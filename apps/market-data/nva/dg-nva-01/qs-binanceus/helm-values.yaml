@@ -30,12 +30,12 @@ QuoteServers:
             - Name: LTC/USDT
             - Name: BTC/USDT
             - Name: BNB/USDT
-            - Name: DOGE/USDT
             - Name: SHIB/USDT
             - Name: SOL/USDT
             - Name: ETH/BTC
             - Name: LTC/BTC
 
+            - Name: TEST/USDT
         Pipeline:
           Publisher:
             ZmqTransport:

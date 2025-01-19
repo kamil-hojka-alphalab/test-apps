@@ -13,7 +13,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -99,7 +99,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -126,6 +126,9 @@ QuoteServers:
             - Name: BTC/USD
             - Name: RNDR/USD
 
+            - Name: TEST/USDT
+            - Name: TEST2/USDT
+            - Name: TEST3/USDT
         RateLimiter:
           Http:
             UsageLimit: 100
@@ -171,7 +174,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -255,7 +258,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -339,7 +342,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -419,7 +422,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -497,7 +500,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
