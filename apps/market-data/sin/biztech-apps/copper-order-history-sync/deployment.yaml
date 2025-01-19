@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alc-biztech-copper-order-history-sync
+spec:
+  selector:
+    matchLabels:
+      app: alc-biztech-copper-order-history-sync
+  replicas: 0
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: alc-biztech-copper-order-history-sync
+    spec:
+      serviceAccountName: copper-order-history-sync-sa
+      containers:
+        - name: alc-biztech-copper-order-history-sync
+          image: ghcr.io/alphalab-hq/copper-cli:607d75d
+          command: ["python"]
+          args: ["./main.py", "sync-history"]
+          resources:
+            requests:
+              cpu: 250m
+              memory: 500Mi
+            limits:
+              cpu: 500m
+              memory: 800Mi
+          env:
+            - name: COPPER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: copper-order-history-sync-secrets
+                  key: copper-api-key
+            - name: COPPER_API_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: copper-order-history-sync-secrets
+                  key: copper-api-secret
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: copper-order-history-sync-secrets
+                  key: db-user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: copper-order-history-sync-secrets
+                  key: db-password
+            - name: OPSGENIE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: copper-order-history-sync-secrets
+                  key: opsgenie-api-key
+          volumeMounts:
+            - name: settings-volume
+              mountPath: /app/settings.json
+              subPath: settings.json
+      imagePullSecrets:
+        - name: ghcr-creds
+      volumes:
+        - name: settings-volume
+          configMap:
+            name: settings-config-map
+      tolerations:
+        - key: node/destiny
+          operator: Equal
+          value: dg-nrt
+          effect: NoSchedule
+      nodeSelector:
+        node/destiny: dg-nrt

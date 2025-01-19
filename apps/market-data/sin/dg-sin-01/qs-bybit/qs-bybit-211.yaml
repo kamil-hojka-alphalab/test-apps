@@ -1,0 +1,79 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybit-211
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-bybit:2023.7.7.68-2c9aa5507b3888b4113ef3a17774d056fa02c94e
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+
+    QuoteServer:
+      ShardId: 210
+      ExchangeName: Bybit
+
+      Monitor:
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+            - UnderlyingName: FIL/USDT
+            - UnderlyingName: CHZ/USDT
+            - UnderlyingName: SXP/USDT
+            - UnderlyingName: ROSE/USDT
+            - UnderlyingName: CELR/USDT
+            - UnderlyingName: TRX/USDT
+            - UnderlyingName: WOO/USDT
+            - UnderlyingName: ENJ/USDT
+            - UnderlyingName: BNB/USDT
+            - UnderlyingName: DASH/USDT
+            - UnderlyingName: ALICE/USDT
+            - UnderlyingName: OMG/USDT
+            - UnderlyingName: KNC/USDT
+            - UnderlyingName: XMR/USDT
+            - UnderlyingName: ILV/USDT
+            - UnderlyingName: KEY/USDT
+            - UnderlyingName: ORDI/USDT
+            - UnderlyingName: IDEX/USDT
+            - UnderlyingName: NKN/USDT
+            - UnderlyingName: LIT/USDT
+            - UnderlyingName: CKB/USDT
+            - UnderlyingName: BNX/USDT
+            - UnderlyingName: TWT/USDT
+            - UnderlyingName: GTC/USDT
+            - UnderlyingName: COMBO/USDT
+            - UnderlyingName: ALPACA/USDT
+            - UnderlyingName: POLYX/USDT
+            - UnderlyingName: ORBS/USDT
+            - UnderlyingName: POWR/USDT
+            - UnderlyingName: WAXP/USDT
+            - UnderlyingName: MON/USDT
+            - UnderlyingName: MASA/USDT
+            - UnderlyingName: ZEUS/USDT
+            - UnderlyingName: LAI/USDT
+            - UnderlyingName: COS/USDT
+            - UnderlyingName: LTO/USDT
+            - UnderlyingName: PHA/USDT
+            - UnderlyingName: OSMO/USDT
+            - UnderlyingName: AVAIL/USDT
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 3
+
+      Pipeline:
+        DepthBookMaintainer:
+          LevelsCap: 200
+
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"

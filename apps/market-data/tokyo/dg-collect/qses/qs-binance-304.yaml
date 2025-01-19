@@ -1,0 +1,128 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-binance-304
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.12.2.127-6a165c5
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 303
+      ExchangeName: Binance
+      Binance:
+        Variant: DeltaSimplified
+        DedupTradesEarly: true
+        DedupTickersEarly: true
+      Monitor:
+        DefaultConnectionCount: 1
+        Symbols:
+        - Name: SHIB/USDC
+        - Name: SKL/TRY
+        - Name: SLP/TRY
+        - Name: SNX/TRY
+        - Name: SOL/TUSD
+        - Name: SOL/USDC
+        - Name: SPELL/TRY
+        - Name: STEEM/USDC
+        - Name: STMX/TRY
+        - Name: STORJ/TRY
+        - Name: STRAX/TRY
+        - Name: STRK/FDUSD
+        - Name: STRK/TRY
+        - Name: STRK/USDC
+        - Name: STX/FDUSD
+        - Name: STX/USDC
+        - Name: SUI/FDUSD
+        - Name: SUI/JPY
+        - Name: SUI/USDC
+        - Name: SUN/TRY
+        - Name: SUPER/TRY
+        - Name: SUSHI/TRY
+        - Name: TAO/FDUSD
+        - Name: TAO/TRY
+        - Name: TAO/USDC
+        - Name: THE/FDUSD
+        - Name: THE/TRY
+        - Name: THE/USDT
+        - Name: THETA/FDUSD
+        - Name: THETA/TRY
+        - Name: TIA/FDUSD
+        - Name: TIA/USDC
+        - Name: TLM/TRY
+        - Name: TNSR/TRY
+        - Name: TNSR/USDC
+        - Name: TON/FDUSD
+        - Name: TON/TRY
+        - Name: TON/USDC
+        - Name: TRB/TRY
+        - Name: TRB/USDC
+        - Name: TROY/TRY
+        - Name: TROY/USDC
+        - Name: TRU/TRY
+        - Name: TRX/USDC
+        - Name: TRY/USDT
+        - Name: TURBO/FDUSD
+        - Name: TURBO/TRY
+        - Name: TURBO/USDC
+        - Name: TURBO/USDT
+        - Name: TWT/TRY
+        - Name: UNI/FDUSD
+        - Name: UNI/TRY
+        - Name: UNI/USDC
+        - Name: USDC/TRY
+        - Name: USTC/FDUSD
+        - Name: USTC/TRY
+        - Name: USUAL/FDUSD
+        - Name: USUAL/TRY
+        - Name: USUAL/USDC
+        - Name: USUAL/USDT
+        - Name: VANA/FDUSD
+        - Name: VANA/TRY
+        - Name: VANA/USDT
+        - Name: VANRY/TRY
+        - Name: VELODROME/USDT
+        - Name: VET/TRY
+        - Name: VIC/TRY
+        - Name: W/FDUSD
+        - Name: W/TRY
+        - Name: W/USDC
+        - Name: WIF/FDUSD
+        - Name: WIF/TRY
+        - Name: WIF/USDC
+        - Name: WLD/FDUSD
+        - Name: WLD/TRY
+        - Name: WLD/USDC
+        - Name: WNXM/USDT
+        - Name: XAI/FDUSD
+        - Name: XEC/TRY
+        - Name: XLM/FDUSD
+        - Name: XLM/JPY
+        - Name: XLM/USDC
+        - Name: XRP/TUSD
+        - Name: XRP/USDC
+        - Name: XTZ/USDC
+        - Name: XVG/TRY
+        - Name: XVS/TRY
+        - Name: YGG/TRY
+        - Name: YGG/USDC
+        - Name: ZIL/TRY
+        - Name: ZK/FDUSD
+        - Name: ZK/TRY
+        - Name: ZK/USDC
+        - Name: ZRO/FDUSD
+        - Name: ZRO/TRY
+        - Name: ZRO/USDC
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

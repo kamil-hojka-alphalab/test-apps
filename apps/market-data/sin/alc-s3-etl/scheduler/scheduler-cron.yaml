@@ -1,0 +1,48 @@
+# apiVersion: batch/v1
+# kind: CronJob
+# metadata:
+#   name: scheduler-cron
+# spec:
+#   schedule: "*/15 * * * *"
+#   startingDeadlineSeconds: 600
+#   concurrencyPolicy: Forbid   # Disallow concurrent runs of the cronjob
+#   failedJobsHistoryLimit: 5
+#   jobTemplate:
+#     spec:
+#       template:
+#         spec:
+#           containers:
+#           - name: scheduler
+#             image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-etl-scheduler:2023.5.9.33-0eaa4ef
+#             args:
+#               - "-c"
+#               - "/config/config.yaml"
+#               - "-s"
+#               - "/state/state.yaml"
+#               #- "-ns"   # TODO: Do not send events to SQS !!!Remove me!!!
+#             volumeMounts:
+#               - mountPath: /state
+#                 name: state-volume
+#               - mountPath: /config
+#                 name: config-volume
+#             resources:
+#               requests:
+#                 cpu: "2"
+#                 memory: "500Mi"
+#           restartPolicy: Never
+#           volumes:
+#             - name: state-volume
+#               persistentVolumeClaim:
+#                 claimName: scheduler-storage
+#             - name: config-volume
+#               configMap:
+#                 name: scheduler-config
+#           tolerations:
+#             - key: node/type
+#               operator: Equal
+#               value: cldn-worker
+#               effect: NoSchedule
+#           nodeSelector:
+#             node/destiny: etl-spot
+#           serviceAccountName: alc-etl-binlogs-prod3-sa
+#       backoffLimit: 1

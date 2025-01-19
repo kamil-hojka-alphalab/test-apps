@@ -1,0 +1,181 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-kucoinfut-301
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.9.17.76-6cc293d
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 300
+      ExchangeName: KuCoinFut
+      Monitor:
+        DefaultConnectionCount: 1
+        MaxSymbolsPerConnection: 20
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+          - UnderlyingName: AERO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AGI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AI16Z/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AIXBT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ALT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: API3/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ATH/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AVA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AVAIL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AXL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: BADGER/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: BAL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: BAN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: BANANA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: BAT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: BLAST/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: CARV/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: CATI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: CATS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: CGPT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: CHILLGUY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: COOKIE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: COTI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: COW/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: CVX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: DEEP/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: DEGEN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: DENT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: DOG/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: DOGE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: DOGS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: DRIFT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: EIGEN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: FARTCOIN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: FLOKI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: FLUX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: FUEL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: FXS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: G/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GLMR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GOAT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GRASS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GRIFFAIN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HIPPO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HIVE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HOT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HYPE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ICX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ILV/USDT
+            NamePatterns:
+            - _Perpetual
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

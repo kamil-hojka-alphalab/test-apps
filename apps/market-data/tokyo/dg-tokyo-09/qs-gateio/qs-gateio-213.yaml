@@ -1,0 +1,92 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateio-213
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.2.16.33-1eb4da9
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 212
+      ExchangeName: GateIO
+      GateIO:
+        ExchangeConnection:
+          WebsocketApi:
+            Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+        SnapshotMakerStrategy:
+          RestApi:
+            Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+      Monitor:
+        Symbols:
+          - Name: CVP/USDT
+          - Name: MPL/USDT
+          - Name: SMURFCAT/USDT
+          - Name: AMC/USDT
+          - Name: CORE/USDT
+          - Name: SENATE/USDT
+          - Name: DMTR/USDT
+          - Name: VEXT/USDT
+          - Name: FCON/USDT
+          - Name: PRQ/USDT
+          - Name: HOT/USDT
+          - Name: MNW/USDT
+          - Name: GMMT/USDT
+          - Name: LOVELY/USDT
+          - Name: PROM/USDT
+          - Name: BRN/USDT
+          - Name: MBS/USDT
+          - Name: POND/USDT
+          - Name: ZTX/USDT
+          - Name: VRTX/USDT
+          - Name: PENDLE/USDT
+          - Name: CWEB/USDT
+          - Name: EOS5L/USDT
+          - Name: NYM/USDT
+          - Name: PAW/USDT
+          - Name: GNO/USDT
+          - Name: VIC/USDT
+          - Name: GMX/USDT
+          - Name: BTG/USDT
+          - Name: SWFTC/USDT
+          - Name: ORDS/USDT
+          - Name: ETHS/USDT
+          - Name: AI/USDT
+          - Name: HER/USDT
+          - Name: NFP/USDT
+          - Name: TURBOS/USDT
+          - Name: DNX/USDT
+          - Name: RDEX/USDT
+          - Name: ALPH/USDT
+          - Name: ZERO/USDT
+          - Name: ADF/USDT
+          - Name: XRP/BTC
+          - Name: LENDS/USDT
+          - Name: INTER/USDT
+          - Name: UPC/USDT
+          - Name: WXT/USDT
+          - Name: ASTO/USDT
+          - Name: SAKAI/USDT
+          - Name: SAROS/USDT
+
+        DefaultConnectionCount: 1
+
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

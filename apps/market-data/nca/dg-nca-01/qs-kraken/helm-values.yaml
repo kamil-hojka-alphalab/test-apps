@@ -1,0 +1,565 @@
+QuoteServers:
+  - name: qs-kraken-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kraken:2025.1.17.71-857c544
+    requests:
+      cpu: 1000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ExchangeName: Kraken
+        ShardId: 200
+
+        Monitor:
+          DefaultConnectionCount: 2
+
+          Symbols:
+            - Name: XMR/BTC
+            - Name: XMR/USD
+            - Name: BTC/GBP
+            - Name: ETH/GBP
+            - Name: COMP/USD
+            - Name: COMP/EUR
+            - Name: USDT/USD
+            - Name: BCH/USDT
+            - Name: DOT/USDT
+            - Name: GBP/USD
+            - Name: APE/EUR
+            - Name: ICP/USD
+            - Name: IMX/USD
+            - Name: ICP/EUR
+            - Name: GALA/USD
+            - Name: SUSHI/EUR
+            - Name: DYDX/USD
+            - Name: XNO/USD
+            - Name: USTC/USD
+            - Name: SEI/USD
+            - Name: PYUSD/USD
+            - Name: SOL/ETH
+            - Name: SUPER/USD
+            - Name: ASTR/USD
+            - Name: SEI/EUR
+            - Name: ETC/USD
+            - Name: OP/EUR
+            - Name: NEAR/EUR
+            - Name: MLN/USD
+            - Name: MATIC/USDT
+            - Name: QNT/USD
+
+        RateLimiter:
+          Http:
+            UsageLimit: 300
+            Interval: 00:01:00
+            MinAcquireGap: 0.00:00:01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 100
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nca-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-kraken-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kraken:2025.1.17.71-857c544
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ExchangeName: Kraken
+        ShardId: 201
+
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: BTC/USD
+            - Name: ETH/EUR
+            - Name: BCH/USD
+            - Name: BCH/EUR
+            - Name: LTC/USD
+            - Name: LTC/EUR
+            - Name: XRP/USD
+            - Name: XRP/EUR
+            - Name: ETH/BTC
+            - Name: LTC/BTC
+            - Name: CHZ/USD
+            - Name: MKR/USD
+            - Name: SGB/USD
+            - Name: APE/USD
+            - Name: LDO/USD
+            - Name: AKT/USD
+            - Name: FET/USD
+            - Name: EOS/USDT
+            - Name: EOS/EUR
+            - Name: DYDX/EUR
+            - Name: LCX/USD
+
+        RateLimiter:
+          Http:
+            UsageLimit: 300
+            Interval: 00:01:00
+            MinAcquireGap: 0.00:00:01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 100
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nca-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-kraken-203
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kraken:2025.1.17.71-857c544
+    requests:
+      cpu: 1000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ExchangeName: Kraken
+        ShardId: 202
+
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: XTZ/USD
+            - Name: XTZ/EUR
+            - Name: EUR/USD
+            - Name: UNI/EUR
+            - Name: UNI/USD
+            - Name: DOT/EUR
+            - Name: DOT/USD
+            - Name: DOT/BTC
+            - Name: KSM/USD
+            - Name: KSM/EUR
+            - Name: EWT/EUR
+            - Name: MINA/EUR
+            - Name: APT/EUR
+            - Name: APT/USD
+            - Name: FTM/USD
+            - Name: REN/EUR
+            - Name: ATOM/USD
+            - Name: ENJ/USD
+            - Name: CHZ/EUR
+            - Name: INJ/EUR
+            - Name: MINA/USD
+            - Name: XRP/USDT
+            - Name: JUP/USD
+            - Name: FLR/USD
+
+        RateLimiter:
+          Http:
+            UsageLimit: 300
+            Interval: 00:01:00
+            MinAcquireGap: 0.00:00:01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 100
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nca-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-kraken-204
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kraken:2025.1.17.71-857c544
+    requests:
+      cpu: 1000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ExchangeName: Kraken
+        ShardId: 203
+
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: LINK/ETH
+            - Name: LINK/USDT
+            - Name: ETH/DAI
+            - Name: DAI/USDT
+            - Name: DAI/USD
+            - Name: DAI/EUR
+            - Name: CRV/USD
+            - Name: FIL/USD
+            - Name: FIL/EUR
+            - Name: XRP/BTC
+            - Name: MATIC/USD
+            - Name: MATIC/BTC
+            - Name: STX/USD
+            - Name: BLUR/USD
+            - Name: SUI/USD
+            - Name: ARB/EUR
+            - Name: ARB/USD
+            - Name: AVAX/USD
+            - Name: AVAX/EUR
+            - Name: EOS/USD
+            - Name: SC/USD
+            - Name: POWR/USD
+            - Name: SC/EUR
+            - Name: MASK/USD
+            - Name: PEPE/USD
+            - Name: WIF/USD
+            - Name: PEPE/EUR
+            - Name: ONDO/USD
+            - Name: W/USD
+            - Name: JASMY/EUR
+
+        RateLimiter:
+          Http:
+            UsageLimit: 300
+            Interval: 00:01:00
+            MinAcquireGap: 0.00:00:01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 100
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nca-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-kraken-205
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kraken:2025.1.17.71-857c544
+    requests:
+      cpu: 1000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ExchangeName: Kraken
+        ShardId: 204
+
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: XLM/EUR
+            - Name: XLM/USD
+            - Name: BCH/BTC
+            - Name: LINK/EUR
+            - Name: LINK/BTC
+            - Name: LINK/USD
+            - Name: ADA/EUR
+            - Name: ADA/BTC
+            - Name: ADA/USD
+            - Name: XMR/EUR
+            - Name: AXS/USD
+            - Name: MOVR/EUR
+            - Name: MOVR/USD
+            - Name: XRP/CAD
+            - Name: XRP/GBP
+            - Name: XRP/AUD
+            - Name: XLM/GBP
+            - Name: BTC/AUD
+            - Name: USDC/GBP
+            - Name: USDT/GBP
+            - Name: ONEINCH/USD
+            - Name: ETH/AUD
+            - Name: EUR/AUD
+            - Name: OCEAN/USD
+            - Name: OCEAN/EUR
+            - Name: STRK/USD
+            - Name: STRK/EUR
+            - Name: FET/EUR
+            - Name: JASMY/USD
+        RateLimiter:
+          Http:
+            UsageLimit: 300
+            Interval: 00:01:00
+            MinAcquireGap: 0.00:00:01
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 100
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nca-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-kraken-206
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kraken:2025.1.17.71-857c544
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ExchangeName: Kraken
+        ShardId: 205
+
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: ZEC/USD
+            - Name: ALGO/USD
+            - Name: ALGO/EUR
+            - Name: TRX/USD
+            - Name: TRX/EUR
+            - Name: ADA/USDT
+            - Name: ATOM/BTC
+            - Name: ATOM/EUR
+            - Name: OMG/USD
+            - Name: AUD/USD
+            - Name: DOGE/EUR
+            - Name: DOGE/USD
+            - Name: MATIC/EUR
+            - Name: ADA/GBP
+            - Name: DOT/GBP
+            - Name: DOT/ETH
+            - Name: LTC/GBP
+            - Name: BTC/USDT
+            - Name: ETH/USDC
+            - Name: ETH/USDT
+            - Name: USDC/EUR
+            - Name: USDC/USD
+            - Name: COTI/USD
+
+
+        RateLimiter:
+          Http:
+            UsageLimit: 300
+            Interval: 00:01:00
+            MinAcquireGap: 0.00:00:01
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 100
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nca-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-kraken-207
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kraken:2025.1.17.71-857c544
+    requests:
+      cpu: 1000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ExchangeName: Kraken
+        ShardId: 206
+
+        Monitor:
+          DefaultConnectionCount: 1
+          Symbols:
+            - Name: KAVA/USD
+            - Name: USDT/EUR
+            - Name: FLOW/EUR
+            - Name: LINK/GBP
+            - Name: LINK/AUD
+            - Name: SAND/EUR
+            - Name: SAND/USD
+            - Name: ATOM/ETH
+            - Name: ETH/CHF
+            - Name: INJ/USD
+            - Name: EWT/USD
+            - Name: SUSHI/USD
+            - Name: REN/USD
+            - Name: PAXG/BTC
+            - Name: PAXG/USD
+            - Name: PAXG/EUR
+            - Name: PAXG/ETH
+            - Name: USDT/CHF
+            - Name: EUR/GBP
+            - Name: EUR/CHF
+            - Name: API3/USD
+            - Name: SOL/USDT
+            - Name: TIA/USD
+            - Name: ZRX/USD
+            - Name: RUNE/USD
+            - Name: YFI/USD
+            - Name: XMR/USDT
+            - Name: YFI/EUR
+            - Name: ZRX/EUR
+            - Name: NEAR/USD
+            - Name: SNX/USD
+            - Name: AVAX/USDT
+            - Name: TIA/EUR
+            - Name: OP/USD
+            - Name: SYN/USD
+            - Name: TVK/USD
+            - Name: LPT/USD
+
+        RateLimiter:
+          Http:
+            UsageLimit: 300
+            Interval: 00:01:00
+            MinAcquireGap: 0.00:00:01
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 100
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nca-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-kraken-208
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kraken:2025.1.17.71-857c544
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ExchangeName: Kraken
+        ShardId: 207
+
+        Monitor:
+          DefaultConnectionCount: 1
+          Symbols:
+            - Name: ADA/ETH
+            - Name: XRP/ETH
+            - Name: BTC/CAD
+            - Name: BTC/CHF
+            - Name: BTC/USDC
+            - Name: GRT/BTC
+            - Name: GRT/USD
+            - Name: GRT/EUR
+            - Name: ETH/CAD
+            - Name: LTC/USDT
+            - Name: USDC/USDT
+            - Name: USDT/CAD
+            - Name: USDT/AUD
+            - Name: USDC/AUD
+            - Name: MANA/USD
+            - Name: MANA/EUR
+            - Name: AAVE/USD
+            - Name: AAVE/EUR
+            - Name: FLOW/USD
+            - Name: SOL/EUR
+            - Name: SOL/GBP
+            - Name: SOL/USD
+            - Name: SOL/BTC
+            - Name: ETH/USD
+            - Name: BTC/EUR
+            - Name: USDT/JPY
+        RateLimiter:
+          Http:
+            UsageLimit: 300
+            Interval: 00:01:00
+            MinAcquireGap: 0.00:00:01
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 100
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nca-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00

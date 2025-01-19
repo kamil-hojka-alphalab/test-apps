@@ -1,0 +1,66 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybitspot-206
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2024.1.10.8-c375899
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 1100m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    QuoteServer:
+      ShardId: 205
+      ExchangeName: BybitSpot
+      Monitor:
+        Symbols:
+          - Name: AEVO/USDT
+          - Name: USDE/USDC
+          - Name: TNSR/USDT
+          - Name: MEW/USDT
+          - Name: CORE/USDT
+          - Name: GUMMY/USDT
+          - Name: NAKA/USDT
+          - Name: DRIFT/USDT
+          - Name: MOG/USDT
+          - Name: VELO/USDT
+          - Name: LAI/USDT
+          - Name: PONKE/USDT
+          - Name: SPEC/USDT
+          - Name: WEN/USDT
+          - Name: PORTAL/USDT
+          - Name: PRCL/USDT
+          - Name: OMNI/USDT
+          - Name: BTC/USDE
+          - Name: RATS/USDT
+          - Name: LMWR/USDT
+          - Name: POL/USDT
+          - Name: ORDER/USDT
+          - Name: UXLINK/USDT
+          - Name: PUFFER/USDT
+          - Name: CARV/USDT
+          - Name: DEEP/USDT
+          - Name: DBR/USDT
+          - Name: CATI/USDT
+          - Name: MAVIA/USDT
+          - Name: ZETA/USDT
+          - Name: DYM/USDT
+          - Name: SC/USDT
+          - Name: SOLO/USDT
+          - Name: VIRTUAL/USDT
+    
+        DefaultConnectionCount: 2
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        DepthBookMaintainer:
+          LevelsCap: 50
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

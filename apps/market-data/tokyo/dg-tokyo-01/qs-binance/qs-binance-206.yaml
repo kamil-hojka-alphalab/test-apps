@@ -1,0 +1,74 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-binance-206
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.12.2.127-6a165c5
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 2000m
+  memory_request: 3000Mi
+  cpu_limit: 2000m
+  memory_limit: 3000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 205
+      ExchangeName: Binance
+      Binance:
+        Variant: DeltaSimplified
+        DedupTradesEarly: true
+        DedupTickersEarly: true
+
+      Monitor:
+        DefaultConnectionCount: 3
+        Symbols:
+          - Name: BTC/USDT
+            UseTicker: true
+          - Name: ETH/DAI
+          - Name: BTC/DAI
+          - Name: NMR/USDT
+          - Name: SKL/USDT
+          - Name: HIVE/USDT
+          - Name: RIF/USDT
+          - Name: UFT/USDT
+          - Name: VIB/USDT
+          - Name: OSMO/USDT
+          - Name: ARB/BTC
+          - Name: ARB/USDT
+          - Name: ARB/TUSD
+          - Name: ARB/EUR
+          - Name: ARB/TRY
+          - Name: RDNT/BTC
+          - Name: AST/USDT
+          - Name: FIL/BTC
+          - Name: SC/USDT
+          - Name: STX/USDT
+          - Name: STX/BTC
+          - Name: DIA/USDT
+          - Name: DIA/BTC
+          - Name: AVAX/EUR
+          - Name: ATOM/BTC
+          - Name: GRT/USDT
+          - Name: INJ/USDT
+          - Name: INJ/BTC
+          - Name: LIT/USDT
+          - Name: AVAX/TRY
+          - Name: HBAR/BNB
+          - Name: OP/BTC
+          - Name: GNS/USDT
+          - Name: ID/BTC
+          - Name: POLYX/BTC
+          - Name: WBTC/USDT
+          - Name: WLD/USDT
+          - Name: FDUSD/USDT
+          - Name: BNB/FDUSD
+          - Name: TON/USDT
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

@@ -1,0 +1,49 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bigone-201
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-bigone:2022.1.24.16-c30513c7aff20050e6155f35e960b0e2f109dbad
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: BigONE
+      Monitor:
+        Symbols:
+          - Name: BTC/USDT
+          - Name: ETH/USDT
+          - Name: XRP/USDT
+          - Name: EOS/USDT
+          - Name: ATOM/USDT
+          - Name: DOT/USDT
+          - Name: HOT/USDT
+          - Name: LTC/USDT
+          - Name: BCH/USDT
+          - Name: ETC/USDT
+          - Name: ZEC/USDT
+          - Name: DASH/USDT
+          - Name: XMR/USDT
+          - Name: SHIB/USDT
+          - Name: SOL/USDT
+          - Name: TRX/USDT
+          - Name: LTC/BTC
+          - Name: QTUM/USDT
+          - Name: APE/USDT
+        DefaultConnectionCount: 1
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-04:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: 24:00:00

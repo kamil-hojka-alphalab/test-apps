@@ -1,0 +1,131 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-binance-302
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.12.2.127-6a165c5
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 301
+      ExchangeName: Binance
+      Binance:
+        Variant: DeltaSimplified
+        DedupTradesEarly: true
+        DedupTickersEarly: true
+      Monitor:
+        DefaultConnectionCount: 1
+        Symbols:
+        - Name: DOGS/TRY
+        - Name: DOGS/USDC
+        - Name: DOGS/USDT
+        - Name: DOT/FDUSD
+        - Name: DOT/USDC
+        - Name: DYDX/FDUSD
+        - Name: DYDX/TRY
+        - Name: DYDX/USDC
+        - Name: DYM/TRY
+        - Name: EDU/TRY
+        - Name: EGLD/FDUSD
+        - Name: EGLD/TRY
+        - Name: EIGEN/FDUSD
+        - Name: EIGEN/TRY
+        - Name: EIGEN/USDC
+        - Name: EIGEN/USDT
+        - Name: ENA/FDUSD
+        - Name: ENA/TRY
+        - Name: ENA/USDC
+        - Name: ENJ/TRY
+        - Name: ENS/FDUSD
+        - Name: ENS/TRY
+        - Name: ENS/USDC
+        - Name: EOS/FDUSD
+        - Name: EOS/USDC
+        - Name: ETC/FDUSD
+        - Name: ETC/TRY
+        - Name: ETHFI/FDUSD
+        - Name: ETHFI/TRY
+        - Name: ETHFI/USDC
+        - Name: FDUSD/USDC
+        - Name: FET/FDUSD
+        - Name: FET/USDC
+        - Name: FIDA/TRY
+        - Name: FIL/FDUSD
+        - Name: FIL/USDC
+        - Name: FLOKI/FDUSD
+        - Name: FLOKI/TRY
+        - Name: FLOKI/USDC
+        - Name: G/TRY
+        - Name: G/USDT
+        - Name: GALA/FDUSD
+        - Name: GALA/USDC
+        - Name: GAS/TRY
+        - Name: GBP/USDT
+        - Name: GRT/FDUSD
+        - Name: HBAR/FDUSD
+        - Name: HBAR/TRY
+        - Name: HBAR/USDC
+        - Name: HIGH/TRY
+        - Name: HIVE/FDUSD
+        - Name: HIVE/TRY
+        - Name: HIVE/USDC
+        - Name: ICP/FDUSD
+        - Name: ICP/TRY
+        - Name: ICP/USDC
+        - Name: ID/TRY
+        - Name: IDEX/FDUSD
+        - Name: IDEX/USDC
+        - Name: INJ/FDUSD
+        - Name: INJ/USDC
+        - Name: IO/FDUSD
+        - Name: IO/TRY
+        - Name: IO/USDC
+        - Name: IOTA/TRY
+        - Name: JPY/USDT
+        - Name: JTO/FDUSD
+        - Name: JTO/USDC
+        - Name: JUP/FDUSD
+        - Name: JUP/TRY
+        - Name: JUP/USDC
+        - Name: KAIA/USDC
+        - Name: KSM/TRY
+        - Name: LAZIO/TRY
+        - Name: LDO/FDUSD
+        - Name: LDO/TRY
+        - Name: LDO/USDC
+        - Name: LEVER/TRY
+        - Name: LINK/FDUSD
+        - Name: LINK/USDC
+        - Name: LPT/TRY
+        - Name: LTC/FDUSD
+        - Name: LTC/TRY
+        - Name: LTC/USDC
+        - Name: MAGIC/TRY
+        - Name: MANA/TRY
+        - Name: MANTA/FDUSD
+        - Name: MANTA/USDC
+        - Name: MASK/TRY
+        - Name: MBOX/TRY
+        - Name: ME/FDUSD
+        - Name: ME/TRY
+        - Name: ME/USDT
+        - Name: MEME/FDUSD
+        - Name: MEME/USDC
+        - Name: METIS/TRY
+        - Name: MKR/TRY
+        - Name: MOVE/FDUSD
+        - Name: MOVE/TRY
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

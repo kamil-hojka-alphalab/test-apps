@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  settings.json: |-
+    {
+      "copperApiHost": "https://api.copper.co",
+      "dbHost": "historicalsprod-cluster.cluster-celixspgharh.ap-southeast-1.rds.amazonaws.com",
+      "dbName": "biztech",
+      "opsgenieTeam": "BizTech"
+    }
+
+kind: ConfigMap
+metadata:
+  name: settings-config-map

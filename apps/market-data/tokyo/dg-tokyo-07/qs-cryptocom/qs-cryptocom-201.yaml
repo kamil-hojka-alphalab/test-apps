@@ -1,0 +1,89 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-cryptocom-201
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-cryptocom:2022.11.4.21-6b7eb24eb4761eb5faa8e41421befdc5e320f621
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: CryptoCom
+
+      Monitor:
+        DefaultConnectionCount: 2
+        MaxSymbolsPerConnection: 25
+        Symbols:
+          - Name: ALI/USD
+          - Name: AAVE/USD
+          - Name: AAVE/USDT
+          - Name: ADA/USD
+          - Name: ADA/USDT
+          - Name: APE/USDT
+          - Name: APT/USDT
+          - Name: BCH/BTC
+          - Name: BCH/USDT
+          - Name: BTC/USD
+          - Name: BTC/USDT
+          - Name: COMP/USDT
+          - Name: CRO/BTC
+          - Name: CRO/USD
+          - Name: CRO/USDT
+          - Name: DAI/USDT
+          - Name: DOGE/USD
+          - Name: DOT/USD
+          - Name: DOT/USDT
+          - Name: EGLD/USDT
+          - Name: ETC/USD
+          - Name: ETC/USDT
+          - Name: ETH/BTC
+          - Name: ETH/USD
+          - Name: ETH/USDT
+          - Name: FTM/USDT
+          - Name: GALA/USD
+          - Name: HBAR/USD
+          - Name: HBAR/USDT
+          - Name: INJ/USDT
+          - Name: LADYS/USD
+          - Name: LTC/USDT
+          - Name: NEON/USDT
+          - Name: NEON/USD
+          - Name: ONE/USDT
+          - Name: QNT/USDT
+          - Name: RARI/USDT
+          - Name: SHIB/USD
+          - Name: SHIB/USDT
+          - Name: SNX/USDT
+          - Name: SOL/USD
+          - Name: SOL/USDT
+          - Name: STX/USDT
+          - Name: UNI/USD
+          - Name: UNI/USDT
+          - Name: USDT/USD
+          - Name: VET/BTC
+          - Name: XPLA/USD
+          - Name: XLM/USD
+          - Name: XLM/USDT
+          - Name: XRP/USD
+          - Name: XRP/USDT
+
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        DepthBookMaintainer:
+          LevelsCap: 50
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+      CryptoCom:
+        WebSocketConnectionUrl: "wss://stream.crypto.com/exchange/v1/market"

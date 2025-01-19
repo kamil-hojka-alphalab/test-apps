@@ -1,0 +1,23 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    mesh:
+      default_region: frank
+      consul_endpoint: "http://consul-server.consul:8500"
+      consul_token: "a514908a-58e7-c4f1-f041-a096cd061ba1"
+
+    dg_proxy:
+      dg_id: 1
+      in_port: 11800
+      out_port: 11900
+      high_water_mark: 250000
+      #monitor: true
+
+    prometheus:
+      port: 5000
+      metrics_path: /metrics
+      dg_name: dg-fra-01
+
+kind: ConfigMap
+metadata:
+  name: dg-proxy-config

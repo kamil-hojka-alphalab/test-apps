@@ -1,0 +1,146 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-kucoin-302
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.1.10.16-c375899
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ExchangeName: KuCoin
+      ShardId: 301
+      KuCoin:
+        ApiPassphrase: VoxOoWnTefUKRsC2J6dJ9wP2LT0MNf9j
+        ApiKey: 6672b0b7104f94000103430c
+        ApiSecret: 3868343c-bfff-4736-a79a-52deb7f3c879
+      Monitor:
+        DefaultConnectionCount: 1
+        MaxSymbolsPerConnection: 30
+        Symbols:
+        - Name: LUCE/USDT
+        - Name: LUNC/USDT
+        - Name: LYX/USDT
+        - Name: MANEKI/USDT
+        - Name: MARSH/USDT
+        - Name: MASA/USDT
+        - Name: MAX/USDT
+        - Name: MBL/USDT
+        - Name: ME/USDT
+        - Name: MERL/USDT
+        - Name: MEW/USDT
+        - Name: MICHI/USDT
+        - Name: MNDE/USDT
+        - Name: MOG/USDT
+        - Name: MON/USDT
+        - Name: MONKY/USDT
+        - Name: MORPHO/USDT
+        - Name: MOVE/USDT
+        - Name: MTL/USDT
+        - Name: NAVI/USDT
+        - Name: NEAR/USDC
+        - Name: NETVR/USDT
+        - Name: NIBI/USDT
+        - Name: NOT/USDT
+        - Name: NPC/USDT
+        - Name: NS/USDT
+        - Name: NYM/USDT
+        - Name: OMNI/USDT
+        - Name: OPEN/USDT
+        - Name: ORBS/USDT
+        - Name: ORCA/USDT
+        - Name: ORDER/USDT
+        - Name: PBR/USDT
+        - Name: PBUX/USDT
+        - Name: PENGU/USDT
+        - Name: PIP/USDT
+        - Name: PIXEL/USDT
+        - Name: PNUT/USDT
+        - Name: POLS/USDT
+        - Name: PONKE/USDT
+        - Name: POPCAT/USDT
+        - Name: PORTAL/USDT
+        - Name: PRCL/USDT
+        - Name: PSTAKE/USDT
+        - Name: PUNDIX/USDT
+        - Name: QORPO/USDT
+        - Name: QTUM/USDT
+        - Name: RENDER/USDT
+        - Name: REZ/USDT
+        - Name: RIO/USDT
+        - Name: RWA/USDT
+        - Name: SAFE/USDT
+        - Name: SCA/USDT
+        - Name: SD/USDT
+        - Name: SEAM/USDT
+        - Name: SFP/USDT
+        - Name: SLN/USDT
+        - Name: SMILE/USDT
+        - Name: SON/USDT
+        - Name: SONIC/USDT
+        - Name: SPX/USDT
+        - Name: SQD/USDT
+        - Name: STRAX/USDT
+        - Name: STREAM/USDT
+        - Name: STRIKE/USDT
+        - Name: STRK/USDT
+        - Name: SUIA/USDT
+        - Name: SUKU/USDT
+        - Name: SUN/USDT
+        - Name: SXP/USDT
+        - Name: TAIKO/USDT
+        - Name: TNSR/USDT
+        - Name: TRUF/USDT
+        - Name: TRVL/USDT
+        - Name: TURBO/USDT
+        - Name: USDT/USDC
+        - Name: UTK/USDT
+        - Name: UXLINK/USDT
+        - Name: VANA/USDT
+        - Name: VANRY/USDT
+        - Name: VEMP/USDT
+        - Name: VINU/USDT
+        - Name: VIRTUAL/USDT
+        - Name: VSYS/USDT
+        - Name: W/USDT
+        - Name: WBTC/USDT
+        - Name: WRX/USDT
+        - Name: WSDM/USDT
+        - Name: X/USDT
+        - Name: XEC/USDT
+        - Name: XETA/USDT
+        - Name: XION/USDT
+        - Name: ZEUS/USDT
+        - Name: ZK/USDT
+        - Name: ZKJ/USDT
+        - Name: ZRO/USDT
+        - Name: ZRX/USDT
+      RateLimiter:
+        Http:
+          UsageLimit: 200
+          Interval: 00:00:01
+          MinAcquireGap: 0.00:00:00.2
+          RequestCosts:
+            Snapshot: 10
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        DepthBookMaintainer:
+          LevelsCap: 150
+        StaleMarketDataObserver:
+          StaleThreshold: 00:10:00
+          IdleThreshold: 00:10:00
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

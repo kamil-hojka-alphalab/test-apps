@@ -1,0 +1,109 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-huobiglobal-207
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2024.10.29.65-57e0a79
+  replicas: 1
+  destiny: dg-rt-az1
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 206
+      ExchangeName: HuobiGlobal
+      Monitor:
+        DefaultConnectionCount: 1
+        MaxSymbolsPerConnection: 30
+        Symbols:
+          - Name: LTC/BTC
+          - Name: QTUM/USDT
+          - Name: IOTA/USDT
+          - Name: OMG/USDT
+          - Name: THETA/USDT
+          - Name: STEEM/USDT
+          - Name: DOT/USDT
+          - Name: TRB/USDT
+          - Name: AAVE/USDT
+          - Name: KSM/USDT
+          - Name: JST/USDT
+          - Name: UNI/USDT
+          - Name: DOT/BTC
+          - Name: COMP/USDT
+          - Name: SNX/USDT
+          - Name: SUN/USDT
+          - Name: YFI/USDT
+          - Name: NYM/USDT
+          - Name: FITFI/USDT
+          - Name: XCAD/USDT
+          - Name: ELU/USDT
+          - Name: T/USDT
+          - Name: XAUT/USDT
+          - Name: CTC/USDT
+          - Name: DFI/USDT
+          - Name: TOMI/USDT
+          - Name: PEPE/USDT
+          - Name: LHINU/USDT
+          - Name: ZIL/USDT
+          - Name: TRX/USDT
+          - Name: XTZ/USDT
+          - Name: LINK/USDT
+          - Name: IOST/USDT
+          - Name: VET/USDT
+          - Name: ETH/BTC
+          - Name: XRP/BTC
+          - Name: BCH/USDT
+          - Name: YFII/USDT
+          - Name: CRV/USDT
+          - Name: ATOM/USDT
+          - Name: XNOT/USDT
+          - Name: SAND/USDT
+          - Name: AUCTION/USDT
+          - Name: BADGER/USDT
+          - Name: POLS/USDT
+          - Name: ANKR/USDT
+          - Name: ORB/USDT
+          - Name: XDC/USDT
+          - Name: FXS/USDT
+          - Name: UNIBOT/USDT
+          - Name: WLD/USDT
+          - Name: PENDLE/USDT
+          - Name: DUSK/USDT
+          - Name: WSTUSDT/USDT
+          - Name: CHZ/USDT
+          - Name: ONEINCH/USDT
+          - Name: FTT/USDT
+          - Name: ENJ/USDT
+          - Name: NULS/USDT
+      RateLimiter:
+        Http:
+          UsageLimit: 10
+          Interval: 00:00:01
+          MinAcquireGap: 0.00:00:00.075
+          RequestCosts:
+            FundingRate: 1
+      HuobiGlobal:
+        Collocation: true
+        UseTickFeed: false
+      Pipeline:
+        AbArbitrator:
+          DepthBookProcessing:
+            OrderBy: Counter
+          TradesProcessing:
+            OrderBy: Sequence
+        SnapshotCoordinator:
+          OrderBy: Counter
+        DepthBookMaintainer:
+          LevelsCap: 150
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: 23:00:00

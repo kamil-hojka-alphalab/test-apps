@@ -1,0 +1,69 @@
+QuoteServers:
+  - name: qs-krakenfut-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kraken:2023.11.8.16-c5d55f1
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |
+      PriceServerClient:
+        Address: ">tcp://qs-nca.node.al:10951,>tcp://qs-nca.node.al:10956"
+      QuoteServer:
+        ExchangeName: KrakenFut
+        ShardId: 200
+
+        Monitor:
+          DefaultConnectionCount: 3
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: BTC/USD
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: XRP/USD
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: ETH/USD
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: LTC/USD
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: BCH/USD
+                NamePatterns:
+                  - _Perpetual
+
+        RateLimiter:
+          Http:
+            UsageLimit: 300
+            Interval: 00:01:00
+            MinAcquireGap: 0.00:00:01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 200
+
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nca-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00

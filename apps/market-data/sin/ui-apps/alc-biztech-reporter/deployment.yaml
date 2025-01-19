@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alc-biztech-reporter
+spec:
+  selector:
+    matchLabels:
+      app: alc-biztech-reporter
+  replicas: 1
+  revisionHistoryLimit: 3
+  template:
+    metadata:
+      labels:
+        app: alc-biztech-reporter
+    spec:
+      serviceAccountName: alc-biztech-reporter-sa-prod
+      containers:
+        - name: alc-biztech-reporter
+          image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-biztech-reporter:2025.1.17.208-26ff06e
+          env:
+            - name: REPORTER_EXECUTION_SERVICE_SERVER
+              value: "http://status-server-api.execution-service-status-server:5000/"
+            - name: REPORTER_GRAFANA_URL
+              value: "http://prom-stack-grafana.prometheus"
+            - name: REPORTER_GRAFANA_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: alc-biztech-reporter-secrets
+                  key: REPORTER_GRAFANA_API_KEY
+            - name: REPORTER_JUPYTER_SERVER
+              value: "research-sing.node.al:8888"
+            - name: REPORTER_JUPYTER_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: alc-biztech-reporter-secrets
+                  key: REPORTER_JUPYTER_TOKEN
+            - name: REPORTER_MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: alc-biztech-reporter-secrets
+                  key: REPORTER_MYSQL_PASSWORD
+            - name: REPORTER_MYSQL_RW_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: alc-biztech-reporter-secrets
+                  key: REPORTER_MYSQL_RW_PASSWORD
+          resources:
+            requests:
+              cpu: "200m"
+              memory: 500Mi
+            limits:
+              cpu: "500m"
+              memory: 700Mi
+          ports:
+            - containerPort: 5000
+      tolerations:
+        - key: node/destiny
+          operator: 'Equal'
+          value: 'alc-ui'
+          effect: 'NoSchedule'
+      nodeSelector:
+        node/destiny: alc-ui

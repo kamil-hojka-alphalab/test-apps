@@ -1,0 +1,72 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-huobiglobal-302
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2024.10.29.65-57e0a79
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 301
+      ExchangeName: HuobiGlobal
+      Monitor:
+        DefaultConnectionCount: 1
+        MaxSymbolsPerConnection: 30
+        Symbols:
+        - Name: SOVRN/USDT
+        - Name: STETH/USDT
+        - Name: STRX/USDT
+        - Name: TAIKO/USDT
+        - Name: TNSR/USDT
+        - Name: TREMP/USDT
+        - Name: UXLINK/USDT
+        - Name: VELODROME/USDT
+        - Name: VIRTUAL/USDT
+        - Name: VSYS/USDT
+        - Name: WALLET/USDT
+        - Name: WOJAK/USDT
+        - Name: WSDM/USDT
+        - Name: XCUR/USDT
+        - Name: XNO/USDT
+        - Name: ZBCN/USDT
+        - Name: ZENT/USDT
+        - Name: ZERO/USDT
+        - Name: ZEROLEND/USDT
+        - Name: ZEUS/USDT
+        - Name: ZK/USDT
+        - Name: ZRO/USDT
+      RateLimiter:
+        Http:
+          UsageLimit: 10
+          Interval: 00:00:01
+          MinAcquireGap: 0.00:00:00.075
+          RequestCosts:
+            FundingRate: 1
+      HuobiGlobal:
+        Collocation: true
+        UseTickFeed: false
+      Pipeline:
+        AbArbitrator:
+          DepthBookProcessing:
+            OrderBy: Counter
+          TradesProcessing:
+            OrderBy: Sequence
+        SnapshotCoordinator:
+          OrderBy: Counter
+        DepthBookMaintainer:
+          LevelsCap: 150
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: 82800

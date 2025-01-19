@@ -1,0 +1,97 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-binance-210
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.12.2.127-6a165c5
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1500m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 209
+      ExchangeName: Binance
+      Binance:
+        Variant: DeltaSimplified
+        DedupTradesEarly: true
+        DedupTickersEarly: true
+
+      Monitor:
+        DefaultConnectionCount: 3
+        Symbols:
+          - Name: GNO/USDT
+          - Name: WAN/BTC
+          - Name: PYR/USDT
+          - Name: JASMY/USDT
+          - Name: AMP/USDT
+          - Name: RAY/BNB
+          - Name: XEC/USDT
+          - Name: VIB/BTC
+          - Name: FIDA/BTC
+          - Name: PYR/BTC
+          - Name: DYDX/USDT
+          - Name: DYDX/BTC
+          - Name: IDEX/USDT
+          - Name: ELF/USDT
+          - Name: GALA/USDT
+          - Name: SANTOS/USDT
+          - Name: SANTOS/BTC
+          - Name: XNO/USDT
+          - Name: AGLD/BTC
+          - Name: RARE/USDT
+          - Name: ALCX/USDT
+          - Name: ADX/USDT
+          - Name: AUCTION/USDT
+          - Name: BTT/USDT
+          - Name: ALICE/USDT
+          - Name: FUN/USDT
+          - Name: CELO/USDT
+          - Name: ONE/USDT
+          - Name: FET/BNB
+          - Name: FET/BTC
+          - Name: TWT/USDT
+          - Name: TWT/BTC
+          - Name: CELR/USDT
+          - Name: IRIS/USDT
+          - Name: TRB/BTC
+          - Name: AI/USDT
+          - Name: NFP/USDT
+          - Name: AI/BTC
+          - Name: MANTA/USDT
+          - Name: MANTA/BTC
+          - Name: XAI/BTC
+          - Name: POL/JPY
+          - Name: DOGE/JPY
+          - Name: ADA/JPY
+          - Name: SOL/JPY
+          - Name: XRP/JPY
+          - Name: GMX/BTC
+          - Name: GRT/TRY
+          - Name: INJ/TRY
+          - Name: JASMY/TRY
+          - Name: KEY/USDT
+          - Name: LQTY/USDT
+          - Name: LUNA/USDT
+          - Name: ID/USDT
+          - Name: RDNT/USDT
+          - Name: OAX/USDT
+          - Name: EDU/USDT
+          - Name: ALT/USDT
+          - Name: IO/USDT
+          - Name: RENDER/USDT
+          - Name: ZK/USDT
+
+
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-01:11800"
+
+          V3BinaryFormat:
+            DevelopmentMode: false

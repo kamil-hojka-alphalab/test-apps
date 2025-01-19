@@ -1,0 +1,132 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-binance-303
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.12.2.127-6a165c5
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 302
+      ExchangeName: Binance
+      Binance:
+        Variant: DeltaSimplified
+        DedupTradesEarly: true
+        DedupTickersEarly: true
+      Monitor:
+        DefaultConnectionCount: 1
+        Symbols:
+        - Name: MOVE/USDC
+        - Name: MOVE/USDT
+        - Name: MOVR/TRY
+        - Name: NEAR/FDUSD
+        - Name: NEAR/JPY
+        - Name: NEAR/TRY
+        - Name: NEAR/USDC
+        - Name: NEIRO/FDUSD
+        - Name: NEIRO/TRY
+        - Name: NEIRO/USDC
+        - Name: NEO/TRY
+        - Name: NEO/USDC
+        - Name: NFP/FDUSD
+        - Name: NOT/FDUSD
+        - Name: NOT/TRY
+        - Name: NOT/USDC
+        - Name: NTRN/TRY
+        - Name: OG/TRY
+        - Name: OGN/TRY
+        - Name: OM/TRY
+        - Name: OM/USDC
+        - Name: OMNI/FDUSD
+        - Name: OMNI/TRY
+        - Name: OMNI/USDC
+        - Name: ONE/TRY
+        - Name: ONT/TRY
+        - Name: ONT/USDC
+        - Name: OP/FDUSD
+        - Name: OP/TRY
+        - Name: OP/USDC
+        - Name: ORCA/TRY
+        - Name: ORCA/USDT
+        - Name: ORDI/FDUSD
+        - Name: ORDI/USDC
+        - Name: PAXG/TRY
+        - Name: PDA/USDT
+        - Name: PENDLE/FDUSD
+        - Name: PENDLE/TRY
+        - Name: PENDLE/USDC
+        - Name: PENGU/FDUSD
+        - Name: PENGU/TRY
+        - Name: PENGU/USDC
+        - Name: PENGU/USDT
+        - Name: PEOPLE/FDUSD
+        - Name: PEOPLE/TRY
+        - Name: PEOPLE/USDC
+        - Name: PEPE/FDUSD
+        - Name: PEPE/JPY
+        - Name: PEPE/USDC
+        - Name: PHA/TRY
+        - Name: PHA/USDC
+        - Name: PHB/TRY
+        - Name: PIXEL/TRY
+        - Name: PIXEL/USDC
+        - Name: PNUT/FDUSD
+        - Name: PNUT/TRY
+        - Name: PNUT/USDC
+        - Name: PNUT/USDT
+        - Name: POL/FDUSD
+        - Name: POL/TRY
+        - Name: POL/USDC
+        - Name: POLYX/TRY
+        - Name: PORTAL/FDUSD
+        - Name: PORTAL/TRY
+        - Name: PYTH/FDUSD
+        - Name: PYTH/TRY
+        - Name: PYTH/USDC
+        - Name: RAD/TRY
+        - Name: RARE/TRY
+        - Name: RARE/USDC
+        - Name: RAY/FDUSD
+        - Name: RAY/TRY
+        - Name: RAY/USDC
+        - Name: RDNT/TRY
+        - Name: RENDER/FDUSD
+        - Name: RENDER/TRY
+        - Name: RENDER/USDC
+        - Name: REZ/TRY
+        - Name: REZ/USDC
+        - Name: RONIN/FDUSD
+        - Name: RONIN/TRY
+        - Name: ROSE/TRY
+        - Name: RSR/FDUSD
+        - Name: RSR/TRY
+        - Name: RSR/USDC
+        - Name: RUNE/FDUSD
+        - Name: RUNE/USDC
+        - Name: RVN/TRY
+        - Name: SAGA/FDUSD
+        - Name: SAGA/TRY
+        - Name: SAGA/USDC
+        - Name: SAND/FDUSD
+        - Name: SAND/TRY
+        - Name: SAND/USDC
+        - Name: SCR/FDUSD
+        - Name: SCR/TRY
+        - Name: SCR/USDT
+        - Name: SEI/USDC
+        - Name: SHIB/FDUSD
+        - Name: SHIB/JPY
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

@@ -1,0 +1,66 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-upbit-205
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-upbit:2023.5.29.28-6735d512272cc866c0a7c6947030ef0f269ac912
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 204
+      ExchangeName: Upbit
+
+      Monitor:
+        DefaultConnectionCount: 2
+        MaxSymbolsPerConnection: 13
+        Symbols:
+          - Name: SXP/KRW
+          - Name: ONT/KRW
+          - Name: ELF/KRW
+          - Name: JST/KRW
+          - Name: SOL/KRW
+          - Name: HUNT/KRW
+          - Name: SHIB/KRW
+          - Name: HIFI/KRW
+          - Name: POLYX/KRW
+          - Name: TOKAMAK/KRW
+          - Name: IOTA/KRW
+          - Name: SNT/KRW
+          - Name: ZRX/KRW
+          - Name: KNC/KRW
+          - Name: BSV/KRW
+          - Name: XLM/KRW
+          - Name: BTT/KRW
+          - Name: IOST/KRW
+          - Name: MTL/KRW
+          - Name: ATOM/KRW
+          - Name: XTZ/KRW
+          - Name: BORA/KRW
+          - Name: GLM/KRW
+          - Name: GRT/KRW
+          - Name: MINA/KRW
+          - Name: CTC/KRW
+          - Name: PYTH/KRW
+          - Name: STRIKE/KRW
+          - Name: AKT/KRW
+          - Name: PENDLE/KRW
+          - Name: ATH/KRW
+
+      Pipeline:
+        DepthBookMaintainer:
+          LevelsCap: 15
+
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+          V3BinaryFormat:
+            DevelopmentMode: false

@@ -1,0 +1,95 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-huobidm-213
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2024.10.29.65-57e0a79
+  replicas: 1
+  destiny: dg-rt-az1
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    PriceServerClient:
+      Address: ">tcp://qs-tokyo-12.node.al:10951,>tcp://qs-tokyo-12.node.al:10956,>tcp://qs-tokyo-13.node.al:10951,>tcp://qs-tokyo-13.node.al:10956,>tcp://qs-tokyo-14.node.al:10951"
+    QuoteServer:
+      ShardId: 212
+      ExchangeName: HuobiDM
+      PeriodicSnapshotTrigger:
+        Enabled: true
+        MinPeriodSeconds: 10
+        MaxPeriodSeconds: 15
+      FundingRatePoller:
+        DelayBetweenPullsInSeconds: 10
+      HuobiDM:
+        Collocation: true
+      Monitor:
+        DefaultConnectionCount: 1
+        MaxSymbolsPerConnection: 10
+
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+            - UnderlyingName: DOT/USD
+            - UnderlyingName: ADA/USD
+            - UnderlyingName: OP/USDT
+            - UnderlyingName: APT/USDT
+            - UnderlyingName: SOL/USDT
+            - UnderlyingName: FTM/USDT
+            - UnderlyingName: IMX/USDT
+            - UnderlyingName: SHIB/USDT
+            - UnderlyingName: KAVA/USDT
+            - UnderlyingName: GMT/USDT
+            - UnderlyingName: GRT/USDT
+            - UnderlyingName: SNX/USDT
+            - UnderlyingName: THETA/USDT
+            - UnderlyingName: DOGE/USD
+            - UnderlyingName: TRX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BTC/USD
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CRV/USDT
+            - UnderlyingName: DOGE/USDT
+            - UnderlyingName: LTC/USDT
+            - UnderlyingName: WIN/USDT
+            - UnderlyingName: ETH/USDT
+            - UnderlyingName: AVAX/USDT
+            - UnderlyingName: ATOM/USDT
+
+
+
+      RateLimiter:
+        Http:
+          UsageLimit: 120
+          Interval: 00:00:03
+          MinAcquireGap: 0.00:00:00.075
+          RequestCosts:
+            FundingRate: 1
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Subsampling:
+          BestBidOfferThreshold: 1e-5
+          TimeThreshold: 00:00:01
+          PriceForChangeThreshold: 3.0e-05
+        AbArbitrator:
+          DepthBookProcessing:
+            OrderBy: Sequence
+          TradesProcessing:
+            OrderBy: Sequence
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        SnapshotCoordinator:
+          OrderBy: Sequence
+        DepthBookMaintainer:
+          LevelsCap: 150
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

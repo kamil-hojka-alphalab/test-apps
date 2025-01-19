@@ -1,0 +1,103 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-huobiglobal-205
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2024.10.29.65-57e0a79
+  replicas: 1
+  destiny: dg-rt-az1
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 204
+      ExchangeName: HuobiGlobal
+      Monitor:
+        DefaultConnectionCount: 1
+        MaxSymbolsPerConnection: 30
+        Symbols:
+          - Name: FIL/USDT
+          - Name: NEAR/USDT
+          - Name: MANA/USDT
+          - Name: WOO/USDT
+          - Name: BTT/USDT
+          - Name: ACA/USDT
+          - Name: C98/USDT
+          - Name: RSS3/USDT
+          - Name: AXS/USDT
+          - Name: DAO/USDT
+          - Name: OP/USDT
+          - Name: ETN/USDT
+          - Name: RDNT/USDT
+          - Name: SUI/USDT
+          - Name: ORDI/USDT
+          - Name: KLV/USDT
+          - Name: APT/USDT
+          - Name: ETH/USDD
+          - Name: BTC/USDD
+          - Name: JOE/USDT
+          - Name: OG/USDT
+          - Name: PYR/USDT
+          - Name: AGLD/USDT
+          - Name: GALA/USDT
+          - Name: MBOX/USDT
+          - Name: SD/USDT
+          - Name: ABBC/USDT
+          - Name: ALICE/USDT
+          - Name: BICO/USDT
+          - Name: SEI/USDT
+          - Name: FCT2/USDT
+          - Name: SOL/BTC
+          - Name: SOL/USDT
+          - Name: NFT/USDT
+          - Name: CVP/USDT
+          - Name: ACH/USDT
+          - Name: CSPR/USDT
+          - Name: XCH/USDT
+          - Name: NEO/USDT
+          - Name: LQTY/USDT
+          - Name: BLUR/USDT
+          - Name: CORE/USDT
+          - Name: MUSIC/USDT
+          - Name: MVL/USDT
+          - Name: MX/USDT
+          - Name: MXC/USDT
+          - Name: MYRO/USDT
+          - Name: NAKA/USDT
+          - Name: NAVX/USDT
+          - Name: NEST/USDT
+          - Name: NEW/USDT
+          - Name: NEXO/USDT
+          - Name: NEXT/USDT
+      RateLimiter:
+        Http:
+          UsageLimit: 10
+          Interval: 00:00:01
+          MinAcquireGap: 0.00:00:00.075
+          RequestCosts:
+            FundingRate: 1
+      HuobiGlobal:
+        Collocation: true
+        UseTickFeed: false
+      Pipeline:
+        AbArbitrator:
+          DepthBookProcessing:
+            OrderBy: Counter
+          TradesProcessing:
+            OrderBy: Sequence
+        SnapshotCoordinator:
+          OrderBy: Counter
+        DepthBookMaintainer:
+          LevelsCap: 150
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: 23:00:00

@@ -1,0 +1,69 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybitspot-303
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2024.1.10.8-c375899
+  replicas: 1
+  destiny: dg-nrt
+  cpu_request: 1100m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 3000Mi
+  config: |
+    QuoteServer:
+      ShardId: 302
+      ExchangeName: BybitSpot
+      Monitor:
+        Symbols:
+        - Name: TRX/USDC
+        - Name: TURBOS/USDT
+        - Name: TUSD/USDT
+        - Name: UNI/USDC
+        - Name: USDT/TRY
+        - Name: USDY/USDT
+        - Name: VANA/USDT
+        - Name: VANRY/USDT
+        - Name: VELA/USDT
+        - Name: VENOM/USDT
+        - Name: VEXT/USDT
+        - Name: VPAD/USDT
+        - Name: VPR/USDT
+        - Name: VRA/USDT
+        - Name: VRTX/USDT
+        - Name: WAXP/USDT
+        - Name: WBTC/USDT
+        - Name: WEMIX/USDT
+        - Name: WIF/USDC
+        - Name: WLKN/USDT
+        - Name: X/USDT
+        - Name: XAVA/USDT
+        - Name: XDC/USDT
+        - Name: XEM/USDT
+        - Name: XETA/USDT
+        - Name: XION/USDT
+        - Name: XLM/USDC
+        - Name: XYM/USDT
+        - Name: ZEN/USDT
+        - Name: ZENT/USDT
+        - Name: ZEX/USDT
+        - Name: ZIL/USDT
+        - Name: ZK/USDC
+        - Name: ZK/USDT
+        - Name: ZKJ/USDT
+        - Name: ZRO/USDC
+        - Name: ZRO/USDT
+        - Name: ZTX/USDT
+        DefaultConnectionCount: 1
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        DepthBookMaintainer:
+          LevelsCap: 50
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

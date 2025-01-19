@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    QsClient:
+      ZmqTransport:
+        Endpoint:
+          - ">tcp://dg-proxy.dg-tokyo-06:11900"
+    DataRecorder:
+      S3Options:
+        Bucket: "qs-bin-v2-tyo"
+      Redis:
+        Host: elasticache-trading-platform-tyo.qcgrcw.ng.0001.apne1.cache.amazonaws.com
+
+kind: ConfigMap
+metadata:
+  name: data-recorder-config

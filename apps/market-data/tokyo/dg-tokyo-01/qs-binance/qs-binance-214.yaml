@@ -1,0 +1,77 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-binance-214
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.12.2.127-6a165c5
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1500m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 213
+      ExchangeName: Binance
+      Binance:
+        Variant: DeltaSimplified
+        DedupTradesEarly: true
+        DedupTickersEarly: true
+
+      Monitor:
+        DefaultConnectionCount: 3
+        Symbols:
+          - Name: STEEM/BTC
+          - Name: KAVA/BTC
+          - Name: KAVA/USDT
+          - Name: WRX/USDT
+          - Name: BAND/BTC
+          - Name: BAND/USDT
+          - Name: RVN/BTC
+          - Name: RVN/USDT
+          - Name: ALGO/BTC
+          - Name: ICX/BTC
+          - Name: LSK/BTC
+          - Name: LSK/USDT
+          - Name: LINA/USDT
+          - Name: MBL/USDT
+          - Name: STEEM/USDT
+          - Name: YFI/USDT
+          - Name: YFI/BTC
+          - Name: COMP/USDT
+          - Name: COMP/BTC
+          - Name: SUN/USDT
+          - Name: SUSHI/USDT
+          - Name: SUSHI/BTC
+          - Name: AVAX/USDT
+          - Name: AVAX/BTC
+          - Name: INJ/BNB
+          - Name: LINK/BRL
+          - Name: GMT/EUR
+          - Name: LDO/USDT
+          - Name: REI/USDT
+          - Name: APT/BTC
+          - Name: APT/USDT
+          - Name: PHB/BTC
+          - Name: GMX/USDT
+          - Name: POLYX/USDT
+          - Name: MAGIC/BTC
+          - Name: PROS/USDT
+          - Name: SUI/USDT
+          - Name: MAV/TRY
+          - Name: ALPINE/TRY
+          - Name: TIA/TRY
+          - Name: PORTO/TRY
+          - Name: AI/TRY
+          - Name: JUP/USDT
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-01:11800"
+
+          V3BinaryFormat:
+            DevelopmentMode: false

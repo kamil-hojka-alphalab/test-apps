@@ -1,0 +1,64 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybit-214
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-bybit:2023.7.7.68-2c9aa5507b3888b4113ef3a17774d056fa02c94e
+
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+
+    QuoteServer:
+      ShardId: 213
+      ExchangeName: Bybit
+      Monitor:
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+            - UnderlyingName: XLM/USDT
+            - UnderlyingName: LINK/USDT
+            - UnderlyingName: ETH/USDT
+            - UnderlyingName: LTC/USDT
+            - UnderlyingName: DOT/USDT
+            - UnderlyingName: MKR/USDT
+            - UnderlyingName: SKL/USDT
+            - UnderlyingName: ZRX/USDT
+            - UnderlyingName: STMX/USDT
+            - UnderlyingName: ETHW/USDT
+            - UnderlyingName: RSR/USDT
+            - UnderlyingName: MANA/USDT
+            - UnderlyingName: ETC/USDT
+            - UnderlyingName: AAVE/USDT
+            - UnderlyingName: COMP/USDT
+            - UnderlyingName: FXS/USDT
+            - UnderlyingName: LQTY/USDT
+            - UnderlyingName: HOOK/USDT
+            - UnderlyingName: GMX/USDT
+            - UnderlyingName: STG/USDT
+            - UnderlyingName: MINA/USDT
+            - UnderlyingName: ALPHA/USDT
+            - UnderlyingName: BSV/USDT
+            - UnderlyingName: ATA/USDT
+            - UnderlyingName: HIFI/USDT
+            - UnderlyingName: TON/USDT
+
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 3
+      Pipeline:
+        DepthBookMaintainer:
+          LevelsCap: 200
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"

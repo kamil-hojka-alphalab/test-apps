@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: position-service
+  labels:
+    release: prom-stack  # this label is required for prometheus autodiscovery of PodMonitor objects
+spec:
+  selector:
+    matchLabels:
+      app: position-service
+  podMetricsEndpoints:
+    - port: prometheus-port
+      path: /metrics
+      interval: 30s

@@ -1,0 +1,70 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-mexc-210
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.28.108-3ce6dd0
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    PriceServerClient:
+      Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+    QuoteServer:
+      ShardId: 209
+      ExchangeName: Mexc
+      Monitor:
+        MaxSymbolsPerConnection: 10
+        Symbols:
+          - Name: LAVA/USDT
+          - Name: JOYSTREAM/USDT
+          - Name: MCOIN/USDT
+          - Name: ALEX/USDT
+          - Name: FMC/USDT
+          - Name: AA/USDT
+          - Name: RAY/USDT
+          - Name: METFI/USDT
+          - Name: GFAL/USDT
+          - Name: RAT/USDT
+          - Name: DC/USDT
+          - Name: CTK/USDT
+          - Name: RFD/USDT
+          - Name: NCDT/USDT
+          - Name: KSM/USDT
+          - Name: STAT/USDT
+          - Name: ROCKI/USDT
+          - Name: LIXX/USDT
+          - Name: BETA/USDT
+          - Name: DAO/USDT
+          - Name: QUACK/USDT
+          - Name: TRIAS/USDT
+          - Name: CREO/USDT
+          - Name: ZTX/USDT
+          - Name: TLOS/USDT
+          - Name: LF/USDT
+          - Name: AI/USDT
+          - Name: AIRI/USDT
+          - Name: SUP/USDT
+          - Name: DFI/USDT
+          - Name: DRN/USDT
+        DefaultConnectionCount: 2
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Subsampling:
+          BestBidOfferThreshold: 1e-5
+          TimeThreshold: 00:00:01
+          PriceForChangeThreshold: 3.0e-05
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

@@ -1,0 +1,51 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bitmart-201
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-bitmart:2022.8.29.66-00615eeff058eeaf7e1ebf087afab694bf491d0f
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: BitMart
+      Monitor:
+        Symbols:
+          - Name: ETH/USDT
+          - Name: BTC/USDT
+          - Name: BTC/USDC
+          - Name: BTC/DAI
+          - Name: ETH/BTC
+          - Name: ETH/USDC
+          - Name: DAI/USDT
+          - Name: BNB/USDT
+          - Name: APE/USDT
+          - Name: BMX/BTC
+          - Name: BMX/ETH
+          - Name: BNB/BTC
+          - Name: ETH/DAI
+          - Name: DOGE/USDT
+          - Name: ADA/USDC
+          - Name: SAND/USDC
+          - Name: BMX/USDT
+          - Name: SEI/USDT
+        MaxSymbolsPerConnection: 1
+        DefaultConnectionCount: 1
+        RateLimiter:
+          Http:
+            MinAcquireGap: 0.00:00:01.00
+
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

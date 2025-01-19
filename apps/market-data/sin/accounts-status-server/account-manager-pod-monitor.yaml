@@ -1,0 +1,32 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: account-manager-pod-monitor
+  labels:
+    team: trading-platform
+    # this is crucial, get it by: `kubectl get prometheus  -o yaml | grep -A4 serviceMonitorSelector`
+    release: prom-stack
+spec:
+  selector:
+    matchLabels:
+      prometheus-pod-scrape: enabled
+      app: accounts-status-server
+  jobLabel: alc-information-service-pod-stats
+  podMetricsEndpoints:
+    - port: http-port
+      path: /metrics
+      interval: 120s
+      scrapeTimeout: 60s
+      metricRelabelings:
+        - action: labeldrop
+          regex: pod
+        - action: labeldrop
+          regex: endpoint
+        - action: labeldrop
+          regex: instance
+        - action: labeldrop
+          regex: cluster
+        - action: labeldrop
+          regex: thanos_ruler_replica
+        - action: labeldrop
+          regex: container

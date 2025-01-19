@@ -1,0 +1,55 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-okex-220
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2024.2.8.19-b35840e
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 219
+      ExchangeName: OKEx
+      OKEx:
+        L2UpdateChannel: books
+        Passphrase: "shfjk#54JS3djDJ"
+        ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+        Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+      Monitor:
+        Symbols:
+          - Name: ETH/BTC
+          - Name: XRP/USDT
+          - Name: BCH/USDT
+          - Name: ETH/USDT
+          - Name: LTC/USDT
+          - Name: BTC/USDT
+          - Name: LTC/BTC
+          - Name: EOS/USDT
+          - Name: ETC/USDT
+          - Name: BSV/BTC
+          - Name: QTUM/USDT
+          - Name: BSV/USDT
+          - Name: TRX/USDT
+          - Name: USDC/USDT
+          - Name: XLM/USDT
+          - Name: ARB/USDT
+          - Name: BNB/USDT
+          - Name: RDNT/USDT
+          - Name: SSV/USDT
+          - Name: GMX/USDT
+          - Name: RIO/USDT
+
+
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

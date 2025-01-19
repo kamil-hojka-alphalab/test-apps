@@ -1,0 +1,79 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-binance-205
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.12.2.127-6a165c5
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1500m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 204
+      ExchangeName: Binance
+      Binance:
+        Variant: DeltaSimplified
+        DedupTradesEarly: true
+        DedupTickersEarly: true
+
+      Monitor:
+        DefaultConnectionCount: 3
+        Symbols:
+          - Name: CRV/BTC
+          - Name: KMD/BTC
+          - Name: ZEN/BTC
+          - Name: BEL/BTC
+          - Name: EGLD/EUR
+          - Name: XLM/TRY
+          - Name: XLM/EUR
+          - Name: PSG/USDT
+          - Name: ZEN/USDT
+          - Name: VTHO/USDT
+          - Name: FET/USDT
+          - Name: SXP/TRY
+          - Name: VIDT/USDT
+          - Name: HIFI/USDT
+          - Name: TRX/BTC
+          - Name: TRX/BNB
+          - Name: ALPHA/BTC
+          - Name: GLM/BTC
+          - Name: CHZ/TRY
+          - Name: ACM/USDT
+          - Name: USDT/IDRT
+          - Name: FIO/USDT
+          - Name: LINK/BNB
+          - Name: ATOM/ETH
+          - Name: SOL/USDT
+          - Name: SOL/BTC
+          - Name: SOL/BNB
+          - Name: DOGE/USDT
+          - Name: DOGE/BTC
+          - Name: EGLD/USDT
+          - Name: EGLD/BNB
+          - Name: EGLD/BTC
+          - Name: FTM/USDT
+          - Name: FTM/BNB
+          - Name: FTM/BTC
+          - Name: CKB/USDT
+          - Name: ROSE/USDT
+          - Name: ROSE/BTC
+          - Name: SEI/TRY
+          - Name: SEI/FDUSD
+          - Name: SEI/BTC
+          - Name: PIXEL/USDT
+          - Name: STRK/BTC
+          - Name: PIXEL/BTC
+          - Name: PIXEL/BNB
+
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

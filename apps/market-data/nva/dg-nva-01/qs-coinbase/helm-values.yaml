@@ -1,0 +1,569 @@
+QuoteServers:
+  - name: qs-coinbase-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coinbase:2025.1.17.74-857c544
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: Coinbase
+        AliasForId: GDAX
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: BAL/USD
+            - Name: XLM/EUR
+            - Name: EOS/USD
+            - Name: APT/USD
+            - Name: CBETH/USD
+            - Name: CBETH/ETH
+            - Name: BLUR/USD
+            - Name: HFT/USD
+            - Name: ILV/USD
+            - Name: SAND/USDT
+            - Name: T/USD
+            - Name: FLOW/USDT
+            - Name: USDC/GBP
+            - Name: USDC/EUR
+            - Name: ARB/USD
+            - Name: MANA/USD
+            - Name: ICP/USDT
+            - Name: ICP/USD
+            - Name: ETH/USDT
+            - Name: USDT/EUR
+            - Name: USDT/GBP
+            - Name: USDT/USDC
+            - Name: SYN/USD
+            - Name: APE/USD
+            - Name: AVAX/USDT
+            - Name: OXT/USD
+            - Name: BNT/USD
+
+        RateLimiter:
+          Http:
+            UsageLimit: 100
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.05
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nva-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:02
+            IdleThreshold: 00:03:00
+        Coinbase:
+          WsBaseUrl: "wss://ws-direct.exchange.coinbase.com"
+          ApiKey: 69c244a9fe4ef9498577ea67d6745e52
+          ApiSecret: eVgF7uDO5xqL0p5S5Mt07PZiEFO2rN6q2Ta/OjR5Iz5c6qmcGcb9zDPlMgLGdmQ64O6TLD615gPCtkvb28gJgA==
+          ApiPassphrase: tVveTC48J9&s6fbbBhqg
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:02
+      PerfCollector:
+        Enabled: false
+  - name: qs-coinbase-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coinbase:2025.1.17.74-857c544
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 201
+        ExchangeName: Coinbase
+        AliasForId: GDAX
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: BTC/USDT
+            - Name: LINK/GBP
+            - Name: BTC/GBP
+            - Name: ETH/GBP
+            - Name: ETC/USD
+            - Name: SPELL/USD
+            - Name: MDT/USD
+            - Name: SUPER/USD
+            - Name: ALGO/USD
+            - Name: LQTY/USD
+            - Name: FLOW/USD
+            - Name: BTC/USD
+            - Name: RNDR/USD
+
+        RateLimiter:
+          Http:
+            UsageLimit: 100
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.05
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nva-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:02
+            IdleThreshold: 00:03:00
+        Coinbase:
+          WsBaseUrl: "wss://ws-direct.exchange.coinbase.com"
+          ApiKey: 69c244a9fe4ef9498577ea67d6745e52
+          ApiSecret: eVgF7uDO5xqL0p5S5Mt07PZiEFO2rN6q2Ta/OjR5Iz5c6qmcGcb9zDPlMgLGdmQ64O6TLD615gPCtkvb28gJgA==
+          ApiPassphrase: tVveTC48J9&s6fbbBhqg
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:02
+      PerfCollector:
+        Enabled: false
+  - name: qs-coinbase-203
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coinbase:2025.1.17.74-857c544
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 202
+        ExchangeName: Coinbase
+        AliasForId: GDAX
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: CELO/USD
+            - Name: FIL/USD
+            - Name: FIL/BTC
+            - Name: LINK/BTC
+            - Name: ZEC/USD
+            - Name: EOS/BTC
+            - Name: DAI/USD
+            - Name: STORJ/USD
+            - Name: ROSE/USD
+            - Name: GMT/USD
+            - Name: BTC/EUR
+            - Name: PERP/USD
+            - Name: TRAC/USD
+            - Name: LCX/USD
+            - Name: SOL/ETH
+            - Name: INJ/USD
+            - Name: HBAR/USD
+            - Name: NEAR/USD
+            - Name: NEON/USD
+            - Name: MATIC/USDT
+            - Name: OCEAN/USD
+            - Name: RNDR/USDT
+            - Name: XRP/USDT
+            - Name: XRP/USD
+            - Name: XRP/EUR
+
+        RateLimiter:
+          Http:
+            UsageLimit: 100
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.05
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nva-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:02
+            IdleThreshold: 00:03:00
+        Coinbase:
+          WsBaseUrl: "wss://ws-direct.exchange.coinbase.com"
+          ApiKey: 69c244a9fe4ef9498577ea67d6745e52
+          ApiSecret: eVgF7uDO5xqL0p5S5Mt07PZiEFO2rN6q2Ta/OjR5Iz5c6qmcGcb9zDPlMgLGdmQ64O6TLD615gPCtkvb28gJgA==
+          ApiPassphrase: tVveTC48J9&s6fbbBhqg
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:02
+      PerfCollector:
+        Enabled: false
+  - name: qs-coinbase-204
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coinbase:2025.1.17.74-857c544
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 203
+        ExchangeName: Coinbase
+        AliasForId: GDAX
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: AAVE/USD
+            - Name: SNX/USD
+            - Name: GRT/EUR
+            - Name: GRT/USD
+            - Name: GRT/BTC
+            - Name: GRT/GBP
+            - Name: MATIC/USD
+            - Name: MATIC/BTC
+            - Name: MATIC/EUR
+            - Name: MATIC/GBP
+            - Name: SKL/USD
+            - Name: USDT/USD
+            - Name: YFI/USD
+            - Name: COMP/USD
+            - Name: MKR/USD
+            - Name: KNC/USD
+            - Name: BAND/USD
+            - Name: LRC/USD
+            - Name: XLM/USD
+            - Name: DASH/USD
+            - Name: LINK/EUR
+            - Name: XLM/BTC
+            - Name: ALGO/EUR
+            - Name: OP/USD
+            - Name: LINK/USD
+            - Name: STX/USD
+        RateLimiter:
+          Http:
+            UsageLimit: 100
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.05
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nva-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:02
+            IdleThreshold: 00:03:00
+        Coinbase:
+          WsBaseUrl: "wss://ws-direct.exchange.coinbase.com"
+          ApiKey: 69c244a9fe4ef9498577ea67d6745e52
+          ApiSecret: eVgF7uDO5xqL0p5S5Mt07PZiEFO2rN6q2Ta/OjR5Iz5c6qmcGcb9zDPlMgLGdmQ64O6TLD615gPCtkvb28gJgA==
+          ApiPassphrase: tVveTC48J9&s6fbbBhqg
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:02
+      PerfCollector:
+        Enabled: false
+  - name: qs-coinbase-205
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coinbase:2025.1.17.74-857c544
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 204
+        ExchangeName: Coinbase
+        AliasForId: GDAX
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: SUSHI/USD
+            - Name: ADA/GBP
+            - Name: ADA/USD
+            - Name: ADA/EUR
+            - Name: HIGH/USD
+            - Name: MINA/USD
+            - Name: SOL/EUR
+            - Name: SOL/BTC
+            - Name: SOL/USDT
+            - Name: SOL/GBP
+            - Name: SOL/USD
+            - Name: DOGE/EUR
+            - Name: DOGE/USDT
+            - Name: DOGE/USD
+            - Name: DOGE/GBP
+            - Name: DOGE/BTC
+            - Name: AMP/USD
+            - Name: CHZ/USD
+            - Name: SUI/USD
+            - Name: MPL/USD
+            - Name: RARI/USD
+
+        RateLimiter:
+          Http:
+            UsageLimit: 100
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.05
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nva-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:02
+            IdleThreshold: 00:03:00
+        Coinbase:
+          WsBaseUrl: "wss://ws-direct.exchange.coinbase.com"
+          ApiKey: 69c244a9fe4ef9498577ea67d6745e52
+          ApiSecret: eVgF7uDO5xqL0p5S5Mt07PZiEFO2rN6q2Ta/OjR5Iz5c6qmcGcb9zDPlMgLGdmQ64O6TLD615gPCtkvb28gJgA==
+          ApiPassphrase: tVveTC48J9&s6fbbBhqg
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:02
+      PerfCollector:
+        Enabled: false
+  - name: qs-coinbase-206
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coinbase:2025.1.17.74-857c544
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 205
+        ExchangeName: Coinbase
+        AliasForId: GDAX
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: ETH/BTC
+            - Name: LTC/BTC
+            - Name: ATOM/USD
+            - Name: LTC/USD
+            - Name: ETH/EUR
+            - Name: LTC/EUR
+            - Name: SAND/USD
+            - Name: LDO/USD
+            - Name: MAGIC/USD
+            - Name: ACH/USD
+            - Name: IMX/USD
+            - Name: BLZ/USD
+            - Name: ZEN/USD
+            - Name: AVAX/EUR
+            - Name: AXS/USD
+            - Name: TRU/USD
+            - Name: SHIB/USDT
+            - Name: MASK/USD
+            - Name: API3/USD
+            - Name: SEI/USD
+        RateLimiter:
+          Http:
+            UsageLimit: 100
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.05
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nva-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:02
+            IdleThreshold: 00:03:00
+        Coinbase:
+          WsBaseUrl: "wss://ws-direct.exchange.coinbase.com"
+          ApiKey: 69c244a9fe4ef9498577ea67d6745e52
+          ApiSecret: eVgF7uDO5xqL0p5S5Mt07PZiEFO2rN6q2Ta/OjR5Iz5c6qmcGcb9zDPlMgLGdmQ64O6TLD615gPCtkvb28gJgA==
+          ApiPassphrase: tVveTC48J9&s6fbbBhqg
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:02
+      PerfCollector:
+        Enabled: false
+  - name: qs-coinbase-207
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coinbase:2025.1.17.74-857c544
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 206
+        ExchangeName: Coinbase
+        AliasForId: GDAX
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: ANKR/USD
+            - Name: ANKR/EUR
+            - Name: CRO/USD
+            - Name: CRV/USD
+            - Name: ONEINCH/BTC
+            - Name: CTSI/USD
+            - Name: ONEINCH/USD
+            - Name: SHIB/USD
+            - Name: OGN/USD
+            - Name: DOT/GBP
+            - Name: DOT/USDT
+            - Name: DOT/EUR
+            - Name: DOT/USD
+            - Name: DOT/BTC
+            - Name: LPT/USD
+            - Name: QNT/USD
+            - Name: JASMY/USD
+            - Name: CLV/USD
+            - Name: FET/USDT
+            - Name: FET/USD
+            - Name: AVAX/USD
+            - Name: ETH/USD
+            - Name: ZRX/USD
+            - Name: XTZ/USD
+            - Name: BCH/USD
+            - Name: UNI/USD
+        RateLimiter:
+          Http:
+            UsageLimit: 100
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.05
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nva-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:02
+            IdleThreshold: 00:03:00
+        Coinbase:
+          WsBaseUrl: "wss://ws-direct.exchange.coinbase.com"
+          ApiKey: 69c244a9fe4ef9498577ea67d6745e52
+          ApiSecret: eVgF7uDO5xqL0p5S5Mt07PZiEFO2rN6q2Ta/OjR5Iz5c6qmcGcb9zDPlMgLGdmQ64O6TLD615gPCtkvb28gJgA==
+          ApiPassphrase: tVveTC48J9&s6fbbBhqg
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:02
+      PerfCollector:
+        Enabled: false

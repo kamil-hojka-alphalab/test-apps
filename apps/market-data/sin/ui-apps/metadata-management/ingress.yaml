@@ -1,0 +1,26 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: metadata-management-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /metadata-management
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: metadata-management
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`tools.alphalab.cc`) && PathPrefix(`/metadata-management`)
+      kind: Rule
+      middlewares:
+        - name: metadata-management-stripprefix
+      services:
+        - name: metadata-management
+          port: 4000
+  tls:
+    secretName: tools.alphalab.cc-prod-tls

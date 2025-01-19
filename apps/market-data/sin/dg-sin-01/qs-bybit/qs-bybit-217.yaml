@@ -1,0 +1,69 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybit-217
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-bybit:2023.7.7.68-2c9aa5507b3888b4113ef3a17774d056fa02c94e
+
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+
+    QuoteServer:
+      ShardId: 216
+      ExchangeName: Bybit
+      Monitor:
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+            - UnderlyingName: CHR/USDT
+            - UnderlyingName: LINA/USDT
+            - UnderlyingName: RVN/USDT
+            - UnderlyingName: ARPA/USDT
+            - UnderlyingName: CTSI/USDT
+            - UnderlyingName: BCH/USDT
+            - UnderlyingName: IMX/USDT
+            - UnderlyingName: CRO/USDT
+            - UnderlyingName: VET/USDT
+            - UnderlyingName: COTI/USDT
+            - UnderlyingName: ENS/USDT
+            - UnderlyingName: MASK/USDT
+            - UnderlyingName: ARB/USDT
+            - UnderlyingName: CFX/USDT
+            - UnderlyingName: BSW/USDT
+            - UnderlyingName: 1000XEC/USDT
+            - UnderlyingName: MDT/USDT
+            - UnderlyingName: SEI/USDT
+            - UnderlyingName: LEVER/USDT
+            - UnderlyingName: AUCTION/USDT
+            - UnderlyingName: CYBER/USDT
+            - UnderlyingName: XNO/USDT
+            - UnderlyingName: QNT/USDT
+            - UnderlyingName: PERP/USDT
+            - UnderlyingName: GAS/USDT
+            - UnderlyingName: TIA/USDT
+            - UnderlyingName: MEME/USDT
+            - UnderlyingName: BADGER/USDT
+            - UnderlyingName: BIGTIME/USDT
+            - UnderlyingName: TOKEN/USDT
+
+
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 3
+      Pipeline:
+        DepthBookMaintainer:
+          LevelsCap: 200
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"

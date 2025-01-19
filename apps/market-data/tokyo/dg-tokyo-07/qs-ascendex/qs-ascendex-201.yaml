@@ -1,0 +1,98 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-ascendex-201
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-ascendex:2022.10.5.35-786064e0fee0a475ccbc0b039b6a7d6bbadb3d0f
+  replicas: 0
+  destiny: dg-rt-az4
+  cpu_request: 1000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    PriceServerClient:
+      Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+
+    Serilog:
+      MinimumLevel:
+        Default: Information
+
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: AscendEx
+
+      Monitor:
+        DefaultConnectionCount: 1
+        ConnectionRetryDelay: 0.1
+        MaxSymbolsPerConnection: 10
+        Symbols:
+          - Name: BTC/USDT
+          - Name: DOT/USDT
+          - Name: BNB/BTC
+          - Name: ASD/USDT
+          - Name: TRX/USDT
+          - Name: WOO/USDT
+          - Name: ONE/USDT
+          - Name: VET/USDT
+          - Name: BSV/USDT
+          - Name: ZEC/USDT
+          - Name: BAT/USDT
+          - Name: QTUM/USDT
+          - Name: ZRX/BTC
+          - Name: ZIL/USDT
+          - Name: ALGO/USDT
+          - Name: ALGO/BTC
+          - Name: CSPR/USDT
+          - Name: ZRX/USDT
+          - Name: SOL/USD
+          - Name: IOST/USDT
+          - Name: ADA/USDT
+          - Name: EOS/USDT
+          - Name: SOL/USDT
+          - Name: FIO/USDT
+          - Name: XTZ/USDT
+          - Name: ZEE/USDT
+          - Name: VRA/USDT
+          - Name: FIS/USDT
+          - Name: ETH/BTC
+          - Name: NEO/USDT
+          - Name: ONT/USDT
+          - Name: FET/USDT
+          - Name: XRP/USDT
+          - Name: DOGE/USDT
+          - Name: BNB/USDT
+          - Name: BCH/USDT
+          - Name: ETC/USDT
+          - Name: RUNE/USDT
+          - Name: LINK/USDT
+          - Name: LTC/USDT
+          - Name: LTC/BTC
+          - Name: EGLD/USDT
+          - Name: DOGE/BTC
+          - Name: LINK/BTC
+          - Name: XRP/BTC
+          - Name: XEM/USDT
+          - Name: ETH/USDT
+          - Name: ATOM/USDT
+
+
+      Pipeline:
+        Subsampling:
+          BestBidOfferThreshold: 1e-5
+          TimeThreshold: "00:00:01"
+          PriceForChangeThreshold: 3.0e-5
+        DepthBookMaintainer:
+          LevelsCap: 100
+
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-06:11800"
+
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: 01:00:00

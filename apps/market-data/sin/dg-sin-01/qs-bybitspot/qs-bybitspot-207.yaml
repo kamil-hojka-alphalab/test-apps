@@ -1,0 +1,34 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybitspot-207
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2024.1.10.8-c375899
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 1100m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    QuoteServer:
+      ShardId: 206
+      ExchangeName: BybitSpot
+      Monitor:
+        Symbols:
+          - Name: CGPT/USDT
+          - Name: GMT/USDT
+          - Name: KDA/USDT
+        DefaultConnectionCount: 2
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        DepthBookMaintainer:
+          LevelsCap: 50
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

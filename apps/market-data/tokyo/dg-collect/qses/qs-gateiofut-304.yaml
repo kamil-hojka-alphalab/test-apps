@@ -1,0 +1,182 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateiofut-304
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.2.16.33-1eb4da9
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 303
+      ExchangeName: GateIOFut
+      Monitor:
+        DefaultConnectionCount: 1
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+          - UnderlyingName: FLUX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: FOXY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: FTN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: FTT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: G/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GALA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GAS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GEAR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GFI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GLM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GLMR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GME/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GMT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GMX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GOAT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GPT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GRASS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GRIFFAIN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GROK/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GRT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: GTAI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HBAR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HIFI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HIGH/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HIPPO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HIVE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HNT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HOLD/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HOOK/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: HYPE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ICE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ICP/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ICX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ID/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: IDEX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ILV/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: IMX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: INJ/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: IO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: IOST/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: IOTA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: IOTX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: IRIS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: JASMY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: JOE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: JTO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: JUP/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: KAIA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: KAS/USDT
+            NamePatterns:
+            - _Perpetual
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

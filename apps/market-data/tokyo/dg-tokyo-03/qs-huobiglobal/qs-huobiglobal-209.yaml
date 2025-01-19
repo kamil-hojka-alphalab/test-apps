@@ -1,0 +1,134 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-huobiglobal-209
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2024.10.29.65-57e0a79
+  replicas: 1
+  destiny: dg-rt-az1
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 1200m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 208
+      ExchangeName: HuobiGlobal
+      Monitor:
+        DefaultConnectionCount: 1
+        MaxSymbolsPerConnection: 30
+        Symbols:
+          - Name: 1CAT/USDT
+          - Name: ACE/USDT
+          - Name: ADP/USDT
+          - Name: ADX/USDT
+          - Name: AEVO/USDT
+          - Name: AI/USDT
+          - Name: AIOZ/USDT
+          - Name: AITECH/USDT
+          - Name: AKRO/USDT
+          - Name: AKT/USDT
+          - Name: ALT/USDT
+          - Name: ANALOS/USDT
+          - Name: APED/USDT
+          - Name: AQT/USDT
+          - Name: AR/USDT
+          - Name: ARDR/USDT
+          - Name: ARKM/USDT
+          - Name: ARTY/USDT
+          - Name: ARV/USDT
+          - Name: ASTR/USDT
+          - Name: ATM/USDT
+          - Name: AURY/USDT
+          - Name: AZERO/USDT
+          - Name: BABYDOGE/USDT
+          - Name: BAKE/USDT
+          - Name: BANANA/USDT
+          - Name: BAT/USDT
+          - Name: BBL/USDT
+          - Name: BEAMX/USDT
+          - Name: BERRY/USDT
+          - Name: BETH/USDT
+          - Name: BOB/USDT
+          - Name: BOME/USDT
+          - Name: BONK/USDT
+          - Name: BORG/USDT
+          - Name: BORING/USDT
+          - Name: BOSON/USDT
+          - Name: BOX/USDT
+          - Name: BREED/USDT
+          - Name: BRISE/USDT
+          - Name: BRWL/USDT
+          - Name: BTT/USDC
+          - Name: BULL/USDT
+          - Name: BWO/USDT
+          - Name: CA/USDT
+          - Name: CAW/USDT
+          - Name: CBK/USDT
+          - Name: CERE/USDT
+          - Name: CGPT/USDT
+          - Name: CHR/USDT
+          - Name: CKB/USDT
+          - Name: COM/USDT
+          - Name: COQ/USDT
+          - Name: COTI/USDT
+          - Name: CRU/USDT
+          - Name: CTSI/USDT
+          - Name: CTX/USDT
+          - Name: CTXC/USDT
+          - Name: CUSD/USDT
+          - Name: CVC/USDT
+          - Name: CYBER/USDT
+          - Name: DAI/USDT
+          - Name: DBC/USDT
+          - Name: DC/USDT
+          - Name: DCK/USDT
+          - Name: DECHAT/USDT
+          - Name: DEGEN/USDT
+          - Name: DF/USDT
+          - Name: DIO/USDT
+          - Name: DKA/USDT
+          - Name: DORA/USDT
+          - Name: DYP/USDT
+          - Name: ELA/USDT
+          - Name: ELON/USDT
+          - Name: ENA/USDT
+          - Name: ENS/USDT
+          - Name: EPIK/USDT
+          - Name: ERG/USDT
+          - Name: ERN/USDT
+          - Name: ERTHA/USDT
+          - Name: ETHFI/USDT
+          - Name: ETHW/USDT
+          - Name: EUROC/USDT
+          - Name: EVMOS/USDT
+      RateLimiter:
+        Http:
+          UsageLimit: 10
+          Interval: 00:00:01
+          MinAcquireGap: 0.00:00:00.075
+          RequestCosts:
+            FundingRate: 1
+      HuobiGlobal:
+        Collocation: true
+        UseTickFeed: false
+      Pipeline:
+        AbArbitrator:
+          DepthBookProcessing:
+            OrderBy: Counter
+          TradesProcessing:
+            OrderBy: Sequence
+        SnapshotCoordinator:
+          OrderBy: Counter
+        DepthBookMaintainer:
+          LevelsCap: 150
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"

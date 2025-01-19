@@ -1,0 +1,67 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    QsClient:
+      DevelopmentMode: false
+
+      Workflow:
+        Type: SplitBySymbolCount
+        SymbolsCount: 800
+        InitialWorkflowCount: 2
+    
+      ZmqTransport:
+        DefaultEndpointName: "default"
+        Endpoint:
+          default:
+            - ">tcp://dg-proxy.dg-tokyo-03:11900"
+          regional:
+            - ">tcp://qs-tokyo-12.node.al:10951"
+            - ">tcp://qs-tokyo-12.node.al:10956"
+            - ">tcp://qs-tokyo-13.node.al:10951"
+            - ">tcp://qs-tokyo-13.node.al:10956"
+            - ">tcp://qs-tokyo-14.node.al:10951"
+        LocalByteCacheSize: 65536
+        ReceiveHighWatermark: 300000
+        
+      Extension: InstanceId
+      Subscription: NonSubSampled
+      ExtensionDeserializationErrorHandling: None
+
+    Subscription:
+      Prefix: ""
+      ExporterName: "qs-exporter-tokyo-c-csharp"
+      Exchanges:
+        default:
+          - "HuobiGlobal"
+          - "HuobiDM"
+          - "bitFlyer"
+          - "bitFlyerFut"
+        regional:
+          - "LFQS"
+
+    MetricConfigurationProvider:
+      DefaultEnabled: true
+      Rules:
+        - Exchange: "LFQS"
+          Enabled: false
+        - Symbol: "XPLA/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "HuobiGlobal"
+          Enabled: true
+        - Symbol: "DFX/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "HuobiGlobal"
+          Enabled: true
+        - Symbol: "DFX/USDT"
+          Metric: "al_qs_prc_for_usd_amt"
+          Exchange: "HuobiGlobal"
+          Enabled: true
+        - Metric: "al_qs_book_agg_amt_from_mid"
+          Enabled: false
+        - Metric: "al_qs_prc_for_usd_amt"
+          Enabled: false
+
+
+kind: ConfigMap
+metadata:
+  name: qs-exporter-config-csharp

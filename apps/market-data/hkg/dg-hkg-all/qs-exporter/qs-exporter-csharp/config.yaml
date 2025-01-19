@@ -1,0 +1,70 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    QsClient:
+      DevelopmentMode: false
+
+      Workflow:
+        Type: SplitBySymbolCount
+        SymbolsCount: 600
+        InitialWorkflowCount: 4
+    
+      ZmqTransport:
+        DefaultEndpointName: "default"
+        Endpoint:
+          default:
+            - ">tcp://dg-proxy.dg-hkg-01:11900"
+            - ">tcp://dg-proxy.dg-hkg-02:11900"
+            - ">tcp://dg-proxy.dg-hkg-03:11900"
+        LocalByteCacheSize: 65536
+        ReceiveHighWatermark: 300000
+        
+      Extension: InstanceId
+      Subscription: NonSubSampled
+      ExtensionDeserializationErrorHandling: None
+
+    Subscription:
+      Prefix: ""
+      ExporterName: "qs-exporter-hongkong-csharp"
+      Exchanges:
+        default:
+          - "OKEx"
+          - "OKExFut"
+          - "Mexc"
+
+    MetricConfigurationProvider:
+      DefaultEnabled: true
+      Rules:
+        - Symbol: "API3/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "OKEx"
+          Enabled: true
+        - Symbol: "USH/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "Mexc"
+          Enabled: true
+        - Symbol: "RARI/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "Mexc"
+          Enabled: true
+        - Symbol: "TKX/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "Mexc"
+          Enabled: true
+        - Symbol: "XPLA/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "Mexc"
+          Enabled: true
+        - Symbol: "PYTH/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "OKEx"
+          Enabled: true
+        - Symbol: "INFRA/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "Mexc"
+          Enabled: true
+      
+
+kind: ConfigMap
+metadata:
+  name: qs-exporter-config-csharp

@@ -1,0 +1,62 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybitspot-201
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2024.1.10.8-c375899
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 1100m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: BybitSpot
+
+      Monitor:
+        Symbols:
+          - Name: BTC/USDT
+          - Name: XRP/USDT
+          - Name: ETH/USDT
+          - Name: SOL/USDT
+          - Name: LTC/USDT
+          - Name: AVAX/USDT
+          - Name: WAVES/USDT
+          - Name: JASMY/USDT
+          - Name: DOT/USDT
+          - Name: AXS/USDT
+          - Name: EOS/USDT
+          - Name: XLM/USDT
+          - Name: BCH/USDT
+          - Name: SUSHI/USDT
+          - Name: GALA/USDT
+          - Name: ATOM/USDT
+          - Name: ADA/USDT
+          - Name: SAND/USDT
+          - Name: DOGE/USDT
+          - Name: MANA/USDT
+          - Name: FTM/USDT
+          - Name: USDC/USDT
+          - Name: PYTH/USDT
+          - Name: ONDO/USDT
+          - Name: MANTA/USDT
+          - Name: UMA/USDT
+          - Name: CHZ/USDT
+          - Name: RAIN/USDT
+
+
+        DefaultConnectionCount: 2
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        DepthBookMaintainer:
+          LevelsCap: 50
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

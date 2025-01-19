@@ -1,0 +1,78 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybit-215
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-bybit:2023.7.7.68-2c9aa5507b3888b4113ef3a17774d056fa02c94e
+
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+
+    QuoteServer:
+      ShardId: 214
+      ExchangeName: Bybit
+      Monitor:
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+            - UnderlyingName: TRB/USDT
+            - UnderlyingName: LDO/USDT
+            - UnderlyingName: FITFI/USDT
+            - UnderlyingName: ZIL/USDT
+            - UnderlyingName: ADA/USD
+            - UnderlyingName: LTC/USD
+            - UnderlyingName: API3/USDT
+            - UnderlyingName: OGN/USDT
+            - UnderlyingName: SCRT/USDT
+            - UnderlyingName: BAL/USDT
+            - UnderlyingName: DODO/USDT
+            - UnderlyingName: BLZ/USDT
+            - UnderlyingName: CTK/USDT
+            - UnderlyingName: GLMR/USDT
+            - UnderlyingName: MTL/USDT
+            - UnderlyingName: AGLD/USDT
+            - UnderlyingName: PHB/USDT
+            - UnderlyingName: PAXG/USDT
+            - UnderlyingName: 1000PEPE/USDT
+            - UnderlyingName: 10000LADYS/USDT
+            - UnderlyingName: SUI/USDT
+            - UnderlyingName: INJ/USDT
+            - UnderlyingName: CAKE/USDT
+            - UnderlyingName: NTRN/USDT
+            - UnderlyingName: SNT/USDT
+            - UnderlyingName: UMA/USDT
+            - UnderlyingName: CVX/USDT
+            - UnderlyingName: EOS/USD
+            - UnderlyingName: RON/USDT
+            - UnderlyingName: DOG/USDT
+            - UnderlyingName: TNSR/USDT
+            - UnderlyingName: MEW/USDT
+            - UnderlyingName: NYAN/USDT
+            - UnderlyingName: OMNI/USDT
+            - UnderlyingName: REZ/USDT
+            - UnderlyingName: SAGA/USDT
+            - UnderlyingName: VELO/USDT
+            - UnderlyingName: DRIFT/USDT
+            - UnderlyingName: SPEC/USDT
+            - UnderlyingName: ORDER/USDT
+
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 3
+      Pipeline:
+        DepthBookMaintainer:
+          LevelsCap: 200
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"

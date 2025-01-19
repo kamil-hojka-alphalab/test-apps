@@ -1,0 +1,132 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-binance-301
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.12.2.127-6a165c5
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 300
+      ExchangeName: Binance
+      Binance:
+        Variant: DeltaSimplified
+        DedupTradesEarly: true
+        DedupTickersEarly: true
+      Monitor:
+        DefaultConnectionCount: 1
+        Symbols:
+        - Name: AAVE/FDUSD
+        - Name: AAVE/TRY
+        - Name: AAVE/USDC
+        - Name: ACA/TRY
+        - Name: ACE/TRY
+        - Name: ACH/TRY
+        - Name: ACT/FDUSD
+        - Name: ACT/TRY
+        - Name: ACT/USDC
+        - Name: ACT/USDT
+        - Name: ACX/TRY
+        - Name: ACX/USDC
+        - Name: ACX/USDT
+        - Name: ADA/USDC
+        - Name: AEVO/FDUSD
+        - Name: AEVO/TRY
+        - Name: AI/FDUSD
+        - Name: AIXBT/USDC
+        - Name: AIXBT/USDT
+        - Name: ALGO/TRY
+        - Name: ALGO/USDC
+        - Name: ALICE/TRY
+        - Name: ALT/FDUSD
+        - Name: ALT/TRY
+        - Name: ALT/USDC
+        - Name: APE/FDUSD
+        - Name: APE/USDC
+        - Name: APT/JPY
+        - Name: APT/USDC
+        - Name: AR/FDUSD
+        - Name: AR/TRY
+        - Name: AR/USDC
+        - Name: ARB/FDUSD
+        - Name: ARB/USDC
+        - Name: ARK/TRY
+        - Name: ARKM/FDUSD
+        - Name: ARKM/TRY
+        - Name: ARKM/USDC
+        - Name: ATOM/FDUSD
+        - Name: ATOM/TRY
+        - Name: ATOM/USDC
+        - Name: AUCTION/FDUSD
+        - Name: AUD/USDT
+        - Name: AUDIO/TRY
+        - Name: AVAX/FDUSD
+        - Name: AVAX/USDC
+        - Name: AXS/TRY
+        - Name: BAKE/TRY
+        - Name: BANANA/FDUSD
+        - Name: BANANA/TRY
+        - Name: BANANA/USDT
+        - Name: BB/FDUSD
+        - Name: BB/TRY
+        - Name: BB/USDC
+        - Name: BCH/FDUSD
+        - Name: BCH/TRY
+        - Name: BCH/USDC
+        - Name: BEAMX/TRY
+        - Name: BEL/TRY
+        - Name: BLUR/TRY
+        - Name: BLUR/USDC
+        - Name: BNX/TRY
+        - Name: BOME/FDUSD
+        - Name: BOME/TRY
+        - Name: BOME/USDC
+        - Name: BONK/FDUSD
+        - Name: BONK/USDC
+        - Name: BSW/TRY
+        - Name: CAKE/TRY
+        - Name: CATI/FDUSD
+        - Name: CATI/TRY
+        - Name: CELO/TRY
+        - Name: CETUS/TRY
+        - Name: CETUS/USDC
+        - Name: CETUS/USDT
+        - Name: CFX/USDC
+        - Name: CGPT/USDC
+        - Name: CGPT/USDT
+        - Name: CHZ/FDUSD
+        - Name: CHZ/USDC
+        - Name: CITY/TRY
+        - Name: CKB/TRY
+        - Name: CKB/USDC
+        - Name: COMP/TRY
+        - Name: COOKIE/USDC
+        - Name: COOKIE/USDT
+        - Name: COS/TRY
+        - Name: COTI/TRY
+        - Name: COW/TRY
+        - Name: COW/USDC
+        - Name: COW/USDT
+        - Name: CRV/TRY
+        - Name: CRV/USDC
+        - Name: CYBER/FDUSD
+        - Name: CYBER/TRY
+        - Name: DENT/TRY
+        - Name: DEXE/USDT
+        - Name: DOGE/TUSD
+        - Name: DOGE/USDC
+        - Name: DOGS/FDUSD
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

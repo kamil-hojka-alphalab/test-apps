@@ -1,0 +1,40 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bluefinfut-111
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-bluefin:2023.8.11.1-1d442ddb53a50a2c8ef5563ed22864c0df196a3a
+  replicas: 0
+  destiny: dg-test
+  cpu_request: 2000m
+  memory_request: 4000Mi
+  cpu_limit: 2000m
+  memory_limit: 4000Mi
+  config: |-
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    
+    QuoteServer:
+      ShardId: 110
+      ExchangeName: BluefinFut
+
+      Monitor:
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+            - UnderlyingName: ETH/USDC
+            - UnderlyingName: BTC/USDC
+            - UnderlyingName: DOGE/USDC
+            - UnderlyingName: SOL/USDC
+            - UnderlyingName: MATIC/USDC
+            - UnderlyingName: LINK/USDC
+            - UnderlyingName: ARB/USDC
+
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-test:11800"
+
+          V3BinaryFormat:
+            DevelopmentMode: true

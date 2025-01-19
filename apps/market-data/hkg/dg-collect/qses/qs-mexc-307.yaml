@@ -1,0 +1,109 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-mexc-307
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
+  replicas: 1
+  destiny: dg-nrt
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 306
+      ExchangeName: Mexc
+      Monitor:
+        MaxSymbolsPerConnection: 10
+        Symbols:
+        - Name: TOKEN/USDT
+        - Name: TOMI/USDT
+        - Name: TRX/USDC
+        - Name: UNI/USDC
+        - Name: USDC/USDT
+        - Name: UXLINK/USDT
+        - Name: VELODROME/USDT
+        - Name: VENOM/USDT
+        - Name: WAVES/USDC
+        - Name: WAXL/USDT
+        - Name: WAXP/USDT
+        - Name: WEMIX/USDT
+        - Name: XCN/USDT
+        - Name: XEN/USDC
+        - Name: XPLA/USDT
+        - Name: XRD/USDT
+        - Name: XRP/USDC
+        - Name: YFI/USDT
+        - Name: ZENT/USDT
+        - Name: ZKF/USDT
+        - Name: VANA/USDT
+        - Name: VANRY/USDT
+        - Name: VELO/USDT
+        - Name: VET/USDT
+        - Name: VEXT/USDT
+        - Name: VGX/USDT
+        - Name: VIDT/USDT
+        - Name: VOXEL/USDT
+        - Name: VRA/USDT
+        - Name: VTHO/USDT
+        - Name: W/USDT
+        - Name: WAVES/USDT
+        - Name: WING/USDT
+        - Name: WLD/USDT
+        - Name: WOJAK/USDT
+        - Name: WOO/USDT
+        - Name: X/USDT
+        - Name: XCH/USDT
+        - Name: XDC/USDT
+        - Name: XEC/USDT
+        - Name: XEN/USDT
+        - Name: XION/USDT
+        - Name: XLM/USDT
+        - Name: XMR/USDT
+        - Name: XRP/USDT
+        - Name: XTZ/USDT
+        - Name: XVG/USDT
+        - Name: XVS/USDT
+        - Name: YGG/USDT
+        - Name: ZBCN/USDT
+        - Name: ZCX/USDT
+        - Name: ZEC/USDT
+        - Name: ZETA/USDT
+        - Name: ZEUS/USDT
+        - Name: ZIL/USDT
+        - Name: ZK/USDT
+        - Name: ZKJ/USDT
+        - Name: ZRO/USDT
+        - Name: BAL/USDT
+        - Name: WEN/USDT
+        - Name: MBOX/USDT
+        - Name: APX/USDT
+        - Name: WIF/USDT
+        - Name: SLP/USDT
+        - Name: BADGER/USDT
+        - Name: AXS/USDT
+        - Name: ONDO/USDT
+        - Name: BAT/USDT
+        - Name: LMWR/USDT
+        - Name: ZRX/USDT
+        - Name: CTK/USDT
+        DefaultConnectionCount: 1
+        RateLimiter:
+          Http:
+            UsageLimit: 240
+            Interval: 00:01
+            MinAcquireGap: 0.00:00:01
+            RequestCosts:
+              Snapshot: 15
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

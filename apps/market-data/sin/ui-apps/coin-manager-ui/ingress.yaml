@@ -1,0 +1,26 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: coin-manager-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /coin-manager
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: coin-manager
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`tools.alphalab.cc`) && PathPrefix(`/coin-manager`)
+      kind: Rule
+      middlewares:
+        - name: coin-manager-stripprefix
+      services:
+        - name: coin-manager
+          port: 4000
+  tls:
+    secretName: tools.alphalab.cc-prod-tls

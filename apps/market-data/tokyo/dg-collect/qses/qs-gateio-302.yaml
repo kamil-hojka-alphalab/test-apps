@@ -1,0 +1,139 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateio-302
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.1.10.31-c375899
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 301
+      ExchangeName: GateIO
+      GateIO:
+        ExchangeConnection:
+          WebsocketApi:
+            Uri: wss://spotws-private.gateapi.io/ws/v4/
+        SnapshotMakerStrategy:
+          RestApi:
+            Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+      Monitor:
+        Symbols:
+        - Name: CGG/USDT
+        - Name: CGV/USDT
+        - Name: CHAMP/USDT
+        - Name: CHAT/USDT
+        - Name: CHILLGUY/USDT
+        - Name: CHKN/USDT
+        - Name: CLND/USDT
+        - Name: CLOUD/USDT
+        - Name: COBE/USDT
+        - Name: COMP/USDT
+        - Name: COOK/USDT
+        - Name: COOKIE/USDT
+        - Name: COPI/USDT
+        - Name: COQ/USDT
+        - Name: COS/USDT
+        - Name: COW/USDT
+        - Name: CRE/USDT
+        - Name: CREDI/USDT
+        - Name: CREO/USDT
+        - Name: CRF/USDT
+        - Name: CRH/USDT
+        - Name: CRTS/USDT
+        - Name: CTA/USDT
+        - Name: CTP/USDT
+        - Name: CTRC/USDT
+        - Name: CWAR/USDT
+        - Name: DAI/USDT
+        - Name: DASH/USDT
+        - Name: DBC/USDT
+        - Name: DECHAT/USDT
+        - Name: DEGEN/USDT
+        - Name: DEP/USDT
+        - Name: DEVVE/USDT
+        - Name: DFI/USDT
+        - Name: DFYN/USDT
+        - Name: DGB/USDT
+        - Name: DGI/USDT
+        - Name: DIO/USDT
+        - Name: DKA/USDT
+        - Name: DKS/USDT
+        - Name: DOG/USDT
+        - Name: DOGA/USDT
+        - Name: DOGS/USDT
+        - Name: DOPE/USDT
+        - Name: DORA/USDT
+        - Name: DOSE/USDT
+        - Name: DREP/USDT
+        - Name: DRIFT/USDT
+        - Name: DSLA/USDT
+        - Name: DSYNC/USDT
+        - Name: DUKO/USDT
+        - Name: DV/USDT
+        - Name: DVI/USDT
+        - Name: DZOO/USDT
+        - Name: EGAME/USDT
+        - Name: EIGEN/USDT
+        - Name: EL/USDT
+        - Name: ELU/USDT
+        - Name: EMC/USDT
+        - Name: EMT/USDT
+        - Name: ENA/USDT
+        - Name: EQX/USDT
+        - Name: ESE/USDT
+        - Name: ETHFI/USDT
+        - Name: ETN/USDT
+        - Name: EVMOS/USDT
+        - Name: EXVG/USDT
+        - Name: F/USDT
+        - Name: FACTR/USDT
+        - Name: FAKEAI/USDT
+        - Name: FARTCOIN/USDT
+        - Name: FAST/USDT
+        - Name: FDT/USDT
+        - Name: FEVR/USDT
+        - Name: FOMO/USDT
+        - Name: FORA/USDT
+        - Name: FORT/USDT
+        - Name: FOXY/USDT
+        - Name: FRBK/USDT
+        - Name: FSN/USDT
+        - Name: FTRB/USDT
+        - Name: FURY/USDT
+        - Name: FUSE/USDT
+        - Name: G/USDT
+        - Name: GAME/USDT
+        - Name: GAME2/USDT
+        - Name: GAMES/USDT
+        - Name: GAS/USDT
+        - Name: GAT/USDT
+        - Name: GEAR/USDT
+        - Name: GEMAI/USDT
+        - Name: GHX/USDT
+        - Name: GINUX/USDT
+        - Name: GLM/USDT
+        - Name: GLS/USDT
+        - Name: GME/USDT
+        - Name: GMEE/USDT
+        - Name: GMPD/USDT
+        - Name: GMRX/USDT
+        - Name: GOAT/USDT
+        DefaultConnectionCount: 1
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

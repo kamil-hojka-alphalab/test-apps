@@ -1,0 +1,62 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-mexc-204
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    PriceServerClient:
+      Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+    QuoteServer:
+      ShardId: 203
+      ExchangeName: Mexc
+      Monitor:
+        Symbols:
+        - Name: FTN/USDT
+        - Name: FTT/USDC
+        - Name: FUN/USDT
+        - Name: GAS/USDT
+        - Name: GFT/USDT
+        - Name: GHST/USDT
+        - Name: GME/USDT
+        - Name: GNO/USDT
+        - Name: GODS/USDT
+        - Name: GOMINING/USDT
+        - Name: GPT/USDT
+        - Name: GROK/USDT
+        - Name: GTAI/USDT
+        - Name: HBAR/USDT
+        - Name: INFRA/USDT
+        - Name: IQ50/USDT
+        - Name: IQ/USDT
+        - Name: JASMY/USDC
+        - Name: JST/USDT
+        - Name: KARRAT/USDT
+        - Name: KAS/USDT
+        - Name: PEAQ/USDT
+        DefaultConnectionCount: 2
+        MaxSymbolsPerConnection: 10
+
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Subsampling:
+          BestBidOfferThreshold: 1e-5
+          TimeThreshold: 00:00:01
+          PriceForChangeThreshold: 3.0e-05
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

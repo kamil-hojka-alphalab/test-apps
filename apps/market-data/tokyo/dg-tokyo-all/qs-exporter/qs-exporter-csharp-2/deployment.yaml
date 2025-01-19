@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qs-exporter-csharp-2
+spec:
+  selector:
+    matchLabels:
+      app: qs-exporter-csharp-2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: qs-exporter-csharp-2
+        prometheus-pod-scrape: enabled
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: qs-exporter
+          image: ghcr.io/alphalab-hq/alc-qs-exporter:2024.3.22.74-3d5cbe1087f974e8d6239b1029ea9669ef2b5538
+          args:
+            - "--config-files=/etc/config/config.yaml"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+            - name: security-master
+              mountPath: /etc/security_master
+          resources:
+            limits:
+              memory: 12000Mi
+              cpu: 10000m
+            requests:
+              cpu: 7000m
+              memory: 12000Mi
+          ports:
+            - name: health-port
+              containerPort: 5000
+          livenessProbe:
+            tcpSocket:
+              port: health-port
+            initialDelaySeconds: 300
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: health-port
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            failureThreshold: 60
+      imagePullSecrets:
+        - name: ghcr-creds
+      volumes:
+        - name: config-volume
+          configMap:
+            name: qs-exporter-config-csharp-2
+        - name: security-master
+          hostPath:
+            path: /synced_files
+      tolerations:
+        - key: node/destiny
+          operator: Equal
+          value: dg-nrt
+          effect: NoSchedule
+      nodeSelector:
+        node/destiny: dg-nrt

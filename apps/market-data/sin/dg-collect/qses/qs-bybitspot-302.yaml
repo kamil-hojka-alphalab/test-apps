@@ -1,0 +1,131 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybitspot-302
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2024.1.10.8-c375899
+  replicas: 1
+  destiny: dg-nrt
+  cpu_request: 1100m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 3000Mi
+  config: |
+    QuoteServer:
+      ShardId: 301
+      ExchangeName: BybitSpot
+      Monitor:
+        Symbols:
+        - Name: KUB/USDT
+        - Name: L3/USDT
+        - Name: LAVA/USDT
+        - Name: LEVER/USDT
+        - Name: LIS/USDT
+        - Name: LL/USDT
+        - Name: LOOKS/USDT
+        - Name: LRC/USDT
+        - Name: LUCE/USDT
+        - Name: LUNC/USDC
+        - Name: LUNC/USDT
+        - Name: MASA/USDT
+        - Name: MBS/USDT
+        - Name: MBX/USDT
+        - Name: MDAO/USDT
+        - Name: ME/USDT
+        - Name: MEE/USDT
+        - Name: MELOS/USDT
+        - Name: METH/USDT
+        - Name: MEW/USDC
+        - Name: MIX/USDT
+        - Name: MKR/USDT
+        - Name: MLK/USDT
+        - Name: MODE/USDT
+        - Name: MORPHO/USDT
+        - Name: MOVE/USDT
+        - Name: MV/USDT
+        - Name: MVL/USDT
+        - Name: NAVX/USDT
+        - Name: NEAR/USDC
+        - Name: NEXO/USDT
+        - Name: NEXT/USDT
+        - Name: NOT/USDC
+        - Name: NS/USDT
+        - Name: NYM/USDT
+        - Name: OAS/USDT
+        - Name: ODOS/USDT
+        - Name: ONDO/USDC
+        - Name: ORT/USDT
+        - Name: PARAM/USDT
+        - Name: PAXG/USDT
+        - Name: PBUX/USDT
+        - Name: PENGU/USDT
+        - Name: PEPE/USDC
+        - Name: PIP/USDT
+        - Name: PLANET/USDT
+        - Name: PLT/USDT
+        - Name: PNUT/USDT
+        - Name: POKT/USDT
+        - Name: POPCAT/USDT
+        - Name: PORT3/USDT
+        - Name: PPT/USDT
+        - Name: PSG/USDT
+        - Name: PSTAKE/USDT
+        - Name: PTU/USDT
+        - Name: PYUSD/USDT
+        - Name: QORPO/USDT
+        - Name: QTUM/USDT
+        - Name: RACA/USDT
+        - Name: REAL/USDT
+        - Name: REN/USDT
+        - Name: RENDER/USDT
+        - Name: RPK/USDT
+        - Name: RPL/USDT
+        - Name: RSS3/USDT
+        - Name: RVN/USDT
+        - Name: SAFE/USDT
+        - Name: SAROS/USDT
+        - Name: SATS/USDT
+        - Name: SCA/USDT
+        - Name: SCR/USDT
+        - Name: SCRT/USDT
+        - Name: SD/USDT
+        - Name: SEI/USDC
+        - Name: SEILOR/USDT
+        - Name: SEND/USDT
+        - Name: SERAPH/USDT
+        - Name: SHIB/USDC
+        - Name: SIDUS/USDT
+        - Name: SLP/USDT
+        - Name: SMILE/USDT
+        - Name: SON/USDT
+        - Name: SONIC/USDT
+        - Name: SPARTA/USDT
+        - Name: SPELL/USDT
+        - Name: SPX/USDT
+        - Name: SQD/USDT
+        - Name: STAT/USDT
+        - Name: STREAM/USDT
+        - Name: SUN/USDT
+        - Name: SWEAT/USDT
+        - Name: T/USDT
+        - Name: TAI/USDT
+        - Name: TAP/USDT
+        - Name: TEL/USDT
+        - Name: TENET/USDT
+        - Name: THN/USDT
+        - Name: TIA/USDC
+        - Name: TIME/USDT
+        - Name: TON/USDC
+        DefaultConnectionCount: 1
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        DepthBookMaintainer:
+          LevelsCap: 50
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

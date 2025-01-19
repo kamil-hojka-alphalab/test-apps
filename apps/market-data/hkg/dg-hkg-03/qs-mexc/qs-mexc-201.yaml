@@ -1,0 +1,54 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-mexc-201
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: Mexc
+      Monitor:
+        MaxSymbolsPerConnection: 10
+        Symbols:
+        - Name: 1CAT/USDT
+        - Name: AAVE/USDC
+        - Name: ADA/USDC
+        - Name: AERGO/USDT
+        - Name: AGI/USDT
+        - Name: AGLD/USDT
+        - Name: ALEO/USDT
+        - Name: ALGO/USDC
+        - Name: ALT/USDT
+        - Name: AMB/USDT
+        - Name: AMP/USDT
+        - Name: APE/USDC
+        - Name: ARK/USDT
+        - Name: ARPA/USDT
+        - Name: ASTR/USDT
+        - Name: ATOM/USDC
+        - Name: AURORA/USDT
+        - Name: AVAX/USDC
+        - Name: BBL/USDT
+        - Name: BCH/USDC
+        - Name: BEAM/USDT
+        DefaultConnectionCount: 2
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

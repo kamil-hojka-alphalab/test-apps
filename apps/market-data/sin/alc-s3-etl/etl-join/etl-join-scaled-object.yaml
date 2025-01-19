@@ -1,0 +1,46 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: etl-join-scaledobject
+  namespace: alc-s3-etl
+spec:
+  scaleTargetRef:
+    name: etl-join
+    apiVersion: apps/v1
+    kind: Deployment
+  minReplicaCount: 0
+  maxReplicaCount: 500
+  triggers:
+    - type: aws-cloudwatch
+      name: age_metric
+      metadata:
+        namespace: AWS/SQS
+        dimensionName: QueueName
+        dimensionValue: alc-etl-binlogs-s3-events-cs-algo-binlogs
+        metricName: ApproximateAgeOfOldestMessage
+        awsRegion: ap-southeast-1
+        minMetricValue: "0"
+        targetMetricValue: "900"
+        activationTargetMetricValue: "800"
+      authenticationRef:
+        name: etl-join-trigger-authentication
+
+    - type: aws-cloudwatch
+      name: count_metric
+      metadata:
+        namespace: AWS/SQS
+        dimensionName: QueueName
+        dimensionValue: alc-etl-binlogs-s3-events-cs-algo-binlogs
+        metricName: ApproximateNumberOfMessagesVisible
+        awsRegion: ap-southeast-1
+        minMetricValue: "0"
+        targetMetricValue: "500"
+      authenticationRef:
+        name: etl-join-trigger-authentication
+
+  advanced:
+    scalingModifiers:
+      target: "0.1"
+      activationTarget: "0.05"
+      formula: |
+        max(0, ((age_metric - 900) / 900) * (count_metric / 100))

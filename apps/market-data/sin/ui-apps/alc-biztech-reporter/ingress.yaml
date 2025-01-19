@@ -1,0 +1,16 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: alc-biztech-reporter
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`reports.alphalab.cc`)
+      kind: Rule
+      services:
+        - name: alc-biztech-reporter
+          port: 5000
+  tls:
+    secretName: reports.alphalab.cc-prod-tls

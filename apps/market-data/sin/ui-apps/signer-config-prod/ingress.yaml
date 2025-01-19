@@ -1,0 +1,26 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: signer-config-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /signer-config
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: signer-config
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`tools.alphalab.cc`) && PathPrefix(`/signer-config`)
+      kind: Rule
+      middlewares:
+        - name: signer-config-stripprefix
+      services:
+        - name: signer-config
+          port: 4000
+  tls:
+    secretName: tools.alphalab.cc-prod-tls

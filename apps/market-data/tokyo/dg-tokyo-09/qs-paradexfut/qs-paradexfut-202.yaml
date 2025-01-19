@@ -1,0 +1,42 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-paradexfut-202
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-paradex:2024.10.25.82-7164f4f
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1200m
+  memory_request: 4000Mi
+  cpu_limit: 2000m
+  memory_limit: 4000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+
+    QuoteServer:
+      ShardId: 201
+      ExchangeName: ParadexFut
+
+      Monitor:
+        DerivedSymbols:
+          Type: Futures
+          Symbols: 
+            - UnderlyingName: SOL/USDC
+              NamePatterns:
+              - _Perpetual
+      Pipeline:
+        AbArbitrator:
+          DepthBookProcessing:
+            OrderBy: Counter
+          TradesProcessing:
+            OrderBy: Timestamp
+            Deduplicate: true
+            IncludeInHash: Timestamp
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+
+          V3BinaryFormat:
+            DevelopmentMode: false

@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    QsClient:
+      DevelopmentMode: false
+
+      ZmqTransport:
+        Endpoint: 
+          - ">tcp://dg-proxy.dg-nva-01:11900"
+      Extension: InstanceId
+      ExtensionDeserializationErrorHandling: None
+
+    Publication:
+      ShardId: 8
+      DevelopmentMode: false
+
+      ZmqTransport:
+        Endpoint: ">tcp://dg-proxy.dg-nva-01:11800"
+
+kind: ConfigMap
+metadata:
+  name: l1-generator-config

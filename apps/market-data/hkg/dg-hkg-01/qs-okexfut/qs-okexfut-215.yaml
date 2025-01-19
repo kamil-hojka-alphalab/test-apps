@@ -1,0 +1,56 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-okexfut-215
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2024.2.8.19-b35840e
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 2000m
+  memory_request: 4000Mi
+  cpu_limit: 2000m
+  memory_limit: 4000Mi
+  config: |
+    PriceServerClient:
+      Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+    QuoteServer:
+      ShardId: 214
+      ExchangeName: OKExFut
+      OKExFut:
+        L2UpdateChannel: books
+        Passphrase: "shfjk#54JS3djDJ"
+        ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+        Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+      Monitor:
+        MaxSymbolsPerConnection: 20
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+            - UnderlyingName: FIL/USDT
+            - UnderlyingName: SNX/USDT
+            - UnderlyingName: BNT/USDT
+            - UnderlyingName: SOL/USDT
+            - UnderlyingName: BAL/USDT
+            - UnderlyingName: ONEINCH/USD
+            - UnderlyingName: LPT/USDT
+            - UnderlyingName: PEOPLE/USDT
+            - UnderlyingName: BICO/USDT
+            - UnderlyingName: CRO/USDT
+            - UnderlyingName: FTM/USDT
+            - UnderlyingName: TRB/USDT
+            - UnderlyingName: FLOKI/USDT
+            - UnderlyingName: VELO/USDT
+            - UnderlyingName: ETH/USD
+            - UnderlyingName: WIF/USDT
+
+
+      Pipeline:
+        Subsampling:
+          BestBidOfferThreshold: 1e-5
+          TimeThreshold: "00:00:01"
+          PriceForChangeThreshold: 3.0e-5
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

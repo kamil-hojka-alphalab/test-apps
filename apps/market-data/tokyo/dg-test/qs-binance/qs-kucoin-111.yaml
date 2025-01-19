@@ -1,0 +1,69 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-kucoin-111
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.9.17.76-6cc293d
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ExchangeName: KuCoin
+      ShardId: 300
+      KuCoin:
+        ApiPassphrase: VoxOoWnTefUKRsC2J6dJ9wP2LT0MNf9j
+        ApiKey: 6672b0b7104f94000103430c
+        ApiSecret: 3868343c-bfff-4736-a79a-52deb7f3c879
+      Monitor:
+        DefaultConnectionCount: 1
+        MaxSymbolsPerConnection: 5
+
+        Symbols:
+          - Name: ADX/USDT
+          - Name: AERGO/USDT
+          - Name: AERO/USDT
+          - Name: AEVO/USDT
+          - Name: AGLD/USDT
+          - Name: AIEPK/USDT
+          - Name: AITECH/USDT
+          - Name: ALPINE/USDT
+          - Name: AMB/USDT
+          - Name: AMP/USDT
+          - Name: ATA/USDT
+          - Name: ATH/USDT
+          - Name: AVA/USDT
+          - Name: AVAIL/USDT
+          - Name: BABYDOGE/USDT
+          - Name: BANANA/USDT
+          - Name: BB/USDT
+          - Name: BBL/USDT
+          - Name: BEER/USDT
+          - Name: BEFI/USDT
+          - Name: BIDP/USDT
+
+      RateLimiter:
+        Http:
+          UsageLimit: 2000
+          Interval: 00:00:01
+          MinAcquireGap: 0.00:00:00.2
+          RequestCosts:
+            Snapshot: 10
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        DepthBookMaintainer:
+          LevelsCap: 150
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-test:11800"
+          V3BinaryFormat:
+            DevelopmentMode: true
+    PerfCollector:
+      Enabled: false

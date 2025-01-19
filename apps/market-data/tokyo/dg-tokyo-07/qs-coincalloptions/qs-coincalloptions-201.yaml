@@ -1,0 +1,42 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-coincalloptions-201
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coincalloptions:2024.11.4.380-320d802
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: CoincallOptions
+      CoincallOptions:
+        ExchangeConnection:
+          WebsocketApi:
+            Url: "wss://ws.coincall.com/options"
+
+      Monitor:
+        DefaultConnectionCount: 1
+        MaxSymbolsPerConnection: 100
+        DerivedSymbols:
+          Type: Options
+          Symbols:
+            - UnderlyingName: BTC/USD
+            - UnderlyingName: ETH/USD
+
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+        DepthBookMaintainer:
+          TickersNeedExchangeTime: false
+          LevelsCap: 200

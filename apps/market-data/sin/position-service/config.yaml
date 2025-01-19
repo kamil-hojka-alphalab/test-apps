@@ -1,0 +1,176 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  config.yaml: |
+    Environment:
+      SubscribeMode: TradeServer
+      TradeServer:
+        ClientId: position-service-sin-@1
+        DispatchThreads: 2
+        BusySpinDispatch: false
+        Consul:
+          Enabled: true
+          Url: https://consul.alphalab.cc
+          RefreshInterval: 00:05:00
+      Kafka:
+        BootstrapServers: "b-3.msk1prodsin.bek0r1.c5.kafka.ap-southeast-1.amazonaws.com:9092,b-1.msk1prodsin.bek0r1.c5.kafka.ap-southeast-1.amazonaws.com:9092,b-2.msk1prodsin.bek0r1.c5.kafka.ap-southeast-1.amazonaws.com:9092"
+        GroupId: position-service-sin-@1
+        MinBackoffTime: 00:00:00.100
+        MaxBackoffTime: 00:00:15
+      RocksDb:
+        path: db
+      Prometheus:
+        Hostname: '*'
+        Port: 9090
+
+    Subscriptions:
+      CeFi:
+        TradeServer:
+          Consul:
+            Mode: "PreferAdmin"
+            Include:
+              - "^ts-.+"
+            Exclude:
+              - "^ts-binance-redoak-410$"
+              - "^ts-binance-redoak-435$"
+              - "^ts-binance-redoak-452$"
+              - "^ts-binance-redoak-458$"
+              - "^ts-binance-redoak-565$"
+              - "^ts-binance-redoak-578$"
+              - "^ts-binance-redoak-579$"
+              - "^ts-binance-redoak-582$"
+              - "^ts-binance-redoak-620$"
+              - "^ts-binance-redoak-736$"
+              - "^ts-binance-redoak-1658$"
+              - "^ts-binance-redoak-1710$"
+              - "^ts-binancefut-redoak-1616$"
+              - "^ts-binancefut-redoak-1636$"
+              - "^ts-binancefut-redoak-1654$"
+              - "^ts-binancefut-redoak-1658$"
+              - "^ts-binancefut-redoak-1661$"              
+              - "^ts-binancefut-redoak-1662$"
+              - "^ts-binancefut-redoak-1701$"
+              - "^ts-binancefut-redoak-1702$"
+              - "^ts-binancefut-redoak-1703$"
+              - "^ts-binancefut-redoak-1704$"
+              - "^ts-binancefut-redoak-1705$"              
+              - "^ts-binancefut-redoak-1732$"
+              - "^ts-binancefut-redoak-1745$"
+              - "^ts-binancefut-fake-coin-3$"
+              - "^ts-bybit-unified-redoak-7$"
+              - "^ts-bybitspot-unified-redoak-22$"
+              - "^ts-bybitspot-unified-redoak-23$"
+              - "^ts-bybitspot-unified-redoak-30$"
+              - "^ts-bybitspot-unified-redoak-31$"
+              - "^ts-bybitspot-unified-redoak-32$"
+              - "^ts-bybitspot-unified-redoak-33$"
+              - "^ts-bybitspot-unified-redoak-34$"
+              - "^ts-bybitspot-unified-redoak-35$"
+              - "^ts-bybitspot-unified-redoak-36$"
+              - "^ts-bybitspot-unified-redoak-37$"
+              - "^ts-bybitspot-unified-redoak-38$"
+              - "^ts-bybitspot-unified-redoak-39$"
+              - "^ts-cryptocom-redoak-14$"
+              - "^ts-okex-redoak-1$"
+              - "^ts-okex-redoak-2$"
+              - "^ts-okex-redoak-3$"
+              - "^ts-okex-redoak-4$"
+              - "^ts-okex-redoak-5$"
+              - "^ts-okex-redoak-6$"
+              - "^ts-okex-redoak-7$"
+              - "^ts-okex-redoak-9$"
+              - "^ts-okexfut-perpetuals-redoak-1$"
+              - "^ts-okexfut-perpetuals-redoak-3$"
+              - "^ts-okexfut-perpetuals-redoak-16$"              
+              - "^ts-kucoin-redoak-43$"
+              - "^ts-kucoin-redoak-44$"
+              - "^ts-kucoin-redoak-46$"
+              - "^ts-kucoin-redoak-78$"
+              - "^ts-kucoin-redoak-79$"
+              - "^ts-kucoin-redoak-80$"
+              - "^ts-kucoin-redoak-81$"
+              - "^ts-kucoin-redoak-82$"
+              - "^ts-kucoin-redoak-87$"              
+              - "^ts-kucoinfut-redoak-39$"
+              - "^ts-kucoinfut-redoak-41$"
+              - "^ts-kucoinfut-redoak-49$"
+              - "^ts-gateio-redoak-6$"
+              - "^ts-gateio-redoak-7$"
+              - "^ts-gateio-redoak-8$"
+              - "^ts-gateio-redoak-9$"
+              - "^ts-gateio-redoak-10$"
+              - "^ts-gateio-redoak-15$"
+              - "^ts-gateio-redoak-26$"
+              - "^ts-gateio-redoak-27$"
+              - "^ts-gateio-redoak-29$"              
+              - "^ts-gateiofut-redoak-32$"
+              - "^ts-gateiofut-redoak-33$"
+              - "^ts-gateiofut-redoak-40$"
+              - "^ts-mexc-redoak-4$"
+              - "^ts-mexc-redoak-5$"
+              - "^ts-mexc-redoak-6$"
+              - "^ts-mexc-redoak-7$"
+              - "^ts-mexc-redoak-8$"
+              - "^ts-mexc-redoak-9$"
+              - "^ts-mexc-redoak-10$"
+              - "^ts-mexc-redoak-12$"
+              - "^ts-mexc-redoak-13$"
+              - "^ts-upbit-kimbooduck$"
+              - "^ts-upbit-kimsujeong$"
+              - "^ts-upbit-leeyunjoo$"
+              - "^ts-coinone-carolina-9$"
+              - "^ts-coinone-parkinhye-9$"
+              - "^ts-korbit-jeremy$"
+              - "^ts-bithumb-leejeongmin$"
+              - "^ts-bitflyer-redoak-4$"
+              - "^ts-bitflyer-redoak-5$"
+              - "^ts-bitflyerfut-redoak-4$"
+              - "^ts-bitbank-redoak-3$"
+              - "^ts-huobiglobal-redoak-21$"
+              - "^ts-huobiglobal-redoak-22$"
+              - "^ts-huobiglobal-redoak-23$"
+              - "^ts-huobiglobal-redoak-24$"
+              - "^ts-huobiglobal-redoak-25$"
+              - "^ts-huobiglobal-redoak-26$"
+              - "^ts-huobiglobal-redoak-27$"
+              - "^ts-huobiglobal-redoak-28$"
+              - "^ts-huobiglobal-redoak-29$"
+              - "^ts-.*-fake-.*$"
+          StaticList: []
+
+
+        Kafka:
+          Topics:
+            - is_balance_binance
+            - is_balance_bitbank
+            - is_balance_bitflyer
+            - is_balance_bithumb
+            - is_balance_bitstamp
+            - is_balance_bybit
+            - is_balance_bybitspot
+            - is_balance_coinone
+            - is_balance_cryptocom
+            - is_balance_gateio
+            - is_balance_gdax
+            - is_balance_huobiglobal
+            - is_balance_kraken
+            - is_balance_kucoin
+            - is_balance_kucoinfut
+            - is_balance_okex
+            - is_balance_poloniex
+            - is_balance_upbit
+      DeFi:
+        Zmq:
+          Address: tcp://eth-ds-tokyo.node.al:10002
+
+    AccountServer:
+      Url: "https://accounts-server.prv.alphalab.cc"
+      RefreshInterval: 00:05:00
+
+    Publications:
+      Tcp:
+        LocalAddress: 0.0.0.0
+        Port: 9250
+metadata:
+  name: alc-position-service-config
+  namespace: alc-position-service

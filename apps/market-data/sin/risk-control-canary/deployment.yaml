@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: risk-control-canary
+  namespace: risk-control-canary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: risk-control-canary
+  template:
+    metadata:
+      labels:
+        app: risk-control-canary
+    spec:
+      containers:
+      - name: risk-control-service
+        image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/cldn-risk-control:1.2024.10.10-c9eb7de
+        command:
+          - alc-rc
+        args:
+          - /etc/config/config.yaml
+          - --debug
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+        resources:
+          limits:
+            memory: 1Gi
+            cpu: 4000m
+          requests:
+            memory: 0.5Gi
+            cpu: 1000m
+        ports:
+        - name: risk-control-port
+          containerPort: 50000
+        - name: prometheus-port
+          containerPort: 9090
+      volumes:
+      - name: config-volume
+        configMap:
+          name: risk-control-canary-config

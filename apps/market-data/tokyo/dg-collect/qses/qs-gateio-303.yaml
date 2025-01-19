@@ -1,0 +1,139 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateio-303
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.1.10.31-c375899
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 302
+      ExchangeName: GateIO
+      GateIO:
+        ExchangeConnection:
+          WebsocketApi:
+            Uri: wss://spotws-private.gateapi.io/ws/v4/
+        SnapshotMakerStrategy:
+          RestApi:
+            Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+      Monitor:
+        Symbols:
+        - Name: GOG/USDT
+        - Name: GOLD/USDT
+        - Name: GOMINING/USDT
+        - Name: GPT/USDT
+        - Name: GQ/USDT
+        - Name: GRASS/USDT
+        - Name: GRIFFAIN/USDT
+        - Name: GROW/USDT
+        - Name: GUI/USDT
+        - Name: GXE/USDT
+        - Name: HC/USDT
+        - Name: HEART/USDT
+        - Name: HGPT/USDT
+        - Name: HIP/USDT
+        - Name: HIPPO/USDT
+        - Name: HIVE/USDT
+        - Name: HLG/USDT
+        - Name: HMT/USDT
+        - Name: HOPPY/USDT
+        - Name: HORD/USDT
+        - Name: HOTCROSS/USDT
+        - Name: HRT/USDT
+        - Name: HTM/USDT
+        - Name: HTX/USDT
+        - Name: HYCO/USDT
+        - Name: HYPE/USDT
+        - Name: IAG/USDT
+        - Name: IDEX/USDT
+        - Name: INK/USDT
+        - Name: IO/USDT
+        - Name: IONX/USDT
+        - Name: IOST/USDT
+        - Name: IQ/USDT
+        - Name: IQ50/USDT
+        - Name: IQT/USDT
+        - Name: IRIS/USDT
+        - Name: ISLM/USDT
+        - Name: ITA/USDT
+        - Name: ITEM/USDT
+        - Name: IVPAY/USDT
+        - Name: IZI/USDT
+        - Name: JST/USDT
+        - Name: JULD/USDT
+        - Name: JUV/USDT
+        - Name: KAI/USDT
+        - Name: KAP/USDT
+        - Name: KARRAT/USDT
+        - Name: KBD/USDT
+        - Name: KIBA/USDT
+        - Name: KINE/USDT
+        - Name: KLV/USDT
+        - Name: KMA/USDT
+        - Name: KMNO/USDT
+        - Name: KMON/USDT
+        - Name: KNC/USDT
+        - Name: KNINE/USDT
+        - Name: KOKO/USDT
+        - Name: KONO/USDT
+        - Name: KUBE/USDT
+        - Name: KZEN/USDT
+        - Name: L3/USDT
+        - Name: LAMB/USDT
+        - Name: LAND/USDT
+        - Name: LANDWOLF/USDT
+        - Name: LAT/USDT
+        - Name: LBL/USDT
+        - Name: LEASH/USDT
+        - Name: LIFE/USDT
+        - Name: LIME/USDT
+        - Name: LKI/USDT
+        - Name: LL/USDT
+        - Name: LLT/USDT
+        - Name: LOE/USDT
+        - Name: LOFI/USDT
+        - Name: LOGT/USDT
+        - Name: LON/USDT
+        - Name: LOOP/USDT
+        - Name: LOVE/USDT
+        - Name: LSS/USDT
+        - Name: LTC/USDC
+        - Name: LUNA2/USDT
+        - Name: LUNC/USDT
+        - Name: LWA/USDT
+        - Name: LYM/USDT
+        - Name: LYNX/USDT
+        - Name: LYX/USDT
+        - Name: MAF/USDT
+        - Name: MAGA/USDT
+        - Name: MANEKI/USDT
+        - Name: MANTA/USDC
+        - Name: MARSH/USDT
+        - Name: MASA/USDT
+        - Name: MAX/USDT
+        - Name: MBL/USDT
+        - Name: MBX/USDT
+        - Name: MDAO/USDT
+        - Name: ME/USDT
+        - Name: MED/USDT
+        - Name: MELD/USDT
+        - Name: MEMETOON/USDT
+        DefaultConnectionCount: 1
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

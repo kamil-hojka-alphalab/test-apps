@@ -1,0 +1,84 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-mexc-211
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.28.108-3ce6dd0
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    PriceServerClient:
+      Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+    QuoteServer:
+      ShardId: 210
+      ExchangeName: Mexc
+      Monitor:
+        MaxSymbolsPerConnection: 10
+        Symbols:
+          - Name: SHILL/USDT
+          - Name: POND/USDT
+          - Name: DAPPX/USDT
+          - Name: BEAM/USDT
+          - Name: ORT/USDT
+          - Name: APX/USDT
+          - Name: UPC/USDT
+          - Name: WORK/USDT
+          - Name: AUR/USDT
+          - Name: TIP/USDT
+          - Name: POOLX/USDT
+          - Name: HIGH/USDT
+          - Name: VINU/USDT
+          - Name: BVT/USDT
+          - Name: OSHI/USDT
+          - Name: SLIM/USDT
+          - Name: RARE/USDT
+          - Name: FXS/USDT
+          - Name: JAB/USDT
+          - Name: SMART/USDT
+          - Name: AXS/USDT
+          - Name: LEMN/USDT
+          - Name: BST/USDT
+          - Name: LEOX/USDT
+          - Name: BNB/USDC
+          - Name: SLP/USDT
+          - Name: OCT/USDT
+          - Name: OPUL/USDT
+          - Name: OCTA/USDT
+          - Name: COMBO/USDT
+          - Name: SAUCE/USDT
+          - Name: QI/USDT
+          - Name: GFY/USDT
+          - Name: CHO/USDT
+          - Name: SWAP/USDT
+          - Name: XUI/USDT
+          - Name: VPR/USDT
+          - Name: TXA/USDT
+          - Name: SC/USDT
+          - Name: XAI/USDT
+          - Name: DUEL/USDT
+          - Name: GOLC/USDT
+          - Name: HEFI/USDT
+          - Name: SYN/USDT
+          - Name: JETTON/USDT
+        DefaultConnectionCount: 2
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Subsampling:
+          BestBidOfferThreshold: 1e-5
+          TimeThreshold: 00:00:01
+          PriceForChangeThreshold: 3.0e-05
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

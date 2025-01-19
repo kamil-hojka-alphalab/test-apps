@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: s3-uploader
+  labels:
+    app: s3-uploader
+spec:
+  selector:
+    matchLabels:
+      name: s3-uploader
+  template:
+    metadata:
+      labels:
+        name: s3-uploader
+    spec:
+      tolerations:
+      - key: node/destiny
+        operator: "Equal"
+        value: "dg-test"
+        effect: "NoSchedule"
+      affinity: 
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node/destiny
+                operator: In
+                values:
+                - dg-test
+      serviceAccountName: s3-uploader-sa
+      containers:
+      - name: s3-uploader
+        image: ghcr.io/alphalab-hq/alc-s3-uploader:2022.4.4.5-1d82a6fc7fb79f5a34d4f59585bbef9149225a97
+        args:
+          - "--config-overrides=/etc/config/config.yaml"
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 50m
+            memory: 200Mi
+        ports:
+          - name: health-port
+            containerPort: 5000
+        volumeMounts:
+          - name: config-volume
+            mountPath: /etc/config
+          - name: s3-upload
+            mountPath: /s3_upload
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: health-port
+          initialDelaySeconds: 120
+          periodSeconds: 20
+      terminationGracePeriodSeconds: 30
+      imagePullSecrets:
+        - name: ghcr-creds
+      volumes:
+        - name: config-volume
+          configMap:
+            name: s3-uploader-config
+        - name: s3-upload
+          hostPath:
+            path: /s3_upload
+            type: DirectoryOrCreate

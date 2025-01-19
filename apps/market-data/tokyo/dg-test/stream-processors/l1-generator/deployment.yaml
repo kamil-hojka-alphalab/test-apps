@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: l1-generator
+spec:
+  selector:
+    matchLabels:
+      app: l1-generator
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        app: l1-generator
+        prometheus-pod-scrape: enabled
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: l1-generator
+          image: ghcr.io/alphalab-hq/alc-qs-process-generate-l1:2022.9.12.39-c44b306dd3cf1c3905aeccddfb3a3c984a687843
+          args:
+            - "--configs=/etc/config/config.yaml"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+            - name: security-master
+              mountPath: /etc/security_master
+          resources:
+            limits:
+              cpu: 4000m
+              memory: 4000Mi
+            requests:
+              cpu: 2000m
+              memory: 1000Mi
+          ports:
+            - name: health-port
+              containerPort: 5000
+          livenessProbe:
+            tcpSocket:
+              port: health-port
+            initialDelaySeconds: 300
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: health-port
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            failureThreshold: 60
+      imagePullSecrets:
+        - name: ghcr-creds
+      volumes:
+        - name: config-volume
+          configMap:
+            name: l1-generator-config
+        - name: security-master
+          hostPath:
+            path: /synced_files
+      tolerations:
+        - key: node/destiny
+          operator: Equal
+          value: dg-test
+          effect: NoSchedule
+      nodeSelector:
+        node/destiny: dg-test

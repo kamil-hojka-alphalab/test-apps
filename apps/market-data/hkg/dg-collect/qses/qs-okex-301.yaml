@@ -1,0 +1,136 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-okex-301
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2024.2.8.19-b35840e
+  replicas: 1
+  destiny: dg-nrt
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    Serilog:
+      MinimumLevel:
+        Default: Information
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 300
+      ExchangeName: OKEx
+      OKEx:
+        L2UpdateChannel: books
+        Passphrase: uGwE4K6MmMazB7Q1yEb3!!
+        ApiKey: 7d5d4a32-8fda-4d2c-bc59-7376b4e25a4b
+        Secret: 25F60CECC6048F38572CB8185C3415D5
+      Monitor:
+        DefaultConnectionCount: 1
+        Symbols:
+        - Name: AAVE/USDC
+        - Name: ADA/USDC
+        - Name: AERGO/USDT
+        - Name: AEVO/USDT
+        - Name: APE/USDC
+        - Name: APT/USDC
+        - Name: AR/USDC
+        - Name: ARB/USDC
+        - Name: ARKM/USDT
+        - Name: ATH/USDT
+        - Name: ATOM/USDC
+        - Name: AVAX/USDC
+        - Name: BABYDOGE/USDT
+        - Name: BCH/USDC
+        - Name: BNB/USDC
+        - Name: BOME/USDT
+        - Name: BSV/USDC
+        - Name: CETUS/USDC
+        - Name: CRO/USDC
+        - Name: CRV/USDC
+        - Name: CSPR/USDC
+        - Name: DOGE/USDC
+        - Name: DYDX/USDC
+        - Name: ELON/USDT
+        - Name: ETHW/USDC
+        - Name: FIL/USDC
+        - Name: FLR/USDC
+        - Name: FTM/USDC
+        - Name: G/USDT
+        - Name: GALA/USDC
+        - Name: GPT/USDT
+        - Name: GRT/USDC
+        - Name: HBAR/USDC
+        - Name: ICP/USDC
+        - Name: KAN/USDT
+        - Name: KISHU/USDT
+        - Name: LINK/USDC
+        - Name: LUNA/USDC
+        - Name: LUNA/USDT
+        - Name: LUNC/USDT
+        - Name: MAX/USDT
+        - Name: MENGO/USDT
+        - Name: MEW/USDT
+        - Name: NEAR/USDC
+        - Name: NOT/USDT
+        - Name: OKB/USDC
+        - Name: PEPE/USDC
+        - Name: PIXEL/USDT
+        - Name: POL/USDC
+        - Name: POL/USDT
+        - Name: PRCL/USDT
+        - Name: RDNT/USDC
+        - Name: SAFE/USDT
+        - Name: SAMO/USDT
+        - Name: SHIB/USDC
+        - Name: SLERF/USDT
+        - Name: SOL/USDC
+        - Name: STX/USDC
+        - Name: SUI/USDC
+        - Name: SWEAT/USDC
+        - Name: TNSR/USDT
+        - Name: TON/USDC
+        - Name: TRX/USDC
+        - Name: UNI/USDC
+        - Name: USDT/TRY
+        - Name: USDT/USDC
+        - Name: VELO/USDC
+        - Name: VENOM/USDT
+        - Name: W/USDT
+        - Name: WIF/USDC
+        - Name: WIF/USDT
+        - Name: ZBCN/USDT
+        - Name: ZENT/USDT
+        - Name: ZEROLEND/USDT
+        - Name: ZEUS/USDT
+        - Name: ZK/USDT
+        - Name: ZKJ/USDT
+        - Name: ZRO/USDC
+        - Name: ZRO/USDT
+        - Name: ONEINCH/USDT
+        - Name: ACT/USDT
+        - Name: BANANA/USDT
+        - Name: CAT/USDT
+        - Name: DEGEN/USDT
+        - Name: DOGS/USDT
+        - Name: EIGEN/USDT
+        - Name: FOXY/USDT
+        - Name: GOAT/USDT
+        - Name: KAIA/USDT
+        - Name: ME/USDT
+        - Name: MOODENG/USDT
+        - Name: MOVE/USDT
+        - Name: NEIRO/USDT
+        - Name: PENDLE/USDT
+        - Name: PENGU/USDT
+        - Name: PNUT/USDT
+        - Name: SCR/USDT
+        - Name: UXLINK/USDT
+        - Name: X/USDT
+        - Name: SONIC/USDT
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

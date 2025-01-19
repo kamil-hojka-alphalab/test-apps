@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dg-proxy
+spec:
+  selector:
+    matchLabels:
+      app: dg-proxy
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        "cluster-autoscaler.kubernetes.io/safe-to-evict": "false"
+      labels:
+        app: dg-proxy
+        prometheus-pod-scrape: enabled
+    spec:
+      terminationGracePeriodSeconds: 20
+      containers:
+      - name: dg-proxy
+        image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-mesh-proxy:2022.9.26.16-217f73a@sha256:90392619bef59ad422eb3778c3b093da2e133bd2ad380bb26eafc7e0119c1729
+        args:
+          - -c 
+          - "/etc/config/config.yaml"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+        resources:
+          limits:
+            memory: 3500Mi
+            cpu: 3000m
+          requests:
+            cpu: 3000m
+            memory: 2048Mi
+        ports:
+          - containerPort: 11800  
+          - containerPort: 11900
+          - name: health-port
+            containerPort: 5000
+      imagePullSecrets:
+      - name: ghcr-creds
+      volumes:
+      - name: config-volume
+        configMap:
+          name: dg-proxy-config
+      tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-proxies
+        effect: NoSchedule
+      nodeSelector:
+        node/destiny: dg-proxies

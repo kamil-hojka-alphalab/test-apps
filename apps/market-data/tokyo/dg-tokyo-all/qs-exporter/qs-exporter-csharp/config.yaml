@@ -1,0 +1,97 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    QsClient:
+      DevelopmentMode: false
+
+      Workflow:
+        Type: SplitBySymbolCount
+        SymbolsCount: 600
+        InitialWorkflowCount: 6
+    
+      ZmqTransport:
+        DefaultEndpointName: "default"
+        Endpoint:
+          default:
+            - ">tcp://dg-proxy.dg-tokyo-01:11900"
+            - ">tcp://dg-proxy.dg-tokyo-05:11900"
+            - ">tcp://dg-proxy.dg-tokyo-06:11900"
+        LocalByteCacheSize: 65536
+        ReceiveHighWatermark: 300000
+        
+      Extension: InstanceId
+      Subscription: NonSubSampled
+      ExtensionDeserializationErrorHandling: None
+
+    Subscription:
+      Prefix: ""
+      ExporterName: "qs-exporter-tokyo-csharp"
+      Exchanges:
+        default:
+          - "Binance"
+          - "KuCoin"
+          - "dYdXV4"
+          - "Zeta"
+          - "Backpack"
+          - "Orderly"
+          - "WooXSpot"
+          - "Hibachi"
+        regional:
+
+    MetricConfigurationProvider:
+      DefaultEnabled: true
+      Rules:
+        - Symbol: "API3/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "Binance"
+          Enabled: true
+        - Symbol: "API3/BTC"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "Binance"
+          Enabled: true
+        - Symbol: "API3/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "KuCoin"
+          Enabled: true
+        - Symbol: "INFRA/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "KuCoin"
+          Enabled: true
+        - Symbol: "SEI/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "KuCoin"
+          Enabled: true
+        - Symbol: "SEI/FDUSD"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "Binance"
+          Enabled: true
+        - Symbol: "SEI/TRY"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "Binance"
+          Enabled: true
+        - Symbol: "PERP/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "Binance"
+          Enabled: true
+        - Symbol: "NEON/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "KuCoin"
+          Enabled: true
+        - Symbol: "PEAQ/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "KuCoin"
+          Enabled: true
+        - Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "Backpack"
+          Enabled: true
+        - Metric: "al_qs_book_agg_amt_from_mid"
+          Enabled: false
+        - Metric: "al_qs_prc_for_usd_amt"
+          Enabled: false
+          
+
+      
+
+kind: ConfigMap
+metadata:
+  name: qs-exporter-config-csharp

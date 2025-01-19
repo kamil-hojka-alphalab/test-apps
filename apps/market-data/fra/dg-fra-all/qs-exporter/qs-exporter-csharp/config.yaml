@@ -1,0 +1,48 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    QsClient:
+      DevelopmentMode: false
+      Workflow:
+        Type: SplitBySymbolCount
+        SymbolsCount: 800
+        InitialWorkflowCount: 2
+    
+      ZmqTransport:
+        DefaultEndpointName: "default"
+        Endpoint:
+          default:
+            - ">tcp://dg-proxy.dg-fra-01:11900"
+         
+        LocalByteCacheSize: 65536
+        ReceiveHighWatermark: 300000
+        
+      Extension: InstanceId
+      Subscription: NonSubSampled
+      ExtensionDeserializationErrorHandling: None
+
+    Subscription:
+      Prefix: ""
+      ExporterName: "qs-exporter-frankfurt-csharp"
+      Exchanges:
+        - "Bitstamp"
+        - "Exmo"
+        - "HitBTC"
+        - "VertexFut"
+        - "Hibachi"
+    
+    MetricConfigurationProvider:
+      DefaultEnabled: true
+      Rules:
+        - Metric: "e2e_latency"
+          Enabled: false
+        - Metric: "queue_delays"
+          Enabled: false
+        - Metric: "al_qs_book_agg_amt_from_mid"
+          Enabled: false
+        - Metric: "al_qs_prc_for_usd_amt"
+          Enabled: false
+     
+kind: ConfigMap
+metadata:
+  name: qs-exporter-config-csharp

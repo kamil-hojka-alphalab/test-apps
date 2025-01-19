@@ -1,0 +1,88 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateio-201
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.1.10.31-c375899
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: GateIO
+      GateIO:
+        ExchangeConnection:
+          WebsocketApi:
+            Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+        SnapshotMakerStrategy:
+          RestApi:
+            Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+      Monitor:
+        Symbols:
+          - Name: IOTA/USDT
+          - Name: AGLD/USDT
+          - Name: ASTR/USDT
+          - Name: MANA/USDT
+          - Name: MASK/USDT
+          - Name: C98/USDT
+          - Name: THETA/USDT
+          - Name: MDT/USDT
+          - Name: T/USDT
+          - Name: XCN/USDT
+          - Name: MAN/USDT
+          - Name: CRV/USDT
+          - Name: QNT/USDT
+          - Name: SLIM/USDT
+          - Name: YGG/USDT
+          - Name: HERO/USDT
+          - Name: FIDA/USDT
+          - Name: APE/USDT
+          - Name: EVER/USDT
+          - Name: IOTX/USDT
+          - Name: ACH/USDT
+          - Name: LDO/USDT
+          - Name: LOKA/USDT
+          - Name: LMR/USDT
+          - Name: GMM/USDT
+          - Name: DAO/USDT
+          - Name: FLUX/USDT
+          - Name: CEEK/USDT
+          - Name: RSR/USDT
+          - Name: FXS/USDT
+          - Name: FEAR/USDT
+          - Name: FITFI/USDT
+          - Name: USDD/USDT
+          - Name: CULT/USDT
+          - Name: USTC/USDT
+          - Name: FRM/USDT
+          - Name: AOG/USDT
+          - Name: APT/USDT
+          - Name: NPT/USDT
+          - Name: MOVEZ/USDT
+          - Name: OG/USDT
+          - Name: ORBS/USDT
+          - Name: STPT/USDT
+          - Name: LMWR/USDT
+          - Name: TIA/USDT
+          - Name: USDC/USDT
+          - Name: INFRA/USDT
+        DefaultConnectionCount: 1
+
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+

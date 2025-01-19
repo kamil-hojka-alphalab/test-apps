@@ -1,0 +1,108 @@
+QuoteServers:
+  - name: qs-btcturk-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-btcturk:2024.4.16.128-580e1b7
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: BtcTurk
+        ShardId: 200
+        Monitor:
+          AsyncWebsocketConnection: true
+          DefaultConnectionCount: 1
+          Symbols:
+            - Name: USDT/TRY
+            - Name: UMA/TRY
+            - Name: BTC/TRY
+            - Name: ETH/TRY
+            - Name: AVAX/TRY
+            - Name: GALA/TRY
+            - Name: ETH/USDT
+            - Name: BTC/USDT
+            - Name: PEPE/TRY
+            - Name: CVC/TRY
+            - Name: T/TRY
+            - Name: ANKR/TRY
+            - Name: FET/TRY
+            - Name: AMP/TRY
+            - Name: FET/USDT
+            - Name: ZRX/TRY
+            - Name: PEPE/USDT
+            - Name: CVC/USDT
+            - Name: JASMY/TRY
+            - Name: APT/TRY
+            - Name: SOL/USDT
+            - Name: AVAX/USDT
+            - Name: XRP/TRY
+            - Name: SOL/TRY
+            - Name: FLR/TRY
+            - Name: ARPA/TRY
+            - Name: ETHW/TRY
+            - Name: SPELL/TRY
+            - Name: GALA/USDT
+            - Name: XRP/USDT
+            - Name: ZRX/USDT
+            - Name: XCN/TRY
+            - Name: SKL/TRY
+            - Name: TRX/TRY
+            - Name: CHZ/TRY
+            - Name: FTM/TRY
+            - Name: APE/TRY
+            - Name: DOGE/TRY
+            - Name: FIL/TRY
+            - Name: GAL/TRY
+            - Name: GRT/TRY
+            - Name: INJ/TRY
+            - Name: SHIB/TRY
+            - Name: STX/TRY
+            - Name: ADA/TRY
+            - Name: XLM/TRY
+            - Name: ARB/TRY
+            - Name: ASR/TRY
+            - Name: HOT/TRY
+            - Name: LUNA/TRY
+            - Name: API3/TRY
+            - Name: DOT/TRY
+            - Name: LRC/TRY
+            - Name: BONK/TRY
+            - Name: ATM/TRY
+            - Name: OMG/TRY
+            - Name: BONK/USDT
+            - Name: GLM/TRY
+            - Name: ENS/TRY
+            - Name: AFC/TRY
+            - Name: JASMY/USDT
+            - Name: UNI/TRY
+            - Name: UNI/USDT
+            - Name: STRK/TRY
+            - Name: SPELL/USDT
+            - Name: INTER/TRY
+
+        Pipeline:
+          AbArbitrator:
+            IsDisabled: true
+            DepthBookProcessing:
+              Deduplicate: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-irl-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          SnapshotCoordinator:
+            OrderBy: Timestamp
+            AllowRepeatedSnapshots: true
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00

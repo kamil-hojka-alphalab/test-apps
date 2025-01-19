@@ -1,0 +1,44 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-binance-test2
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.11.27.125-03e8a60
+  replicas: 0
+  destiny: dg-test
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 113
+      ExchangeName: Binance
+      Binance:
+        Variant: DeltaSimplified
+        DedupTradesEarly: true
+        DedupTickersEarly: true
+
+      Monitor:
+        DefaultConnectionCount: 1
+        Symbols:
+          - Name: MANA/USDT
+          - Name: MANA/BTC
+          - Name: STORJ/USDT
+          - Name: STORJ/BTC
+          - Name: DATA/USDT
+          - Name: DATA/BTC
+          - Name: DODO/USDT
+          - Name: YYYYYYYYY/BTC
+          - Name: XXXXXXXXX/BTC
+        
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-test:11800"
+
+          V3BinaryFormat:
+            DevelopmentMode: true

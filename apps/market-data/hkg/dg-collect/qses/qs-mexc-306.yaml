@@ -1,0 +1,111 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-mexc-306
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
+  replicas: 1
+  destiny: dg-nrt
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 305
+      ExchangeName: Mexc
+      Monitor:
+        MaxSymbolsPerConnection: 10
+        Symbols:
+        - Name: RDNT/USDT
+        - Name: REEF/USDT
+        - Name: RIF/USDT
+        - Name: RLC/USDT
+        - Name: RON/USDT
+        - Name: ROOT/USDT
+        - Name: RPL/USDT
+        - Name: RSS3/USDT
+        - Name: SAFE/USDT
+        - Name: SC/USDT
+        - Name: SCA/USDT
+        - Name: SCRT/USDT
+        - Name: SHIB/USDC
+        - Name: SKL/USDT
+        - Name: SLERF/USDT
+        - Name: SLN/USDT
+        - Name: SOL/USDC
+        - Name: SPEC/USDT
+        - Name: STARL/USDT
+        - Name: STEEM/USDT
+        - Name: SUI/USDT
+        - Name: SUN/USDT
+        - Name: SWEAT/USDT
+        - Name: SYN/USDT
+        - Name: TAI/USDT
+        - Name: TAIKO/USDT
+        - Name: TAO/USDT
+        - Name: SANTOS/USDT
+        - Name: SCR/USDT
+        - Name: SD/USDT
+        - Name: SEI/USDT
+        - Name: SEND/USDT
+        - Name: SFP/USDT
+        - Name: SHIB/USDT
+        - Name: SMILE/USDT
+        - Name: SNEK/USDT
+        - Name: SNT/USDT
+        - Name: SNX/USDT
+        - Name: SOLO/USDT
+        - Name: SPA/USDT
+        - Name: SPELL/USDT
+        - Name: SPX/USDT
+        - Name: SSV/USDT
+        - Name: STG/USDT
+        - Name: STORJ/USDT
+        - Name: STPT/USDT
+        - Name: STREAM/USDT
+        - Name: STRK/USDT
+        - Name: STX/USDT
+        - Name: SUIAI/USDT
+        - Name: SUSHI/USDT
+        - Name: SWFTC/USDT
+        - Name: SYS/USDT
+        - Name: T/USDT
+        - Name: THE/USDT
+        - Name: TIA/USDT
+        - Name: TLM/USDT
+        - Name: TNSR/USDT
+        - Name: TON/USDT
+        - Name: TRU/USDT
+        - Name: TRUMP/USDT
+        - Name: TRX/USDT
+        - Name: TURBO/USDT
+        - Name: TWT/USDT
+        - Name: UMA/USDT
+        - Name: UNFI/USDT
+        - Name: UNI/USDT
+        - Name: USTC/USDT
+        - Name: PHA/USDT
+        - Name: ORDI/USDT
+        - Name: XAI/USDT
+        - Name: AI/USDT
+        - Name: ENS/USDT
+        DefaultConnectionCount: 1
+        RateLimiter:
+          Http:
+            UsageLimit: 240
+            Interval: 00:01
+            MinAcquireGap: 0.00:00:01
+            RequestCosts:
+              Snapshot: 15
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

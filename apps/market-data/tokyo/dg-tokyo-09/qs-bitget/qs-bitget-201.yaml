@@ -1,0 +1,29 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bitget-201
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bitget:2025.1.15.397-361ab0a
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 4000Mi
+  config: |
+    QuoteServer:
+      ExchangeName: Bitget
+      ShardId: 200
+      Monitor:
+        Symbols:
+          - Name: BTC/USDT
+          - Name: ETH/USDT
+          - Name: RARI/USDT
+          - Name: XPLA/USDT
+          - Name: PEAQ/USDT
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

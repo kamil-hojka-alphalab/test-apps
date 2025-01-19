@@ -1,0 +1,54 @@
+apiVersion: v1
+data:
+  config.yaml: |      
+    SecurityMaster:
+      Exchanges:
+        BinanceFut:
+          FileLoader:
+            ExchangeDataFile: /etc/security_master/security_master.binancefut.prop.yaml.all.latest
+        OKExFut:
+          FileLoader:
+            ExchangeDataFile: /etc/security_master/security_master.okexfut.prop.yaml.all.latest
+        HuobiDM:
+          FileLoader:
+            ExchangeDataFile: /etc/security_master/security_master.huobidm.prop.yaml.all.latest
+      FileLoader:
+        CurrencyFilePath: /etc/security_master/security_master.ccy.yaml.all.latest
+        ExchangesFilePath: /etc/security_master/security_master.exch.yaml.all.latest
+    General:
+      BackgroundQueueCapacity: 1000
+    Exchanges:
+      - Name: BinanceFut
+        RateLimiter:
+          UsageLimit: 240
+          Interval: 00:01
+          MinAcquireGap: 0.00:00:00.5
+          RequestCosts:
+            FundingRate: 10
+      - Name: OKExFut
+        RateLimiter:
+          UsageLimit: 20                  # it's 20 according to api spec, we set up a smaller value to be nice for other QS instances
+          Interval: 00:00:02              # two seconds
+          MinAcquireGap: 0.00:00:00.1     # 6100/minute = 100ms, we set up more conservative value
+          RequestCosts:
+            Snapshot: 1
+            FundingRate: 1
+      - Name: HuobiDM
+        RateLimiter:
+          UsageLimit: 120
+          Interval: 00:00:03
+          MinAcquireGap: 0.00:00:00.075
+          RequestCosts:
+            FundingRate: 1
+    TransportLayer:
+      FundingRatePublicationAddress: "@tcp://0.0.0.0:10001"
+      FundingRatePublicationBaseTopic: "lastFundingRate"
+      FundingRateRequestAddress: "@tcp://0.0.0.0:10002"
+      FundingRateRequestTopic: "requestFundingRate"
+      FundingRateResponseAddress: "@tcp://0.0.0.0:10001"
+      FundingRateResponseTopic: "responseFundingRate"
+
+
+kind: ConfigMap
+metadata:
+  name: alc-funding-rate-broadcaster-config

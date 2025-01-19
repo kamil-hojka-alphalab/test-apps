@@ -1,0 +1,95 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-coinone-202
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-coinone:2023.6.27.38-c6655b0e9ed4e467e9d091554fa2d1a9e4ec878b
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+
+    QuoteServer:
+      ShardId: 201
+      ExchangeName: Coinone
+
+      Coinone:
+        ConnectionIdleInterval: 00:20:00
+
+      CheckStaleMarketDataTrigger:
+        Interval: 00:00:01
+
+      Monitor:
+        DefaultConnectionCount: 2
+        MaxSymbolsPerConnection: 1
+        Symbols:
+          - Name: XTZ/KRW
+          - Name: XLM/KRW
+          - Name: ZRX/KRW
+          - Name: KAVA/KRW
+          - Name: SUN/KRW
+          - Name: BNT/KRW
+          - Name: CBK/KRW
+          - Name: SUSHI/KRW
+          - Name: OGN/KRW
+          - Name: ORBS/KRW
+          - Name: DAO/KRW
+          - Name: MANA/KRW
+          - Name: LBL/KRW
+          - Name: TRX/KRW
+          - Name: BCH/KRW
+          - Name: QTUM/KRW
+          - Name: NEO/KRW
+          - Name: ATOM/KRW
+          - Name: BAND/KRW
+          - Name: LINK/KRW
+          - Name: IOTA/KRW
+          - Name: MNR/KRW
+          - Name: AUCTION/KRW
+          - Name: FIS/KRW
+          - Name: KSP/KRW
+          - Name: SUI/KRW
+          - Name: SHIB/KRW
+          - Name: KNC/KRW
+          - Name: STX/KRW
+          - Name: SAND/KRW
+          - Name: XRP/KRW
+          - Name: ZIL/KRW
+          - Name: FLOW/KRW
+          - Name: ANKR/KRW
+          - Name: USDT/KRW
+          - Name: APP/KRW
+          - Name: ONDO/KRW
+          - Name: ALGO/KRW
+          - Name: BNB/KRW
+          - Name: ATH/KRW
+          - Name: MON/KRW
+          - Name: KAIA/KRW
+
+      RateLimiter:
+        Http:
+          UsageLimit: 3000
+          Interval: 00:01
+          MinAcquireGap: 0.00:00:00.2
+          RequestCosts:
+            Snapshot: 10
+      Pipeline:
+        DepthBookMaintainer:
+          LevelsCap: 150
+        StaleMarketDataObserver:
+          StaleThreshold: 00:00:01
+          IdleThreshold: 01:00:00
+
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: 01:00:00

@@ -1,0 +1,54 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    QsClient:
+      DevelopmentMode: false
+
+      Workflow:
+        Type: SplitBySymbolCount
+        SymbolsCount: 200
+        InitialWorkflowCount: 2
+    
+      ZmqTransport:
+        DefaultEndpointName: "default"
+        Endpoint:
+          default:
+            - ">tcp://dg-proxy.dg-nva-01:11900"
+        LocalByteCacheSize: 65536
+        ReceiveHighWatermark: 300000
+        
+      Extension: InstanceId
+      Subscription: NonSubSampled
+      ExtensionDeserializationErrorHandling: None
+
+    Subscription:
+      Prefix: ""
+      ExporterName: "qs-exporter-northvirginia-csharp"
+      Exchanges:
+        default:
+          - "GDAX"
+          - "BinanceUS"
+
+    MetricConfigurationProvider:
+      DefaultEnabled: true
+      Rules:
+        - Symbol: "NEON/USD"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "GDAX"
+          Enabled: true
+        - Symbol: "API3/USD"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "GDAX"
+          Enabled: true
+        - Symbol: "API3/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "GDAX"
+          Enabled: true
+        - Metric: "al_qs_book_agg_amt_from_mid"
+          Enabled: false
+        - Metric: "al_qs_prc_for_usd_amt"
+          Enabled: false
+
+kind: ConfigMap
+metadata:
+  name: qs-exporter-config-csharp

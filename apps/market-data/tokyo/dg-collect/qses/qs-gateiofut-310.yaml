@@ -1,0 +1,47 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateiofut-310
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.2.16.33-1eb4da9
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 309
+      ExchangeName: GateIOFut
+      Monitor:
+        DefaultConnectionCount: 1
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+          - UnderlyingName: ZEUS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ZIL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ZK/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ZRO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ZRX/USDT
+            NamePatterns:
+            - _Perpetual
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

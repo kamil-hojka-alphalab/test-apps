@@ -1,0 +1,113 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateio-306
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.1.10.31-c375899
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 305
+      ExchangeName: GateIO
+      GateIO:
+        ExchangeConnection:
+          WebsocketApi:
+            Uri: wss://spotws-private.gateapi.io/ws/v4/
+        SnapshotMakerStrategy:
+          RestApi:
+            Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+      Monitor:
+        Symbols:
+        - Name: TRVL/USDT
+        - Name: TRY/USDT
+        - Name: TTC/USDT
+        - Name: TUSD/USDT
+        - Name: TX20/USDT
+        - Name: UBXS/USDT
+        - Name: UDS/USDT
+        - Name: UMA/USDT
+        - Name: UNA/USDT
+        - Name: USDE/USDT
+        - Name: USUAL/USDT
+        - Name: UXLINK/USDT
+        - Name: VADER/USDT
+        - Name: VANA/USDT
+        - Name: VANRY/USDT
+        - Name: VELA/USDT
+        - Name: VENOM/USDT
+        - Name: VIA/USDT
+        - Name: VIRTUAL/USDT
+        - Name: VIZ/USDT
+        - Name: VSC/USDT
+        - Name: VSX/USDT
+        - Name: W/USDT
+        - Name: WAGMIGAMES/USDT
+        - Name: WALLET/USDT
+        - Name: WALV/USDT
+        - Name: WAMPL/USDT
+        - Name: WBTC/USDT
+        - Name: WELL/USDT
+        - Name: WEST/USDT
+        - Name: WNXM/USDT
+        - Name: WOLF/USDT
+        - Name: WOOP/USDT
+        - Name: WRT/USDT
+        - Name: WRX/USDT
+        - Name: WSDM/USDT
+        - Name: WSIENNA/USDT
+        - Name: WUF/USDT
+        - Name: WX/USDT
+        - Name: X/USDT
+        - Name: XAUT/USDT
+        - Name: XCHNG/USDT
+        - Name: XELS/USDT
+        - Name: XFI/USDT
+        - Name: XION/USDT
+        - Name: XMR/USDT
+        - Name: XNO/USDT
+        - Name: XPET/USDT
+        - Name: XPRESS/USDT
+        - Name: XPRT/USDT
+        - Name: XRP/USDC
+        - Name: XSWAP/USDT
+        - Name: XVG/USDT
+        - Name: XYO/USDT
+        - Name: Y8U/USDT
+        - Name: YFDAI/USDT
+        - Name: YFI/USDT
+        - Name: YOOSHI/USDT
+        - Name: YOURAI/USDT
+        - Name: ZAM/USDT
+        - Name: ZBCN/USDT
+        - Name: ZCN/USDT
+        - Name: ZEC/USDT
+        - Name: ZEE/USDT
+        - Name: ZELIX/USDT
+        - Name: ZENT/USDT
+        - Name: ZEROLEND/USDT
+        - Name: ZEUS/USDT
+        - Name: ZEX/USDT
+        - Name: ZF/USDT
+        - Name: ZK/USDT
+        - Name: ZKJ/USDT
+        - Name: ZLW/USDT
+        - Name: ZRO/USDT
+        DefaultConnectionCount: 1
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

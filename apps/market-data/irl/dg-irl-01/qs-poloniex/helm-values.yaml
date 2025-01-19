@@ -1,0 +1,136 @@
+QuoteServers:
+  - name: qs-poloniex-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-poloniex:2025.1.17.70-857c544
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: Poloniex
+
+        Monitor:
+          DefaultConnectionCount: 3
+          MaxSymbolsPerConnection: 20
+          Symbols:
+            - Name: BTC/USDT
+            - Name: NFT/USDT
+            - Name: ETH/USDT
+            - Name: TRX/USDT
+            - Name: FCT2/USDT
+            - Name: BTT/USDT
+            - Name: ETH/BTC
+            - Name: XRP/USDT
+            - Name: TUSD/USDT
+            - Name: SUN/USDT
+            - Name: BCH/USDT
+            - Name: WIN/USDT
+            - Name: SOL/USDT
+            - Name: ETC/USDT
+            - Name: STEEM/USDT
+            - Name: JST/USDT
+            - Name: BNB/USDT
+            - Name: AVAX/USDT
+            - Name: YFI/USDT
+            - Name: ADA/USDT
+            - Name: LINK/USDT
+            - Name: ATOM/USDT
+            - Name: SNX/USDT
+            - Name: VOLT/USDT
+            - Name: LTC/BTC
+            - Name: DOT/USDT
+            - Name: AAVE/USDT
+            - Name: TRX/BTC
+            - Name: DOGE/USDT
+            - Name: LINK/BTC
+            - Name: EOS/BTC
+            - Name: SUSHI/USDT
+            - Name: AAVE/BTC
+            - Name: XRP/BTC
+            - Name: LTC/USDT
+
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-irl-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-poloniex-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-poloniex:2025.1.17.70-857c544
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 201
+        ExchangeName: Poloniex
+        Monitor:
+          DefaultConnectionCount: 3
+          MaxSymbolsPerConnection: 20
+          Symbols:
+            - Name: LOOM/USDT
+            - Name: MASK/USDT
+            - Name: SAND/USDT
+            - Name: HUNT/USDT
+            - Name: GMT/USDT
+            - Name: AXS/USDT
+            - Name: CTC/USDT
+            - Name: REN/USDT
+            - Name: APT/USDT
+            - Name: NEO/BTC
+            - Name: NEO/USDT
+            - Name: ETC/BTC
+            - Name: SNX/BTC
+            - Name: DOT/BTC
+            - Name: DOT/USDD
+            - Name: XMR/USDT
+            - Name: XMR/BTC
+            - Name: XRP/USDD
+            - Name: CULT/USDT
+            - Name: SUN/USDD
+            - Name: WIN/USDD
+            - Name: JST/USDD
+            - Name: DOGE/BTC
+            - Name: UNI/USDT
+            - Name: SHIB/USDT
+            - Name: TRU/USDT
+            - Name: CHZ/USDT
+            - Name: KUB/USDT
+            - Name: VELO/USDT
+            - Name: SOL/BTC
+            - Name: ETHW/USDT
+            - Name: USDD/USDT
+            - Name: ARB/USDT
+            - Name: INJ/USDT
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-irl-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false

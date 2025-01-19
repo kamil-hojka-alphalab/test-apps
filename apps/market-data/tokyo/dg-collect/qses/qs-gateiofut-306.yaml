@@ -1,0 +1,182 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateiofut-306
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.2.16.33-1eb4da9
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 305
+      ExchangeName: GateIOFut
+      Monitor:
+        DefaultConnectionCount: 1
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+          - UnderlyingName: MODE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MOG/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MONKY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MOODENG/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MORPHO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MOTHER/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MOVE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MOVR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MTL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MUBI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MYRIA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MYRO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NEAR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NEIRO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NEIROETH/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NEO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NFP/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NKN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NMR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NOT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NPC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NTRN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: OAX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: OG/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: OGN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: OM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: OMG/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: OMNI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ONDO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ONE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ONG/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ONT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: OP/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ORBS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ORCA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ORDER/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ORDI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: OXT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PEAQ/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PENDLE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PENGU/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PEOPLE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PEPE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PEPE2/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PERP/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PHA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PHB/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PIXEL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PNG/USDT
+            NamePatterns:
+            - _Perpetual
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

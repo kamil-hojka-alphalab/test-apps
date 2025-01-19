@@ -1,0 +1,65 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    QsClient:
+      DevelopmentMode: false
+
+      Workflow:
+        Type: SplitBySymbolCount
+        SymbolsCount: 600
+        InitialWorkflowCount: 3
+    
+      ZmqTransport:
+        DefaultEndpointName: "default"
+        Endpoint:
+          default:
+            - ">tcp://dg-proxy.dg-sin-01:11900"
+          regional:
+            - ">tcp://qs-sing.node.al:10951"
+            - ">tcp://qs-sing-2.node.al:10951"
+            - ">tcp://qs-sing-3.node.al:10951"
+
+        LocalByteCacheSize: 65536
+        ReceiveHighWatermark: 300000
+        
+      Extension: InstanceId
+      Subscription: NonSubSampled
+      ExtensionDeserializationErrorHandling: None
+
+    Subscription:
+      Prefix: ""
+      ExporterName: "qs-exporter-singapore-csharp"
+      Exchanges:
+        default:
+          - "Bybit"
+          - "BybitSpot"
+        regional:
+          - "LFQS"
+    MetricConfigurationProvider:
+      DefaultEnabled: true
+      Rules:
+        - Exchange: "LFQS"
+          Enabled: false
+        - Symbol: "NEON/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "BybitSpot"
+          Enabled: true
+        - Symbol: "PYTH/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "BybitSpot"
+          Enabled: true
+        - Symbol: "THRUST/USDT"
+          Metric: "al_qs_book_agg_amt_from_mid"
+          Exchange: "BybitSpot"
+          Enabled: true
+        - Metric: "al_qs_book_agg_amt_from_mid"
+          Enabled: false
+        - Metric: "al_qs_prc_for_usd_amt"
+          Enabled: false
+        - Metric: "e2e_latency"
+          Enabled: false
+        - Metric: "queue_delays"
+          Enabled: false
+kind: ConfigMap
+metadata:
+  name: qs-exporter-config-csharp

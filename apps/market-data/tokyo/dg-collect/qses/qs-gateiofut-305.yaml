@@ -1,0 +1,182 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateiofut-305
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.2.16.33-1eb4da9
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 304
+      ExchangeName: GateIOFut
+      Monitor:
+        DefaultConnectionCount: 1
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+          - UnderlyingName: KAVA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: KDA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: KEY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: KMNO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: KNC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: KSM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: L3/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LADYS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LAI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LAVA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LDO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LEVER/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LINA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LINK/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LIT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LMWR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LOKA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LOOKS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LOOM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LPT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LQTY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LRC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LSK/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LTC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LUNA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: LUNC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MAGA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MAGIC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MANA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MANEKI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MANTA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MASA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MASK/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MAV/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MAVIA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MAX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MBL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MBOX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MDT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ME/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MEME/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MEMETOON/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MERL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: METIS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MEW/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MICHI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MINA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MKR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MNT/USDT
+            NamePatterns:
+            - _Perpetual
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

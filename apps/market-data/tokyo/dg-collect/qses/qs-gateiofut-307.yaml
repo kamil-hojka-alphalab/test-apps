@@ -1,0 +1,182 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateiofut-307
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.2.16.33-1eb4da9
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 306
+      ExchangeName: GateIOFut
+      Monitor:
+        DefaultConnectionCount: 1
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+          - UnderlyingName: PNUT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: POL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: POLYX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PONKE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: POPCAT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PORTAL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: POWER/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: POWR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PRCL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PRIME/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PROM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PRQ/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PUFFER/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PYTH/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: QNT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: QTUM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RACA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RAD/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RARE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RATS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RAY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RDNT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: REEF/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: REI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: REN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RENDER/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: REQ/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: REX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: REZ/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RLC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RON/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ROOT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ROSE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RPL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RSR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RSS3/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RUNE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RVN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RWA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SAFE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SAGA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SAND/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SANTOS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SATS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SCA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SCR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SCRT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SD/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SEI/USDT
+            NamePatterns:
+            - _Perpetual
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

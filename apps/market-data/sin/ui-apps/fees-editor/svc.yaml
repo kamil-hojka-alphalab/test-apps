@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fees-editor
+spec:
+  selector:
+    app: fees-editor
+  ports:
+    - protocol: TCP
+      port: 1234

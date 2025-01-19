@@ -1,0 +1,46 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bitso-201
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bitso:2024.1.10.8-c375899
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1100m
+  memory_request: 1000Mi
+  cpu_limit: 4000m
+  memory_limit: 4000Mi
+  config: |-
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: Bitso
+      Monitor:
+        DefaultConnectionCount: 1
+        Symbols:
+          - Name: BTC/MXN
+          - Name: XRP/MXN
+          - Name: ETH/MXN
+          - Name: BTC/USD
+          - Name: LTC/MXN
+          - Name: ETH/USD
+          - Name: BTC/USDT
+          - Name: XRP/USD
+          - Name: XRP/USDT
+          - Name: BTC/BRL
+          - Name: USDT/MXN
+          - Name: SOL/USD
+          - Name: PEPE/USD
+
+          
+      Pipeline:
+        PriceValidation: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-nva-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: 01:00:00

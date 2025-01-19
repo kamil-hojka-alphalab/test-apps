@@ -1,0 +1,26 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-icrypex-201
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-icrypex:2024.4.3.111-8244ac9
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |-
+    QuoteServer:
+      ExchangeName: Icrypex
+      ShardId: 200
+      Monitor:
+        Symbols:
+          - Name: ETH/USDT
+          - Name: BTC/USDT
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-fra-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

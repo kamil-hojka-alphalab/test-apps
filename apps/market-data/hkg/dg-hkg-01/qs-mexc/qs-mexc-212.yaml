@@ -1,0 +1,73 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-mexc-212
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.28.108-3ce6dd0
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    PriceServerClient:
+      Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+    QuoteServer:
+      ShardId: 211
+      ExchangeName: Mexc
+      Monitor:
+        MaxSymbolsPerConnection: 10
+        Symbols:
+          - Name: XRD/USDT
+          - Name: PXT/USDT
+          - Name: HUAHUA/USDT
+          - Name: CRETA/USDT
+          - Name: CLV/USDT
+          - Name: SRM/USDT
+          - Name: WWY/USDT
+          - Name: AGI/USDT
+          - Name: NHT/USDT
+          - Name: ATLAS/USDT
+          - Name: KCS/USDT
+          - Name: CVTX/USDT
+          - Name: ASTR/USDT
+          - Name: ARC/USDT
+          - Name: BGB/USDT
+          - Name: TKO/USDT
+          - Name: BOBA/USDT
+          - Name: HC/USDT
+          - Name: CHRP/USDT
+          - Name: FLUX1/USDT
+          - Name: NTX/USDT
+          - Name: SONNE/USDT
+          - Name: GMX/USDT
+          - Name: BADGER/USDT
+          - Name: WNT/USDT
+          - Name: HAPI/USDT
+          - Name: ADS/USDT
+          - Name: VSC/USDT
+          - Name: MEGA/USDT
+          - Name: TRVL/USDT
+          - Name: APEX/USDT
+          - Name: SCPT/USDT
+          - Name: AMB/USDT
+
+        DefaultConnectionCount: 2
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Subsampling:
+          BestBidOfferThreshold: 1e-5
+          TimeThreshold: 00:00:01
+          PriceForChangeThreshold: 3.0e-05
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

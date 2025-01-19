@@ -1,0 +1,132 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-huobiglobal-211
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2024.10.29.65-57e0a79
+  replicas: 1
+  destiny: dg-rt-az1
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 1200m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 210
+      ExchangeName: HuobiGlobal
+      Monitor:
+        DefaultConnectionCount: 1
+        MaxSymbolsPerConnection: 30
+        Symbols:
+          - Name: NFP/USDT
+          - Name: NODL/USDT
+          - Name: NPT/USDT
+          - Name: NUM/USDT
+          - Name: OGN/USDT
+          - Name: OGV/USDT
+          - Name: OLAND/USDT
+          - Name: ONDO/USDT
+          - Name: ONE/USDT
+          - Name: OPUL/USDT
+          - Name: ORBR/USDT
+          - Name: ORBS/USDT
+          - Name: ORDS/USDT
+          - Name: OXT/USDT
+          - Name: PCI/USDT
+          - Name: PEOPLE/USDT
+          - Name: PERP/USDT
+          - Name: PHB/USDT
+          - Name: PI/USDT
+          - Name: PIXEL/USDT
+          - Name: PLU/USDT
+          - Name: POLC/USDT
+          - Name: POLYX/USDT
+          - Name: PONKE/USDT
+          - Name: POOH/USDT
+          - Name: PORTAL/USDT
+          - Name: PRISMA/USDT
+          - Name: PROM/USDT
+          - Name: PSTAKE/USDT
+          - Name: PUMP/USDT
+          - Name: PUNDIX/USDT
+          - Name: PUNDU/USDT
+          - Name: PUSH/USDT
+          - Name: PYTH/USDT
+          - Name: PYUSD/USDT
+          - Name: RAB/USDT
+          - Name: RACA/USDT
+          - Name: RATS/USDT
+          - Name: REEF/USDT
+          - Name: REI/USDT
+          - Name: REQ/USDT
+          - Name: RIO/USDT
+          - Name: ROCO/USDT
+          - Name: ROOT/USDT
+          - Name: RPK/USDT
+          - Name: RPL/USDT
+          - Name: RSR/USDT
+          - Name: RUNE/USDT
+          - Name: SAO/USDT
+          - Name: SAROS/USDT
+          - Name: SATS/USDT
+          - Name: SCA/USDT
+          - Name: SCRT/USDT
+          - Name: SFUND/USDT
+          - Name: SKL/USDT
+          - Name: SLERF/USDT
+          - Name: SMILEY/USDT
+          - Name: SMT/USDT
+          - Name: SNS/USDT
+          - Name: SNT/USDT
+          - Name: SORA/USDT
+          - Name: SPA/USDT
+          - Name: SPELL/USDT
+          - Name: SPELLFIRE/USDT
+          - Name: SPRT/USDT
+          - Name: STPT/USDT
+          - Name: STRK/USDT
+          - Name: STRM/USDT
+          - Name: SUPER/USDT
+          - Name: SUSHI/USDT
+          - Name: SWAP/USDT
+          - Name: SWEAT/USDT
+          - Name: SXP/USDT
+          - Name: SYLO/USDT
+          - Name: SYS/USDT
+          - Name: TAVA/USDT
+          - Name: TENET/USDT
+          - Name: TIA/USDT
+          - Name: TLM/USDT
+          - Name: TLOS/USDT
+          - Name: TOP/USDT
+          - Name: TPY/USDT
+      RateLimiter:
+        Http:
+          UsageLimit: 10
+          Interval: 00:00:01
+          MinAcquireGap: 0.00:00:00.075
+          RequestCosts:
+            FundingRate: 1
+      HuobiGlobal:
+        Collocation: true
+        UseTickFeed: false
+      Pipeline:
+        AbArbitrator:
+          DepthBookProcessing:
+            OrderBy: Counter
+          TradesProcessing:
+            OrderBy: Sequence
+        SnapshotCoordinator:
+          OrderBy: Counter
+        DepthBookMaintainer:
+          LevelsCap: 150
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"

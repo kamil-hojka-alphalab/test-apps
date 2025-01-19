@@ -1,0 +1,56 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:346086605621:certificate/fbe1d963-fbc1-42a0-b9b6-97faf5326052
+    alb.ingress.kubernetes.io/group.name: eks-prod-sin-alb-ingress-internal
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/target-type: ip
+    kubernetes.io/ingress.class: alb
+  labels:
+    app: execution-service-status-server
+  name: status-server-api-internal
+  namespace: execution-service-status-server
+spec:
+  rules:
+    - host: es-status-server.prv.alphalab.cc
+      http:
+        paths:
+          - backend:
+              service:
+                name: status-server-api
+                port:
+                  number: 5000
+            path: /
+            pathType: Prefix
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:346086605621:certificate/4c467c90-299b-439a-9d3b-541b6ef9896c
+    alb.ingress.kubernetes.io/group.name: eks-prod-sin-alb-ingress-internal
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/target-type: ip
+    kubernetes.io/ingress.class: alb
+  labels:
+    app: execution-service-status-server
+  name: status-server-api-int
+  namespace: execution-service-status-server
+spec:
+  rules:
+    - host: es-status-server.alphalab.cc
+      http:
+        paths:
+          - backend:
+              service:
+                name: status-server-api
+                port:
+                  number: 5000
+            path: /
+            pathType: Prefix

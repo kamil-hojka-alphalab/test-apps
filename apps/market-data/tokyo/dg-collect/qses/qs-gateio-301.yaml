@@ -1,0 +1,139 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateio-301
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.1.10.31-c375899
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 300
+      ExchangeName: GateIO
+      GateIO:
+        ExchangeConnection:
+          WebsocketApi:
+            Uri: wss://spotws-private.gateapi.io/ws/v4/
+        SnapshotMakerStrategy:
+          RestApi:
+            Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+      Monitor:
+        Symbols:
+        - Name: 1EARTH/USDT
+        - Name: 1ON8/USDT
+        - Name: 3ULL/USDT
+        - Name: ABYS/USDT
+        - Name: ACENT/USDT
+        - Name: ACT/USDT
+        - Name: ACX/USDT
+        - Name: ADA/USDC
+        - Name: ADX/USDT
+        - Name: AE/USDT
+        - Name: AERGO/USDT
+        - Name: AERO/USDT
+        - Name: AEVO/USDT
+        - Name: AFC/USDT
+        - Name: AI16Z/USDT
+        - Name: AIEPK/USDT
+        - Name: AIT/USDT
+        - Name: AIXBT/USDT
+        - Name: AKI/USDT
+        - Name: AKITA/USDT
+        - Name: ALPHA/USDT
+        - Name: ALT/USDT
+        - Name: AME/USDT
+        - Name: AMPL/USDT
+        - Name: ANDR/USDT
+        - Name: ANDY/USDT
+        - Name: ANDYETH/USDT
+        - Name: APU/USDT
+        - Name: APX/USDT
+        - Name: AQT/USDT
+        - Name: ARC/USDT
+        - Name: ARRR/USDT
+        - Name: ARS/USDT
+        - Name: ASMATCH/USDT
+        - Name: ASR/USDT
+        - Name: ATH/USDT
+        - Name: ATM/USDT
+        - Name: ATR/USDT
+        - Name: ATS/USDT
+        - Name: AURA/USDT
+        - Name: AVA/USDT
+        - Name: AVAIL/USDT
+        - Name: AVALOX/USDT
+        - Name: AWT/USDT
+        - Name: AZY/USDT
+        - Name: BAD/USDT
+        - Name: BADGER/USDT
+        - Name: BAJU/USDT
+        - Name: BAN/USDT
+        - Name: BANANA/USDT
+        - Name: BAND/USDT
+        - Name: BB/USDT
+        - Name: BBL/USDT
+        - Name: BBT/USDT
+        - Name: BCCOIN/USDT
+        - Name: BD20/USDT
+        - Name: BEBE/USDT
+        - Name: BEER/USDT
+        - Name: BEFI/USDT
+        - Name: BENDOG/USDT
+        - Name: BENJI/USDT
+        - Name: BEPRO/USDT
+        - Name: BITCI/USDT
+        - Name: BLADE/USDT
+        - Name: BLAST/USDT
+        - Name: BLAZE/USDT
+        - Name: BLENDR/USDT
+        - Name: BLOCK/USDT
+        - Name: BLS/USDT
+        - Name: BLUE/USDT
+        - Name: BOBO/USDT
+        - Name: BORA/USDT
+        - Name: BORING/USDT
+        - Name: BOSON/USDT
+        - Name: BOX/USDT
+        - Name: BRAWL/USDT
+        - Name: BRCST/USDT
+        - Name: BRETT/USDT
+        - Name: BRI/USDT
+        - Name: BRWL/USDT
+        - Name: BST/USDT
+        - Name: BTC/USDC
+        - Name: BTF/USDT
+        - Name: BTRST/USDT
+        - Name: BUBBLE/USDT
+        - Name: BVM/USDT
+        - Name: BWLD/USDT
+        - Name: BXN/USDT
+        - Name: CAD/USDT
+        - Name: CAF/USDT
+        - Name: CANTO/USDT
+        - Name: CAPS/USDT
+        - Name: CATCH/USDT
+        - Name: CATCOIN/USDT
+        - Name: CATE/USDT
+        - Name: CATS/USDT
+        - Name: CAW/USDT
+        - Name: CBK/USDT
+        - Name: CCD/USDT
+        - Name: CEL/USDT
+        DefaultConnectionCount: 1
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

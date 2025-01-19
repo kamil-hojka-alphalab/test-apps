@@ -1,0 +1,32 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-wazirx-201
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-wazirx:2022.2.28.35-5841097a4cbdbdac3161bd343c7b990941ea83a5
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |-
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: WazirX
+      
+      Monitor:
+        Symbols: 
+          - Name: SHIB/INR
+          - Name: USDT/INR
+          - Name: BTC/INR
+        DefaultConnectionCount: 3
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+          
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"

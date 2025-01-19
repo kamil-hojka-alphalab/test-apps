@@ -1,0 +1,110 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybit-302
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-bybit:2023.7.7.68-2c9aa5507b3888b4113ef3a17774d056fa02c94e
+  replicas: 1
+  destiny: dg-nrt
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 4000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 301
+      ExchangeName: Bybit
+      Monitor:
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+          - UnderlyingName: STRK/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SUI/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SYN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SYS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TAI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: THE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TIA/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TON/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TROY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: USDC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: USDE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: USUAL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VANA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VANRY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VELODROME/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VIDT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VOXEL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: WIF/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: WLD/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: XCH/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: XION/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: XLM/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: XRP/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ZENT/USDT
+            NamePatterns:
+            - _Perpetual
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 3
+      Pipeline:
+        DepthBookMaintainer:
+          LevelsCap: 200
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: '23:00:00'

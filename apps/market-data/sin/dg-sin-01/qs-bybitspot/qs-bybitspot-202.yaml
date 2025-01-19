@@ -1,0 +1,67 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybitspot-202
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.1.14.69-3709607
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 1100m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    QuoteServer:
+      ShardId: 201
+      ExchangeName: BybitSpot
+      Monitor:
+        Symbols:
+          - Name: APE/USDT
+          - Name: COMP/USDT
+          - Name: STG/USDT
+          - Name: MNT/USDC
+          - Name: MNT/USDT
+          - Name: ARKM/USDT
+          - Name: NEON/USDT
+          - Name: CTC/USDT
+          - Name: HBAR/USDT
+          - Name: CRV/USDT
+          - Name: CYBER/USDT
+          - Name: TON/USDT
+          - Name: CTT/USDT
+          - Name: AGI/USDT
+          - Name: WLD/USDC
+          - Name: AAVE/USDT
+          - Name: ETC/USDT
+          - Name: LTC/USDC
+          - Name: WLD/USDT
+          - Name: SEI/USDT
+          - Name: INJ/USDT
+          - Name: BONK/USDT
+          - Name: LINK/USDC
+          - Name: ICP/USDT
+          - Name: ETH/USDC
+          - Name: APT/USDT
+          - Name: SUI/USDT
+          - Name: XRP/USDC
+          - Name: GMX/USDT
+          - Name: COQ/USDT
+          - Name: PENDLE/USDT
+          - Name: XTZ/USDT
+          - Name: GTAI/USDT
+          - Name: THRUST/USDT
+
+
+        DefaultConnectionCount: 2
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        DepthBookMaintainer:
+          LevelsCap: 50
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

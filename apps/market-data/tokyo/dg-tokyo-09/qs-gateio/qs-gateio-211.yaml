@@ -1,0 +1,93 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateio-211
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.2.16.33-1eb4da9
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1100m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 210
+      ExchangeName: GateIO
+      GateIO:
+        ExchangeConnection:
+          WebsocketApi:
+            Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+        SnapshotMakerStrategy:
+          RestApi:
+            Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+      Monitor:
+        Symbols:
+          - Name: BONE/USDT
+          - Name: NIZA/USDT
+          - Name: PRIME/USDT
+          - Name: INSP/USDT
+          - Name: BDX/BTC
+          - Name: OSMO/USDT
+          - Name: LAVA/USDT
+          - Name: AITECH/USDT
+          - Name: VTHO/USDT
+          - Name: PICA/USDT
+          - Name: UNIBOT/USDT
+          - Name: LSD7/USDT
+          - Name: DAG/USDT
+          - Name: RPK/USDT
+          - Name: COMBO/USDT
+          - Name: NCT/USDT
+          - Name: BAKE/USDT
+          - Name: ALPACA/USDT
+          - Name: SIN/USDT
+          - Name: GGG/USDT
+          - Name: KICKS/USDT
+          - Name: DESO/USDT
+          - Name: BZZ/USDT
+          - Name: QANX/USDT
+          - Name: ZIG/USDT
+          - Name: DCK/USDT
+          - Name: ISK/USDT
+          - Name: AST/USDT
+          - Name: OAS/USDT
+          - Name: MYTH/USDT
+          - Name: EJS/USDT
+          - Name: MOB/USDT
+          - Name: LAYER/USDT
+          - Name: SNEK/USDT
+          - Name: XNA/USDT
+          - Name: DOCK/USDT
+          - Name: SHX/USDT
+          - Name: DOME/USDT
+          - Name: REACH/USDT
+          - Name: BRCT/USDT
+          - Name: MATH/USDT
+          - Name: ZETA/USDT
+          - Name: MAVIA/USDT
+          - Name: DYM/USDT
+          - Name: JUP/USDT
+          - Name: WEN/USDT
+          - Name: DMAIL/USDT
+          - Name: GTAI/USDT
+          - Name: COM/USDT
+          - Name: ORNJ/USDT
+          - Name: TAPROOT/USDT
+        DefaultConnectionCount: 1
+
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

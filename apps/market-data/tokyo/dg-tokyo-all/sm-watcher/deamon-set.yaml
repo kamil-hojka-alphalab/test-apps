@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: sm-watcher
+  labels:
+    app: sm-watcher
+spec:
+  selector:
+    matchLabels:
+      name: sm-watcher
+  template:
+    metadata:
+      labels:
+        name: sm-watcher
+    spec:
+      tolerations:
+      - key: node/destiny
+        operator: "Equal"
+        value: "dg-rt"
+        effect: "NoSchedule"
+      - key: node/destiny
+        operator: "Equal"
+        value: "dg-nrt"
+        effect: "NoSchedule"
+      - key: node/destiny
+        operator: "Equal"
+        value: "dg-test"
+        effect: "NoSchedule"
+      - key: node/destiny
+        operator: "Equal"
+        value: "dg-test-adrian"
+        effect: "NoSchedule"
+      - key: node/destiny
+        operator: "Equal"
+        value: "dg-rt-az4"
+        effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node/destiny
+                operator: In
+                values:
+                - dg-test
+                - dg-rt
+                - dg-rt-az4
+                - dg-nrt
+                - dg-test-adrian
+
+      serviceAccountName: sm-watcher-sa
+      containers:
+      - name: sm-watcher
+        image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-sm-watcher:2024.10.21.110-9707e8d
+        args:
+          - "/synced_files"
+        resources:
+          limits:
+            memory: 2000Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+        - name: files-dir
+          mountPath: /synced_files
+        startupProbe:
+          initialDelaySeconds: 10
+          failureThreshold: 70
+          periodSeconds: 10
+          exec:
+            command:
+              # there is no good way of defining "pull complete" but existence of latest ccy file is good enough approximation
+              - cat
+              - /synced_files/.last-update-timestamp
+      terminationGracePeriodSeconds: 30
+      imagePullSecrets:
+      - name: ghcr-creds
+      volumes:
+      - name: files-dir
+        hostPath:
+          path: /synced_files
+          type: DirectoryOrCreate

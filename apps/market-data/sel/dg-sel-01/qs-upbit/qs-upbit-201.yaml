@@ -1,0 +1,62 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-upbit-201
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-upbit:2023.5.29.28-6735d512272cc866c0a7c6947030ef0f269ac912
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: Upbit
+      Monitor:
+        DefaultConnectionCount: 2
+        MaxSymbolsPerConnection: 12
+        Symbols:
+          - Name: BTC/KRW
+          - Name: AHT/KRW
+          - Name: FCT2/KRW
+          - Name: LSK/KRW
+          - Name: POWR/KRW
+          - Name: MASK/KRW
+          - Name: APT/KRW
+          - Name: EGLD/KRW
+          - Name: AXS/KRW
+          - Name: STX/KRW
+          - Name: DKA/KRW
+          - Name: TT/KRW
+          - Name: META/KRW
+          - Name: STRAX/KRW
+          - Name: ORBS/KRW
+          - Name: CELO/KRW
+          - Name: GMT/KRW
+          - Name: ARB/KRW
+          - Name: ETH/USDT
+          - Name: SEI/KRW
+          - Name: MNT/KRW
+          - Name: ENS/KRW
+          - Name: G/KRW
+          - Name: MEW/KRW
+          - Name: UNI/KRW
+          - Name: CKB/KRW
+          - Name: USDT/KRW
+          - Name: POL/KRW
+
+      Pipeline:
+        DepthBookMaintainer:
+          LevelsCap: 15
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: 01:00:00

@@ -1,0 +1,76 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybitspot-204
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2024.1.10.8-c375899
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 1100m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    QuoteServer:
+      ShardId: 203
+      ExchangeName: BybitSpot
+      Monitor:
+        Symbols:
+          - Name: SNX/USDT
+          - Name: JTO/USDT
+          - Name: FET/USDT
+          - Name: IMX/USDT
+          - Name: BEAM/USDT
+          - Name: SIS/USDT
+          - Name: ADA/USDC
+          - Name: EGLD/USDT
+          - Name: BOB/USDT
+          - Name: PRIME/USDT
+          - Name: FLR/USDT
+          - Name: DOT/USDC
+          - Name: XCAD/USDT
+          - Name: FLOW/USDT
+          - Name: SHIB/USDT
+          - Name: MYRIA/USDT
+          - Name: RDNT/USDT
+          - Name: SFUND/USDT
+          - Name: FITFI/USDT
+          - Name: HNT/USDT
+          - Name: BTC3L/USDT
+          - Name: ZIG/USDT
+          - Name: BTC3S/USDT
+          - Name: STX/USDT
+          - Name: AR/USDT
+          - Name: WWY/USDT
+          - Name: FIDA/USDT
+          - Name: QNT/USDT
+          - Name: WOO/USDT
+          - Name: OP/USDC
+          - Name: 1INCH/USDT
+          - Name: HOOK/USDT
+          - Name: MINA/USDT
+          - Name: BTC/EUR
+          - Name: ROSE/USDT
+          - Name: TWT/USDT
+          - Name: ENJ/USDT
+          - Name: BTT/USDT
+          - Name: DOGE/USDC
+          - Name: MYRO/USDT
+          - Name: DUEL/USDT
+          - Name: JUP/USDT
+          - Name: STRK/USDT
+          - Name: STRK/USDC
+          - Name: ID/USDT
+        DefaultConnectionCount: 2
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        DepthBookMaintainer:
+          LevelsCap: 50
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

@@ -1,0 +1,54 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bitpanda-202
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-bitpanda:2022.1.20.17-eb86fbff1024497ab5dc4761f3f39dacc87399e3
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 201
+      ExchangeName: Bitpanda
+
+      Monitor:
+        Symbols:
+          - Name: ETH/EUR
+          - Name: PAN/EUR
+          - Name: LINK/EUR
+          - Name: ADA/EUR
+          - Name: SHIB/EUR
+          - Name: LTC/EUR
+          - Name: USDT/EUR
+          - Name: ETH/CHF
+          - Name: XRP/CHF
+          - Name: BTC/GBP
+          - Name: BTC/EUR
+          - Name: DOT/EUR
+          - Name: DOGE/EUR
+          - Name: XRP/EUR
+          - Name: BTC/CHF
+          - Name: MANA/EUR
+          - Name: AVAX/EUR
+          - Name: APE/EUR
+          - Name: USDC/EUR
+          - Name: SOL/EUR
+          - Name: BEST/EUR
+          - Name: BEST/BTC
+          - Name: GRT/EUR
+        DefaultConnectionCount: 3
+
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-irl-01:11800"
+
+          V3BinaryFormat:
+            DevelopmentMode: false

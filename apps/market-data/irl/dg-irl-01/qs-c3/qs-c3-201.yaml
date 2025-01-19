@@ -1,0 +1,49 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-c3-201
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-c3:2024.3.13.85-a75da76
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    Serilog:
+      MinimumLevel:
+        Default: Debug
+    QuoteServer: 
+      RateLimiter:
+        Http:
+          UsageLimit: 30
+          Interval: 00:00:01
+          MinAcquireGap: 0.00:00:00.0
+          RequestCosts:
+            Snapshot: 1
+
+      ExchangeName: C3
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-irl-01:11800"
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:02
+            IdleThreshold: 01:00:00
+          V3BinaryFormat:
+            Extension: InstanceId
+            DevelopmentMode: false
+
+      Monitor:
+        Symbols:
+          - Name: ETH/USDC
+          - Name: WBTC/USDC
+          - Name: AVAX/USDC
+          - Name: ALGO/USDC
+          - Name: ARB/USDC
+
+
+
+    PerfCollector:
+      HistogramDumpInterval: 01:00:00

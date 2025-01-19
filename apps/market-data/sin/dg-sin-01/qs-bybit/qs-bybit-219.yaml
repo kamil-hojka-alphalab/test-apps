@@ -1,0 +1,87 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-bybit-219
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-bybit:2023.7.7.68-2c9aa5507b3888b4113ef3a17774d056fa02c94e
+
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+
+    QuoteServer:
+      ShardId: 218
+      ExchangeName: Bybit
+      Monitor:
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+            - UnderlyingName: APE/USDT
+            - UnderlyingName: AKRO/USDT
+            - UnderlyingName: JASMY/USDT
+            - UnderlyingName: REQ/USDT
+            - UnderlyingName: DENT/USDT
+            - UnderlyingName: JST/USDT
+            - UnderlyingName: AUDIO/USDT
+            - UnderlyingName: DUSK/USDT
+            - UnderlyingName: RUNE/USDT
+            - UnderlyingName: SSV/USDT
+            - UnderlyingName: ONT/USDT
+            - UnderlyingName: RAD/USDT
+            - UnderlyingName: RSS3/USDT
+            - UnderlyingName: OG/USDT
+            - UnderlyingName: PROM/USDT
+            - UnderlyingName: SWEAT/USDT
+            - UnderlyingName: NMR/USDT
+            - UnderlyingName: ACE/USDT
+            - UnderlyingName: 1CAT/USDT
+            - UnderlyingName: BNT/USDT
+            - UnderlyingName: TAO/USDT
+            - UnderlyingName: VTHO/USDT
+            - UnderlyingName: BOME/USDT
+            - UnderlyingName: SLERF/USDT
+            - UnderlyingName: ETHFI/USDT
+            - UnderlyingName: AEVO/USDT
+            - UnderlyingName: ZBCN/USDT
+            - UnderlyingName: DEGEN/USDT
+            - UnderlyingName: BRETT/USDT
+            - UnderlyingName: NOT/USDT
+            - UnderlyingName: BENDOG/USDT
+            - UnderlyingName: BB/USDT
+            - UnderlyingName: 1000BONK/USDT
+            - UnderlyingName: ENA/USDT
+            - UnderlyingName: POPCAT/USDT
+            - UnderlyingName: PENG/USDT
+            - UnderlyingName: W/USDT
+            - UnderlyingName: MERL/USDT
+            - UnderlyingName: ZKJ/USDT
+            - UnderlyingName: ZK/USDT
+            - UnderlyingName: ZRO/USDT
+            - UnderlyingName: AKT/USDT
+            - UnderlyingName: TAIKO/USDT
+            - UnderlyingName: G/USDT
+            - UnderlyingName: UXLINK/USDT
+            - UnderlyingName: FIDA/USDT
+            - UnderlyingName: POL/USDT
+            - UnderlyingName: MVL/USDT
+            - UnderlyingName: SAFE/USDT
+            - UnderlyingName: CARV/USDT
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 3
+      Pipeline:
+        DepthBookMaintainer:
+          LevelsCap: 200
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"

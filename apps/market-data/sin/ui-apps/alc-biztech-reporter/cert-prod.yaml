@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: reports.alphalab.cc-prod
+spec:
+  secretName: reports.alphalab.cc-prod-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: reports.alphalab.cc
+  dnsNames:
+    - reports.alphalab.cc

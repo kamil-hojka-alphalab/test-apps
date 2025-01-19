@@ -1,0 +1,44 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-tokenize-101
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-tokenize:2024.10.4.64-239c1f3
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |-
+    QuoteServer:
+      ShardId: 100
+      ExchangeName: Tokenize
+
+      PeriodicSnapshotTrigger:
+        Enabled: true
+        MinPeriodSeconds: 25
+        MaxPeriodSeconds: 50
+
+      Monitor:
+        Symbols:
+          - Name: BTC/SGD
+          - Name: ETH/SGD
+          - Name: BTC/USD
+          - Name: TKX/SGD
+          - Name: SOL/XSGD
+          - Name: USDT/SGD
+          - Name: SOL/SGD
+          - Name: XRP/SGD
+          - Name: TKX/USD
+
+        DefaultConnectionCount: 1
+
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"

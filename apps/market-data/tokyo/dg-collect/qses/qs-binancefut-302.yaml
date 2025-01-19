@@ -1,0 +1,159 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-binancefut-302
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.12.2.127-6a165c5
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    QuoteServer:
+      ShardId: 301
+      ExchangeName: BinanceFut
+      Monitor:
+        DefaultConnectionCount: 1
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+          - UnderlyingName: MBOX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ME/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MOODENG/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MORPHO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: MOVE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NEAR/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NEIRO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NEIROETH/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NEO/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NOT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: NULS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: OMNI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ORCA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PENGU/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PHA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PNUT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PONKE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: PROM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: QUICKSWAP/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RARE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: REZ/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: RPL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SAGA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SANTOS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SCR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SCRT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SLERF/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SONIC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SPX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SYN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SYS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: THE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TIA/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TNSR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TROY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: USUAL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VANA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VANRY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VELODROME/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VIDT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VIRTUAL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: VOXEL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: WIF/USDC
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: WLD/USDC
+            NamePatterns:
+            - _Perpetual
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

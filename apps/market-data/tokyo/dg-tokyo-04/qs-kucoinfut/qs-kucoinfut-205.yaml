@@ -1,0 +1,69 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-kucoinfut-205
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.9.17.76-6cc293d
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 2000m
+  memory_request: 3000Mi
+  cpu_limit: 2000m
+  memory_limit: 3000Mi
+  config: |-
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    PriceServerClient:
+      Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+    QuoteServer:
+      ShardId: 204
+      ExchangeName: KuCoinFut
+      Monitor:
+        DefaultConnectionCount: 2
+        MaxSymbolsPerConnection: 10
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+          - UnderlyingName: FIL/USDT
+          - UnderlyingName: NEAR/USDT
+          - UnderlyingName: BLUR/USDT
+          - UnderlyingName: ALGO/USDT
+          - UnderlyingName: WOO/USDT
+          - UnderlyingName: ETC/USDT        
+          - UnderlyingName: EOS/USDT        
+          - UnderlyingName: QNT/USDT         
+          - UnderlyingName: NKN/USDT
+          - UnderlyingName: ONEINCH/USDT        
+          - UnderlyingName: VET/USDT        
+          - UnderlyingName: CRV/USDT
+          - UnderlyingName: RUNE/USDT
+          - UnderlyingName: MINA/USDT
+          - UnderlyingName: XVG/USDT
+          - UnderlyingName: CVC/USDT
+          - UnderlyingName: XRP/USD
+          - UnderlyingName: SXP/USDT          
+          - UnderlyingName: UNI/USDT
+          - UnderlyingName: ICP/USDT          
+          - UnderlyingName: IMX/USDT          
+          - UnderlyingName: STX/USDT
+          - UnderlyingName: DASH/USDT
+          - UnderlyingName: EGLD/USDT                    
+          - UnderlyingName: BCH/USDT          
+          - UnderlyingName: XEC/USDT          
+          - UnderlyingName: ZRX/USDT
+          - UnderlyingName: CYBER/USDT
+
+
+      Pipeline:
+        Subsampling:
+          BestBidOfferThreshold: 1e-5
+          TimeThreshold: 00:00:01
+          PriceForChangeThreshold: 3.0e-05
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-04:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"

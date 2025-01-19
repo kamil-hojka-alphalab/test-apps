@@ -1,0 +1,31 @@
+# This is example - not actually applied to ANY cluster
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: prom-oper-qs-exporter-podmonitor
+  labels:
+    team: trading-platform
+    # this is crucial, get it by: `kubectl get prometheus  -o yaml | grep -A4 serviceMonitorSelector`
+    release: prom-stack
+spec:
+  selector:
+    matchLabels:
+      prometheus-pod-scrape: enabled
+    matchExpressions:
+      - {key: app, operator: In, values: [qs-exporter-csharp, qs-exporter-python]}
+  jobLabel: qs-exporter-pod-stats
+  namespaceSelector:
+    any: true
+  podMetricsEndpoints:
+    - port: health-port
+      path: /metrics
+      interval: 10s
+      relabelings:
+        - action: labelmap
+          regex: "__meta_kubernetes_pod_label_(.+)"
+        - sourceLabels: [__meta_kubernetes_namespace]
+          action: replace
+          targetLabel: namespace
+        - sourceLabels: [__meta_kubernetes_pod_name]
+          action: replace
+          targetLabel: pod_name

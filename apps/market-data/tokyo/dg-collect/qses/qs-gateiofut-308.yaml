@@ -1,0 +1,182 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateiofut-308
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.2.16.33-1eb4da9
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 307
+      ExchangeName: GateIOFut
+      Monitor:
+        DefaultConnectionCount: 1
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+          - UnderlyingName: SEND/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SHIB/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SIDUS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SKL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SLERF/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SLP/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SMILE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SNEK/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SNX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SOLO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SOLS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SONIC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SOON/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SPA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SPEC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SPX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SSV/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: STEEM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: STG/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: STMX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: STORJ/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: STPT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: STREAM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: STRK/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: STX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SUI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SUIAI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SUN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SUPER/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SUSHI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SWEAT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SWFTC/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SXP/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: SYN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: T/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TAI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TAIKO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TAO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: THE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: THETA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TIA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TLM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TNSR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TOKEN/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TOMI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TON/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TRB/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TROY/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TRU/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: TRUMP/USDT
+            NamePatterns:
+            - _Perpetual
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

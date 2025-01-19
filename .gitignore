@@ -1,0 +1,6 @@
+.idea/
+.vscode/
+.envrc
+
+.DS_Store
+/.project

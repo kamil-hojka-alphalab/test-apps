@@ -1,0 +1,26 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    Serilog:
+      MinimumLevel:
+        Default: Information
+      WriteTo:
+        - Name: Console
+          Args:
+            outputTemplate: "[{Timestamp:HH:mm:ss.fff} {Level:u3}] {Prefix}{Message:lj}{NewLine}{Exception}"
+
+    UploaderOptions:
+      FirstLookupDelay: 0.00:00:05
+      LookupInterval: 0.00:00:10
+      MonitoringEntries:
+        - Path: "/s3_upload/"
+          SearchPattern: "*.bin"
+        - Path: "/s3_upload/"
+          SearchPattern: "*.yaml"
+
+    S3Options:
+      Region: "eu-central-1"
+
+kind: ConfigMap
+metadata:
+  name: s3-uploader-config

@@ -1,0 +1,72 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-mexc-213
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.28.108-3ce6dd0
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    PriceServerClient:
+      Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+    QuoteServer:
+      ShardId: 212
+      ExchangeName: Mexc
+      Monitor:
+        MaxSymbolsPerConnection: 10
+        Symbols:
+          - Name: PANDO/USDT
+          - Name: AURORA/USDT
+          - Name: MDT/USDT
+          - Name: BRN/USDT
+          - Name: PHA/USDT
+          - Name: BFIC/USDT
+          - Name: ISK/USDT
+          - Name: XRPH/USDT
+          - Name: WEMIX/USDT
+          - Name: OMG/USDT
+          - Name: NEOX/USDT
+          - Name: AR/USDT
+          - Name: AIPAD/USDT
+          - Name: VELODROME/USDT
+          - Name: WBTC/USDT
+          - Name: ONTP/USDT
+          - Name: BROCK/USDT
+          - Name: POOH/USDT
+          - Name: UNO/USDT
+          - Name: MBX/USDT
+          - Name: ALU/USDT
+          - Name: ZANO/USDT
+          - Name: CTC/USDT
+          - Name: YOLO/USDT
+          - Name: OFN/USDT
+          - Name: SWEAT/USDT
+          - Name: ALPH/USDT
+          - Name: SOIL/USDT
+          - Name: PORT3/USDT
+          - Name: RDEX/USDT
+          - Name: MAR3/USDT
+          - Name: ABOND/USDT
+
+        DefaultConnectionCount: 2
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Subsampling:
+          BestBidOfferThreshold: 1e-5
+          TimeThreshold: 00:00:01
+          PriceForChangeThreshold: 3.0e-05
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

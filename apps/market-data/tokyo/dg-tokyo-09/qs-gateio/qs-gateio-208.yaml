@@ -1,0 +1,79 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateio-208
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.1.10.31-c375899
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 207
+      ExchangeName: GateIO
+      GateIO:
+        ExchangeConnection:
+          WebsocketApi:
+            Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+        SnapshotMakerStrategy:
+          RestApi:
+            Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+
+      Monitor:
+        Symbols:
+          - Name: SUKU/USDT
+          - Name: MXC/USDT
+          - Name: ALCX/USDT
+          - Name: TRADE/USDT
+          - Name: ATLAS/USDT
+          - Name: DODO/USDT
+          - Name: WIT/USDT
+          - Name: XCV/USDT
+          - Name: IMX/USDT
+          - Name: MTS/USDT
+          - Name: HIGH/USDT
+          - Name: POLIS/USDT
+          - Name: IDEA/USDT
+          - Name: ELON/USDT
+          - Name: XCAD/USDT
+          - Name: PYR/USDT
+          - Name: SSV/USDT
+          - Name: SYLO/USDT
+          - Name: SIS/USDT
+          - Name: KEY/USDT
+          - Name: XDC/USDT
+          - Name: SC/USDT
+          - Name: ADS/USDT
+          - Name: VOXEL/USDT
+          - Name: BSV/USDT
+          - Name: BTC/USDT
+          - Name: LINK/USDT
+          - Name: AAVE/USDT
+          - Name: XAVA/USDT
+          - Name: AKRO/USDT
+          - Name: BEAM/USDT
+          - Name: DARK/USDT
+          - Name: HNT/USDT
+          - Name: AURORA/USDT
+          - Name: SEI/USDT
+          - Name: CYBER/USDT
+          - Name: BOME/USDT
+        DefaultConnectionCount: 1
+
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+

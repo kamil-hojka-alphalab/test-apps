@@ -1,0 +1,104 @@
+QuoteServers:
+  - name: qs-fmfwio-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-fmfwio:2025.1.14.69-100f6ef
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: FMFWio
+
+        Monitor:
+          Symbols:
+            - Name: ETH/USDT
+            - Name: BTC/USDT
+            - Name: SOL/USDT
+            - Name: ATOM/USDT
+            - Name: BNB/USDT
+            - Name: DOT/USDT
+            - Name: FIL/USDT
+            - Name: ADA/USDT
+            - Name: GALA/USDT
+            - Name: TRX/USDT
+            - Name: XRP/USDT
+            - Name: LINK/USDT
+            - Name: ETH/BTC
+            - Name: THETA/USDT
+            - Name: AXS/USDT
+            - Name: WAVES/USDT
+            - Name: LTC/USDT
+            - Name: VET/USDT
+            - Name: BCH/USDT
+            - Name: ONT/USDT
+            - Name: QTUM/USDT
+            - Name: XRP/BTC
+            - Name: CAKE/USDT
+            - Name: BAT/USDT
+            - Name: KNC/USDT
+            - Name: BNB/ETH
+            - Name: FTM/BTC
+            - Name: UNI/BTC
+            - Name: XMR/BTC
+            - Name: C98/USDT
+            - Name: ZIL/USDT
+            - Name: TRX/BTC
+            - Name: LINA/USDT
+            - Name: NEO/USDT
+            - Name: ALGO/BTC
+            - Name: XTZ/USDT
+            - Name: GRT/USDT
+            - Name: MANA/USDT
+            - Name: XLM/USDT
+            - Name: ZEC/USDT
+            - Name: BNB/BTC
+            - Name: OMG/USDT
+            - Name: EOS/USDT
+            - Name: DYDX/USDT
+            - Name: YFI/USDT
+            - Name: SOL/BTC
+            - Name: KLAY/USDT
+            - Name: XMR/USDT
+            - Name: CHZ/USDT
+            - Name: DASH/USDT
+            - Name: ONEINCH/USDT
+            - Name: HBAR/USDT
+            - Name: YGG/USDT
+            - Name: LTC/BTC
+            - Name: OGN/USDT
+            - Name: IOST/USDT
+            - Name: ONE/BTC
+            - Name: REEF/USDT
+            - Name: TLM/USDT
+            - Name: VET/BTC
+            - Name: AXS/BTC
+            - Name: ZEC/BTC
+            - Name: ZEN/USDT
+            - Name: XLM/BTC
+            - Name: DODO/USDT
+            - Name: MKR/USDT
+            - Name: BAKE/USDT
+            - Name: BTC/USDC
+            - Name: ETH/USDC
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 40
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-irl-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false

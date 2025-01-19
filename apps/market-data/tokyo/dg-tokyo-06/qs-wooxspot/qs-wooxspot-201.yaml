@@ -1,0 +1,39 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-wooxspot-201
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-woox:2024.12.6.68-0146c75
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1100m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 6000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: WooXSpot
+
+      Monitor:
+        Symbols:
+          - Name: BTC/USDT
+          - Name: ETH/USDT
+          - Name: SOL/USDT
+        DefaultConnectionCount: 1
+
+      Pipeline:
+        AbArbitrator:
+          DepthBookProcessing:
+            OrderBy: Timestamp
+          TradesProcessing:
+            OrderBy: Timestamp
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-06:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

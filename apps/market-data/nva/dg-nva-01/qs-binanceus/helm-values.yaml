@@ -1,0 +1,47 @@
+QuoteServers:
+  - name: qs-binanceus-201
+    image: ghcr.io/alphalab-hq/alc-qs-exchange-binance:2022.11.23.70-c4549530b9a7c7e73823c76ece629d5314bbb198
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: BinanceUS
+
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: ETH/USDT
+            - Name: USDT/USD
+            - Name: BTC/USDC
+            - Name: LTC/USDT
+            - Name: BTC/USDT
+            - Name: BNB/USDT
+            - Name: DOGE/USDT
+            - Name: SHIB/USDT
+            - Name: SOL/USDT
+            - Name: ETH/BTC
+            - Name: LTC/BTC
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nva-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 23:00:00

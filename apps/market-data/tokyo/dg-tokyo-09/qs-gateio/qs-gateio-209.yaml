@@ -1,0 +1,97 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateio-209
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.1.10.31-c375899
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 208
+      ExchangeName: GateIO
+      GateIO:
+        ExchangeConnection:
+          WebsocketApi:
+            Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+        SnapshotMakerStrategy:
+          RestApi:
+            Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+
+      Monitor:
+        Symbols:
+          - Name: ALU/USDT
+          - Name: CRO/USDT
+          - Name: HAPI/USDT
+          - Name: STX/USDT
+          - Name: TARA/USDT
+          - Name: STND/USDT
+          - Name: LIKE/USDT
+          - Name: AKT/USDT
+          - Name: BAT/USDT
+          - Name: MTV/USDT
+          - Name: TT/USDT
+          - Name: POLC/USDT
+          - Name: DUSK/USDT
+          - Name: HBAR/USDT
+          - Name: ZIL/USDT
+          - Name: ARPA/USDT
+          - Name: PERP/USDT
+          - Name: 10SET/USDT
+          - Name: VELO/USDT
+          - Name: ZRX/USDT
+          - Name: BICO/USDT
+          - Name: PNG/USDT
+          - Name: ZCX/USDT
+          - Name: BLZ/USDT
+          - Name: DIONE/USDT
+          - Name: JASMY/USDT
+          - Name: DOGE/USDT
+          - Name: ETH/USDT
+          - Name: POWR/USDT
+          - Name: XRP/USDT
+            UseTicker: true
+          - Name: ETC/USDT
+          - Name: SHIB/USDT
+          - Name: UNI/USDT
+          - Name: HIFI/USDT
+          - Name: RDNT/USDT
+          - Name: NOM/USDT
+          - Name: BSV5S/USDT
+          - Name: VINU/USDT
+          - Name: DUST/USDT
+          - Name: TOKEN/USDT
+          - Name: GALA5S/USDT
+          - Name: BNT/USDT
+          - Name: FTN/USDT
+          - Name: VAI/USDT
+          - Name: DOT5S/USDT
+          - Name: BIGTIME/USDT
+          - Name: KNFT/USDT
+          - Name: VPR/USDT
+          - Name: EVO/USDT
+          - Name: TSUKA/USDT
+          - Name: TRALA/USDT
+          - Name: CYBERARENA/USDT
+          - Name: UMEE/USDT
+          - Name: NAOS/USDT
+          - Name: SMILEAI/USDT
+        DefaultConnectionCount: 1
+
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

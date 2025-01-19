@@ -1,0 +1,139 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateio-304
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.1.10.31-c375899
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 303
+      ExchangeName: GateIO
+      GateIO:
+        ExchangeConnection:
+          WebsocketApi:
+            Uri: wss://spotws-private.gateapi.io/ws/v4/
+        SnapshotMakerStrategy:
+          RestApi:
+            Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+      Monitor:
+        Symbols:
+        - Name: MERL/USDT
+        - Name: METAL/USDT
+        - Name: METFI/USDT
+        - Name: METO/USDT
+        - Name: MEW/USDT
+        - Name: MFER/USDT
+        - Name: MICHI/USDT
+        - Name: MIX/USDT
+        - Name: MLK/USDT
+        - Name: MLP/USDT
+        - Name: MMT/USDT
+        - Name: MOBILE/USDT
+        - Name: MODE/USDT
+        - Name: MOG/USDT
+        - Name: MOJO/USDT
+        - Name: MON/USDT
+        - Name: MONI/USDT
+        - Name: MONKY/USDT
+        - Name: MOOV/USDT
+        - Name: MORPHO/USDT
+        - Name: MOTHER/USDT
+        - Name: MOVE/USDT
+        - Name: MPT/USDT
+        - Name: MSN/USDT
+        - Name: MSOL/USDT
+        - Name: MTL/USDT
+        - Name: MUC/USDT
+        - Name: MUNITY/USDT
+        - Name: MUSE/USDT
+        - Name: MV/USDT
+        - Name: MVL/USDT
+        - Name: MYRO/USDT
+        - Name: MYT/USDT
+        - Name: NAI/USDT
+        - Name: NBS/USDT
+        - Name: NEIROETH/USDT
+        - Name: NEVER/USDT
+        - Name: NEXO/USDT
+        - Name: NFE/USDT
+        - Name: NFT/USDT
+        - Name: NIBI/USDT
+        - Name: NOT/USDT
+        - Name: NPC/USDT
+        - Name: NS/USDT
+        - Name: NUB/USDT
+        - Name: NWC/USDT
+        - Name: NYAN/USDT
+        - Name: O4DX/USDT
+        - Name: OBI/USDT
+        - Name: OBT/USDT
+        - Name: OCTA/USDT
+        - Name: ODDZ/USDT
+        - Name: OFF/USDT
+        - Name: OGN/USDT
+        - Name: OLT/USDT
+        - Name: OMNI/USDT
+        - Name: OOE/USDT
+        - Name: OORT/USDT
+        - Name: OPAI/USDT
+        - Name: OPN1/USDT
+        - Name: ORB/USDT
+        - Name: ORBK/USDT
+        - Name: ORBR/USDT
+        - Name: ORDER/USDT
+        - Name: ORFY/USDT
+        - Name: OSHI/USDT
+        - Name: PACK/USDT
+        - Name: PAI/USDT
+        - Name: PANDO/USDT
+        - Name: PARAM/USDT
+        - Name: PATEX/USDT
+        - Name: PBUX/USDT
+        - Name: PBX/USDT
+        - Name: PCH/USDT
+        - Name: PDEX/USDT
+        - Name: PENG/USDT
+        - Name: PENGU/USDT
+        - Name: PEPECOIN/USDT
+        - Name: PEW/USDT
+        - Name: PIGCOIN/USDT
+        - Name: PIN/USDT
+        - Name: PIP/USDT
+        - Name: PIXEL/USDT
+        - Name: PIZZA/USDT
+        - Name: PNUT/USDT
+        - Name: POINT/USDT
+        - Name: POLK/USDT
+        - Name: PONKE/USDT
+        - Name: POPCAT/USDT
+        - Name: POR/USDT
+        - Name: PORTAL/USDT
+        - Name: POWER/USDT
+        - Name: PPT/USDT
+        - Name: PRCL/USDT
+        - Name: PRO/USDT
+        - Name: PROPC/USDT
+        - Name: PROPS/USDT
+        - Name: PRX/USDT
+        - Name: PSG/USDT
+        - Name: PSTAKE/USDT
+        DefaultConnectionCount: 1
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

@@ -1,0 +1,68 @@
+apiVersion: v1
+data:
+  config.yaml: |
+    SecurityMaster:
+      RefreshIntervalInSeconds: 540
+      Exchanges:
+        okcoinjp:
+          FileLoader:
+            ExchangeDataFile: /etc/security_master/security_master.okcoinjp.prop.yaml.latest
+      FileLoader:
+        DisableNotificationsService: true
+        CurrencyFilePath: /etc/security_master/security_master.ccy.yaml.latest
+        ExchangesFilePath: /etc/security_master/security_master.exch.yaml.latest
+
+    QuoteServer:
+      ShardId: 201
+      ExchangeName: OKCoinJP
+      Monitor:
+        Symbols:
+          - Name: ETH/JPY
+          - Name: APE/JPY
+          - Name: ARB/JPY
+          - Name: AVAX/JPY
+          - Name: BCH/JPY
+          - Name: DEP/JPY
+          - Name: DOT/JPY
+          - Name: ETC/JPY
+          - Name: FNCT/JPY
+          - Name: KLAY/JPY
+          - Name: MASK/JPY
+          - Name: MKR/JPY
+          - Name: OP/JPY
+          - Name: PLT/JPY
+          - Name: SAND/JPY
+          - Name: SOL/JPY
+          - Name: TON/JPY
+          - Name: XLM/JPY
+          - Name: XTZ/JPY
+          - Name: POL/JPY
+        DefaultConnectionCount: 1
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-04:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    QsLite:
+      HotPathBusyWait: false
+      ColdPathBusyWait: false
+      HotPathAffinityMask: ""
+      ColdPathAffinityMask: ""
+      MonitoringServerPort: 5001
+      Exchanges:
+        okcoinjp:
+          WsEndpoint: "wss://connect.okcoin.jp:443/ws/v3"
+          HttpEndpoint: "https://www.okcoin.jp"
+          NumTickerSubscriptions: 5
+          NumTradeSubscriptions: 5
+          RateLimiter:
+            Window: "00:00:01"
+            AutoReplenishment: true
+            PermitLimit: 20  # count
+            QueueLimit: 20   # sum
+    PerfCollector:
+      HistogramDumpInterval: 24:00:00
+kind: ConfigMap
+metadata:
+  name: qs-okcoinjp-202-config

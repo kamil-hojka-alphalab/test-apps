@@ -1,0 +1,26 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: fees-editor-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /fees-editor
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: fees-editor
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`tools.alphalab.cc`) && PathPrefix(`/fees-editor`)
+      kind: Rule
+      middlewares:
+        - name: fees-editor-stripprefix
+      services:
+        - name: fees-editor
+          port: 1234
+  tls:
+    secretName: tools.alphalab.cc-prod-tls

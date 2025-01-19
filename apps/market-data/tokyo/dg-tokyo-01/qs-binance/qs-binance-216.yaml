@@ -1,0 +1,56 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-binance-216
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.12.2.127-6a165c5
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 1500m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 215
+      ExchangeName: Binance
+      Binance:
+        Variant: DeltaSimplified
+        DedupTradesEarly: true
+        DedupTickersEarly: true
+
+      Monitor:
+        DefaultConnectionCount: 3
+        Symbols:
+          - Name: NOT/USDT
+          - Name: BB/USDT
+          - Name: ENA/USDT
+          - Name: ETHFI/USDT
+          - Name: REZ/USDT
+          - Name: W/USDT
+          - Name: TNSR/USDT
+          - Name: PORTAL/USDT
+          - Name: TAO/USDT
+          - Name: SAGA/USDT
+          - Name: OMNI/USDT
+          - Name: AXL/USDT
+          - Name: METIS/USDT
+          - Name: BB/BNB
+          - Name: NOT/BNB
+          - Name: ZRO/USDT
+          - Name: POL/USDT
+          - Name: CATI/USDT
+          - Name: KAIA/USDT
+          - Name: KLAY/USDT
+          - Name: VANRY/USDT          
+
+      Pipeline:
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-01:11800"
+
+          V3BinaryFormat:
+            DevelopmentMode: false

@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    QsClient:
+      ZmqTransport:
+        Endpoint:
+          - ">tcp://dg-proxy.dg-collect:11900"
+    DataRecorder:
+      S3Options:
+        Bucket: "qs-bin-v2"
+      Redis:
+        Host: elasticache-trading-platform-sin.nixewa.ng.0001.apse1.cache.amazonaws.com
+
+kind: ConfigMap
+metadata:
+  name: data-recorder-config

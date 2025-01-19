@@ -1,0 +1,182 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-gateiofut-301
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.2.16.33-1eb4da9
+  replicas: 1
+  destiny: dg-test
+  cpu_request: 1200m
+  memory_request: 1000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 300
+      ExchangeName: GateIOFut
+      Monitor:
+        DefaultConnectionCount: 1
+        DerivedSymbols:
+          Type: Futures
+          Symbols:
+          - UnderlyingName: 1CAT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: 1INCH/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AAVE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ACE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ACH/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ACT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ACX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ADX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AERGO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AERO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AEVO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AGI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AGLD/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AI/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AI16Z/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AIOZ/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AIXBT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AKRO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ALEO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ALGO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ALICE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ALPACA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ALPHA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ALT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AMB/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AMP/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ANKR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: API3/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: APT/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: APU/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: APX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ARB/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ARK/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ARKM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ARPA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ASTR/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ATA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ATH/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: ATOM/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AUCTION/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AUDIO/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AURORA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AVA/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AVAIL/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AVAX/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: AXS/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: BADGER/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: BAKE/USDT
+            NamePatterns:
+            - _Perpetual
+          - UnderlyingName: BAN/USDT
+            NamePatterns:
+            - _Perpetual
+      Pipeline:
+        SanityCheckFilter:
+          AllowEmptyL2Deltas: true
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-collect:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false

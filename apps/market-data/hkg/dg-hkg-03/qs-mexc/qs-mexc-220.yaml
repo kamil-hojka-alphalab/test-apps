@@ -1,0 +1,78 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-mexc-220
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.28.108-3ce6dd0
+  replicas: 0
+  destiny: dg-rt
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 219
+      ExchangeName: Mexc
+      Monitor:
+        MaxSymbolsPerConnection: 10
+        Symbols:
+          - Name: SAROS/USDT
+          - Name: INTR/USDT
+          - Name: WYNN/USDT
+          - Name: TSUGT/USDT
+          - Name: 3KM/USDT
+          - Name: ARG/USDT
+          - Name: SDN/USDT
+          - Name: CGPT/USDC
+          - Name: CITY/USDT
+          - Name: AVALOX/USDT
+          - Name: WEN/USDT
+          - Name: SEED/USDT
+          - Name: GTAI/USDT
+          - Name: MOCKJUP/USDT
+          - Name: ZRX/USDT
+          - Name: GARI/USDT
+          - Name: NCT/USDT
+          - Name: FNCT/USDT
+          - Name: TGT/USDT
+          - Name: PPC/USDT
+          - Name: SHIA/USDT
+          - Name: PLB/USDT
+          - Name: ARK/USDT
+          - Name: DGI/USDT
+          - Name: METO/USDT
+          - Name: EVO/USDT
+          - Name: MOG/USDT
+          - Name: JCO/USDT
+          - Name: MTS/USDT
+          - Name: ALI/USDT
+          - Name: JAN/USDT
+          - Name: DEFI/USDT
+          - Name: WALV/USDT
+          - Name: TERRA/USDT
+          - Name: PET/USDT
+          - Name: FLX/USDT
+          - Name: KTC/USDT
+          - Name: SOL/USDT
+          - Name: CYBERARENA/USDT
+          - Name: NEURO/USDT
+          - Name: MRST/USDT
+          - Name: FLX/USDT
+          - Name: TXA/USDT
+          - Name: TKX/USDT
+
+        DefaultConnectionCount: 2
+      Pipeline:
+        Disruptor:
+          DisruptorStatsDecoratorEnabled: false
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      Enabled: false

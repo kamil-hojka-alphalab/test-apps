@@ -1,0 +1,53 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-indodax-201
+spec:
+  image: ghcr.io/alphalab-hq/alc-qs-exchange-indodax:2022.9.14.16-bb38cb7bd98ce33c82afe15628f7f1516c1db9c7
+  replicas: 1
+  destiny: dg-rt
+  cpu_request: 1000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+
+    QuoteServer:
+      ShardId: 200
+      ExchangeName: IndoDAX
+      Monitor:
+        DefaultConnectionCount: 2
+        MaxSymbolsPerConnection: 1
+
+        Symbols:
+          - Name: USDT/IDR
+          - Name: BTC/IDR
+          - Name: ABBC/IDR
+          - Name: ETH/IDR
+          - Name: XRP/IDR
+          - Name: SRM/IDR
+          - Name: DOGE/IDR
+          - Name: VELO/IDR
+          - Name: CFX/IDR
+          - Name: SOL/IDR
+          - Name: ADA/IDR
+          - Name: BNB/IDR
+          - Name: VRA/IDR
+          - Name: SOLVE/IDR
+          - Name: AIOZ/IDR
+      Pipeline:
+        Publisher:
+          V3BinaryFormat:
+            DevelopmentMode: false
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+        DepthBookMaintainer:
+          LevelsCap: 50
+
+      IndoDAX:
+        Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE5NDY2MTg0MTV9.UR1lBM6Eqh0yWz-PVirw1uPCxe60FdchR8eNVdsskeo"
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"

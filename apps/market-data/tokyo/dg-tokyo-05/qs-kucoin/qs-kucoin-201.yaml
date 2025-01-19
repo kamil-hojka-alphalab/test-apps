@@ -1,0 +1,87 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-kucoin-201
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.9.17.76-6cc293d
+  replicas: 1
+  destiny: dg-rt-az4
+  cpu_request: 2000m
+  memory_request: 2000Mi
+  cpu_limit: 2000m
+  memory_limit: 2000Mi
+  config: |
+    PriceServerClient:
+      Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ExchangeName: KuCoin
+      ShardId: 200
+      
+      CheckStaleMarketDataTrigger:
+        Interval: 00:00:01
+      Monitor:
+        Symbols:
+          - Name: OGN/USDT
+          - Name: BAND/USDT
+          - Name: LINK/USDC
+          - Name: SKEY/USDT
+          - Name: LINK/BTC
+          - Name: ISP/USDT
+          - Name: FXS/USDT
+          - Name: VXV/USDT
+          - Name: TRX/BTC
+          - Name: DMTR/USDT
+          - Name: ATOM/USDC
+          - Name: KCS/USDC
+          - Name: DATA/USDT
+          - Name: POLK/USDT
+          - Name: SFUND/USDT
+          - Name: MAN/USDT
+          - Name: HAI/USDT
+          - Name: CTI/USDT
+          - Name: EWT/USDT
+          - Name: PAXG/USDT
+          - Name: TRX/USDT
+          - Name: CELO/USDT
+          - Name: SAND/USDT
+          - Name: DASH/USDT
+          - Name: XMR/BTC
+          - Name: ROSE/USDT
+          - Name: ETH/USDC
+          - Name: OP/USDT
+          - Name: ALGO/USDT
+          - Name: LINK/USDT
+          - Name: LTC/USDT
+          - Name: TON/USDT
+          - Name: FLR/USDT
+          - Name: ACH/USDT
+          - Name: GAS/USDT
+
+      RateLimiter:
+        Http:
+          UsageLimit: 200
+          Interval: 00:00:01
+          MinAcquireGap: 0.00:00:00.10
+          RequestCosts:
+            Snapshot: 10
+      Pipeline:
+        Subsampling:
+          BestBidOfferThreshold: 1e-5
+          TimeThreshold: "00:00:01"
+          PriceForChangeThreshold: 3.0e-5
+        DepthBookMaintainer:
+          LevelsCap: 150
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-05:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+        StaleMarketDataObserver:
+          StaleThreshold: 00:00:01
+          IdleThreshold: 00:02:00
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"
+

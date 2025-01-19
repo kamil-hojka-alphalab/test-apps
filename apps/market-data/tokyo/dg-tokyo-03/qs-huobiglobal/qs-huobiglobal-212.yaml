@@ -1,0 +1,111 @@
+apiVersion: tradingplatform.alphalab.cc/v1alpha1
+kind: QuoteServer
+metadata:
+  name: qs-huobiglobal-212
+spec:
+  image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2024.10.29.65-57e0a79
+  replicas: 1
+  destiny: dg-rt-az1
+  cpu_request: 1200m
+  memory_request: 2000Mi
+  cpu_limit: 1200m
+  memory_limit: 2000Mi
+  config: |
+    SecurityMaster:
+      FileLoader:
+        DisableNotificationsService: true
+    QuoteServer:
+      ShardId: 211
+      ExchangeName: HuobiGlobal
+      Monitor:
+        DefaultConnectionCount: 1
+        MaxSymbolsPerConnection: 30
+        Symbols:
+          - Name: TRAC/USDT
+          - Name: TROLL/USDT
+          - Name: TRU/USDT
+          - Name: TURT/USDT
+          - Name: TUSD/USDT
+          - Name: UFT/USDT
+          - Name: UNB/USDT
+          - Name: UOS/USDT
+          - Name: USDJ/USDT
+          - Name: USTC/USDT
+          - Name: UT/USDT
+          - Name: UTK/USDT
+          - Name: VIC/USDT
+          - Name: VINU/USDT
+          - Name: VISION/USDT
+          - Name: VLX/USDT
+          - Name: VPAD/USDT
+          - Name: VR/USDT
+          - Name: VRA/USDT
+          - Name: VRTX/USDT
+          - Name: W/USDT
+          - Name: WAN/USDT
+          - Name: WAXL/USDT
+          - Name: WE/USDT
+          - Name: WEMIX/USDT
+          - Name: WEN/USDT
+          - Name: WHALE/USDT
+          - Name: WIF/USDT
+          - Name: WIFI/USDT
+          - Name: WIN/USDT
+          - Name: WNXM/USDT
+          - Name: WPCI/USDT
+          - Name: WSM/USDT
+          - Name: WWY/USDT
+          - Name: WXT/USDT
+          - Name: XCN/USDT
+          - Name: XEM/USDT
+          - Name: XETA/USDT
+          - Name: XFI/USDT
+          - Name: XPET/USDT
+          - Name: XVG/USDT
+          - Name: ZCX/USDT
+          - Name: ZEC/USDT
+          - Name: ZELIX/USDT
+          - Name: ZEN/USDT
+          - Name: ZETA/USDT
+          - Name: ZIG/USDT
+          - Name: ZKF/USDT
+          - Name: ZKP/USDT
+          - Name: ZUZALU/USDT
+          - Name: BLAST/USDT
+          - Name: JUICE/USDT
+          - Name: PUFFER/USDT
+          - Name: CARV/USDT
+          - Name: MOODENG/USDT
+          - Name: DBR/USDT
+          - Name: EDEN/USDT
+          - Name: WOZX/USDT
+          - Name: STC/USDT
+          - Name: DOCK/USDT
+          - Name: LHINU/USDT
+      RateLimiter:
+        Http:
+          UsageLimit: 10
+          Interval: 00:00:01
+          MinAcquireGap: 0.00:00:00.075
+          RequestCosts:
+            FundingRate: 1
+      HuobiGlobal:
+        Collocation: true
+        UseTickFeed: false
+      Pipeline:
+        AbArbitrator:
+          DepthBookProcessing:
+            OrderBy: Counter
+          TradesProcessing:
+            OrderBy: Sequence
+        SnapshotCoordinator:
+          OrderBy: Counter
+        DepthBookMaintainer:
+          LevelsCap: 150
+        Publisher:
+          ZmqTransport:
+            Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+          V3BinaryFormat:
+            DevelopmentMode: false
+    PerfCollector:
+      HistogramDumpInterval: "23:00:00"
