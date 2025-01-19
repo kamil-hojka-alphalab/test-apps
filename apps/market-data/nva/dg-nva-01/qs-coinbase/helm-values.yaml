@@ -13,7 +13,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -33,8 +33,6 @@ QuoteServers:
             - Name: CBETH/USD
             - Name: CBETH/ETH
             - Name: BLUR/USD
-            - Name: HFT/USD
-            - Name: ILV/USD
             - Name: SAND/USDT
             - Name: T/USD
             - Name: FLOW/USDT
@@ -43,7 +41,6 @@ QuoteServers:
             - Name: ARB/USD
             - Name: MANA/USD
             - Name: ICP/USDT
-            - Name: ICP/USD
             - Name: ETH/USDT
             - Name: USDT/EUR
             - Name: USDT/GBP
@@ -52,8 +49,6 @@ QuoteServers:
             - Name: APE/USD
             - Name: AVAX/USDT
             - Name: OXT/USD
-            - Name: BNT/USD
-
         RateLimiter:
           Http:
             UsageLimit: 100
@@ -99,7 +94,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -126,6 +121,16 @@ QuoteServers:
             - Name: BTC/USD
             - Name: RNDR/USD
 
+            - Name: BAND/USD
+            - Name: BCH/USD
+            - Name: BNT/USD
+            - Name: BTC/EUR
+            - Name: DASH/USD
+            - Name: DOT/USDT
+            - Name: LINK/EUR
+            - Name: NEAR/USD
+            - Name: TEST/USDT
+            - Name: TEST2/USDT
         RateLimiter:
           Http:
             UsageLimit: 100
@@ -171,7 +176,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -194,14 +199,12 @@ QuoteServers:
             - Name: STORJ/USD
             - Name: ROSE/USD
             - Name: GMT/USD
-            - Name: BTC/EUR
             - Name: PERP/USD
             - Name: TRAC/USD
             - Name: LCX/USD
             - Name: SOL/ETH
             - Name: INJ/USD
             - Name: HBAR/USD
-            - Name: NEAR/USD
             - Name: NEON/USD
             - Name: MATIC/USDT
             - Name: OCEAN/USD
@@ -255,7 +258,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -284,11 +287,8 @@ QuoteServers:
             - Name: COMP/USD
             - Name: MKR/USD
             - Name: KNC/USD
-            - Name: BAND/USD
             - Name: LRC/USD
             - Name: XLM/USD
-            - Name: DASH/USD
-            - Name: LINK/EUR
             - Name: XLM/BTC
             - Name: ALGO/EUR
             - Name: OP/USD
@@ -339,7 +339,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -374,6 +374,8 @@ QuoteServers:
             - Name: MPL/USD
             - Name: RARI/USD
 
+            - Name: DOT/GBP
+            - Name: ILV/USD
         RateLimiter:
           Http:
             UsageLimit: 100
@@ -419,7 +421,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -452,6 +454,9 @@ QuoteServers:
             - Name: MASK/USD
             - Name: API3/USD
             - Name: SEI/USD
+            - Name: HFT/USD
+            - Name: ICP/USD
+            - Name: TEST3/USDT
         RateLimiter:
           Http:
             UsageLimit: 100
@@ -497,7 +502,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       PriceServerClient:
         Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
       SecurityMaster:
@@ -519,8 +524,6 @@ QuoteServers:
             - Name: ONEINCH/USD
             - Name: SHIB/USD
             - Name: OGN/USD
-            - Name: DOT/GBP
-            - Name: DOT/USDT
             - Name: DOT/EUR
             - Name: DOT/USD
             - Name: DOT/BTC
@@ -534,7 +537,6 @@ QuoteServers:
             - Name: ETH/USD
             - Name: ZRX/USD
             - Name: XTZ/USD
-            - Name: BCH/USD
             - Name: UNI/USD
         RateLimiter:
           Http:
