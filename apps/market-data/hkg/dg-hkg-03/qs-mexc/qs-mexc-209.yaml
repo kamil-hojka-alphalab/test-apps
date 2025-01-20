@@ -20,21 +20,22 @@ spec:
       Monitor:
         MaxSymbolsPerConnection: 10
         Symbols:
-        - Name: VELODROME/USDT
-        - Name: VENOM/USDT
-        - Name: WAVES/USDC
-        - Name: WAXL/USDT
-        - Name: WAXP/USDT
-        - Name: WEMIX/USDT
-        - Name: XCN/USDT
-        - Name: XEN/USDC
-        - Name: XPLA/USDT
-        - Name: XRD/USDT
-        - Name: XRP/USDC
-        - Name: YFI/USDT
-        - Name: ZENT/USDT
-        - Name: ZKF/USDT
+          - Name: VELODROME/USDT
+          - Name: VENOM/USDT
+          - Name: WAVES/USDC
+          - Name: WAXL/USDT
+          - Name: WAXP/USDT
+          - Name: WEMIX/USDT
+          - Name: XCN/USDT
+          - Name: XEN/USDC
+          - Name: XPLA/USDT
+          - Name: XRD/USDT
+          - Name: XRP/USDC
+          - Name: YFI/USDT
+          - Name: ZENT/USDT
+          - Name: ZKF/USDT
 
+          - Name: TEST/USDT
         DefaultConnectionCount: 2
       Pipeline:
         Disruptor:

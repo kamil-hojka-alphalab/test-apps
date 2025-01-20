@@ -13,7 +13,7 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
+    config: |
       SecurityMaster:
         FileLoader:
           DisableNotificationsService: true
@@ -92,6 +92,7 @@ QuoteServers:
             - Name: BAKE/USDT
             - Name: BTC/USDC
             - Name: ETH/USDC
+            - Name: TEST/USDC
           DefaultConnectionCount: 1
           MaxSymbolsPerConnection: 40
 
