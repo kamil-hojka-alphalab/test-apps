@@ -56,6 +56,7 @@ QuoteServers:
               DevelopmentMode: false
       PerfCollector:
         Enabled: false
+      new_key: value
   - name: qs-mexc-202
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -112,6 +113,7 @@ QuoteServers:
               DevelopmentMode: false
       PerfCollector:
         Enabled: false
+      new_key: value
   - name: qs-mexc-203
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -177,6 +179,7 @@ QuoteServers:
               DevelopmentMode: false
       PerfCollector:
         Enabled: false
+      new_key: value
   - name: qs-mexc-204
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -241,6 +244,7 @@ QuoteServers:
               DevelopmentMode: false
       PerfCollector:
         Enabled: false
+      new_key: value
   - name: qs-mexc-205
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -303,6 +307,7 @@ QuoteServers:
               DevelopmentMode: false
       PerfCollector:
         Enabled: false
+      new_key: value
   - name: qs-mexc-206
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -366,6 +371,7 @@ QuoteServers:
               DevelopmentMode: false
       PerfCollector:
         Enabled: false
+      new_key: value
   - name: qs-mexc-207
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -428,6 +434,7 @@ QuoteServers:
               DevelopmentMode: false
       PerfCollector:
         Enabled: false
+      new_key: value
   - name: qs-mexc-208
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -490,6 +497,7 @@ QuoteServers:
               DevelopmentMode: false
       PerfCollector:
         Enabled: false
+      new_key: value
   - name: qs-mexc-209
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -528,7 +536,7 @@ QuoteServers:
           - Name: YFI/USDT
           - Name: ZENT/USDT
           - Name: ZKF/USDT
-
+          - Name: BARBERSTEST/USDT
           DefaultConnectionCount: 2
         Pipeline:
           Disruptor:
@@ -540,6 +548,7 @@ QuoteServers:
               DevelopmentMode: false
       PerfCollector:
         Enabled: false
+      new_key: value
   - name: qs-mexc-213
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -634,3 +643,4 @@ QuoteServers:
               Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
             V3BinaryFormat:
               DevelopmentMode: false
+      new_key: value
