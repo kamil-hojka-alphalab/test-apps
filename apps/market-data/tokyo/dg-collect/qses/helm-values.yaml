@@ -262,6 +262,7 @@ QuoteServers:
           - Name: MKR/TRY
           - Name: MOVE/FDUSD
           - Name: MOVE/TRY
+          - Name: TEST/USDT
         Pipeline:
           Publisher:
             ZmqTransport:
