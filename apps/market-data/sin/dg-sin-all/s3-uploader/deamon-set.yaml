@@ -22,6 +22,10 @@ spec:
         operator: "Equal"
         value: "dg-nrt-8x"
         effect: "NoSchedule"
+      - key: node/destiny
+        operator: "Equal"
+        value: "dg-nrt"
+        effect: "NoSchedule"
       affinity: 
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -32,6 +36,7 @@ spec:
                 values:
                 - dg-test
                 - dg-nrt-8x
+                - dg-nrt
       serviceAccountName: s3-uploader-sa
       containers:
       - name: s3-uploader

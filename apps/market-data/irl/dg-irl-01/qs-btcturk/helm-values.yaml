@@ -1,6 +1,6 @@
 QuoteServers:
   - name: qs-btcturk-201
-    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-btcturk:2024.4.16.128-580e1b7
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-btcturk:2025.1.14.72-100f6ef
     requests:
       cpu: 1100m
       memory: 2000Mi
@@ -59,7 +59,6 @@ QuoteServers:
             - Name: SKL/TRY
             - Name: TRX/TRY
             - Name: CHZ/TRY
-            - Name: FTM/TRY
             - Name: APE/TRY
             - Name: DOGE/TRY
             - Name: FIL/TRY

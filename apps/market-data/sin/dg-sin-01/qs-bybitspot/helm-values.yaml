@@ -1,0 +1,463 @@
+QuoteServers:
+  - name: qs-bybitspot-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: BybitSpot
+
+        Monitor:
+          Symbols:
+            - Name: BTC/USDT
+            - Name: XRP/USDT
+            - Name: ETH/USDT
+            - Name: SOL/USDT
+            - Name: LTC/USDT
+            - Name: AVAX/USDT
+            - Name: WAVES/USDT
+            - Name: JASMY/USDT
+            - Name: DOT/USDT
+            - Name: AXS/USDT
+            - Name: EOS/USDT
+            - Name: XLM/USDT
+            - Name: BCH/USDT
+            - Name: SUSHI/USDT
+            - Name: GALA/USDT
+            - Name: ATOM/USDT
+            - Name: ADA/USDT
+            - Name: SAND/USDT
+            - Name: DOGE/USDT
+            - Name: MANA/USDT
+            - Name: FTM/USDT
+            - Name: USDC/USDT
+            - Name: PYTH/USDT
+            - Name: ONDO/USDT
+            - Name: MANTA/USDT
+
+          DefaultConnectionCount: 2
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 50
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-bybitspot-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ShardId: 201
+        ExchangeName: BybitSpot
+        Monitor:
+          Symbols:
+            - Name: APE/USDT
+            - Name: COMP/USDT
+            - Name: STG/USDT
+            - Name: MNT/USDC
+            - Name: MNT/USDT
+            - Name: ARKM/USDT
+            - Name: NEON/USDT
+            - Name: CTC/USDT
+            - Name: HBAR/USDT
+            - Name: CRV/USDT
+            - Name: CYBER/USDT
+            - Name: TON/USDT
+            - Name: CTT/USDT
+            - Name: AGI/USDT
+            - Name: WLD/USDC
+            - Name: AAVE/USDT
+            - Name: ETC/USDT
+            - Name: LTC/USDC
+            - Name: WLD/USDT
+            - Name: SEI/USDT
+            - Name: INJ/USDT
+            - Name: BONK/USDT
+            - Name: LINK/USDC
+            - Name: ICP/USDT
+            - Name: ETH/USDC
+            - Name: APT/USDT
+            - Name: SUI/USDT
+            - Name: XRP/USDC
+            - Name: GMX/USDT
+
+          DefaultConnectionCount: 2
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 50
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-bybitspot-203
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ShardId: 202
+        ExchangeName: BybitSpot
+        Monitor:
+          Symbols:
+            - Name: LADYS/USDT
+            - Name: ARB/USDT
+            - Name: TOMI/USDT
+            - Name: OP/USDT
+            - Name: SOL/USDC
+            - Name: APEX/USDT
+            - Name: DYDX/USDT
+            - Name: LDO/USDT
+            - Name: VINU/USDT
+            - Name: TRX/USDT
+            - Name: ARB/USDC
+            - Name: HFT/USDT
+            - Name: PEPE/USDT
+            - Name: FB/USDT
+            - Name: ETH/BTC
+            - Name: BNB/USDT
+            - Name: MAGIC/USDT
+            - Name: BLUR/USDT
+            - Name: WAXL/USDT
+            - Name: UNI/USDT
+            - Name: SUI/USDC
+            - Name: LINK/USDT
+            - Name: BTC/USDC
+            - Name: GRT/USDT
+            - Name: FIL/USDT
+            - Name: STETH/USDT
+            - Name: FTT/USDT
+            - Name: USDE/USDT
+            - Name: DEGEN/USDT
+            - Name: BRETT/USDT
+            - Name: NOT/USDT
+            - Name: TAIKO/USDT
+            - Name: WIF/USDT
+
+          DefaultConnectionCount: 2
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 50
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-bybitspot-204
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ShardId: 203
+        ExchangeName: BybitSpot
+        Monitor:
+          Symbols:
+            - Name: SNX/USDT
+            - Name: JTO/USDT
+            - Name: FET/USDT
+            - Name: IMX/USDT
+            - Name: BEAM/USDT
+            - Name: SIS/USDT
+            - Name: ADA/USDC
+            - Name: EGLD/USDT
+            - Name: BOB/USDT
+            - Name: PRIME/USDT
+            - Name: FLR/USDT
+            - Name: DOT/USDC
+            - Name: XCAD/USDT
+            - Name: FLOW/USDT
+            - Name: SHIB/USDT
+            - Name: MYRIA/USDT
+            - Name: RDNT/USDT
+            - Name: SFUND/USDT
+            - Name: FITFI/USDT
+            - Name: HNT/USDT
+            - Name: BTC3L/USDT
+            - Name: ZIG/USDT
+            - Name: BTC3S/USDT
+            - Name: STX/USDT
+            - Name: AR/USDT
+            - Name: WWY/USDT
+            - Name: FIDA/USDT
+            - Name: QNT/USDT
+            - Name: WOO/USDT
+            - Name: OP/USDC
+            - Name: 1INCH/USDT
+            - Name: HOOK/USDT
+            - Name: MINA/USDT
+            - Name: BTC/EUR
+            - Name: ROSE/USDT
+            - Name: TWT/USDT
+            - Name: ENJ/USDT
+            - Name: BTT/USDT
+            - Name: DOGE/USDC
+            - Name: MYRO/USDT
+            - Name: DUEL/USDT
+            - Name: JUP/USDT
+            - Name: STRK/USDT
+            - Name: STRK/USDC
+            - Name: ID/USDT
+          DefaultConnectionCount: 2
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 50
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-bybitspot-205
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ShardId: 204
+        ExchangeName: BybitSpot
+        Monitor:
+          Symbols:
+            - Name: MBOX/USDT
+            - Name: BOBA/USDT
+            - Name: GLMR/USDT
+            - Name: PERP/USDT
+            - Name: MASK/USDT
+            - Name: ROOT/USDT
+            - Name: MOVR/USDT
+            - Name: CAKE/USDT
+            - Name: KSM/USDT
+            - Name: C98/USDT
+            - Name: USTC/USDT
+            - Name: ETHW/USDT
+            - Name: ALGO/USDT
+            - Name: SOL/BTC
+            - Name: NEAR/USDT
+            - Name: AVAX/USDC
+            - Name: ZRX/USDT
+            - Name: RUNE/USDT
+            - Name: TIA/USDT
+            - Name: YFI/USDT
+            - Name: MEME/USDT
+            - Name: ORDI/USDT
+            - Name: KAS/USDT
+            - Name: TOKEN/USDT
+            - Name: PEOPLE/USDT
+            - Name: ENS/USDT
+            - Name: SSV/USDT
+            - Name: XAI/USDT
+            - Name: ZKF/USDT
+            - Name: AGLD/USDT
+            - Name: FXS/USDT
+            - Name: THETA/USDT
+            - Name: LDO/USDC
+            - Name: CPOOL/USDT
+            - Name: CELO/USDT
+            - Name: ONE/USDT
+          DefaultConnectionCount: 2
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 50
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-bybitspot-206
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ShardId: 205
+        ExchangeName: BybitSpot
+        Monitor:
+          Symbols:
+            - Name: AEVO/USDT
+            - Name: USDE/USDC
+            - Name: TNSR/USDT
+            - Name: MEW/USDT
+            - Name: CORE/USDT
+            - Name: GUMMY/USDT
+            - Name: NAKA/USDT
+            - Name: DRIFT/USDT
+            - Name: MOG/USDT
+            - Name: VELO/USDT
+            - Name: LAI/USDT
+            - Name: PONKE/USDT
+            - Name: SPEC/USDT
+            - Name: WEN/USDT
+            - Name: PORTAL/USDT
+            - Name: PRCL/USDT
+            - Name: OMNI/USDT
+            - Name: BTC/USDE
+            - Name: RATS/USDT
+            - Name: LMWR/USDT
+            - Name: POL/USDT
+            - Name: ORDER/USDT
+            - Name: UXLINK/USDT
+            - Name: PUFFER/USDT
+            - Name: CARV/USDT
+            - Name: DEEP/USDT
+            - Name: DBR/USDT
+            - Name: CATI/USDT
+            - Name: MAVIA/USDT
+            - Name: ZETA/USDT
+            - Name: DYM/USDT
+            - Name: SC/USDT
+            - Name: SOLO/USDT
+            - Name: VIRTUAL/USDT
+
+          DefaultConnectionCount: 2
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 50
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-bybitspot-207
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ShardId: 206
+        ExchangeName: BybitSpot
+        Monitor:
+          Symbols:
+            - Name: CGPT/USDT
+            - Name: GMT/USDT
+            - Name: KDA/USDT
+            - Name: ONDO/USDT
+            - Name: MANTA/USDT
+            - Name: UMA/USDT
+            - Name: CHZ/USDT
+            - Name: RAIN/USDT
+            - Name: COQ/USDT
+            - Name: PENDLE/USDT
+            - Name: XTZ/USDT
+            - Name: GTAI/USDT
+            - Name: THRUST/USDT
+            - Name: CEL/USDT
+            - Name: W/USDT
+            - Name: ETHFI/USDT
+            - Name: BOME/USDT
+            - Name: MERL/USDT
+            - Name: NYAN/USDT
+            - Name: NIBI/USDT
+            - Name: MON/USDT
+            - Name: ENA/USDT
+            - Name: BB/USDT
+
+          DefaultConnectionCount: 2
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 50
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false

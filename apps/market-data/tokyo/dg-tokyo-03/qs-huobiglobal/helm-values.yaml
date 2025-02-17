@@ -1,0 +1,1100 @@
+QuoteServers:
+  - name: qs-huobiglobal-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az1
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az1
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo-12.node.al:10951,>tcp://qs-tokyo-12.node.al:10956,>tcp://qs-tokyo-13.node.al:10951,>tcp://qs-tokyo-13.node.al:10956,>tcp://qs-tokyo-14.node.al:10951"
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: HuobiGlobal
+
+        PeriodicSnapshotTrigger:
+          Enabled: true
+          MinPeriodSeconds: 10
+          MaxPeriodSeconds: 15
+
+        Monitor:
+          DefaultConnectionCount: 1
+          Symbols:
+            # Only certain symbols supports usetickfeed, before adding new symbols check https://huobiapi.github.io/docs/spot/v1/en/#market-by-price-incremental-update
+            - Name: ETH/USDT
+            - Name: XRP/USDT
+            - Name: ADA/USDT
+            - Name: LTC/USDT
+
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: true
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+
+          SnapshotCoordinator:
+            OrderBy: Counter
+
+          DeepBookCombiner:
+            SnapshotRequestingDisabled: true
+            ApplyDeltaToDepthBookType: Deep
+            ReplaceDeepBookWithCombined: true
+            OrderBy: Timestamp
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 23:00:00
+  - name: qs-huobiglobal-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az1
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az1
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo-12.node.al:10951,>tcp://qs-tokyo-12.node.al:10956,>tcp://qs-tokyo-13.node.al:10951,>tcp://qs-tokyo-13.node.al:10956,>tcp://qs-tokyo-14.node.al:10951"
+      QuoteServer:
+        ShardId: 201
+        ExchangeName: HuobiGlobal
+
+        PeriodicSnapshotTrigger:
+          Enabled: true
+          MinPeriodSeconds: 10
+          MaxPeriodSeconds: 15
+
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 1
+          Symbols:
+            # Only certain symbols supports usetickfeed, before adding new symbols check https://huobiapi.github.io/docs/spot/v1/en/#market-by-price-incremental-update
+            - Name: BTC/USDT
+            - Name: BSV/USDT
+            - Name: ETC/USDT
+            - Name: EOS/USDT
+
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: true
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+
+          SnapshotCoordinator:
+            OrderBy: Counter
+
+          DeepBookCombiner:
+            SnapshotRequestingDisabled: true
+            ApplyDeltaToDepthBookType: Deep
+            ReplaceDeepBookWithCombined: true
+            OrderBy: Timestamp
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 23:00:00
+  - name: qs-huobiglobal-205
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az1
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az1
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 204
+        ExchangeName: HuobiGlobal
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+            - Name: FIL/USDT
+            - Name: NEAR/USDT
+            - Name: MANA/USDT
+            - Name: WOO/USDT
+            - Name: BTT/USDT
+            - Name: ACA/USDT
+            - Name: C98/USDT
+            - Name: RSS3/USDT
+            - Name: AXS/USDT
+            - Name: DAO/USDT
+            - Name: OP/USDT
+            - Name: ETN/USDT
+            - Name: RDNT/USDT
+            - Name: SUI/USDT
+            - Name: ORDI/USDT
+            - Name: KLV/USDT
+            - Name: APT/USDT
+            - Name: ETH/USDD
+            - Name: BTC/USDD
+            - Name: JOE/USDT
+            - Name: OG/USDT
+            - Name: PYR/USDT
+            - Name: AGLD/USDT
+            - Name: GALA/USDT
+            - Name: MBOX/USDT
+            - Name: SD/USDT
+            - Name: ABBC/USDT
+            - Name: ALICE/USDT
+            - Name: BICO/USDT
+            - Name: SEI/USDT
+            - Name: FCT2/USDT
+            - Name: SOL/BTC
+            - Name: SOL/USDT
+            - Name: NFT/USDT
+            - Name: CVP/USDT
+            - Name: ACH/USDT
+            - Name: CSPR/USDT
+            - Name: XCH/USDT
+            - Name: NEO/USDT
+            - Name: LQTY/USDT
+            - Name: BLUR/USDT
+            - Name: CORE/USDT
+            - Name: MUSIC/USDT
+            - Name: MVL/USDT
+            - Name: MX/USDT
+            - Name: MXC/USDT
+            - Name: MYRO/USDT
+            - Name: NAKA/USDT
+            - Name: NAVX/USDT
+            - Name: NEST/USDT
+            - Name: NEW/USDT
+            - Name: NEXO/USDT
+            - Name: NEXT/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 10
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.075
+            RequestCosts:
+              FundingRate: 1
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: false
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+          SnapshotCoordinator:
+            OrderBy: Counter
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 23:00:00
+  - name: qs-huobiglobal-206
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az1
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az1
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 205
+        ExchangeName: HuobiGlobal
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+            - Name: TRX/BTC
+            - Name: ICX/USDT
+            - Name: KAVA/USDT
+            - Name: DOGE/BTC
+            - Name: DOGE/USDT
+            - Name: WAVES/USDT
+            - Name: STORJ/USDT
+            - Name: RVN/USDT
+            - Name: NKN/USDT
+            - Name: ELF/USDT
+            - Name: SIS/USDT
+            - Name: BOBA/USDT
+            - Name: GMX/USDT
+            - Name: ARG/USDT
+            - Name: ABBC/USDD
+            - Name: ARB/USDT
+            - Name: QUICKSWAP/USDT
+            - Name: XMR/USDT
+            - Name: POOLX/USDT
+            - Name: TURBO/USDT
+            - Name: WLKN/USDT
+            - Name: FLZ/USDT
+            - Name: WELL/USDT
+            - Name: EUL/USDT
+            - Name: MINA/USDT
+            - Name: LDO/USDT
+            - Name: VELO/USDT
+            - Name: MBX/USDT
+            - Name: GMT/USDT
+            - Name: FUSE/USDT
+            - Name: CAKE/USDT
+            - Name: AMP/USDT
+            - Name: GQ/USDT
+            - Name: ONT/USDT
+            - Name: XLM/USDT
+            - Name: ALGO/USDT
+            - Name: SOLO/USDT
+            - Name: XEN/USDT
+            - Name: XEC/USDT
+            - Name: RLC/USDT
+            - Name: GRV/USDT
+            - Name: FET/USDT
+            - Name: EURT/USDT
+            - Name: HFT/USDT
+            - Name: KLAY/USDT
+            - Name: BONE/USDT
+            - Name: OSMO/USDT
+            - Name: CLV/USDT
+            - Name: SRM/USDT
+            - Name: RAD/USDT
+            - Name: YGG/USDT
+            - Name: SC/USDT
+            - Name: DESO/USDT
+            - Name: XPLA/USDT
+            - Name: HTX/USDT
+            - Name: DCR/USDT
+            - Name: HIVE/USDT
+            - Name: POND/USDT
+            - Name: UNFI/USDT
+            - Name: XPRT/USDT
+            - Name: CRTS/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 10
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.075
+            RequestCosts:
+              FundingRate: 1
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: false
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+          SnapshotCoordinator:
+            OrderBy: Counter
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 23:00:00
+  - name: qs-huobiglobal-207
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az1
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az1
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 206
+        ExchangeName: HuobiGlobal
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+            - Name: LTC/BTC
+            - Name: QTUM/USDT
+            - Name: IOTA/USDT
+            - Name: OMG/USDT
+            - Name: THETA/USDT
+            - Name: STEEM/USDT
+            - Name: DOT/USDT
+            - Name: TRB/USDT
+            - Name: AAVE/USDT
+            - Name: KSM/USDT
+            - Name: JST/USDT
+            - Name: UNI/USDT
+            - Name: DOT/BTC
+            - Name: COMP/USDT
+            - Name: SNX/USDT
+            - Name: SUN/USDT
+            - Name: YFI/USDT
+            - Name: NYM/USDT
+            - Name: FITFI/USDT
+            - Name: XCAD/USDT
+            - Name: ELU/USDT
+            - Name: T/USDT
+            - Name: XAUT/USDT
+            - Name: CTC/USDT
+            - Name: DFI/USDT
+            - Name: TOMI/USDT
+            - Name: PEPE/USDT
+            - Name: LHINU/USDT
+            - Name: ZIL/USDT
+            - Name: TRX/USDT
+            - Name: XTZ/USDT
+            - Name: LINK/USDT
+            - Name: IOST/USDT
+            - Name: VET/USDT
+            - Name: ETH/BTC
+            - Name: XRP/BTC
+            - Name: BCH/USDT
+            - Name: YFII/USDT
+            - Name: CRV/USDT
+            - Name: ATOM/USDT
+            - Name: XNOT/USDT
+            - Name: SAND/USDT
+            - Name: AUCTION/USDT
+            - Name: BADGER/USDT
+            - Name: POLS/USDT
+            - Name: ANKR/USDT
+            - Name: ORB/USDT
+            - Name: XDC/USDT
+            - Name: FXS/USDT
+            - Name: UNIBOT/USDT
+            - Name: WLD/USDT
+            - Name: PENDLE/USDT
+            - Name: DUSK/USDT
+            - Name: WSTUSDT/USDT
+            - Name: CHZ/USDT
+            - Name: ONEINCH/USDT
+            - Name: FTT/USDT
+            - Name: ENJ/USDT
+            - Name: NULS/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 10
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.075
+            RequestCosts:
+              FundingRate: 1
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: false
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+          SnapshotCoordinator:
+            OrderBy: Counter
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 23:00:00
+  - name: qs-huobiglobal-208
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 1200m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az1
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az1
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 207
+        ExchangeName: HuobiGlobal
+
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+            - Name: AVAX/USDT
+            - Name: KNC/USDT
+            - Name: BNT/USDT
+            - Name: BAL/USDT
+            - Name: UMA/USDT
+            - Name: MKR/USDT
+            - Name: TT/USDT
+            - Name: LOKA/USDT
+            - Name: WBT/USDT
+            - Name: TON/USDT
+            - Name: DEXE/USDT
+            - Name: MAGIC/USDT
+            - Name: ALI/USDT
+            - Name: CVX/USDT
+            - Name: RAIN/USDT
+            - Name: CELO/USDT
+            - Name: GMEE/USDT
+            - Name: JASMY/USDT
+            - Name: REVV/USDT
+            - Name: DYDX/USDT
+            - Name: ETH/USDC
+            - Name: ICP/USDT
+            - Name: SHIB/USDT
+            - Name: BTC/USDC
+            - Name: PHA/USDT
+            - Name: ZRX/USDT
+            - Name: REN/USDT
+            - Name: BAND/USDT
+            - Name: ROCK/USDT
+            - Name: MONG/USDT
+            - Name: TOX/USDT
+            - Name: HUNT/USDT
+            - Name: DOSE/USDT
+            - Name: USDC/USDT
+            - Name: USDD/USDT
+            - Name: BBF/USDT
+            - Name: VOXEL/USDT
+            - Name: GNO/USDT
+            - Name: GHST/USDT
+            - Name: AUDIO/USDT
+            - Name: DIA/USDT
+            - Name: EGLD/USDT
+            - Name: MOVR/USDT
+            - Name: APE/USDT
+            - Name: ACS/USDT
+            - Name: IMX/USDT
+            - Name: MASK/USDT
+            - Name: FLOW/USDT
+            - Name: API3/USDT
+            - Name: HBAR/USDT
+            - Name: DASH/USDT
+            - Name: SSV/USDT
+            - Name: DEP/USDT
+            - Name: SWFTC/USDT
+            - Name: FORTH/USDT
+            - Name: ARPA/USDT
+            - Name: XTM/USDT
+            - Name: LPT/USDT
+            - Name: BNB/USDT
+            - Name: LIKE/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 10
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.075
+            RequestCosts:
+              FundingRate: 1
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: false
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+          SnapshotCoordinator:
+            OrderBy: Counter
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 23:00:00
+  - name: qs-huobiglobal-209
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 1200m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az1
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az1
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 208
+        ExchangeName: HuobiGlobal
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+            - Name: 1CAT/USDT
+            - Name: ACE/USDT
+            - Name: ADP/USDT
+            - Name: ADX/USDT
+            - Name: AEVO/USDT
+            - Name: AI/USDT
+            - Name: AIOZ/USDT
+            - Name: AITECH/USDT
+            - Name: AKRO/USDT
+            - Name: AKT/USDT
+            - Name: ALT/USDT
+            - Name: ANALOS/USDT
+            - Name: APED/USDT
+            - Name: AQT/USDT
+            - Name: AR/USDT
+            - Name: ARDR/USDT
+            - Name: ARKM/USDT
+            - Name: ARTY/USDT
+            - Name: ARV/USDT
+            - Name: ASTR/USDT
+            - Name: ATM/USDT
+            - Name: AURY/USDT
+            - Name: AZERO/USDT
+            - Name: BABYDOGE/USDT
+            - Name: BAKE/USDT
+            - Name: BANANA/USDT
+            - Name: BAT/USDT
+            - Name: BBL/USDT
+            - Name: BEAMX/USDT
+            - Name: BERRY/USDT
+            - Name: BETH/USDT
+            - Name: BOB/USDT
+            - Name: BOME/USDT
+            - Name: BONK/USDT
+            - Name: BORG/USDT
+            - Name: BORING/USDT
+            - Name: BOSON/USDT
+            - Name: BOX/USDT
+            - Name: BREED/USDT
+            - Name: BRISE/USDT
+            - Name: BRWL/USDT
+            - Name: BTT/USDC
+            - Name: BULL/USDT
+            - Name: BWO/USDT
+            - Name: CA/USDT
+            - Name: CAW/USDT
+            - Name: CBK/USDT
+            - Name: CERE/USDT
+            - Name: CGPT/USDT
+            - Name: CHR/USDT
+            - Name: CKB/USDT
+            - Name: COM/USDT
+            - Name: COQ/USDT
+            - Name: COTI/USDT
+            - Name: CRU/USDT
+            - Name: CTSI/USDT
+            - Name: CTX/USDT
+            - Name: CTXC/USDT
+            - Name: CUSD/USDT
+            - Name: CVC/USDT
+            - Name: CYBER/USDT
+            - Name: DAI/USDT
+            - Name: DBC/USDT
+            - Name: DC/USDT
+            - Name: DCK/USDT
+            - Name: DECHAT/USDT
+            - Name: DEGEN/USDT
+            - Name: DF/USDT
+            - Name: DIO/USDT
+            - Name: DKA/USDT
+            - Name: DORA/USDT
+            - Name: DYP/USDT
+            - Name: ELA/USDT
+            - Name: ELON/USDT
+            - Name: ENA/USDT
+            - Name: ENS/USDT
+            - Name: EPIK/USDT
+            - Name: ERG/USDT
+            - Name: ERN/USDT
+            - Name: ERTHA/USDT
+            - Name: ETHFI/USDT
+            - Name: ETHW/USDT
+            - Name: EUROC/USDT
+            - Name: EVMOS/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 10
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.075
+            RequestCosts:
+              FundingRate: 1
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: false
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+          SnapshotCoordinator:
+            OrderBy: Counter
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-huobiglobal-210
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 1200m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az1
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az1
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 209
+        ExchangeName: HuobiGlobal
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+            - Name: FANC/USDT
+            - Name: FDT/USDT
+            - Name: FIO/USDT
+            - Name: FIRO/USDT
+            - Name: FIS/USDT
+            - Name: FLOKI/USDT
+            - Name: FLR/USDT
+            - Name: FLZ/USDC
+            - Name: FOR/USDT
+            - Name: FTM/USDT
+            - Name: GARI/USDT
+            - Name: GAS/USDT
+            - Name: GFT/USDT
+            - Name: GLM/USDT
+            - Name: GLMR/USDT
+            - Name: GMPD/USDT
+            - Name: GRAIL/USDT
+            - Name: GROK/USDT
+            - Name: GRT/USDT
+            - Name: GT/USDT
+            - Name: GTAI/USDT
+            - Name: H2O/USDT
+            - Name: HEC/USDT
+            - Name: HIFI/USDT
+            - Name: HOT/USDT
+            - Name: ICE/USDT
+            - Name: ID/USDT
+            - Name: IDEX/USDT
+            - Name: IGU/USDT
+            - Name: ING/USDT
+            - Name: INJ/USDT
+            - Name: INSUR/USDT
+            - Name: IOTX/USDT
+            - Name: JTO/USDT
+            - Name: JUP/USDT
+            - Name: JUV/USDT
+            - Name: KAN/USDT
+            - Name: KICKS/USDT
+            - Name: KMD/USDT
+            - Name: KRRX/USDT
+            - Name: KT/USDT
+            - Name: KUBE/USDT
+            - Name: LADYS/USDT
+            - Name: LAI/USDT
+            - Name: LAMB/USDT
+            - Name: LAT/USDT
+            - Name: LBP/USDT
+            - Name: LINA/USDT
+            - Name: LMWR/USDT
+            - Name: LOOKS/USDT
+            - Name: LOVELY/USDT
+            - Name: LRC/USDT
+            - Name: LSK/USDT
+            - Name: LUNC/USDT
+            - Name: LVN/USDT
+            - Name: MANTA/USDT
+            - Name: MAVIA/USDT
+            - Name: MBL/USDT
+            - Name: MCONTENT/USDT
+            - Name: MCRT/USDT
+            - Name: MDX/USDT
+            - Name: MEME/USDT
+            - Name: MFER/USDT
+            - Name: MLK/USDT
+            - Name: MLN/USDT
+            - Name: MNT/USDT
+            - Name: MOG/USDT
+            - Name: MOOV/USDT
+            - Name: MRS/USDT
+            - Name: MUBI/USDT
+            - Name: MUDOL2/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 10
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.075
+            RequestCosts:
+              FundingRate: 1
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: false
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+          SnapshotCoordinator:
+            OrderBy: Counter
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-huobiglobal-211
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 1200m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az1
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az1
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 210
+        ExchangeName: HuobiGlobal
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+            - Name: NFP/USDT
+            - Name: NODL/USDT
+            - Name: NPT/USDT
+            - Name: NUM/USDT
+            - Name: OGN/USDT
+            - Name: OGV/USDT
+            - Name: OLAND/USDT
+            - Name: ONDO/USDT
+            - Name: ONE/USDT
+            - Name: OPUL/USDT
+            - Name: ORBR/USDT
+            - Name: ORBS/USDT
+            - Name: ORDS/USDT
+            - Name: OXT/USDT
+            - Name: PCI/USDT
+            - Name: PEOPLE/USDT
+            - Name: PERP/USDT
+            - Name: PHB/USDT
+            - Name: PI/USDT
+            - Name: PIXEL/USDT
+            - Name: PLU/USDT
+            - Name: POLC/USDT
+            - Name: POLYX/USDT
+            - Name: PONKE/USDT
+            - Name: POOH/USDT
+            - Name: PORTAL/USDT
+            - Name: PRISMA/USDT
+            - Name: PROM/USDT
+            - Name: PSTAKE/USDT
+            - Name: PUMP/USDT
+            - Name: PUNDIX/USDT
+            - Name: PUNDU/USDT
+            - Name: PUSH/USDT
+            - Name: PYTH/USDT
+            - Name: PYUSD/USDT
+            - Name: RAB/USDT
+            - Name: RACA/USDT
+            - Name: RATS/USDT
+            - Name: REEF/USDT
+            - Name: REI/USDT
+            - Name: REQ/USDT
+            - Name: RIO/USDT
+            - Name: ROCO/USDT
+            - Name: ROOT/USDT
+            - Name: RPK/USDT
+            - Name: RPL/USDT
+            - Name: RSR/USDT
+            - Name: RUNE/USDT
+            - Name: SAO/USDT
+            - Name: SAROS/USDT
+            - Name: SATS/USDT
+            - Name: SCA/USDT
+            - Name: SCRT/USDT
+            - Name: SFUND/USDT
+            - Name: SKL/USDT
+            - Name: SLERF/USDT
+            - Name: SMILEY/USDT
+            - Name: SMT/USDT
+            - Name: SNS/USDT
+            - Name: SNT/USDT
+            - Name: SORA/USDT
+            - Name: SPA/USDT
+            - Name: SPELL/USDT
+            - Name: SPELLFIRE/USDT
+            - Name: SPRT/USDT
+            - Name: STPT/USDT
+            - Name: STRK/USDT
+            - Name: STRM/USDT
+            - Name: SUPER/USDT
+            - Name: SUSHI/USDT
+            - Name: SWAP/USDT
+            - Name: SWEAT/USDT
+            - Name: SXP/USDT
+            - Name: SYLO/USDT
+            - Name: SYS/USDT
+            - Name: TAVA/USDT
+            - Name: TENET/USDT
+            - Name: TIA/USDT
+            - Name: TLM/USDT
+            - Name: TLOS/USDT
+            - Name: TOP/USDT
+            - Name: TPY/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 10
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.075
+            RequestCosts:
+              FundingRate: 1
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: false
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+          SnapshotCoordinator:
+            OrderBy: Counter
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-huobiglobal-212
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 1200m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az1
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az1
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 211
+        ExchangeName: HuobiGlobal
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+            - Name: TRAC/USDT
+            - Name: TROLL/USDT
+            - Name: TRU/USDT
+            - Name: TURT/USDT
+            - Name: TUSD/USDT
+            - Name: UFT/USDT
+            - Name: UNB/USDT
+            - Name: UOS/USDT
+            - Name: USDJ/USDT
+            - Name: USTC/USDT
+            - Name: UT/USDT
+            - Name: UTK/USDT
+            - Name: VIC/USDT
+            - Name: VINU/USDT
+            - Name: VISION/USDT
+            - Name: VLX/USDT
+            - Name: VPAD/USDT
+            - Name: VR/USDT
+            - Name: VRA/USDT
+            - Name: VRTX/USDT
+            - Name: W/USDT
+            - Name: WAN/USDT
+            - Name: WAXL/USDT
+            - Name: WE/USDT
+            - Name: WEMIX/USDT
+            - Name: WEN/USDT
+            - Name: WHALE/USDT
+            - Name: WIF/USDT
+            - Name: WIFI/USDT
+            - Name: WIN/USDT
+            - Name: WNXM/USDT
+            - Name: WPCI/USDT
+            - Name: WSM/USDT
+            - Name: WWY/USDT
+            - Name: WXT/USDT
+            - Name: XCN/USDT
+            - Name: XEM/USDT
+            - Name: XETA/USDT
+            - Name: XFI/USDT
+            - Name: XPET/USDT
+            - Name: XVG/USDT
+            - Name: ZCX/USDT
+            - Name: ZEC/USDT
+            - Name: ZELIX/USDT
+            - Name: ZEN/USDT
+            - Name: ZETA/USDT
+            - Name: ZIG/USDT
+            - Name: ZKF/USDT
+            - Name: ZKP/USDT
+            - Name: ZUZALU/USDT
+            - Name: BLAST/USDT
+            - Name: JUICE/USDT
+            - Name: PUFFER/USDT
+            - Name: CARV/USDT
+            - Name: MOODENG/USDT
+            - Name: DBR/USDT
+            - Name: EDEN/USDT
+            - Name: WOZX/USDT
+            - Name: STC/USDT
+            - Name: DOCK/USDT
+            - Name: LHINU/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 10
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.075
+            RequestCosts:
+              FundingRate: 1
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: false
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+          SnapshotCoordinator:
+            OrderBy: Counter
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"

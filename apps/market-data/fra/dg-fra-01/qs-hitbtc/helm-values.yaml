@@ -1,0 +1,29 @@
+QuoteServers:
+  - name: qs-hitbtc-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-hitbtc:2025.1.14.52-100f6ef
+    requests:
+      cpu: 1000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ExchangeName: HitBTC
+        ShardId: 200
+        Monitor:
+          Symbols:
+            - Name: BTC/USDT
+            - Name: ETH/USDC
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-fra-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false

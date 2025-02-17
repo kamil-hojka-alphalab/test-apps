@@ -29,7 +29,7 @@ spec:
               cpu: 4
               memory: 4000Mi
             requests:
-              cpu: 3
+              cpu: 4
               memory: 4000Mi
           ports:
             - name: health-port

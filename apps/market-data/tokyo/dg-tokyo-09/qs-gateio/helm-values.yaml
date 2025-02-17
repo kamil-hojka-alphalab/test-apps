@@ -1,0 +1,1425 @@
+QuoteServers:
+  - name: qs-gateio-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+            - Name: IOTA/USDT
+            - Name: AGLD/USDT
+            - Name: ASTR/USDT
+            - Name: MANA/USDT
+            - Name: MASK/USDT
+            - Name: C98/USDT
+            - Name: THETA/USDT
+            - Name: MDT/USDT
+            - Name: T/USDT
+            - Name: XCN/USDT
+            - Name: MAN/USDT
+            - Name: CRV/USDT
+            - Name: QNT/USDT
+            - Name: SLIM/USDT
+            - Name: YGG/USDT
+            - Name: HERO/USDT
+            - Name: FIDA/USDT
+            - Name: APE/USDT
+            - Name: EVER/USDT
+            - Name: IOTX/USDT
+            - Name: ACH/USDT
+            - Name: LDO/USDT
+            - Name: LOKA/USDT
+            - Name: LMR/USDT
+            - Name: GMM/USDT
+            - Name: DAO/USDT
+            - Name: FLUX/USDT
+            - Name: CEEK/USDT
+            - Name: RSR/USDT
+            - Name: FXS/USDT
+            - Name: FEAR/USDT
+            - Name: FITFI/USDT
+            - Name: USDD/USDT
+            - Name: CULT/USDT
+            - Name: USTC/USDT
+            - Name: FRM/USDT
+            - Name: AOG/USDT
+            - Name: APT/USDT
+            - Name: NPT/USDT
+            - Name: MOVEZ/USDT
+            - Name: OG/USDT
+            - Name: ORBS/USDT
+            - Name: STPT/USDT
+            - Name: LMWR/USDT
+            - Name: TIA/USDT
+            - Name: USDC/USDT
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateio-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 201
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+
+        Monitor:
+          Symbols:
+            - Name: XEC/USDT
+            - Name: YFII/USDT
+            - Name: QTUM/USDT
+            - Name: EGLD/USDT
+            - Name: TWT/USDT
+            - Name: UTK/USDT
+            - Name: KIN/USDT
+            - Name: KP3R/USDT
+            - Name: FLOKI/USDT
+            - Name: GMT/USDT
+            - Name: CHZ/USDT
+            - Name: UOS/USDT
+            - Name: SPA/USDT
+            - Name: FLOW/USDT
+            - Name: ERG/USDT
+            - Name: SUSHI/USDT
+            - Name: XVS/USDT
+            - Name: BRISE/USDT
+            - Name: RSS3/USDT
+            - Name: RUNE/USDT
+            - Name: CELR/USDT
+            - Name: GALA/USDT
+            - Name: MOVR/USDT
+            - Name: FORTH/USDT
+            - Name: BTS/USDT
+            - Name: CHEQ/USDT
+            - Name: TRX/USDT
+            - Name: FTM/USDT
+            - Name: SDAO/USDT
+            - Name: MINA/USDT
+            - Name: SLP/USDT
+            - Name: BSW/USDT
+            - Name: NEON/USDT
+            - Name: BERRY/USDT
+            - Name: MEME/USDT
+            - Name: TSUGT/USDT
+            - Name: GALA5L/USDT
+            - Name: PEPE2/USDT
+            - Name: ARKM/USDT
+            - Name: ZBU/USDT
+            - Name: PEAQ/USDT
+
+
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-gateio-203
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 202
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+
+        Monitor:
+          Symbols:
+            - Name: AR/USDT
+            - Name: AUDIO/USDT
+            - Name: OMG/USDT
+            - Name: SXP/USDT
+            - Name: CFX/USDT
+            - Name: CKB/USDT
+            - Name: UNFI/USDT
+            - Name: LPT/USDT
+            - Name: XLM/USDT
+            - Name: SHILL/USDT
+            - Name: NEO/USDT
+            - Name: STARL/USDT
+            - Name: SOL/USDT
+            - Name: LEO/USDT
+            - Name: ALGO/USDT
+            - Name: PEOPLE/USDT
+            - Name: KSM/USDT
+            - Name: OPUL/USDT
+            - Name: AVAX/USDT
+            - Name: CELO/USDT
+            - Name: ILV/USDT
+            - Name: XTZ/USDT
+            - Name: BOBA/USDT
+            - Name: GRIN/USDT
+            - Name: ERN/USDT
+            - Name: ETH5L/USDT
+            - Name: BTC5L/USDT
+            - Name: LTC5S/USDT
+            - Name: KAS/USDT
+            - Name: LINK5L/USDT
+            - Name: KING/USDT
+            - Name: LINK5S/USDT
+            - Name: BDX/USDT
+            - Name: VOLT/USDT
+            - Name: OAX/USDT
+            - Name: XRD/USDT
+            - Name: FIS/USDT
+            - Name: ONE/USDT
+            - Name: ENS/USDT
+            - Name: COTI/USDT
+            - Name: MIR/USDT
+            - Name: HT/USDT
+            - Name: WEMIX/USDT
+            - Name: MBOX/USDT
+            - Name: VRA/USDT
+            - Name: NUM/USDT
+            - Name: KAIA/USDT
+            - Name: WAVES/USDT
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-gateio-204
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 203
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+
+        Monitor:
+          Symbols:
+            - Name: DYDX/USDT
+            - Name: SAND/USDT
+            - Name: CSPR/USDT
+            - Name: NGL/USDT
+            - Name: RAD/USDT
+            - Name: API3/USDT
+            - Name: SWASH/USDT
+            - Name: EPIK/USDT
+            - Name: FRA/USDT
+            - Name: ICP/USDT
+            - Name: OKT/USDT
+            - Name: GRT/USDT
+            - Name: KDA/USDT
+            - Name: RAY/USDT
+            - Name: UFO/USDT
+            - Name: CHR/USDT
+            - Name: WAXP/USDT
+            - Name: ONEINCH/USDT
+            - Name: AMP/USDT
+            - Name: XPR/USDT
+            - Name: CVC/USDT
+            - Name: SQUAD/USDT
+            - Name: ORDI/USDT
+            - Name: ID/USDT
+            - Name: LADYS/USDT
+            - Name: TURBO/USDT
+            - Name: PEPE/USDT
+            - Name: XEN/USDT
+            - Name: MAGIC/USDT
+            - Name: MONG/USDT
+            - Name: TOMI/USDT
+            - Name: FLR/USDT
+            - Name: BTM/USDT
+            - Name: GHST/USDT
+            - Name: OVR/USDT
+            - Name: SOS/USDT
+            - Name: RLC/USDT
+            - Name: CRU/USDT
+            - Name: TFUEL/USDT
+            - Name: CVX/USDT
+            - Name: ABBC/USDT
+            - Name: SGB/USDT
+            - Name: LQTY/USDT
+            - Name: GNS/USDT
+            - Name: SYN/USDT
+            - Name: ASTRA/USDT
+            - Name: BLUR/USDT
+            - Name: SUI/USDT
+            - Name: GFT/USDT
+            - Name: BBC/USDT
+            - Name: STRAX/USDT
+
+
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-gateio-205
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 204
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+
+        Monitor:
+          Symbols:
+            - Name: OKB/USDT
+            - Name: NOS/USDT
+            - Name: FTT/USDT
+            - Name: METIS/USDT
+            - Name: ISP/USDT
+            - Name: LRC/USDT
+            - Name: SRM/USDT
+            - Name: STORJ/USDT
+            - Name: TRU/USDT
+            - Name: CTK/USDT
+            - Name: NMR/USDT
+            - Name: SIDUS/USDT
+            - Name: NEAR/USDT
+            - Name: RLY/USDT
+            - Name: ONG/USDT
+            - Name: ONT/USDT
+            - Name: ATA/USDT
+            - Name: FET/USDT
+            - Name: ETH/BTC
+            - Name: SCRT/USDT
+            - Name: SUPER/USDT
+            - Name: HAI/USDT
+            - Name: GAFI/USDT
+            - Name: CREAM/USDT
+            - Name: CIRUS/USDT
+            - Name: ANKR/USDT
+            - Name: EWT/USDT
+            - Name: FLY/USDT
+            - Name: VLX/USDT
+            - Name: TLOS/USDT
+            - Name: DENT/USDT
+            - Name: CTSI/USDT
+            - Name: SOLO/USDT
+            - Name: TIDAL/USDT
+            - Name: AZERO/USDT
+            - Name: CELL/USDT
+            - Name: BTT/USDT
+            - Name: RARI/USDT
+            - Name: SFUND/USDT
+            - Name: ALI/USDT
+            - Name: ARB/USDT
+            - Name: HFT/USDT
+            - Name: STIK/USDT
+            - Name: TENET/USDT
+            - Name: BONK/USDT
+            - Name: HOOK/USDT
+            - Name: CSIX/USDT
+            - Name: ACS/USDT
+            - Name: TRB/USDT
+            - Name: INFRA/USDT
+
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-gateio-206
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 205
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+
+        Monitor:
+          Symbols:
+            - Name: VET/USDT
+            - Name: WIN/USDT
+            - Name: TON/USDT
+            - Name: NKN/USDT
+            - Name: BOA/USDT
+            - Name: SKL/USDT
+            - Name: KISHU/USDT
+            - Name: RACA/USDT
+            - Name: POKT/USDT
+            - Name: LOOKS/USDT
+            - Name: GLMR/USDT
+            - Name: GFI/USDT
+            - Name: KAVA/USDT
+            - Name: PHA/USDT
+            - Name: DAR/USDT
+            - Name: REEF/USDT
+            - Name: CERE/USDT
+            - Name: MKR/USDT
+            - Name: XTAG/USDT
+            - Name: BONDLY/USDT
+            - Name: OM/USDT
+            - Name: ACA/USDT
+            - Name: JOE/USDT
+            - Name: IOI/USDT
+            - Name: AIOZ/USDT
+            - Name: LTO/USDT
+            - Name: HTR/USDT
+            - Name: STORE/USDT
+            - Name: WAXL/USDT
+            - Name: OUSD/USDT
+            - Name: XRP5S/USDT
+            - Name: RFD/USDT
+            - Name: BNB/USDT
+            - Name: OP/USDT
+            - Name: XEM/USDT
+            - Name: CPOOL/USDT
+            - Name: RVN/USDT
+            - Name: PNT/USDT
+            - Name: LINA/USDT
+            - Name: WLD/USDT
+            - Name: STG/USDT
+            - Name: PLANET/USDT
+            - Name: OCT/USDT
+            - Name: CHEEL/USDT
+            - Name: LOOM/USDT
+            - Name: GROK/USDT
+            - Name: PYTH/USDT
+            - Name: SATS/USDT
+            - Name: ETHW/USDT
+            - Name: CLORE/USDT
+            - Name: RIF/USDT
+            - Name: FDUSD/USDT
+            - Name: CGPT/USDT
+
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateio-207
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 206
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+
+        Monitor:
+          Symbols:
+            - Name: CFG/USDT
+            - Name: SCLP/USDT
+            - Name: PBR/USDT
+            - Name: BABYDOGE/USDT
+            - Name: QUACK/USDT
+            - Name: CTI/USDT
+            - Name: INJ/USDT
+            - Name: TKO/USDT
+            - Name: ICX/USDT
+            - Name: STOS/USDT
+            - Name: LABS/USDT
+            - Name: RARE/USDT
+            - Name: AUCTION/USDT
+            - Name: BLOK/USDT
+            - Name: WOO/USDT
+            - Name: SNX/USDT
+            - Name: LITH/USDT
+            - Name: ROSE/USDT
+            - Name: CAKE/USDT
+            - Name: ANC/USDT
+            - Name: ARV/USDT
+            - Name: SOUL/USDT
+            - Name: DYP/USDT
+            - Name: UNO/USDT
+            - Name: IGU/USDT
+            - Name: DOT/USDT
+            - Name: LTC/USDT
+            - Name: XCH/USDT
+            - Name: SWAP/USDT
+            - Name: FIL/USDT
+            - Name: ATOM/USDT
+            - Name: ADA/USDT
+            - Name: AXS/USDT
+            - Name: BOND/USDT
+            - Name: TLM/USDT
+            - Name: CLV/USDT
+            - Name: EOS/USDT
+            - Name: GT/USDT
+            - Name: BCH/USDT
+            - Name: VGX/USDT
+            - Name: SYS/USDT
+            - Name: BFC/USDT
+            - Name: WOJAK/USDT
+            - Name: PHB/USDT
+            - Name: CHO/USDT
+            - Name: LTC5L/USDT
+            - Name: XRP5L/USDT
+            - Name: EDU/USDT
+            - Name: BTC5S/USDT
+            - Name: ETH5S/USDT
+            - Name: POGAI/USDT
+            - Name: POLYX/USDT
+
+            - Name: GARI/USDT
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateio-208
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 207
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+
+        Monitor:
+          Symbols:
+            - Name: SUKU/USDT
+            - Name: MXC/USDT
+            - Name: ALCX/USDT
+            - Name: TRADE/USDT
+            - Name: ATLAS/USDT
+            - Name: DODO/USDT
+            - Name: WIT/USDT
+            - Name: XCV/USDT
+            - Name: IMX/USDT
+            - Name: MTS/USDT
+            - Name: HIGH/USDT
+            - Name: POLIS/USDT
+            - Name: IDEA/USDT
+            - Name: ELON/USDT
+            - Name: XCAD/USDT
+            - Name: PYR/USDT
+            - Name: SSV/USDT
+            - Name: SYLO/USDT
+            - Name: SIS/USDT
+            - Name: KEY/USDT
+            - Name: XDC/USDT
+            - Name: SC/USDT
+            - Name: ADS/USDT
+            - Name: VOXEL/USDT
+            - Name: BSV/USDT
+            - Name: BTC/USDT
+            - Name: LINK/USDT
+            - Name: AAVE/USDT
+            - Name: XAVA/USDT
+            - Name: AKRO/USDT
+            - Name: BEAM/USDT
+            - Name: DARK/USDT
+            - Name: HNT/USDT
+            - Name: AURORA/USDT
+            - Name: SEI/USDT
+            - Name: CYBER/USDT
+            - Name: BOME/USDT
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateio-209
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 208
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+
+        Monitor:
+          Symbols:
+            - Name: ALU/USDT
+            - Name: CRO/USDT
+            - Name: HAPI/USDT
+            - Name: STX/USDT
+            - Name: TARA/USDT
+            - Name: STND/USDT
+            - Name: LIKE/USDT
+            - Name: AKT/USDT
+            - Name: BAT/USDT
+            - Name: MTV/USDT
+            - Name: TT/USDT
+            - Name: POLC/USDT
+            - Name: DUSK/USDT
+            - Name: HBAR/USDT
+            - Name: ZIL/USDT
+            - Name: ARPA/USDT
+            - Name: PERP/USDT
+            - Name: 10SET/USDT
+            - Name: VELO/USDT
+            - Name: ZRX/USDT
+            - Name: BICO/USDT
+            - Name: PNG/USDT
+            - Name: ZCX/USDT
+            - Name: BLZ/USDT
+            - Name: DIONE/USDT
+            - Name: JASMY/USDT
+            - Name: DOGE/USDT
+            - Name: ETH/USDT
+            - Name: POWR/USDT
+            - Name: XRP/USDT
+              UseTicker: true
+            - Name: ETC/USDT
+            - Name: SHIB/USDT
+            - Name: UNI/USDT
+            - Name: HIFI/USDT
+            - Name: RDNT/USDT
+            - Name: NOM/USDT
+            - Name: BSV5S/USDT
+            - Name: VINU/USDT
+            - Name: DUST/USDT
+            - Name: TOKEN/USDT
+            - Name: GALA5S/USDT
+            - Name: BNT/USDT
+            - Name: FTN/USDT
+            - Name: VAI/USDT
+            - Name: DOT5S/USDT
+            - Name: BIGTIME/USDT
+            - Name: KNFT/USDT
+            - Name: VPR/USDT
+            - Name: EVO/USDT
+            - Name: TSUKA/USDT
+            - Name: TRALA/USDT
+            - Name: CYBERARENA/USDT
+            - Name: UMEE/USDT
+            - Name: NAOS/USDT
+            - Name: SMILEAI/USDT
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateio-210
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 209
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+            - Name: SOLS/USDT
+            - Name: MUBI/USDT
+            - Name: NTRN/USDT
+            - Name: SCT/USDT
+            - Name: DC/USDT
+            - Name: JTO/USDT
+            - Name: TRAC/USDT
+            - Name: CAGA/USDT
+            - Name: MAV/USDT
+            - Name: NAKA/USDT
+            - Name: FUN/USDT
+            - Name: COREUM/USDT
+            - Name: JAM/USDT
+            - Name: ALEX/USDT
+            - Name: BEAMX/USDT
+            - Name: MYRIA/USDT
+            - Name: CTC/USDT
+            - Name: GOAL/USDT
+            - Name: CVTX/USDT
+            - Name: POLS/USDT
+            - Name: TRIAS/USDT
+            - Name: TAO/USDT
+            - Name: AGI/USDT
+            - Name: ML/USDT
+            - Name: F3/USDT
+            - Name: LAI/USDT
+            - Name: DORKL/USDT
+            - Name: HOPR/USDT
+            - Name: VC/USDT
+            - Name: LM/USDT
+            - Name: ORAI/USDT
+            - Name: OPEN/USDT
+            - Name: MLT/USDT
+            - Name: HARD/USDT
+            - Name: NAVX/USDT
+            - Name: MESA/USDT
+            - Name: WORK/USDT
+            - Name: VEMP/USDT
+            - Name: PORTO/USDT
+            - Name: DCB/USDT
+            - Name: DEFI/USDT
+            - Name: LSK/USDT
+            - Name: MAR3/USDT
+            - Name: FIO/USDT
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-gateio-211
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.2.16.33-1eb4da9
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 210
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+            - Name: BONE/USDT
+            - Name: NIZA/USDT
+            - Name: PRIME/USDT
+            - Name: INSP/USDT
+            - Name: BDX/BTC
+            - Name: OSMO/USDT
+            - Name: LAVA/USDT
+            - Name: AITECH/USDT
+            - Name: VTHO/USDT
+            - Name: PICA/USDT
+            - Name: UNIBOT/USDT
+            - Name: LSD7/USDT
+            - Name: DAG/USDT
+            - Name: RPK/USDT
+            - Name: COMBO/USDT
+            - Name: NCT/USDT
+            - Name: BAKE/USDT
+            - Name: ALPACA/USDT
+            - Name: SIN/USDT
+            - Name: GGG/USDT
+            - Name: KICKS/USDT
+            - Name: DESO/USDT
+            - Name: BZZ/USDT
+            - Name: QANX/USDT
+            - Name: ZIG/USDT
+            - Name: DCK/USDT
+            - Name: ISK/USDT
+            - Name: AST/USDT
+            - Name: OAS/USDT
+            - Name: MYTH/USDT
+            - Name: EJS/USDT
+            - Name: MOB/USDT
+            - Name: LAYER/USDT
+            - Name: SNEK/USDT
+            - Name: XNA/USDT
+            - Name: DOCK/USDT
+            - Name: SHX/USDT
+            - Name: DOME/USDT
+            - Name: REACH/USDT
+            - Name: BRCT/USDT
+            - Name: MATH/USDT
+            - Name: ZETA/USDT
+            - Name: MAVIA/USDT
+            - Name: DYM/USDT
+            - Name: JUP/USDT
+            - Name: WEN/USDT
+            - Name: DMAIL/USDT
+            - Name: GTAI/USDT
+            - Name: COM/USDT
+            - Name: ORNJ/USDT
+            - Name: TAPROOT/USDT
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-gateio-212
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 211
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+            - Name: ORCA/USDT
+            - Name: NEXT/USDT
+            - Name: RPL/USDT
+            - Name: PSUB/USDT
+            - Name: WBT/USDT
+            - Name: TAMA/USDT
+            - Name: VTS/USDT
+            - Name: TAKI/USDT
+            - Name: CETUS/USDT
+            - Name: IRON/USDT
+            - Name: WLKN/USDT
+            - Name: NODL/USDT
+            - Name: GRAIL/USDT
+            - Name: SSWP/USDT
+            - Name: XDB/USDT
+            - Name: WIFI/USDT
+            - Name: ROOT/USDT
+            - Name: ALEPH/USDT
+            - Name: MBLK/USDT
+            - Name: BUY/USDT
+            - Name: ABT/USDT
+            - Name: MUSIC/USDT
+            - Name: XETA/USDT
+            - Name: GT/BTC
+            - Name: POOH/USDT
+            - Name: POOLX/USDT
+            - Name: SDEX/USDT
+            - Name: OXT/USDT
+            - Name: CAT/USDT
+            - Name: MLN/USDT
+            - Name: LVN/USDT
+            - Name: KAR/USDT
+            - Name: OX/USDT
+            - Name: DEGO/USDT
+            - Name: REN/USDT
+            - Name: ZKF/USDT
+            - Name: XAI/USDT
+            - Name: GOLC/USDT
+            - Name: PORT3/USDT
+            - Name: APP/USDT
+            - Name: BEFE/USDT
+            - Name: PERC/USDT
+            - Name: SUIP/USDT
+            - Name: LAZIO/USDT
+            - Name: MULTI/USDT
+            - Name: NULS/USDT
+            - Name: JOYSTREAM/USDT
+            - Name: 3KM/USDT
+            - Name: GEL/USDT
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-gateio-213
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2024.2.16.33-1eb4da9
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 212
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+            - Name: CVP/USDT
+            - Name: MPL/USDT
+            - Name: SMURFCAT/USDT
+            - Name: AMC/USDT
+            - Name: CORE/USDT
+            - Name: SENATE/USDT
+            - Name: DMTR/USDT
+            - Name: VEXT/USDT
+            - Name: FCON/USDT
+            - Name: PRQ/USDT
+            - Name: HOT/USDT
+            - Name: MNW/USDT
+            - Name: GMMT/USDT
+            - Name: LOVELY/USDT
+            - Name: PROM/USDT
+            - Name: BRN/USDT
+            - Name: MBS/USDT
+            - Name: POND/USDT
+            - Name: ZTX/USDT
+            - Name: VRTX/USDT
+            - Name: PENDLE/USDT
+            - Name: CWEB/USDT
+            - Name: EOS5L/USDT
+            - Name: NYM/USDT
+            - Name: PAW/USDT
+            - Name: GNO/USDT
+            - Name: VIC/USDT
+            - Name: GMX/USDT
+            - Name: BTG/USDT
+            - Name: SWFTC/USDT
+            - Name: ORDS/USDT
+            - Name: ETHS/USDT
+            - Name: AI/USDT
+            - Name: HER/USDT
+            - Name: NFP/USDT
+            - Name: TURBOS/USDT
+            - Name: DNX/USDT
+            - Name: RDEX/USDT
+            - Name: ALPH/USDT
+            - Name: ZERO/USDT
+            - Name: ADF/USDT
+            - Name: XRP/BTC
+            - Name: LENDS/USDT
+            - Name: INTER/USDT
+            - Name: UPC/USDT
+            - Name: WXT/USDT
+            - Name: ASTO/USDT
+            - Name: SAKAI/USDT
+            - Name: SAROS/USDT
+
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-gateio-214
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 213
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+            - Name: LBR/USDT
+            - Name: MILO/USDT
+            - Name: WNCG/USDT
+            - Name: CLH/USDT
+            - Name: MNDE/USDT
+            - Name: RON/USDT
+            - Name: FLM/USDT
+            - Name: SBR/USDT
+            - Name: ENJ/USDT
+            - Name: TOX/USDT
+            - Name: RJV/USDT
+            - Name: DIA/USDT
+            - Name: WSI/USDT
+            - Name: DF/USDT
+            - Name: ELF/USDT
+            - Name: SOULS/USDT
+            - Name: EPX/USDT
+            - Name: VR/USDT
+            - Name: REI/USDT
+            - Name: DEXE/USDT
+            - Name: RATS/USDT
+            - Name: 1CAT/USDT
+            - Name: CHAX/USDT
+            - Name: LEVER/USDT
+            - Name: ARTY/USDT
+            - Name: AISWAP/USDT
+            - Name: AXS5L/USDT
+            - Name: CONV/USDT
+            - Name: FYN/USDT
+            - Name: ONDO/USDT
+            - Name: MANTA/USDT
+            - Name: TROLL/USDT
+            - Name: DUEL/USDT
+            - Name: ICE/USDT
+            - Name: KARATE/USDT
+            - Name: RITE/USDT
+            - Name: INTR/USDT
+            - Name: GLQ/USDT
+            - Name: OMI/USDT
+            - Name: SANTOS/USDT
+            - Name: POL/USDT
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-gateio-215
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 214
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: "wss://spotws-private.gateapi.io/ws/v4/"
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+            - Name: FARM/USDT
+            - Name: MTRG/USDT
+            - Name: BNX/USDT
+            - Name: DCR/USDT
+            - Name: FOR/USDT
+            - Name: UFT/USDT
+            - Name: THL/USDT
+            - Name: ALICE/USDT
+            - Name: 5IRE/USDT
+            - Name: WING/USDT
+            - Name: OOKI/USDT
+            - Name: SEILOR/USDT
+            - Name: PROS/USDT
+            - Name: HELLO/USDT
+            - Name: WAS/USDT
+            - Name: TROY/USDT
+            - Name: SPELL/USDT
+            - Name: AMB/USDT
+            - Name: SAITO/USDT
+            - Name: BAL/USDT
+            - Name: BEL/USDT
+            - Name: WILD/USDT
+            - Name: REF/USDT
+            - Name: XPLA/USDT
+            - Name: ING/USDT
+            - Name: DATA/USDT
+            - Name: AIMX/USDT
+            - Name: FRR/USDT
+            - Name: ELA/USDT
+            - Name: LNDX/USDT
+            - Name: ULTIMA/USDT
+            - Name: CROWN/USDT
+            - Name: TURT/USDT
+            - Name: ACE/USDT
+            - Name: QUICKSWAP/USDT
+            - Name: VELODROME/USDT
+            - Name: WIF/USDT
+            - Name: ARK/USDT
+            - Name: DPR/USDT
+            - Name: CWS/USDT
+            - Name: RMRK/USDT
+            - Name: CHESS/USDT
+            - Name: LIT/USDT
+            - Name: BNC/USDT
+            - Name: GORILLA/USDT
+            - Name: MNT/USDT
+            - Name: XYM/USDT
+            - Name: USDT/TRY
+            - Name: SWEAT/USDT
+            - Name: FEG/USDT
+            - Name: ARG/USDT
+            - Name: WWY/USDT
+            - Name: ORC/USDT
+            - Name: NERD/USDT
+            - Name: PUFFER/USDT
+            - Name: CARV/USDT
+            - Name: ALEO/USDT
+            - Name: MOODENG/USDT
+            - Name: DEEP/USDT
+            - Name: DBR/USDT
+            - Name: CATI/USDT
+            - Name: DIONE/USDT
+            - Name: FNZ/USDT
+            - Name: VV/USDT
+            - Name: PERL/USDT
+            - Name: TYPE/USDT
+            - Name: MMM/USDT
+            - Name: ORN/USDT
+            - Name: SMILE/USDT
+            - Name: WOZX/USDT
+            - Name: SAO/USDT
+            - Name: JPG/USDT
+            - Name: NADA/USDT
+            - Name: DERI/USDT
+            - Name: FUD/USDT
+
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"

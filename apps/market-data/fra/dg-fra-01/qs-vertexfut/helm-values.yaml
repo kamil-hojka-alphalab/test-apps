@@ -1,0 +1,160 @@
+QuoteServers:
+  - name: qs-vertexfut-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-vertex:2025.1.20.398-857c544
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 4000m
+      memory: 4000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: VertexFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: ADA/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: APE/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: APT/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: ARB/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: ATOM/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: AVAX/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: BCH/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: BLUR/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: BNB/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: BTC/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: COMP/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: CRV/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: DOGE/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: DOT/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: DYDX/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: ETH/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: FIL/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: GALA/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: ICP/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: IMX/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: INJ/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: JTO/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: JUP/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: LDO/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: LINK/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: LTC/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: MATIC/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: MEME/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: MKR/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: NEAR/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: OP/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: PYTH/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: SEI/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: SNX/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: SOL/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: STX/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: SUI/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: TIA/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: TRX/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: WLD/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: XRP/USDC
+                NamePatterns:
+                  - _Perpetual
+
+        Pipeline:
+          PriceValidation: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-fra-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00

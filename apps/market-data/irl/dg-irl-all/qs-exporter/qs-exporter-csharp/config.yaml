@@ -7,7 +7,7 @@ data:
       Workflow:
         Type: SplitBySymbolCount
         SymbolsCount: 400
-        InitialWorkflowCount: 2
+        InitialWorkflowCount: 4
     
       ZmqTransport:
         Endpoint:
@@ -30,6 +30,7 @@ data:
         - "BtcTurk"
         - "DeribitOptions"
         - "DeribitSpot"
+        - "DeribitMerged"
 
     MetricConfigurationProvider:
       DefaultEnabled: true

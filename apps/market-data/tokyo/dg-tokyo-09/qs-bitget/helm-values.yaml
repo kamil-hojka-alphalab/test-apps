@@ -1,0 +1,33 @@
+QuoteServers:
+  - name: qs-bitget-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bitget:2025.1.15.397-361ab0a
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ExchangeName: Bitget
+        ShardId: 200
+        Monitor:
+          Symbols:
+            - Name: BTC/USDT
+            - Name: ETH/USDT
+            - Name: RARI/USDT
+            - Name: XPLA/USDT
+            - Name: PEAQ/USDT
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false

@@ -1,0 +1,849 @@
+QuoteServers:
+  - name: qs-okex-219
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      Serilog:
+        MinimumLevel:
+          Default: Information
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 218
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: ATOM/USDT
+            - Name: XTZ/USDT
+            - Name: KNC/USDT
+            - Name: ICX/USDT
+            - Name: LSK/USDT
+            - Name: FLOKI/USDT
+            - Name: CORE/USDT
+            - Name: FLR/USDT
+            - Name: CSPR/USDT
+            - Name: XCH/USDT
+            - Name: FTM/USDT
+            - Name: OM/USDT
+            - Name: ONDO/USDT
+            - Name: USTC/USDT
+            - Name: BLUR/USDT
+            - Name: APT/USDT
+            - Name: FLOW/USDT
+            - Name: STX/USDT
+            - Name: MINA/USDT
+            - Name: SLP/USDT
+            - Name: SD/USDT
+            - Name: BTC/USDC
+            - Name: TIA/USDT
+            - Name: PYTH/USDT
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okex-220
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 219
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: ETH/BTC
+            - Name: XRP/USDT
+            - Name: BCH/USDT
+            - Name: ETH/USDT
+            - Name: LTC/USDT
+            - Name: BTC/USDT
+            - Name: LTC/BTC
+            - Name: EOS/USDT
+            - Name: ETC/USDT
+            - Name: BSV/BTC
+            - Name: QTUM/USDT
+            - Name: BSV/USDT
+            - Name: TRX/USDT
+            - Name: USDC/USDT
+            - Name: XLM/USDT
+            - Name: ARB/USDT
+            - Name: BNB/USDT
+            - Name: RDNT/USDT
+            - Name: SSV/USDT
+            - Name: GMX/USDT
+            - Name: RIO/USDT
+            - Name: TRUMP/USDT
+            - Name: MEW/USDT
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okex-221
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 220
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: LINK/USDT
+            - Name: ADA/USDT
+            - Name: IOST/USDT
+            - Name: ONT/USDT
+            - Name: NEO/USDT
+            - Name: ZRX/USDT
+            - Name: DOT/USDT
+            - Name: ALGO/USDT
+            - Name: TRB/USDT
+            - Name: KSM/USDT
+            - Name: JST/USDT
+            - Name: CRV/USDT
+            - Name: ELF/USDT
+            - Name: RPL/USDT
+            - Name: BZZ/USDT
+            - Name: PHA/USDT
+            - Name: GEAR/USDT
+            - Name: MXC/USDT
+            - Name: DORA/USDT
+            - Name: OMI/USDT
+            - Name: SWFTC/USDT
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okex-222
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 221
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: COMP/USDT
+            - Name: SNX/USDT
+            - Name: SUSHI/USDT
+            - Name: AVAX/USDT
+            - Name: BAND/USDT
+            - Name: MKR/USDT
+            - Name: BAL/USDT
+            - Name: YFI/USDT
+            - Name: RSR/USDT
+            - Name: ETH/DAI
+            - Name: BTC/DAI
+            - Name: DAI/USDT
+            - Name: WBTC/USDT
+            - Name: AR/USDT
+            - Name: SC/USDT
+            - Name: CELO/USDT
+            - Name: NMR/USDT
+            - Name: FIL/USDT
+            - Name: TURBO/USDT
+            - Name: STETH/USDT
+            - Name: LBR/USDT
+            - Name: RAY/USDT
+            - Name: WINT/USDT
+            - Name: FXS/USDT
+            - Name: SKL/USDT
+            - Name: VELA/USDT
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okex-223
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 222
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: NFT/USDT
+            - Name: ENS/USDT
+            - Name: DAO/USDT
+            - Name: RON/USDT
+            - Name: ACA/USDT
+            - Name: ONE/USDT
+            - Name: BTT/USDT
+            - Name: JOE/USDT
+            - Name: METIS/USDT
+            - Name: AXS/USDT
+            - Name: TON/USDT
+            - Name: THETA/USDT
+            - Name: LRC/USDT
+            - Name: HBAR/USDT
+            - Name: SNT/USDT
+            - Name: BNT/USDT
+            - Name: ETHW/USDT
+            - Name: SWEAT/USDT
+            - Name: LDO/USDT
+            - Name: YGG/USDT
+            - Name: CLV/USDT
+            - Name: ERN/USDT
+            - Name: AGLD/USDT
+            - Name: WLD/USDT
+            - Name: MEME/USDT
+            - Name: ILV/USDT
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-okex-224
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 223
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: PEOPLE/USDT
+            - Name: APE/USDT
+            - Name: DEP/USDT
+            - Name: FLM/USDT
+            - Name: LPT/USDT
+            - Name: OP/USDC
+            - Name: OP/USDT
+            - Name: UNI/USDT
+            - Name: UMA/USDT
+            - Name: CHZ/USDT
+            - Name: ORDI/USDT
+            - Name: WAXP/USDT
+            - Name: MAGIC/USDT
+            - Name: BLUR/USDC
+            - Name: CETUS/USDT
+            - Name: PERP/USDT
+            - Name: AUCTION/USDT
+            - Name: BICO/USDT
+            - Name: MOVR/USDT
+            - Name: PEPE/USDT
+            - Name: CEEK/USDT
+            - Name: ETH/TRY
+            - Name: RENDER/USDT
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okex-225
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 224
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: AAVE/USDT
+            - Name: BAT/USDT
+            - Name: SAND/USDT
+            - Name: OKT/USDT
+            - Name: BETH/ETH
+            - Name: BETH/USDT
+            - Name: CVC/USDT
+            - Name: MANA/USDT
+            - Name: CTC/USDT
+            - Name: GRT/USDT
+            - Name: ONEINCH/USDT
+            - Name: ZIL/USDT
+            - Name: IOTA/USDT
+            - Name: ORBS/USDT
+            - Name: EGLD/USDT
+            - Name: EOS/USDC
+            - Name: VELO/USDT
+            - Name: DYDX/USDT
+            - Name: ETH/USDC
+            - Name: VELODROME/USDT
+            - Name: ID/USDT
+            - Name: BONE/USDT
+            - Name: SUI/USDT
+            - Name: GLMR/USDT
+            - Name: LOOKS/USDT
+            - Name: RSS3/USDT
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okex-226
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 225
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: DOGE/USDT
+            - Name: OKB/USDT
+            - Name: SOL/BTC
+            - Name: SOL/USDT
+            - Name: STORJ/USDT
+            - Name: KLAY/USDT
+            - Name: WOO/USDT
+            - Name: ASTR/USDT
+            - Name: KDA/USDT
+            - Name: GAS/USDT
+            - Name: RVN/USDT
+            - Name: ALPHA/USDT
+            - Name: GLM/USDT
+            - Name: CELR/USDT
+            - Name: NULS/USDT
+            - Name: SHIB/USDT
+            - Name: LAT/USDT
+            - Name: GALA/USDT
+            - Name: WCFG/USDT
+            - Name: NEAR/USDT
+            - Name: CTXC/USDT
+            - Name: MDT/USDT
+            - Name: RADAR/USDT
+            - Name: FET/USDT
+            - Name: LAMB/USDT
+            - Name: JUP/USDT
+            - Name: ZETA/USDT
+
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-okex-227
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 226
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: BADGER/USDT
+            - Name: KP3R/USDT
+            - Name: LTC/USDC
+            - Name: XRP/USDC
+            - Name: DGB/USDT
+            - Name: OKB/BTC
+            - Name: MASK/USDT
+            - Name: GODS/USDT
+            - Name: IMX/USDT
+            - Name: GMT/USDT
+            - Name: T/USDT
+            - Name: CFX/USDT
+            - Name: API3/USDT
+            - Name: CRO/USDT
+            - Name: BCH/BTC
+            - Name: ENJ/USDT
+            - Name: LQTY/USDT
+            - Name: RACA/USDT
+            - Name: BIGTIME/USDT
+            - Name: TRA/USDT
+            - Name: WSM/USDT
+            - Name: FORTH/USDT
+            - Name: VRA/USDT
+            - Name: ICP/USDT
+            - Name: INJ/USDT
+            - Name: SSWP/USDT
+            - Name: XNO/USDT
+            - Name: MYRIA/USDT
+            - Name: OAS/USDT
+            - Name: MERL/USDT
+            - Name: VINE/USDT
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okex-228
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 227
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: GOG/USDT
+            - Name: ACH/USDT
+            - Name: STX/BTC
+            - Name: PRQ/USDT
+            - Name: CVX/USDT
+            - Name: OXT/USDT
+            - Name: IQ/USDT
+            - Name: PSTAKE/USDT
+            - Name: GOAL/USDT
+            - Name: POR/USDT
+            - Name: MILO/USDT
+            - Name: WBTC/BTC
+            - Name: MLN/USDT
+            - Name: ALCX/USDT
+            - Name: SATS/USDT
+            - Name: ACE/USDT
+            - Name: DIA/USDT
+            - Name: BORING/USDT
+            - Name: ARTY/USDT
+            - Name: XAUT/USDT
+            - Name: LEO/USDT
+            - Name: JTO/USDT
+            - Name: BONK/USDT
+            - Name: ARG/USDT
+            - Name: GHST/USDT
+            - Name: CITY/USDT
+            - Name: GALFT/USDT
+            - Name: BTC/TRY
+            - Name: ICE/USDT
+            - Name: BORA/USDT
+            - Name: STRK/USDT
+            - Name: ETHFI/USDT
+            - Name: CATI/USDT
+            - Name: MORPHO/USDT
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-okex-229
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1000m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    nodeDestiny: dg-rt
+    prometheusPodScrape: true
+    config: |-
+      Serilog:
+        MinimumLevel:
+          Default: Information
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 228
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: uGwE4K6MmMazB7Q1yEb3!!
+          ApiKey: 7d5d4a32-8fda-4d2c-bc59-7376b4e25a4b
+          Secret: 25F60CECC6048F38572CB8185C3415D5
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+          - Name: AAVE/USDC
+          - Name: ADA/USDC
+          - Name: AERGO/USDT
+          - Name: AEVO/USDT
+          - Name: APE/USDC
+          - Name: APT/USDC
+          - Name: AR/USDC
+          - Name: ARB/USDC
+          - Name: ARKM/USDT
+          - Name: ATH/USDT
+          - Name: ATOM/USDC
+          - Name: AVAX/USDC
+          - Name: BABYDOGE/USDT
+          - Name: BCH/USDC
+          - Name: BNB/USDC
+          - Name: BOME/USDT
+          - Name: BSV/USDC
+          - Name: CETUS/USDC
+          - Name: CRO/USDC
+          - Name: CRV/USDC
+          - Name: CSPR/USDC
+          - Name: DOGE/USDC
+          - Name: DYDX/USDC
+          - Name: ELON/USDT
+          - Name: ETHW/USDC
+          - Name: FIL/USDC
+          - Name: FLR/USDC
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okex-230
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1000m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    nodeDestiny: dg-rt
+    prometheusPodScrape: true
+    config: |-
+      Serilog:
+        MinimumLevel:
+          Default: Information
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 229
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: uGwE4K6MmMazB7Q1yEb3!!
+          ApiKey: 7d5d4a32-8fda-4d2c-bc59-7376b4e25a4b
+          Secret: 25F60CECC6048F38572CB8185C3415D5
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+          - Name: SAFE/USDT
+          - Name: SAMO/USDT
+          - Name: SHIB/USDC
+          - Name: SLERF/USDT
+          - Name: SOL/USDC
+          - Name: STX/USDC
+          - Name: SUI/USDC
+          - Name: SWEAT/USDC
+          - Name: TNSR/USDT
+          - Name: TON/USDC
+          - Name: TRX/USDC
+          - Name: UNI/USDC
+          - Name: USDT/TRY
+          - Name: USDT/USDC
+          - Name: VELO/USDC
+          - Name: VENOM/USDT
+          - Name: W/USDT
+          - Name: ME/USDT
+          - Name: MOODENG/USDT
+          - Name: MOVE/USDT
+          - Name: NEIRO/USDT
+          - Name: PENDLE/USDT
+          - Name: PENGU/USDT
+          - Name: PNUT/USDT
+          - Name: SCR/USDT
+          - Name: UXLINK/USDT
+          - Name: X/USDT
+          - Name: SONIC/USDT
+          - Name: AIXBT/USDT
+          - Name: DUCK/USDT
+          - Name: BERA/USDT
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okex-231
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    nodeDestiny: dg-rt
+    prometheusPodScrape: true
+    config: |-
+      Serilog:
+        MinimumLevel:
+          Default: Information
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 230
+        ExchangeName: OKEx
+        OKEx:
+          L2UpdateChannel: books
+          Passphrase: uGwE4K6MmMazB7Q1yEb3!!
+          ApiKey: 7d5d4a32-8fda-4d2c-bc59-7376b4e25a4b
+          Secret: 25F60CECC6048F38572CB8185C3415D5
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: FTM/USDC
+            - Name: G/USDT
+            - Name: GALA/USDC
+            - Name: GPT/USDT
+            - Name: GRT/USDC
+            - Name: HBAR/USDC
+            - Name: ICP/USDC
+            - Name: KAN/USDT
+            - Name: KISHU/USDT
+            - Name: LINK/USDC
+            - Name: LUNA/USDC
+            - Name: LUNA/USDT
+            - Name: LUNC/USDT
+            - Name: MAX/USDT
+            - Name: MENGO/USDT
+            - Name: NEAR/USDC
+            - Name: NOT/USDT
+            - Name: OKB/USDC
+            - Name: PEPE/USDC
+            - Name: PIXEL/USDT
+            - Name: POL/USDC
+            - Name: POL/USDT
+            - Name: PRCL/USDT
+            - Name: RDNT/USDC
+            - Name: WIF/USDC
+            - Name: WIF/USDT
+            - Name: ZBCN/USDT
+            - Name: ZENT/USDT
+            - Name: ZEROLEND/USDT
+            - Name: ZEUS/USDT
+            - Name: ZK/USDT
+            - Name: ZKJ/USDT
+            - Name: ZRO/USDC
+            - Name: ZRO/USDT
+            - Name: ONEINCH/USDT
+            - Name: ACT/USDT
+            - Name: BANANA/USDT
+            - Name: CAT/USDT
+            - Name: DEGEN/USDT
+            - Name: DOGS/USDT
+            - Name: EIGEN/USDT
+            - Name: FOXY/USDT
+            - Name: GOAT/USDT
+            - Name: KAIA/USDT
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false

@@ -1,0 +1,757 @@
+QuoteServers:
+  - name: qs-bithumb-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bithumb:2025.1.14.85-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: Bithumb
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+
+        Monitor:
+          DefaultConnectionCount: 3
+          Symbols:
+            - Name: EOS/KRW
+            - Name: YFI/KRW
+            - Name: ALGO/KRW
+            - Name: SUN/KRW
+            - Name: JST/KRW
+            - Name: ATOM/KRW
+            - Name: BTG/KRW
+            - Name: XTZ/KRW
+            - Name: CRO/KRW
+            - Name: ENJ/KRW
+            - Name: POWR/KRW
+            - Name: SUSHI/KRW
+            - Name: APM/KRW
+            - Name: EGLD/KRW
+            - Name: GMT/KRW
+            - Name: JASMY/KRW
+            - Name: APT/KRW
+            - Name: XCN/KRW
+            - Name: SEI/KRW
+            - Name: STPT/KRW
+            - Name: JUP/KRW
+            - Name: NEO/KRW
+            - Name: GAS/KRW
+            - Name: XAI/KRW
+            - Name: BONK/KRW
+            - Name: ENS/KRW
+            - Name: AR/KRW
+            - Name: ZETA/KRW
+            - Name: UXLINK/KRW
+            - Name: FIDA/KRW
+            - Name: EIGEN/KRW
+            - Name: PEAQ/KRW
+        RateLimiter:
+          Http:
+            UsageLimit: 1000
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Timestamp
+              Deduplicate: false
+              IncludeInHash: Timestamp
+            TradesProcessing:
+              OrderBy: Timestamp
+              Deduplicate: true
+              IncludeInHash: Timestamp
+
+          DepthBookMaintainer:
+            LevelsCap: 30
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:01:00
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-bithumb-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bithumb:2025.1.14.85-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 201
+        ExchangeName: Bithumb
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+
+        Monitor:
+          DefaultConnectionCount: 3
+          Symbols:
+            - Name: ETC/KRW
+            - Name: AQT/KRW
+            - Name: RLY/KRW
+            - Name: XVS/KRW
+            - Name: WIKEN/KRW
+            - Name: NMR/KRW
+            - Name: XRP/KRW
+            - Name: LRC/KRW
+            - Name: ELF/KRW
+            - Name: UNI/KRW
+            - Name: ARB/KRW
+            - Name: DVI/KRW
+            - Name: FX/KRW
+            - Name: ACH/KRW
+            - Name: AERGO/KRW
+            - Name: ALICE/KRW
+            - Name: FANC/KRW
+            - Name: LM/KRW
+            - Name: RSS3/KRW
+            - Name: OAS/KRW
+            - Name: WLD/KRW
+            - Name: HFT/KRW
+            - Name: RPL/KRW
+            - Name: ID/KRW
+            - Name: BIGTIME/KRW
+            - Name: ALEX/KRW
+            - Name: HIGH/KRW
+            - Name: ARKM/KRW
+            - Name: FET/KRW
+            - Name: STAT/KRW
+            - Name: ZTX/KRW
+            - Name: MINA/KRW
+            - Name: IOTX/KRW
+            - Name: HIFI/KRW
+            - Name: STORJ/KRW
+        RateLimiter:
+          Http:
+            UsageLimit: 1000
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Timestamp
+              Deduplicate: false
+              IncludeInHash: Timestamp
+            TradesProcessing:
+              OrderBy: Timestamp
+              Deduplicate: true
+              IncludeInHash: Timestamp
+
+          DepthBookMaintainer:
+            LevelsCap: 30
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:01:00
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-bithumb-203
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bithumb:2025.1.14.85-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 202
+        ExchangeName: Bithumb
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+
+        Monitor:
+          DefaultConnectionCount: 3
+          Symbols:
+            - Name: STRAX/KRW
+            - Name: UMA/KRW
+            - Name: SAND/KRW
+            - Name: ONG/KRW
+            - Name: BEL/KRW
+            - Name: HIVE/KRW
+            - Name: BORA/KRW
+            - Name: GLM/KRW
+            - Name: MLK/KRW
+            - Name: CHR/KRW
+            - Name: GRT/KRW
+            - Name: WAXP/KRW
+            - Name: EGG/KRW
+            - Name: BLY/KRW
+            - Name: CHZ/KRW
+            - Name: RLC/KRW
+            - Name: GHX/KRW
+            - Name: LPT/KRW
+            - Name: CTK/KRW
+            - Name: PYR/KRW
+            - Name: XPLA/KRW
+            - Name: TIA/KRW
+            - Name: IMX/KRW
+            - Name: DYDX/KRW
+            - Name: API3/KRW
+            - Name: HBAR/KRW
+            - Name: RDNT/KRW
+            - Name: AUDIO/KRW
+            - Name: FTM/KRW
+            - Name: STMX/KRW
+            - Name: CELO/KRW
+            - Name: PENDLE/KRW
+            - Name: MASK/KRW
+            - Name: FXS/KRW
+            - Name: DAR/KRW
+            - Name: APE/KRW
+            - Name: GMX/KRW
+            - Name: ACS/KRW
+            - Name: ACE/KRW
+            - Name: OSMO/KRW
+            - Name: PEAQ/KRW
+
+        RateLimiter:
+          Http:
+            UsageLimit: 1000
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Timestamp
+              Deduplicate: false
+              IncludeInHash: Timestamp
+            TradesProcessing:
+              OrderBy: Timestamp
+              Deduplicate: true
+              IncludeInHash: Timestamp
+
+          DepthBookMaintainer:
+            LevelsCap: 30
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:01:00
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-bithumb-204
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bithumb:2025.1.14.85-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 203
+        ExchangeName: Bithumb
+
+        Monitor:
+          DefaultConnectionCount: 3
+          CheckStaleMarketDataTrigger:
+            Interval: 00:00:01
+          Symbols:
+            - Name: QTUM/KRW
+            - Name: ZIL/KRW
+            - Name: ADA/KRW
+            - Name: BCH/KRW
+            - Name: BTC/KRW
+            - Name: TRX/KRW
+            - Name: SNT/KRW
+            - Name: ZRX/KRW
+            - Name: KNC/KRW
+            - Name: BSV/KRW
+            - Name: XLM/KRW
+            - Name: DOT/KRW
+            - Name: META/KRW
+            - Name: UOS/KRW
+            - Name: CTSI/KRW
+            - Name: XEC/KRW
+            - Name: CTXC/KRW
+            - Name: CAKE/KRW
+            - Name: KLAY/KRW
+            - Name: BNB/KRW
+            - Name: ASM/KRW
+            - Name: AGI/KRW
+            - Name: ILV/KRW
+            - Name: ZBCN/KRW
+            - Name: AIOZ/KRW
+            - Name: ONDO/KRW
+            - Name: W/KRW
+            - Name: MEW/KRW
+            - Name: FLOKI/KRW
+            - Name: CARV/KRW
+            - Name: JTO/KRW
+            - Name: POL/KRW
+
+
+        RateLimiter:
+          Http:
+            UsageLimit: 1000
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Timestamp
+              Deduplicate: false
+              IncludeInHash: Timestamp
+            TradesProcessing:
+              OrderBy: Timestamp
+              Deduplicate: true
+              IncludeInHash: Timestamp
+
+          DepthBookMaintainer:
+            LevelsCap: 30
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:01:00
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-bithumb-205
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bithumb:2025.1.14.85-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 204
+        ExchangeName: Bithumb
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+
+        Monitor:
+          DefaultConnectionCount: 3
+          Symbols:
+            - Name: BTT/KRW
+            - Name: IOST/KRW
+            - Name: MTL/KRW
+            - Name: BAT/KRW
+            - Name: LINK/KRW
+            - Name: STEEM/KRW
+            - Name: VET/KRW
+            - Name: WAVES/KRW
+            - Name: ICX/KRW
+            - Name: THETA/KRW
+            - Name: LOOM/KRW
+            - Name: ANKR/KRW
+            - Name: SXP/KRW
+            - Name: ONT/KRW
+            - Name: ETH/KRW
+            - Name: CKB/KRW
+            - Name: SOL/KRW
+            - Name: KSM/KRW
+            - Name: BNT/KRW
+            - Name: BFC/KRW
+            - Name: REI/KRW
+            - Name: VIX/KRW
+            - Name: FCT2/KRW
+            - Name: CRTS/KRW
+            - Name: BLUR/KRW
+            - Name: STRK/KRW
+            - Name: ZRO/KRW
+            - Name: ZK/KRW
+            - Name: KAIA/KRW
+            - Name: LWA/KRW
+            - Name: SPURS/KRW
+            - Name: BLAST/KRW
+            - Name: TAIKO/KRW
+
+        RateLimiter:
+          Http:
+            UsageLimit: 1000
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Timestamp
+              Deduplicate: false
+              IncludeInHash: Timestamp
+            TradesProcessing:
+              OrderBy: Timestamp
+              Deduplicate: true
+              IncludeInHash: Timestamp
+
+          DepthBookMaintainer:
+            LevelsCap: 30
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:01:00
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-bithumb-206
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bithumb:2025.1.14.85-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 205
+        ExchangeName: Bithumb
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+
+        Monitor:
+          DefaultConnectionCount: 3
+          Symbols:
+            - Name: AAVE/KRW
+            - Name: SNX/KRW
+            - Name: COMP/KRW
+            - Name: MBL/KRW
+            - Name: ORBS/KRW
+            - Name: PUNDIX/KRW
+            - Name: OBSR/KRW
+            - Name: QTCON/KRW
+            - Name: AMO/KRW
+            - Name: AXS/KRW
+            - Name: RSR/KRW
+            - Name: WOM/KRW
+            - Name: FITFI/KRW
+            - Name: SHIB/KRW
+            - Name: FLR/KRW
+            - Name: DAO/KRW
+            - Name: BAL/KRW
+            - Name: CELR/KRW
+            - Name: PEPE/KRW
+            - Name: CYBER/KRW
+            - Name: JOE/KRW
+            - Name: MAV/KRW
+            - Name: REQ/KRW
+            - Name: INJ/KRW
+            - Name: ASTR/KRW
+            - Name: MOC/KRW
+            - Name: EDU/KRW
+            - Name: FLUX/KRW
+            - Name: RVN/KRW
+            - Name: ARK/KRW
+            - Name: KAVA/KRW
+            - Name: CVC/KRW
+            - Name: GRS/KRW
+            - Name: HUNT/KRW
+            - Name: IQ/KRW
+            - Name: PYTH/KRW
+
+        RateLimiter:
+          Http:
+            UsageLimit: 1000
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Timestamp
+              Deduplicate: false
+              IncludeInHash: Timestamp
+            TradesProcessing:
+              OrderBy: Timestamp
+              Deduplicate: true
+              IncludeInHash: Timestamp
+
+          DepthBookMaintainer:
+            LevelsCap: 30
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:01:00
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-bithumb-207
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bithumb:2025.1.14.85-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 206
+        ExchangeName: Bithumb
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+
+        Monitor:
+          DefaultConnectionCount: 3
+          Symbols:
+            - Name: XPR/KRW
+            - Name: ADP/KRW
+            - Name: BIOT/KRW
+            - Name: POLA/KRW
+            - Name: MEV/KRW
+            - Name: T/KRW
+            - Name: TAVA/KRW
+            - Name: C98/KRW
+            - Name: FRONT/KRW
+            - Name: TDROP/KRW
+            - Name: NPT/KRW
+            - Name: AVAX/KRW
+            - Name: CSPR/KRW
+            - Name: SIX/KRW
+            - Name: OGN/KRW
+            - Name: COS/KRW
+            - Name: MANA/KRW
+            - Name: DOGE/KRW
+            - Name: SOFI/KRW
+            - Name: WOO/KRW
+            - Name: GRACY/KRW
+            - Name: WNCG/KRW
+            - Name: AZIT/KRW
+            - Name: HOOK/KRW
+            - Name: LBL/KRW
+            - Name: CRV/KRW
+            - Name: STX/KRW
+            - Name: OP/KRW
+            - Name: LDO/KRW
+            - Name: MANTA/KRW
+            - Name: RAD/KRW
+            - Name: MAGIC/KRW
+        RateLimiter:
+          Http:
+            UsageLimit: 1000
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.01
+            RequestCosts:
+              Snapshot: 10
+
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Timestamp
+              Deduplicate: false
+              IncludeInHash: Timestamp
+            TradesProcessing:
+              OrderBy: Timestamp
+              Deduplicate: true
+              IncludeInHash: Timestamp
+
+          DepthBookMaintainer:
+            LevelsCap: 30
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:01:00
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-bithumb-208
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bithumb:2025.1.14.85-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 207
+        ExchangeName: Bithumb
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+
+        Monitor:
+          DefaultConnectionCount: 3
+          Symbols:
+            - Name: MIX/KRW
+            - Name: EVZ/KRW
+            - Name: MXC/KRW
+            - Name: VALOR/KRW
+            - Name: EL/KRW
+            - Name: ARPA/KRW
+            - Name: TEMCO/KRW
+            - Name: CTC/KRW
+            - Name: COTI/KRW
+            - Name: BOBA/KRW
+            - Name: SWAP/KRW
+            - Name: MBX/KRW
+            - Name: GALA/KRW
+            - Name: NFT/KRW
+            - Name: MED/KRW
+            - Name: ONEINCH/KRW
+            - Name: MVC/KRW
+            - Name: FIT/KRW
+            - Name: BOA/KRW
+            - Name: TFUEL/KRW
+            - Name: OXT/KRW
+            - Name: CFX/KRW
+            - Name: SUI/KRW
+            - Name: FLZ/KRW
+            - Name: NCT/KRW
+            - Name: FLOW/KRW
+            - Name: STG/KRW
+            - Name: LEVER/KRW
+            - Name: SFP/KRW
+            - Name: WEMIX/KRW
+            - Name: USDC/KRW
+            - Name: USDT/KRW
+            - Name: YGG/KRW
+            - Name: WAXL/KRW
+            - Name: MNT/KRW
+            - Name: GTC/KRW
+            - Name: LSK/KRW
+            - Name: TT/KRW
+            - Name: NEAR/KRW
+            - Name: AKT/KRW
+            - Name: PCI/KRW
+            - Name: ATH/KRW
+
+        RateLimiter:
+          Http:
+            UsageLimit: 1000
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.01
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Timestamp
+              Deduplicate: false
+              IncludeInHash: Timestamp
+            TradesProcessing:
+              OrderBy: Timestamp
+              Deduplicate: true
+              IncludeInHash: Timestamp
+
+          DepthBookMaintainer:
+            LevelsCap: 30
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:03:00
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false

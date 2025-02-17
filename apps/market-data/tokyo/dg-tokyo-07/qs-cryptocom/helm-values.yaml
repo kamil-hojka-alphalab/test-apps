@@ -1,0 +1,93 @@
+QuoteServers:
+  - name: qs-cryptocom-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-cryptocom:2025.1.14.72-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: CryptoCom
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 25
+          Symbols:
+            - Name: ALI/USD
+            - Name: AAVE/USD
+            - Name: AAVE/USDT
+            - Name: ADA/USD
+            - Name: ADA/USDT
+            - Name: APE/USDT
+            - Name: APT/USDT
+            - Name: BCH/BTC
+            - Name: BCH/USDT
+            - Name: BTC/USD
+            - Name: BTC/USDT
+            - Name: COMP/USDT
+            - Name: CRO/BTC
+            - Name: CRO/USD
+            - Name: CRO/USDT
+            - Name: DAI/USDT
+            - Name: DOGE/USD
+            - Name: DOT/USD
+            - Name: DOT/USDT
+            - Name: EGLD/USDT
+            - Name: ETC/USD
+            - Name: ETC/USDT
+            - Name: ETH/BTC
+            - Name: ETH/USD
+            - Name: ETH/USDT
+            - Name: FTM/USDT
+            - Name: GALA/USD
+            - Name: HBAR/USD
+            - Name: HBAR/USDT
+            - Name: INJ/USDT
+            - Name: LADYS/USD
+            - Name: LTC/USDT
+            - Name: NEON/USDT
+            - Name: NEON/USD
+            - Name: ONE/USDT
+            - Name: QNT/USDT
+            - Name: RARI/USDT
+            - Name: SHIB/USD
+            - Name: SHIB/USDT
+            - Name: SNX/USDT
+            - Name: SOL/USD
+            - Name: SOL/USDT
+            - Name: STX/USDT
+            - Name: UNI/USD
+            - Name: UNI/USDT
+            - Name: USDT/USD
+            - Name: VET/BTC
+            - Name: XPLA/USD
+            - Name: XLM/USD
+            - Name: XLM/USDT
+            - Name: XRP/USD
+            - Name: XRP/USDT
+
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 50
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+        CryptoCom:
+          WebSocketConnectionUrl: "wss://stream.crypto.com/exchange/v1/market"

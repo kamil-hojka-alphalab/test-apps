@@ -1,0 +1,299 @@
+QuoteServers:
+  - name: qs-coinone-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coinone:2025.1.14.87-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: Coinone
+
+        Coinone:
+          ConnectionIdleInterval: 00:20:00
+
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 1
+          Symbols:
+            - Name: BEL/KRW
+            - Name: PROM/KRW
+            - Name: FET/KRW
+            - Name: DIA/KRW
+            - Name: FRONT/KRW
+            - Name: DODO/KRW
+            - Name: BORA/KRW
+            - Name: ONEINCH/KRW
+            - Name: MBL/KRW
+            - Name: AAVE/KRW
+            - Name: WNCG/KRW
+            - Name: ACH/KRW
+            - Name: SIX/KRW
+            - Name: UMA/KRW
+            - Name: ADA/KRW
+            - Name: ONT/KRW
+            - Name: SXP/KRW
+            - Name: BTG/KRW
+            - Name: DOT/KRW
+            - Name: GAS/KRW
+            - Name: SKLAY/KRW
+            - Name: EGG/KRW
+            - Name: INJ/KRW
+            - Name: XDATA/KRW
+            - Name: ALPHA/KRW
+            - Name: ONG/KRW
+            - Name: AVAX/KRW
+            - Name: GRT/KRW
+            - Name: SEI/KRW
+            - Name: BTC/KRW
+            - Name: EVER/KRW
+            - Name: AXS/KRW
+            - Name: HPO/KRW
+            - Name: TAIKO/KRW
+            - Name: TON/KRW
+            - Name: ENA/KRW
+            - Name: MINA/KRW
+            - Name: ETHFI/KRW
+            - Name: ENS/KRW
+            - Name: HOT/KRW
+            - Name: HBAR/KRW
+        RateLimiter:
+          Http:
+            UsageLimit: 3000
+            Interval: 00:01
+            MinAcquireGap: 0.00:00:00.2
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 150
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 01:00:00
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-coinone-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coinone:2025.1.14.87-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 201
+        ExchangeName: Coinone
+
+        Coinone:
+          ConnectionIdleInterval: 00:20:00
+
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 1
+          Symbols:
+            - Name: XTZ/KRW
+            - Name: XLM/KRW
+            - Name: ZRX/KRW
+            - Name: KAVA/KRW
+            - Name: SUN/KRW
+            - Name: BNT/KRW
+            - Name: CBK/KRW
+            - Name: SUSHI/KRW
+            - Name: OGN/KRW
+            - Name: ORBS/KRW
+            - Name: DAO/KRW
+            - Name: MANA/KRW
+            - Name: LBL/KRW
+            - Name: TRX/KRW
+            - Name: BCH/KRW
+            - Name: QTUM/KRW
+            - Name: NEO/KRW
+            - Name: ATOM/KRW
+            - Name: BAND/KRW
+            - Name: LINK/KRW
+            - Name: IOTA/KRW
+            - Name: MNR/KRW
+            - Name: AUCTION/KRW
+            - Name: FIS/KRW
+            - Name: KSP/KRW
+            - Name: SUI/KRW
+            - Name: SHIB/KRW
+            - Name: KNC/KRW
+            - Name: STX/KRW
+            - Name: SAND/KRW
+            - Name: XRP/KRW
+            - Name: ZIL/KRW
+            - Name: FLOW/KRW
+            - Name: ANKR/KRW
+            - Name: USDT/KRW
+            - Name: APP/KRW
+            - Name: ONDO/KRW
+            - Name: ALGO/KRW
+            - Name: BNB/KRW
+            - Name: ATH/KRW
+            - Name: MON/KRW
+            - Name: KAIA/KRW
+
+        RateLimiter:
+          Http:
+            UsageLimit: 3000
+            Interval: 00:01
+            MinAcquireGap: 0.00:00:00.2
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 150
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 01:00:00
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-coinone-203
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coinone:2025.1.14.87-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 202
+        ExchangeName: Coinone
+
+        Coinone:
+          ConnectionIdleInterval: 00:20:00
+
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 1
+          Symbols:
+            - Name: ORC/KRW
+            - Name: QTCON/KRW
+            - Name: AMO/KRW
+            - Name: DVI/KRW
+            - Name: CKB/KRW
+            - Name: CTSI/KRW
+            - Name: ARPA/KRW
+            - Name: STPT/KRW
+            - Name: TEMCO/KRW
+            - Name: MVC/KRW
+            - Name: CRV/KRW
+            - Name: ASM/KRW
+            - Name: IOTX/KRW
+            - Name: HIBS/KRW
+            - Name: COS/KRW
+            - Name: PHA/KRW
+            - Name: MLK/KRW
+            - Name: FIL/KRW
+            - Name: SOL/KRW
+            - Name: XEC/KRW
+            - Name: ETC/KRW
+            - Name: EOS/KRW
+            - Name: WEMIX/KRW
+            - Name: JTO/KRW
+            - Name: BTT/KRW
+            - Name: PYTH/KRW
+            - Name: KAS/KRW
+            - Name: MEME/KRW
+            - Name: PIB/KRW
+            - Name: ETH/KRW
+            - Name: DOGE/KRW
+            - Name: KLAY/KRW
+            - Name: KSM/KRW
+            - Name: SEILOR/KRW
+            - Name: BSV/KRW
+            - Name: GALA/KRW
+            - Name: ZETA/KRW
+            - Name: MAVIA/KRW
+            - Name: WLD/KRW
+            - Name: PEPE/KRW
+            - Name: BONK/KRW
+            - Name: MANTA/KRW
+            - Name: STRK/KRW
+            - Name: NEAR/KRW
+            - Name: ARB/KRW
+            - Name: W/KRW
+            - Name: PCI/KRW
+            - Name: MNT/KRW
+            - Name: JUP/KRW
+            - Name: STG/KRW
+            - Name: PENDLE/KRW
+            - Name: MEW/KRW
+        RateLimiter:
+          Http:
+            UsageLimit: 3000
+            Interval: 00:01
+            MinAcquireGap: 0.00:00:00.2
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 150
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 01:00:00
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false

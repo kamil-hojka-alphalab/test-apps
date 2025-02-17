@@ -1,0 +1,548 @@
+QuoteServers:
+  - name: qs-binance-test
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.11.18.124-5721311
+    replicas: 0
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-test
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-test
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 110
+        ExchangeName: Binance
+        Binance:
+          Variant: Simplified
+          DedupTradesEarly: true
+          DedupTickersEarly: true
+
+        Monitor:
+          DefaultConnectionCount: 1
+          Symbols:
+            - Name: MANA/USDT
+            - Name: MANA/BTC
+            - Name: STORJ/USDT
+            - Name: STORJ/BTC
+            - Name: DATA/USDT
+            - Name: DATA/BTC
+            - Name: DODO/USDT
+            - Name: DODO/BTC
+            - Name: COTI/BTC
+            - Name: OGN/USDT
+            - Name: OGN/BTC
+            - Name: TLM/USDT
+            - Name: MAGIC/USDT
+            - Name: HFT/BTC
+            - Name: APT/EUR
+            - Name: USDC/USDT
+            - Name: BTC/USDC
+            - Name: BNT/USDT
+            - Name: DENT/USDT
+            - Name: VET/BNB
+            - Name: ADA/EUR
+            - Name: ADX/BTC
+            - Name: CHZ/USDT
+            - Name: DCR/USDT
+            - Name: ETH/BTC
+            - Name: BCH/BTC
+            - Name: XLM/USDT
+            - Name: KNC/BTC
+            - Name: AXS/BTC
+            - Name: AXS/BNB
+            - Name: EOS/BTC
+            - Name: BCH/USDT
+            - Name: QTUM/BTC
+            - Name: QTUM/USDT
+            - Name: XTZ/USDT
+            - Name: XTZ/BTC
+            - Name: BNB/USDT
+            - Name: TRU/USDT
+            - Name: TRU/BTC
+            - Name: GRT/EUR
+            - Name: STMX/USDT
+            - Name: SUI/BNB
+            - Name: BTC/JPY
+            - Name: ETH/JPY
+            - Name: BNB/JPY
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-test:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: true
+  - name: qs-binance-test2
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.11.27.125-03e8a60
+    replicas: 0
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-test
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-test
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 113
+        ExchangeName: Binance
+        Binance:
+          Variant: DeltaSimplified
+          DedupTradesEarly: true
+          DedupTickersEarly: true
+
+        Monitor:
+          DefaultConnectionCount: 1
+          Symbols:
+            - Name: MANA/USDT
+            - Name: MANA/BTC
+            - Name: STORJ/USDT
+            - Name: STORJ/BTC
+            - Name: DATA/USDT
+            - Name: DATA/BTC
+            - Name: DODO/USDT
+            - Name: YYYYYYYYY/BTC
+            - Name: XXXXXXXXX/BTC
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-test:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: true
+  - name: qs-binance-early-dedup-tickers
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.10.31.121-128fbed
+    replicas: 0
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-test
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-test
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 114
+        ExchangeName: Binance
+        Binance:
+          Variant: Simplified
+          DedupTradesEarly: true
+          DedupTickersEarly: true
+
+        Monitor:
+          DefaultConnectionCount: 3
+          Symbols:
+            - Name: CVP/USDT
+              UseTicker: true
+            - Name: POWR/USDT
+              UseTicker: true
+            - Name: FRONT/USDT
+              UseTicker: true
+            - Name: PEPE/TRY
+              UseTicker: true
+            - Name: FLOKI/USDT
+              UseTicker: true
+            - Name: GLM/USDT
+              UseTicker: true
+            - Name: MAV/USDT
+              UseTicker: true
+            - Name: GAS/USDT
+              UseTicker: true
+            - Name: BTC/USDT
+              UseTicker: true
+            - Name: ETH/USDT
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-test:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: true
+            DepthBookMaintainer:
+              TickersNeedExchangeTime: true
+  - name: qs-binance-early-dedup-notickers
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.10.31.121-128fbed
+    replicas: 0
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-test
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-test
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 115
+        ExchangeName: Binance
+        Binance:
+          Variant: Simplified
+          DedupTradesEarly: true
+          DedupTickersEarly: false
+
+        Monitor:
+          DefaultConnectionCount: 3
+          Symbols:
+            - Name: CVP/USDT
+            - Name: POWR/USDT
+            - Name: FRONT/USDT
+            - Name: PEPE/TRY
+            - Name: FLOKI/USDT
+            - Name: GLM/USDT
+            - Name: MAV/USDT
+            - Name: GAS/USDT
+            - Name: BTC/USDT
+            - Name: ETH/USDT
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-test:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: true
+  - name: qs-binance-delta-pipeline-notickers
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.10.31.121-128fbed
+    replicas: 0
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-test
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-test
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 116
+        ExchangeName: Binance
+        Binance:
+          Variant: DeltaSimplified
+          DedupTradesEarly: true
+          DedupTickersEarly: false
+        Monitor:
+          DefaultConnectionCount: 3
+          Symbols:
+            - Name: CVP/USDT
+            - Name: POWR/USDT
+            - Name: FRONT/USDT
+            - Name: PEPE/TRY
+            - Name: FLOKI/USDT
+            - Name: GLM/USDT
+            - Name: MAV/USDT
+            - Name: GAS/USDT
+            - Name: BTC/USDT
+            - Name: ETH/USDT
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-test:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: true
+  - name: qs-binance-delta-pipeline-tickers
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2024.10.31.121-128fbed
+    replicas: 0
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-test
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-test
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 117
+        ExchangeName: Binance
+        Binance:
+          Variant: DeltaSimplified
+          DedupTradesEarly: true
+          DedupTickersEarly: true
+        Monitor:
+          DefaultConnectionCount: 3
+          Symbols:
+            - Name: CVP/USDT
+              UseTicker: true
+            - Name: POWR/USDT
+              UseTicker: true
+            - Name: FRONT/USDT
+              UseTicker: true
+            - Name: PEPE/TRY
+              UseTicker: true
+            - Name: FLOKI/USDT
+              UseTicker: true
+            - Name: GLM/USDT
+              UseTicker: true
+            - Name: MAV/USDT
+              UseTicker: true
+            - Name: GAS/USDT
+              UseTicker: true
+            - Name: BTC/USDT
+              UseTicker: true
+            - Name: ETH/USDT
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-test:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: true
+  - name: qs-deribitoptions-111
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.1.21.81-7df981e
+    replicas: 0
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 110
+        ExchangeName: DeribitOptions
+
+        DeribitOptions:
+          ExchangeConnection:
+            OrderBookUpdateChannel:
+              DebugVerbosity: 2
+            TradeChannel:
+              DebugVerbosity: 2
+            ParsingOptions:
+              FastParsing: false # true for fast parsing, false will use fallback (JsonDispatcher) mechanism
+            Sync:
+              Interval: 0 # ms 0 - disable
+          SnapshotMakerStrategy:
+            DebugVerbosity: 2
+
+        PeriodicSnapshotTrigger:
+          Enabled: true
+          MinPeriodSeconds: 30
+          MaxPeriodSeconds: 60
+
+        RateLimiter:
+          Http:
+            UsageLimit: 40
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.50
+            RequestCosts:
+              Snapshot: 20
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 100
+          DerivedSymbols:
+            Type: Options
+            Symbols:
+              - UnderlyingName: BTC/USD
+                NamePatterns:
+                  - 'BTC/USD_P_100500.0_20250122@DeribitOptions'
+          #Symbols:
+          #  - Name: MATIC/USDC_C_0.52_20240830@DeribitOptions
+          #  - Name: MATIC/USDC_C_0.54_20240830@DeribitOptions
+          #  - Name: MATIC/USDC_C_0.55_20240830@DeribitOptions
+          #  - Name: MATIC/USDC_P_0.52_20240830@DeribitOptions
+          #  - Name: MATIC/USDC_P_0.54_20240830@DeribitOptions
+          #  - Name: MATIC/USDC_P_0.55_20240830@DeribitOptions
+
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-test:11800"
+            V3BinaryFormat:
+              DevelopmentMode: true
+          DepthBookMaintainer:
+            TickersNeedExchangeTime: true
+  - name: qs-kucoin-111
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.9.17.76-6cc293d
+    replicas: 1
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 300
+        KuCoin:
+          ApiPassphrase: VoxOoWnTefUKRsC2J6dJ9wP2LT0MNf9j
+          ApiKey: 6672b0b7104f94000103430c
+          ApiSecret: 3868343c-bfff-4736-a79a-52deb7f3c879
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 5
+
+          Symbols:
+            - Name: ADX/USDT
+            - Name: AERGO/USDT
+            - Name: AERO/USDT
+            - Name: AEVO/USDT
+            - Name: AGLD/USDT
+            - Name: AIEPK/USDT
+            - Name: AITECH/USDT
+            - Name: ALPINE/USDT
+            - Name: AMB/USDT
+            - Name: AMP/USDT
+            - Name: ATA/USDT
+            - Name: ATH/USDT
+            - Name: AVA/USDT
+            - Name: AVAIL/USDT
+            - Name: BABYDOGE/USDT
+            - Name: BANANA/USDT
+            - Name: BB/USDT
+            - Name: BBL/USDT
+            - Name: BEER/USDT
+            - Name: BEFI/USDT
+            - Name: BIDP/USDT
+
+        RateLimiter:
+          Http:
+            UsageLimit: 2000
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.2
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-test:11800"
+            V3BinaryFormat:
+              DevelopmentMode: true
+      PerfCollector:
+        Enabled: false
+  - name: qs-okexfut-111
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    replicas: 0
+    requests:
+      cpu: 1000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    nodeDestiny: dg-test
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-test
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://regional-proxy-london.node.al:10951"
+      QuoteServer:
+        ShardId: 110
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: THETA/USDT
+              - UnderlyingName: AGLD/USDT
+              - UnderlyingName: XLM/USDT
+              - UnderlyingName: UNI/USD
+
+
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-test:11800"
+            V3BinaryFormat:
+              DevelopmentMode: true
+      PerfCollector:
+        Enabled: false

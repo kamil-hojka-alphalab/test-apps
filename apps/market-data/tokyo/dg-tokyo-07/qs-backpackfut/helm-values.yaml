@@ -1,0 +1,35 @@
+QuoteServers:
+  - name: qs-backpackfut-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-backpack:2025.1.21.399-699cb1f
+    requests:
+      cpu: 1000m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: BackpackFut
+        Monitor:
+          Symbols:
+            - Name: BTC/USDC_Perpetual@BackpackFut
+            - Name: SOL/USDC_Perpetual@BackpackFut
+            - Name: ETH/USDC_Perpetual@BackpackFut
+            - Name: TRUMP/USDC_Perpetual@BackpackFut
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-07:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false

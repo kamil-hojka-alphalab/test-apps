@@ -1,0 +1,753 @@
+QuoteServers:
+  - name: qs-bybit-210
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 209
+        ExchangeName: Bybit
+
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: LPT/USDT
+              - UnderlyingName: EGLD/USDT
+              - UnderlyingName: IOTX/USDT
+              - UnderlyingName: ONEINCH/USDT
+              - UnderlyingName: ALGO/USDT
+              - UnderlyingName: ONE/USDT
+              - UnderlyingName: DOGE/USDT
+              - UnderlyingName: KSM/USDT
+              - UnderlyingName: FTM/USDT
+              - UnderlyingName: LOOKS/USDT
+              - UnderlyingName: BAT/USDT
+              - UnderlyingName: UNI/USDT
+              - UnderlyingName: CRV/USDT
+              - UnderlyingName: PEOPLE/USDT
+              - UnderlyingName: AVAX/USDT
+              - UnderlyingName: C98/USDT
+              - UnderlyingName: SAND/USDT
+              - UnderlyingName: RPL/USDT
+              - UnderlyingName: FLR/USDT
+              - UnderlyingName: BOBA/USDT
+              - UnderlyingName: HOT/USDT
+              - UnderlyingName: BEL/USDT
+              - UnderlyingName: BAKE/USDT
+              - UnderlyingName: BAND/USDT
+              - UnderlyingName: REN/USDT
+              - UnderlyingName: ICX/USDT
+              - UnderlyingName: KLAY/USDT
+              - UnderlyingName: BTC/USDT
+              - UnderlyingName: UNFI/USDT
+              - UnderlyingName: FLM/USDT
+              - UnderlyingName: XION/USDT
+              - UnderlyingName: POL/USDT
+              - UnderlyingName: MVL/USDT
+              - UnderlyingName: SAFE/USDT
+              - UnderlyingName: CARV/USDT
+
+
+            DefaultConnectionCount: 2
+            MaxSymbolsPerConnection: 3
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 200
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-bybit-211
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 210
+        ExchangeName: Bybit
+
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: FIL/USDT
+              - UnderlyingName: CHZ/USDT
+              - UnderlyingName: SXP/USDT
+              - UnderlyingName: ROSE/USDT
+              - UnderlyingName: CELR/USDT
+              - UnderlyingName: TRX/USDT
+              - UnderlyingName: WOO/USDT
+              - UnderlyingName: ENJ/USDT
+              - UnderlyingName: BNB/USDT
+              - UnderlyingName: DASH/USDT
+              - UnderlyingName: ALICE/USDT
+              - UnderlyingName: OMG/USDT
+              - UnderlyingName: KNC/USDT
+              - UnderlyingName: XMR/USDT
+              - UnderlyingName: ILV/USDT
+              - UnderlyingName: KEY/USDT
+              - UnderlyingName: ORDI/USDT
+              - UnderlyingName: IDEX/USDT
+              - UnderlyingName: NKN/USDT
+              - UnderlyingName: CKB/USDT
+              - UnderlyingName: BNX/USDT
+              - UnderlyingName: TWT/USDT
+              - UnderlyingName: GTC/USDT
+              - UnderlyingName: COMBO/USDT
+              - UnderlyingName: ALPACA/USDT
+              - UnderlyingName: POLYX/USDT
+              - UnderlyingName: ORBS/USDT
+              - UnderlyingName: POWR/USDT
+              - UnderlyingName: WAXP/USDT
+              - UnderlyingName: MON/USDT
+              - UnderlyingName: MASA/USDT
+              - UnderlyingName: ZEUS/USDT
+              - UnderlyingName: LAI/USDT
+              - UnderlyingName: COS/USDT
+              - UnderlyingName: PHA/USDT
+              - UnderlyingName: OSMO/USDT
+              - UnderlyingName: AVAIL/USDT
+              - UnderlyingName: MERL/USDT
+              - UnderlyingName: ZKJ/USDT
+              - UnderlyingName: ZK/USDT
+              - UnderlyingName: ZRO/USDT
+              - UnderlyingName: AKT/USDT
+              - UnderlyingName: TAIKO/USDT
+              - UnderlyingName: G/USDT
+              - UnderlyingName: UXLINK/USDT
+              - UnderlyingName: FIDA/USDT
+
+            DefaultConnectionCount: 2
+            MaxSymbolsPerConnection: 3
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 200
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-bybit-212
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 211
+        ExchangeName: Bybit
+
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: YGG/USDT
+              - UnderlyingName: EOS/USDT
+              - UnderlyingName: ATOM/USDT
+              - UnderlyingName: ICP/USDT
+              - UnderlyingName: GALA/USDT
+              - UnderlyingName: LRC/USDT
+              - UnderlyingName: SOL/USDT
+              - UnderlyingName: FLOW/USDT
+              - UnderlyingName: TLM/USDT
+              - UnderlyingName: GMT/USDT
+              - UnderlyingName: THETA/USDT
+              - UnderlyingName: YFI/USDT
+              - UnderlyingName: SNX/USDT
+              - UnderlyingName: DYDX/USDT
+              - UnderlyingName: IOST/USDT
+              - UnderlyingName: NEO/USDT
+              - UnderlyingName: XVG/USDT
+              - UnderlyingName: MAV/USDT
+              - UnderlyingName: VRA/USDT
+              - UnderlyingName: XVS/USDT
+              - UnderlyingName: STPT/USDT
+              - UnderlyingName: MNT/USDT
+              - UnderlyingName: STEEM/USDT
+              - UnderlyingName: BOND/USDT
+              - UnderlyingName: RIF/USDT
+              - UnderlyingName: DOT/USD
+              - UnderlyingName: JUP/USDT
+              - UnderlyingName: ZETA/USDT
+              - UnderlyingName: MOBILE/USDT
+              - UnderlyingName: OM/USDT
+              - UnderlyingName: L3/USDT
+              - UnderlyingName: ATH/USDT
+
+
+            DefaultConnectionCount: 2
+            MaxSymbolsPerConnection: 3
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 200
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-bybit-213
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 212
+        ExchangeName: Bybit
+
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: KSHIB/USDT
+              - UnderlyingName: ZEC/USDT
+              - UnderlyingName: ANKR/USDT
+              - UnderlyingName: ZEN/USDT
+              - UnderlyingName: WAVES/USDT
+              - UnderlyingName: STORJ/USDT
+              - UnderlyingName: SPELL/USDT
+              - UnderlyingName: HBAR/USDT
+              - UnderlyingName: ADA/USDT
+              - UnderlyingName: SLP/USDT
+              - UnderlyingName: AXS/USDT
+              - UnderlyingName: QTUM/USDT
+              - UnderlyingName: GRT/USDT
+              - UnderlyingName: HNT/USDT
+              - UnderlyingName: BICO/USDT
+              - UnderlyingName: RDNT/USDT
+              - UnderlyingName: ASTR/USDT
+              - UnderlyingName: RLC/USDT
+              - UnderlyingName: CORE/USDT
+              - UnderlyingName: SFP/USDT
+              - UnderlyingName: CVC/USDT
+              - UnderlyingName: TRU/USDT
+              - UnderlyingName: HFT/USDT
+              - UnderlyingName: CELO/USDT
+              - UnderlyingName: JOE/USDT
+              - UnderlyingName: HIGH/USDT
+              - UnderlyingName: PENDLE/USDT
+              - UnderlyingName: AMB/USDT
+              - UnderlyingName: KAIA/USDT
+
+            DefaultConnectionCount: 2
+            MaxSymbolsPerConnection: 3
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 200
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-bybit-214
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 213
+        ExchangeName: Bybit
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: XLM/USDT
+              - UnderlyingName: LINK/USDT
+              - UnderlyingName: ETH/USDT
+              - UnderlyingName: LTC/USDT
+              - UnderlyingName: DOT/USDT
+              - UnderlyingName: MKR/USDT
+              - UnderlyingName: SKL/USDT
+              - UnderlyingName: ZRX/USDT
+              - UnderlyingName: STMX/USDT
+              - UnderlyingName: ETHW/USDT
+              - UnderlyingName: RSR/USDT
+              - UnderlyingName: MANA/USDT
+              - UnderlyingName: ETC/USDT
+              - UnderlyingName: AAVE/USDT
+              - UnderlyingName: COMP/USDT
+              - UnderlyingName: FXS/USDT
+              - UnderlyingName: LQTY/USDT
+              - UnderlyingName: HOOK/USDT
+              - UnderlyingName: GMX/USDT
+              - UnderlyingName: STG/USDT
+              - UnderlyingName: MINA/USDT
+              - UnderlyingName: ALPHA/USDT
+              - UnderlyingName: BSV/USDT
+              - UnderlyingName: ATA/USDT
+              - UnderlyingName: HIFI/USDT
+              - UnderlyingName: TON/USDT
+
+            DefaultConnectionCount: 2
+            MaxSymbolsPerConnection: 3
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 200
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-bybit-215
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 214
+        ExchangeName: Bybit
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: TRB/USDT
+              - UnderlyingName: LDO/USDT
+              - UnderlyingName: FITFI/USDT
+              - UnderlyingName: ZIL/USDT
+              - UnderlyingName: ADA/USD
+              - UnderlyingName: LTC/USD
+              - UnderlyingName: API3/USDT
+              - UnderlyingName: OGN/USDT
+              - UnderlyingName: SCRT/USDT
+              - UnderlyingName: BAL/USDT
+              - UnderlyingName: DODO/USDT
+              - UnderlyingName: BLZ/USDT
+              - UnderlyingName: CTK/USDT
+              - UnderlyingName: GLMR/USDT
+              - UnderlyingName: MTL/USDT
+              - UnderlyingName: AGLD/USDT
+              - UnderlyingName: PHB/USDT
+              - UnderlyingName: PAXG/USDT
+              - UnderlyingName: 1000PEPE/USDT
+              - UnderlyingName: 10000LADYS/USDT
+              - UnderlyingName: SUI/USDT
+              - UnderlyingName: INJ/USDT
+              - UnderlyingName: CAKE/USDT
+              - UnderlyingName: NTRN/USDT
+              - UnderlyingName: SNT/USDT
+              - UnderlyingName: UMA/USDT
+              - UnderlyingName: CVX/USDT
+              - UnderlyingName: EOS/USD
+              - UnderlyingName: RON/USDT
+              - UnderlyingName: DOG/USDT
+              - UnderlyingName: TNSR/USDT
+              - UnderlyingName: MEW/USDT
+              - UnderlyingName: NYAN/USDT
+              - UnderlyingName: OMNI/USDT
+              - UnderlyingName: REZ/USDT
+              - UnderlyingName: SAGA/USDT
+              - UnderlyingName: VELO/USDT
+              - UnderlyingName: DRIFT/USDT
+              - UnderlyingName: SPEC/USDT
+              - UnderlyingName: ORDER/USDT
+
+            DefaultConnectionCount: 2
+            MaxSymbolsPerConnection: 3
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 200
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-bybit-216
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 215
+        ExchangeName: Bybit
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: STX/USDT
+              - UnderlyingName: T/USDT
+              - UnderlyingName: APT/USDT
+              - UnderlyingName: CTC/USDT
+              - UnderlyingName: XCN/USDT
+              - UnderlyingName: NEAR/USDT
+              - UnderlyingName: SUSHI/USDT
+              - UnderlyingName: OP/USDT
+              - UnderlyingName: XTZ/USDT
+              - UnderlyingName: XEM/USDT
+              - UnderlyingName: AR/USDT
+              - UnderlyingName: IOTA/USDT
+              - UnderlyingName: KAVA/USDT
+              - UnderlyingName: XRP/USDT
+              - UnderlyingName: KDA/USDT
+              - UnderlyingName: EDU/USDT
+              - UnderlyingName: MAGIC/USDT
+              - UnderlyingName: ACH/USDT
+              - UnderlyingName: ID/USDT
+              - UnderlyingName: BLUR/USDT
+              - UnderlyingName: KAS/USDT
+              - UnderlyingName: ARKM/USDT
+              - UnderlyingName: FORTH/USDT
+              - UnderlyingName: ARK/USDT
+              - UnderlyingName: OXT/USDT
+              - UnderlyingName: WLD/USDT
+              - UnderlyingName: PORTAL/USDT
+              - UnderlyingName: ALT/USDT
+              - UnderlyingName: SCA/USDT
+
+            DefaultConnectionCount: 2
+            MaxSymbolsPerConnection: 3
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 200
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-bybit-217
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 216
+        ExchangeName: Bybit
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: CHR/USDT
+              - UnderlyingName: LINA/USDT
+              - UnderlyingName: RVN/USDT
+              - UnderlyingName: ARPA/USDT
+              - UnderlyingName: CTSI/USDT
+              - UnderlyingName: BCH/USDT
+              - UnderlyingName: IMX/USDT
+              - UnderlyingName: CRO/USDT
+              - UnderlyingName: VET/USDT
+              - UnderlyingName: COTI/USDT
+              - UnderlyingName: ENS/USDT
+              - UnderlyingName: MASK/USDT
+              - UnderlyingName: ARB/USDT
+              - UnderlyingName: CFX/USDT
+              - UnderlyingName: BSW/USDT
+              - UnderlyingName: 1000XEC/USDT
+              - UnderlyingName: MDT/USDT
+              - UnderlyingName: SEI/USDT
+              - UnderlyingName: LEVER/USDT
+              - UnderlyingName: AUCTION/USDT
+              - UnderlyingName: CYBER/USDT
+              - UnderlyingName: XNO/USDT
+              - UnderlyingName: QNT/USDT
+              - UnderlyingName: PERP/USDT
+              - UnderlyingName: GAS/USDT
+              - UnderlyingName: TIA/USDT
+              - UnderlyingName: MEME/USDT
+              - UnderlyingName: BADGER/USDT
+              - UnderlyingName: BIGTIME/USDT
+              - UnderlyingName: TOKEN/USDT
+
+
+            DefaultConnectionCount: 2
+            MaxSymbolsPerConnection: 3
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 200
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-bybit-218
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 217
+        ExchangeName: Bybit
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: USTC/USDT
+              - UnderlyingName: SUPER/USDT
+              - UnderlyingName: PYTH/USDT
+              - UnderlyingName: BEAM/USDT
+              - UnderlyingName: RARE/USDT
+              - UnderlyingName: ONG/USDT
+              - UnderlyingName: TOMI/USDT
+              - UnderlyingName: GODS/USDT
+              - UnderlyingName: MOVR/USDT
+              - UnderlyingName: SC/USDT
+              - UnderlyingName: AGI/USDT
+              - UnderlyingName: AERGO/USDT
+              - UnderlyingName: MBL/USDT
+              - UnderlyingName: JTO/USDT
+              - UnderlyingName: 1000BTT/USDT
+              - UnderlyingName: QI/USDT
+              - UnderlyingName: XRD/USDT
+              - UnderlyingName: AXL/USDT
+              - UnderlyingName: FUN/USDT
+              - UnderlyingName: MYRIA/USDT
+              - UnderlyingName: GLM/USDT
+              - UnderlyingName: DATA/USDT
+              - UnderlyingName: DAR/USDT
+              - UnderlyingName: SUN/USDT
+              - UnderlyingName: LSK/USDT
+              - UnderlyingName: METIS/USDT
+              - UnderlyingName: NFP/USDT
+              - UnderlyingName: WIF/USDT
+              - UnderlyingName: ZKF/USDT
+              - UnderlyingName: MYRO/USDT
+              - UnderlyingName: AI/USDT
+              - UnderlyingName: MBOX/USDT
+              - UnderlyingName: XAI/USDT
+              - UnderlyingName: MANTA/USDT
+              - UnderlyingName: ONDO/USDT
+              - UnderlyingName: CETUS/USDT
+              - UnderlyingName: MAVIA/USDT
+              - UnderlyingName: STRK/USDT
+              - UnderlyingName: DYM/USDT
+              - UnderlyingName: DGB/USDT
+              - UnderlyingName: PIXEL/USDT
+              - UnderlyingName: VIRTUAL/USDT
+            DefaultConnectionCount: 2
+            MaxSymbolsPerConnection: 3
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 200
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-bybit-219
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bybit:2025.2.3.74-44fb45d
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 218
+        ExchangeName: Bybit
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: APE/USDT
+              - UnderlyingName: AKRO/USDT
+              - UnderlyingName: JASMY/USDT
+              - UnderlyingName: REQ/USDT
+              - UnderlyingName: DENT/USDT
+              - UnderlyingName: JST/USDT
+              - UnderlyingName: AUDIO/USDT
+              - UnderlyingName: DUSK/USDT
+              - UnderlyingName: RUNE/USDT
+              - UnderlyingName: SSV/USDT
+              - UnderlyingName: ONT/USDT
+              - UnderlyingName: RAD/USDT
+              - UnderlyingName: RSS3/USDT
+              - UnderlyingName: OG/USDT
+              - UnderlyingName: PROM/USDT
+              - UnderlyingName: SWEAT/USDT
+              - UnderlyingName: NMR/USDT
+              - UnderlyingName: ACE/USDT
+              - UnderlyingName: 1CAT/USDT
+              - UnderlyingName: BNT/USDT
+              - UnderlyingName: TAO/USDT
+              - UnderlyingName: VTHO/USDT
+              - UnderlyingName: BOME/USDT
+              - UnderlyingName: SLERF/USDT
+              - UnderlyingName: ETHFI/USDT
+              - UnderlyingName: AEVO/USDT
+              - UnderlyingName: ZBCN/USDT
+              - UnderlyingName: DEGEN/USDT
+              - UnderlyingName: BRETT/USDT
+              - UnderlyingName: NOT/USDT
+              - UnderlyingName: BB/USDT
+              - UnderlyingName: 1000BONK/USDT
+              - UnderlyingName: ENA/USDT
+              - UnderlyingName: POPCAT/USDT
+              - UnderlyingName: W/USDT
+
+            DefaultConnectionCount: 2
+            MaxSymbolsPerConnection: 3
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 200
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sin-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"

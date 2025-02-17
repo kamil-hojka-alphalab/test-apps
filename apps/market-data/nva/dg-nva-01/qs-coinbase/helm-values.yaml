@@ -567,3 +567,66 @@ QuoteServers:
           Interval: 00:00:02
       PerfCollector:
         Enabled: false
+  - name: qs-coinbase-291
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-coinbase:2025.1.17.74-857c544
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-nva.node.al:10951,>tcp://qs-nva-1.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+        Exchanges:
+          Coinbase:
+            FileLoader:
+              ExchangeDataFile: /etc/security_master/security_master.coinbase.prop.yaml.latest
+      QuoteServer:
+        ShardId: 290
+        ExchangeName: Coinbase
+        AliasForId: null
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: ETH/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 100
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.05
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-nva-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:02
+            IdleThreshold: 00:03:00
+        Coinbase:
+          WsBaseUrl: "wss://ws-direct.exchange.coinbase.com"
+          ApiKey: 69c244a9fe4ef9498577ea67d6745e52
+          ApiSecret: eVgF7uDO5xqL0p5S5Mt07PZiEFO2rN6q2Ta/OjR5Iz5c6qmcGcb9zDPlMgLGdmQ64O6TLD615gPCtkvb28gJgA==
+          ApiPassphrase: tVveTC48J9&s6fbbBhqg
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:02
+      PerfCollector:
+        Enabled: false

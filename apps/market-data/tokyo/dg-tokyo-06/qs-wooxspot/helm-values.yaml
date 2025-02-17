@@ -1,0 +1,43 @@
+QuoteServers:
+  - name: qs-wooxspot-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-woox:2025.1.21.75-914bf85
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 6000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: WooXSpot
+
+        Monitor:
+          Symbols:
+            - Name: BTC/USDT
+            - Name: ETH/USDT
+            - Name: SOL/USDT
+          DefaultConnectionCount: 1
+
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Timestamp
+            TradesProcessing:
+              OrderBy: Timestamp
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-06:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false

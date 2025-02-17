@@ -1,0 +1,108 @@
+QuoteServers:
+  - name: qs-bluefinfut-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bluefin:2025.1.14.69-100f6ef
+    replicas: 0
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: BluefinFut
+
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: BTC/USDC.e_Perpetual@BluefinFut
+                NamePatterns:
+                  - BTC/USDC.e_Perpetual@BluefinFut
+              - UnderlyingName: ETH/USDC.e_Perpetual@BluefinFut
+                NamePatterns:
+                  - ETH/USDC.e_Perpetual@BluefinFut
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-bluefinsuifut-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bluefin:2025.1.14.69-100f6ef
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: BluefinSuiFut
+
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: BTC/USDCeth_Perpetual@BluefinSuiFut
+                NamePatterns:
+                  - BTC/USDCeth_Perpetual@BluefinSuiFut
+              - UnderlyingName: ETH/USDCeth_Perpetual@BluefinSuiFut
+                NamePatterns:
+                  - ETH/USDCeth_Perpetual@BluefinSuiFut
+              - UnderlyingName: SUI/USDCeth_Perpetual@BluefinSuiFut
+                NamePatterns:
+                  - SUI/USDCeth_Perpetual@BluefinSuiFut
+              - UnderlyingName: SOL/USDCeth_Perpetual@BluefinSuiFut
+                NamePatterns:
+                  - SOL/USDCeth_Perpetual@BluefinSuiFut
+              - UnderlyingName: TIA/USDCeth_Perpetual@BluefinSuiFut
+                NamePatterns:
+                  - TIA/USDCeth_Perpetual@BluefinSuiFut
+              - UnderlyingName: SEI/USDCeth_Perpetual@BluefinSuiFut
+                NamePatterns:
+                  - SEI/USDCeth_Perpetual@BluefinSuiFut
+              - UnderlyingName: AVAX/USDCeth_Perpetual@BluefinSuiFut
+                NamePatterns:
+                  - AVAX/USDCeth_Perpetual@BluefinSuiFut
+              - UnderlyingName: ARB/USDCeth_Perpetual@BluefinSuiFut
+                NamePatterns:
+                  - ARB/USDCeth_Perpetual@BluefinSuiFut
+              - UnderlyingName: APT/USDCeth_Perpetual@BluefinSuiFut
+                NamePatterns:
+                  - APT/USDCeth_Perpetual@BluefinSuiFut
+              - UnderlyingName: MATIC/USDCeth_Perpetual@BluefinSuiFut
+                NamePatterns:
+                  - MATIC/USDCeth_Perpetual@BluefinSuiFut
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false

@@ -1,0 +1,74 @@
+QuoteServers:
+  - name: qs-zeta-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-zeta:2025.1.22.400-3d0d058
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: Zeta
+
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: ETH/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: BTC/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: SOL/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: JUP/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: TIA/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: ARB/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: PYTH/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: APT/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: STRK/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: SEI/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: JTO/USDC
+                NamePatterns:
+                  - '_Perpetual'
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Timestamp
+            TradesProcessing:
+              OrderBy: Timestamp
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-06:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false

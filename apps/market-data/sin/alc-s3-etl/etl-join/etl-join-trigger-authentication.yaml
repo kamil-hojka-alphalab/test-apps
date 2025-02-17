@@ -1,9 +1,0 @@
-apiVersion: keda.sh/v1alpha1
-kind: TriggerAuthentication
-metadata:
-  name: etl-join-trigger-authentication
-  namespace: alc-s3-etl
-spec:
-  podIdentity:
-    provider: aws
-    roleArn: arn:aws:iam::346086605621:role/keda-workload-cloudwatch-observability

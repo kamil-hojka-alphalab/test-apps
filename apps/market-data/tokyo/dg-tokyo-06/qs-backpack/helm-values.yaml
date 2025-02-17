@@ -1,0 +1,53 @@
+QuoteServers:
+  - name: qs-backpack-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-backpack:2025.1.21.399-699cb1f
+    requests:
+      cpu: 1000m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: Backpack
+
+        Monitor:
+          Symbols:
+            - Name: PYTH/USDC
+            - Name: SOL/USDC
+            - Name: JTO/USDC
+            - Name: HNT/USDC
+            - Name: USDT/USDC
+            - Name: BONK/USDC
+            - Name: JUP/USDC
+            - Name: MOBILE/USDC
+            - Name: WIF/USDC
+            - Name: WEN/USDC
+            - Name: BTC/USDC
+            - Name: W/USDC
+            - Name: RNDR/USDC
+            - Name: PRCL/USDC
+            - Name: SHFL/USDC
+            - Name: HLG/USDC
+            - Name: ZKJ/USDC
+            - Name: UNA/USDC
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-06:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false

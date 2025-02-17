@@ -1,0 +1,49 @@
+QuoteServers:
+  - name: qs-synquotefut-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-synquote:2024.9.20.332-26d8cae
+    requests:
+      cpu: 1000m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: SynQuoteFut
+        SynQuoteFut:
+          WsUrl: wss://prod-api.synquote.com/ws
+          RestUrl: https://prod-api.synquote.com
+        Monitor:
+          MaxSymbolsPerConnection: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: BTC/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: ETH/USDC
+                NamePatterns:
+                  - _Perpetual
+              - UnderlyingName: SOL/USDC
+                NamePatterns:
+                  - _Perpetual
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false

@@ -1,0 +1,50 @@
+QuoteServers:
+  - name: qs-dydxv4-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-dydxv4:2024.1.19.58-c1ea6f0
+    requests:
+      cpu: 1200m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: dYdXV4
+
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: ETH/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: BTC/USDC
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: SOL/USDC
+                NamePatterns:
+                  - '_Perpetual'
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Timestamp
+            TradesProcessing:
+              OrderBy: Timestamp
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-06:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false

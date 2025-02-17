@@ -26,10 +26,10 @@ spec:
               mountPath: /etc/security_master
           resources:
             limits:
-              memory: 6000Mi
-              cpu: 9000m
+              memory: 12000Mi
+              cpu: 11000m
             requests:
-              cpu: 9000m
+              cpu: 11000m
               memory: 6000Mi
           ports:
             - name: health-port

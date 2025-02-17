@@ -30,11 +30,11 @@ spec:
               mountPath: /app/prod
           resources:
             limits:
-              memory: 12000Mi
+              memory: 25000Mi
               cpu: 7000m
             requests:
               cpu: 6000m
-              memory: 4000Mi
+              memory: 8000Mi
           ports:
             - name: health-port
               containerPort: 5001
@@ -65,8 +65,8 @@ spec:
       tolerations:
         - key: node/destiny
           operator: Equal
-          value: dg-test
+          value: dg-nrt
           effect: NoSchedule
       nodeSelector:
-        node/destiny: dg-test
+        node/destiny: dg-nrt
 

@@ -1,0 +1,932 @@
+QuoteServers:
+  - name: qs-kucoin-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2025.1.22.95-3d0d058
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 200
+
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+        Monitor:
+          Symbols:
+            - Name: OGN/USDT
+            - Name: BAND/USDT
+            - Name: LINK/USDC
+            - Name: SKEY/USDT
+            - Name: LINK/BTC
+            - Name: ISP/USDT
+            - Name: FXS/USDT
+            - Name: TRX/BTC
+            - Name: ATOM/USDC
+            - Name: DATA/USDT
+            - Name: POLK/USDT
+            - Name: MAN/USDT
+            - Name: HAI/USDT
+            - Name: PAXG/USDT
+            - Name: TRX/USDT
+            - Name: CELO/USDT
+            - Name: SAND/USDT
+            - Name: DASH/USDT
+            - Name: XMR/BTC
+            - Name: ROSE/USDT
+            - Name: ETH/USDC
+            - Name: ALGO/USDT
+            - Name: LINK/USDT
+            - Name: LTC/USDT
+            - Name: TON/USDT
+            - Name: FLR/USDT
+            - Name: ACH/USDT
+
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.10
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-05:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:02:00
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-kucoin-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2025.1.22.95-3d0d058
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 201
+
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+        Monitor:
+          Symbols:
+            - Name: SLIM/USDT
+            - Name: UMA/USDT
+            - Name: LTO/USDT
+            - Name: REVV/USDT
+            - Name: ORAI/USDT
+            - Name: ALEPH/USDT
+            - Name: DPR/USDT
+            - Name: MNW/USDT
+            - Name: IMX/USDT
+            - Name: GODS/USDT
+            - Name: HYVE/USDT
+            - Name: YFI/USDT
+            - Name: XMR/ETH
+            - Name: ERN/USDT
+            - Name: XLM/USDT
+            - Name: LSS/USDT
+            - Name: ENS/USDT
+            - Name: FLAME/USDT
+            - Name: DODO/USDT
+            - Name: SLP/USDT
+            - Name: OPUL/USDT
+            - Name: EGLD/USDT
+            - Name: OM/USDT
+            - Name: KAVA/USDT
+            - Name: EWT/BTC
+            - Name: NFT/USDT
+            - Name: MOVR/USDT
+            - Name: COTI/USDT
+            - Name: POND/USDT
+            - Name: JST/USDT
+            - Name: DVPN/USDT
+            - Name: CLH/USDT
+            - Name: CWEB/USDT
+            - Name: FLY/USDT
+            - Name: PEOPLE/USDT
+            - Name: LINA/USDT
+            - Name: UPO/USDT
+            - Name: AVAX/USDC
+            - Name: SHIB/USDC
+            - Name: SOL/USDC
+
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.10
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-05:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:02:00
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-kucoin-203
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2025.1.22.95-3d0d058
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 202
+
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+        Monitor:
+          Symbols:
+            - Name: LPOOL/USDT
+            - Name: LIT/USDT
+            - Name: BTC/USDT
+            - Name: VR/USDT
+            - Name: BTT/USDT
+            - Name: FLUX/USDT
+            - Name: IGU/USDT
+            - Name: TSUGT/USDT
+            - Name: ENJ/USDT
+            - Name: GRT/USDT
+            - Name: VET/USDT
+            - Name: ZIL/USDT
+            - Name: SHIB/USDT
+            - Name: MINA/USDT
+            - Name: USDD/USDC
+            - Name: LOOKS/USDT
+            - Name: APE/USDT
+            - Name: FT/USDT
+            - Name: WLD/USDT
+            - Name: MJT/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.10
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-05:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:02:00
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-kucoin-205
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2025.1.22.95-3d0d058
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 204
+        KuCoin:
+          ApiPassphrase: VoxOoWnTefUKRsC2J6dJ9wP2LT0MNf9j
+          ApiKey: 6672b0b7104f94000103430c
+          ApiSecret: 3868343c-bfff-4736-a79a-52deb7f3c879
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+        Monitor:
+          Symbols:
+            - Name: OVR/USDT
+            - Name: USDD/USDT
+            - Name: FITFI/USDT
+            - Name: SIN/USDT
+            - Name: TRX/USDC
+            - Name: FTM/USDC
+            - Name: DOT/USDC
+            - Name: CAKE/USDT
+            - Name: XCAD/USDT
+            - Name: KRL/USDT
+            - Name: CPOOL/USDT
+            - Name: JASMY/USDT
+            - Name: TOMI/USDT
+            - Name: WAXL/USDT
+            - Name: VOLT/USDT
+            - Name: KAS/USDT
+            - Name: LADYS/USDT
+            - Name: MANA/USDT
+            - Name: GALA/USDT
+            - Name: BFC/USDT
+            - Name: T/USDT
+            - Name: CTC/USDT
+            - Name: FET/USDT
+            - Name: NXRA/USDT
+            - Name: ARB/USDT
+            - Name: TENET/USDT
+            - Name: SPA/USDT
+            - Name: RACA/USDT
+
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.10
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-05:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:02:00
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-kucoin-206
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2025.1.22.95-3d0d058
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 205
+
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+        Monitor:
+          Symbols:
+            - Name: DFI/BTC
+            - Name: VET/ETH
+            - Name: AIOZ/USDT
+            - Name: MKR/USDT
+            - Name: BNB/KCS
+            - Name: TRADE/USDT
+            - Name: WBTC/BTC
+            - Name: ZEE/USDT
+            - Name: LTC/ETH
+            - Name: XPRT/USDT
+            - Name: CFX/USDT
+            - Name: TWT/USDT
+            - Name: APT/USDT
+            - Name: ETC/USDT
+            - Name: XTZ/USDT
+            - Name: ZEC/USDT
+            - Name: FET/BTC
+            - Name: ERG/USDT
+            - Name: MAHA/USDT
+            - Name: TRIAS/USDT
+            - Name: SUPER/USDT
+            - Name: PERP/USDT
+            - Name: OUSD/USDT
+            - Name: HNT/USDT
+            - Name: TRU/USDT
+            - Name: CREDI/USDT
+            - Name: XDB/USDT
+            - Name: VELO/USDT
+            - Name: ROUTE/USDT
+            - Name: STX/BTC
+            - Name: ASTR/USDT
+            - Name: MONI/USDT
+            - Name: RSR/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.10
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-05:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:01:00
+            IdleThreshold: 00:02:00
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-kucoin-207
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2025.1.22.95-3d0d058
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 206
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+        Monitor:
+          Symbols:
+            - Name: LIKE/USDT
+            - Name: REEF/USDT
+            - Name: AKRO/USDT
+            - Name: PLU/USDT
+            - Name: ELA/USDT
+            - Name: DEXE/USDT
+            - Name: INJ/USDT
+            - Name: DIA/USDT
+            - Name: FIL/USDT
+            - Name: UNI/USDT
+            - Name: THETA/USDT
+            - Name: OOE/USDT
+            - Name: BEPRO/USDT
+            - Name: TOWER/USDT
+            - Name: WOO/USDT
+            - Name: NAKA/USDT
+            - Name: PEPE2/USDT
+            - Name: TT/USDT
+            - Name: WAVES/USDT
+            - Name: NTRN/USDT
+            - Name: XMR/USDT
+            - Name: MTV/USDT
+            - Name: CIRUS/USDT
+            - Name: STORJ/USDT
+            - Name: MEME/USDT
+            - Name: TOKEN/USDT
+            - Name: LL/USDT
+
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.10
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-05:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:02:00
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-kucoin-208
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2025.1.22.95-3d0d058
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 207
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+        Monitor:
+          Symbols:
+            - Name: API3/USDT
+            - Name: ODDZ/USDT
+            - Name: CTSI/USDT
+            - Name: DFYN/USDT
+            - Name: PHA/USDT
+            - Name: SHR/USDT
+            - Name: DAO/USDT
+            - Name: CERE/USDT
+            - Name: GMEE/USDT
+            - Name: ONT/USDT
+            - Name: CVX/USDT
+            - Name: CRO/USDT
+            - Name: AR/USDT
+            - Name: METIS/USDT
+            - Name: HAPI/USDT
+            - Name: SWASH/USDT
+            - Name: SCLP/USDT
+            - Name: ANKR/USDT
+            - Name: DGB/USDT
+            - Name: SNX/USDT
+            - Name: FEAR/USDT
+            - Name: AXS/USDT
+            - Name: DEGO/USDT
+            - Name: COMP/USDT
+            - Name: KSM/USDT
+            - Name: DAG/USDT
+            - Name: HTR/USDT
+            - Name: DOT/USDT
+            - Name: TEL/USDT
+            - Name: ETH/BTC
+            - Name: UNO/USDT
+            - Name: GMT/USDT
+            - Name: GHX/USDT
+            - Name: TLM/USDT
+            - Name: WILD/USDT
+            - Name: SOUL/USDT
+            - Name: MAGIC/USDT
+            - Name: CSPR/USDT
+            - Name: RDNT/USDT
+
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.10
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-05:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:02:00
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-kucoin-210
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2025.1.22.95-3d0d058
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 209
+
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+        Monitor:
+          Symbols:
+            - Name: XRP/ETH
+            - Name: CHMB/USDT
+            - Name: KLAY/USDT
+            - Name: REVU/USDT
+            - Name: BAX/USDT
+            - Name: GLMR/USDT
+            - Name: UNFI/USDT
+            - Name: ATOM/USDT
+            - Name: SKL/USDT
+            - Name: C98/USDT
+            - Name: JAM/USDT
+            - Name: BOB/USDT
+            - Name: ICP/USDT
+            - Name: QNT/USDT
+            - Name: CHR/USDT
+            - Name: BNB/USDT
+            - Name: KCS/USDT
+            - Name: DAG/BTC
+            - Name: ONE/USDT
+            - Name: KCS/BTC
+            - Name: CRV/USDT
+            - Name: SUI/USDT
+            - Name: ZPAY/USDT
+            - Name: LMWR/USDT
+            - Name: KARATE/USDT
+            - Name: CGPT/USDT
+            - Name: KDA/USDT
+            - Name: MASK/USDT
+            - Name: XPR/USDT
+            - Name: ARX/USDT
+            - Name: VRA/BTC
+            - Name: NEON/USDT
+            - Name: PEAQ/USDT
+
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.10
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-06:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:02:00
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-kucoin-211
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2025.1.22.95-3d0d058
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 210
+        KuCoin:
+          ApiPassphrase: UPpdoXnVJeJjAx9HzYGbmeG2hmlhJuAf
+          ApiKey: 6672b0bd5ee2e4000139e38b
+          ApiSecret: a87e98dd-04ff-4be1-af42-337dee963d6f
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+        Monitor:
+          Symbols:
+            - Name: ADS/USDT
+            - Name: ZEC/BTC
+            - Name: HBAR/USDT
+            - Name: ZEN/USDT
+            - Name: REN/USDT
+            - Name: YGG/USDT
+            - Name: XCH/USDT
+            - Name: SWEAT/USDT
+            - Name: ETH/USDT
+            - Name: SDAO/USDT
+            - Name: FTT/USDT
+            - Name: ALICE/USDT
+            - Name: XTM/USDT
+            - Name: AVAX/BTC
+            - Name: CFG/USDT
+            - Name: BNB/BTC
+            - Name: BLZ/USDT
+            - Name: BONK/USDT
+            - Name: SIDUS/USDT
+            - Name: ETHW/USDT
+            - Name: VISION/USDT
+            - Name: VRA/USDT
+            - Name: SUSHI/USDT
+            - Name: TLOS/USDT
+            - Name: VET/BTC
+            - Name: USDC/USDT
+            - Name: PBX/USDT
+            - Name: PYR/USDT
+            - Name: BLOK/USDT
+            - Name: DFI/USDT
+            - Name: TOKO/USDT
+            - Name: LTC/BTC
+            - Name: ILV/USDT
+            - Name: STX/USDT
+            - Name: ARPA/USDT
+            - Name: ADA/USDT
+
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.10
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-05:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:02:00
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-kucoin-213
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2025.1.22.95-3d0d058
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 212
+
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+        Monitor:
+          Symbols:
+            - Name: XRP/BTC
+            - Name: SOL/USDT
+            - Name: IOTX/USDT
+            - Name: ADA/BTC
+            - Name: LITH/USDT
+            - Name: ADA/USDC
+            - Name: UOS/USDT
+            - Name: WIN/USDT
+            - Name: AVAX/USDT
+            - Name: DYDX/USDT
+            - Name: XNO/USDT
+            - Name: USTC/USDT
+            - Name: EOS/USDT
+            - Name: NWC/USDT
+            - Name: BTC/USDC
+            - Name: XRP/USDC
+            - Name: AAVE/USDT
+            - Name: ICP/BTC
+            - Name: DAPPX/USDT
+            - Name: SWFTC/USDT
+            - Name: NMR/USDT
+            - Name: PYTH/USDT
+            - Name: ZBCN/USDT
+            - Name: POL/USDT
+            - Name: PUFFER/USDT
+            - Name: CATI/USDT
+            - Name: MOODENG/USDT
+            - Name: CARV/USDT
+            - Name: DEEP/USDT
+            - Name: DBR/USDT
+            - Name: SCR/USDT
+
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.10
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-05:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:02:00
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+
+  - name: qs-kucoin-219
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2025.1.22.95-3d0d058
+    requests:
+      cpu: 1100m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 218
+
+        CheckStaleMarketDataTrigger:
+          Interval: 00:00:01
+        Monitor:
+          Symbols:
+            - Name: XRP/USDT
+            - Name: AZERO/USDT
+            - Name: VAI/USDT
+            - Name: BLUR/USDT
+            - Name: ACS/USDT
+            - Name: HFT/USDT
+            - Name: DUSK/USDT
+            - Name: GMX/USDT
+            - Name: DC/USDT
+            - Name: AKT/USDT
+            - Name: SEI/USDT
+            - Name: VXV/USDT
+            - Name: DMTR/USDT
+            - Name: CTI/USDT
+            - Name: EWT/USDT
+            - Name: SFUND/USDT
+            - Name: KCS/USDC
+            - Name: OP/USDT
+            - Name: GAS/USDT
+
+
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.10
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-05:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          StaleMarketDataObserver:
+            StaleThreshold: 00:00:01
+            IdleThreshold: 00:02:00
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"

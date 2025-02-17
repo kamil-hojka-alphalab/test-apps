@@ -1,0 +1,803 @@
+QuoteServers:
+  - name: qs-okexfut-210
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 209
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: THETA/USDT
+              - UnderlyingName: AGLD/USDT
+              - UnderlyingName: XLM/USDT
+              - UnderlyingName: UNI/USD
+              - UnderlyingName: ATOM/USD
+              - UnderlyingName: FLM/USDT
+              - UnderlyingName: CRV/USD
+              - UnderlyingName: SUSHI/USD
+              - UnderlyingName: YFI/USD
+              - UnderlyingName: APT/USDT
+              - UnderlyingName: WLD/USDT
+              - UnderlyingName: HBAR/USDT
+              - UnderlyingName: TIA/USDT
+              - UnderlyingName: FLOW/USDT
+              - UnderlyingName: MEME/USDT
+              - UnderlyingName: SATS/USDT
+              - UnderlyingName: ACE/USDT
+              - UnderlyingName: ZETA/USDT
+
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-okexfut-211
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 210
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: ALGO/USD
+              - UnderlyingName: TRX/USDT
+              - UnderlyingName: TRX/USD
+              - UnderlyingName: NEO/USD
+              - UnderlyingName: BAT/USDT
+              - UnderlyingName: LTC/USD
+              - UnderlyingName: LTC/USDT
+              - UnderlyingName: APE/USDT
+              - UnderlyingName: LOOKS/USDT
+              - UnderlyingName: SAND/USD
+              - UnderlyingName: API3/USDT
+              - UnderlyingName: MANA/USD
+              - UnderlyingName: SWEAT/USDT
+              - UnderlyingName: USTC/USDT
+              - UnderlyingName: BNB/USDT
+              - UnderlyingName: CETUS/USDT
+              - UnderlyingName: ZRX/USDT
+              - UnderlyingName: AVAX/USDT
+              - UnderlyingName: DOT/USDT
+              - UnderlyingName: TURBO/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-okexfut-212
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 211
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: QTUM/USDT
+              - UnderlyingName: NEO/USDT
+              - UnderlyingName: ALGO/USDT
+              - UnderlyingName: ENS/USDT
+              - UnderlyingName: YFI/USDT
+              - UnderlyingName: COMP/USDT
+              - UnderlyingName: SUSHI/USDT
+              - UnderlyingName: LRC/USDT
+              - UnderlyingName: CHZ/USDT
+              - UnderlyingName: MASK/USDT
+              - UnderlyingName: BAND/USDT
+              - UnderlyingName: JST/USDT
+              - UnderlyingName: OP/USDT
+              - UnderlyingName: PYTH/USDT
+              - UnderlyingName: SSV/USDT
+              - UnderlyingName: JOE/USDT
+              - UnderlyingName: KSM/USDT
+              - UnderlyingName: LUNC/USDT
+              - UnderlyingName: USDC/USDT
+              - UnderlyingName: ZK/USDT
+              - UnderlyingName: VINE/USDT
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-okexfut-213
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.6.85-4ea07e2
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 212
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: XLM/USD
+              - UnderlyingName: BTC/USD
+              - UnderlyingName: AAVE/USDT
+              - UnderlyingName: ATOM/USDT
+              - UnderlyingName: IMX/USDT
+              - UnderlyingName: DYDX/USDT
+              - UnderlyingName: ZIL/USDT
+              - UnderlyingName: LDO/USDT
+              - UnderlyingName: MAGIC/USDT
+              - UnderlyingName: GMX/USDT
+              - UnderlyingName: WOO/USDT
+              - UnderlyingName: AR/USDT
+              - UnderlyingName: BTC/USDC
+              - UnderlyingName: ETH/USDC
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 23:00:00
+  - name: qs-okexfut-214
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 213
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: XTZ/USDT
+              - UnderlyingName: DOT/USD
+              - UnderlyingName: FIL/USD
+              - UnderlyingName: GRT/USDT
+              - UnderlyingName: CELO/USDT
+              - UnderlyingName: CVC/USDT
+              - UnderlyingName: EGLD/USDT
+              - UnderlyingName: BADGER/USDT
+              - UnderlyingName: GALA/USDT
+              - UnderlyingName: ALPHA/USDT
+              - UnderlyingName: PERP/USDT
+              - UnderlyingName: SAND/USDT
+              - UnderlyingName: NEAR/USDT
+              - UnderlyingName: DOGE/USD
+              - UnderlyingName: SOL/USD
+              - UnderlyingName: VRA/USDT
+              - UnderlyingName: ID/USDT
+              - UnderlyingName: INJ/USDT
+              - UnderlyingName: RON/USDT
+              - UnderlyingName: AUCTION/USDT
+              - UnderlyingName: ME/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okexfut-215
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.6.85-4ea07e2
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 214
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: FIL/USDT
+              - UnderlyingName: SNX/USDT
+              - UnderlyingName: BNT/USDT
+              - UnderlyingName: SOL/USDT
+              - UnderlyingName: BAL/USDT
+              - UnderlyingName: ONEINCH/USD
+              - UnderlyingName: LPT/USDT
+              - UnderlyingName: PEOPLE/USDT
+              - UnderlyingName: BICO/USDT
+              - UnderlyingName: CRO/USDT
+              - UnderlyingName: FTM/USDT
+              - UnderlyingName: ETH/USD
+              - UnderlyingName: WIF/USDT
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okexfut-216
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.6.85-4ea07e2
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 215
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: AXS/USDT
+              - UnderlyingName: GRT/USD
+              - UnderlyingName: RVN/USDT
+              - UnderlyingName: MINA/USDT
+              - UnderlyingName: YGG/USDT
+              - UnderlyingName: BTC/USDT
+              - UnderlyingName: AVAX/USD
+              - UnderlyingName: ETH/USDT
+              - UnderlyingName: IOST/USDT
+              - UnderlyingName: KNC/USDT
+              - UnderlyingName: CFX/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okexfut-217
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 216
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: ETC/USDT
+              - UnderlyingName: XRP/USDT
+              - UnderlyingName: BCH/USDT
+              - UnderlyingName: BSV/USDT
+              - UnderlyingName: EOS/USDT
+              - UnderlyingName: ADA/USDT
+              - UnderlyingName: LINK/USDT
+              - UnderlyingName: IOTA/USDT
+              - UnderlyingName: XCH/USDT
+              - UnderlyingName: STX/USDT
+              - UnderlyingName: RDNT/USDT
+              - UnderlyingName: PEPE/USDT
+              - UnderlyingName: ORDI/USDT
+              - UnderlyingName: TRUMP/USDT
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-okexfut-218
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 217
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: MANA/USDT
+              - UnderlyingName: MKR/USDT
+              - UnderlyingName: UMA/USDT
+              - UnderlyingName: DOGE/USDT
+              - UnderlyingName: THETA/USD
+              - UnderlyingName: CSPR/USDT
+              - UnderlyingName: SLP/USDT
+              - UnderlyingName: GMT/USDT
+              - UnderlyingName: SHIB/USDT
+              - UnderlyingName: ICP/USDT
+              - UnderlyingName: ONT/USDT
+              - UnderlyingName: STORJ/USDT
+              - UnderlyingName: ONEINCH/USDT
+              - UnderlyingName: GODS/USDT
+              - UnderlyingName: ORBS/USDT
+              - UnderlyingName: BIGTIME/USDT
+              - UnderlyingName: LSK/USDT
+              - UnderlyingName: NMR/USDT
+              - UnderlyingName: JUP/USDT
+              - UnderlyingName: PRCL/USDT
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: "23:00:00"
+  - name: qs-okexfut-219
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 218
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: ETC/USD
+              - UnderlyingName: XRP/USD
+              - UnderlyingName: BCH/USD
+              - UnderlyingName: BSV/USD
+              - UnderlyingName: EOS/USD
+              - UnderlyingName: ADA/USD
+              - UnderlyingName: LINK/USD
+              - UnderlyingName: CRV/USDT
+              - UnderlyingName: UNI/USDT
+              - UnderlyingName: RSR/USDT
+              - UnderlyingName: NFT/USDT
+              - UnderlyingName: ETHW/USDT
+              - UnderlyingName: ARB/USDT
+              - UnderlyingName: SUI/USDT
+              - UnderlyingName: WAXP/USDT
+              - UnderlyingName: GAS/USDT
+              - UnderlyingName: RACA/USDT
+              - UnderlyingName: ONE/USDT
+              - UnderlyingName: ACH/USDT
+              - UnderlyingName: T/USDT
+              - UnderlyingName: ICX/USDT
+              - UnderlyingName: GLM/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-okexfut-220
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 219
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: ENJ/USDT
+              - UnderlyingName: METIS/USDT
+              - UnderlyingName: RAY/USDT
+              - UnderlyingName: FXS/USDT
+              - UnderlyingName: OP/USD
+              - UnderlyingName: NOT/USDT
+              - UnderlyingName: MEW/USDT
+              - UnderlyingName: TNSR/USDT
+              - UnderlyingName: ETHFI/USDT
+              - UnderlyingName: ZENT/USDT
+              - UnderlyingName: W/USDT
+              - UnderlyingName: AEVO/USDT
+              - UnderlyingName: ONDO/USDT
+              - UnderlyingName: ATH/USDT
+              - UnderlyingName: CVX/USDT
+              - UnderlyingName: KISHU/USDT
+              - UnderlyingName: ZRO/USDT
+              - UnderlyingName: BOME/USDT
+              - UnderlyingName: TAO/USDT
+              - UnderlyingName: UXLINK/USDT
+              - UnderlyingName: POL/USDT
+              - UnderlyingName: ARKM/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+
+  - name: qs-okexfut-221
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.5.84-a3e3325
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 220
+        ExchangeName: OKExFut
+        OKExFut:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        Monitor:
+          MaxSymbolsPerConnection: 20
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: OM/USDT
+              - UnderlyingName: LQTY/USDT
+              - UnderlyingName: STRK/USDT
+              - UnderlyingName: BONE/USDT
+              - UnderlyingName: DGB/USDT
+              - UnderlyingName: MERL/USDT
+              - UnderlyingName: CTC/USDT
+              - UnderlyingName: BONK/USDT
+              - UnderlyingName: JTO/USDT
+              - UnderlyingName: MOVR/USDT
+              - UnderlyingName: TRB/USDT
+              - UnderlyingName: FLOKI/USDT
+              - UnderlyingName: VELO/USDT
+              - UnderlyingName: KLAY/USDT
+              - UnderlyingName: TON/USDT
+              - UnderlyingName: BLUR/USDT
+              - UnderlyingName: CORE/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-okexfut-291
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-okex:2025.2.11.89-c065da5
+    requests:
+      cpu: 2000m
+      memory: 3000Mi
+    limits:
+      cpu: 2000m
+      memory: 3000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+      QuoteServer:
+        ShardId: 290
+        ExchangeName: OKExMerged
+        OKExMerged:
+          L2UpdateChannel: books
+          Passphrase: "shfjk#54JS3djDJ"
+          ApiKey: "5b10705f-b0e4-45ce-aa65-1e8bb93878c8"
+          Secret: "E7AA910F4291AF4769FC4013BDC1FC94"
+          SubscribeToFundingRates: true
+        PeriodicSnapshotTrigger:
+          Enabled: true
+          MinPeriodSeconds: 10
+          MaxPeriodSeconds: 15
+        Monitor:
+          MaxSymbolsPerConnection: 100
+          DefaultConnectionCount: 2
+          DerivedSymbols:
+            Type: All
+            Symbols:
+              - UnderlyingName: ETH/USD
+                NamePatterns:
+                  - 'ETH/USD.*@OKExMerged'
+              - UnderlyingName: BTC/USD
+                NamePatterns:
+                  - 'BTC/USD.*@OKExMerged'
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00

@@ -1,0 +1,222 @@
+QuoteServers:
+  - name: qs-bitstamp-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bitstamp:2025.1.14.69-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 12
+          Symbols:
+            - Name: BCH/BTC
+            - Name: BCH/USD
+            - Name: LTC/BTC
+            - Name: LTC/EUR
+            - Name: ETH/BTC
+            - Name: BCH/EUR
+            - Name: SNX/USD
+            - Name: SNX/EUR
+            - Name: CRV/USD
+            - Name: CRV/EUR
+            - Name: LINK/USD
+            - Name: LINK/EUR
+            - Name: ETH/GBP
+            - Name: XLM/USD
+            - Name: XLM/EUR
+            - Name: UNI/USD
+            - Name: UNI/EUR
+            - Name: UNI/BTC
+            - Name: XRP/USDT
+            - Name: USDC/USD
+            - Name: USDC/EUR
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-fra-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-bitstamp-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bitstamp:2025.1.14.69-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 201
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 12
+          Symbols:
+            - Name: ETH/USD
+            - Name: ETH/USDT
+            - Name: USDT/USD
+            - Name: USDT/EUR
+            - Name: KNC/USD
+            - Name: KNC/EUR
+            - Name: DAI/USD
+            - Name: USDC/USDT
+            - Name: GRT/USD
+            - Name: GRT/EUR
+            - Name: ZRX/USD
+            - Name: ZRX/EUR
+            - Name: AAVE/BTC
+            - Name: AAVE/EUR
+            - Name: AAVE/USD
+            - Name: SOL/USD
+            - Name: SOL/EUR
+            - Name: XRP/USD
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-fra-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-bitstamp-203
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bitstamp:2025.1.14.69-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 202
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 10
+          Symbols:
+            - Name: CHZ/USD
+            - Name: BTC/EUR
+            - Name: LINK/GBP
+            - Name: ADA/EUR
+            - Name: ADA/USD
+            - Name: SUSHI/USD
+            - Name: SAND/EUR
+            - Name: MATIC/USD
+            - Name: SAND/USD
+            - Name: CHZ/EUR
+            - Name: ETH/USDC
+            - Name: LTC/USD
+            - Name: ETH/EUR
+            - Name: BAT/EUR
+            - Name: BAT/USD
+            - Name: XRP/BTC
+            - Name: XRP/EUR
+            - Name: EUR/USD
+            - Name: GBP/USD
+
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-fra-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-bitstamp-204
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bitstamp:2025.1.14.69-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 203
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 10
+          Symbols:
+            - Name: YFI/USD
+            - Name: YFI/EUR
+            - Name: ALGO/USD
+            - Name: ALGO/EUR
+            - Name: MKR/USD
+            - Name: MKR/EUR
+            - Name: COMP/USD
+            - Name: COMP/EUR
+            - Name: BTC/USDT
+            - Name: BTC/USDC
+            - Name: XRP/GBP
+            - Name: XLM/BTC
+            - Name: BTC/USD
+            - Name: BTC/GBP
+            - Name: AXS/USD
+            - Name: AXS/EUR
+            - Name: ENJ/USD
+            - Name: ENJ/EUR
+            - Name: MATIC/EUR
+            - Name: AUDIO/USD
+            - Name: AUDIO/EUR
+            - Name: AUDIO/BTC
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-fra-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00

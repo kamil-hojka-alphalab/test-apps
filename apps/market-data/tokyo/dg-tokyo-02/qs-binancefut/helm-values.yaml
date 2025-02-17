@@ -1,0 +1,677 @@
+QuoteServers:
+  - name: qs-binancefut-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: BinanceFut
+
+
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: ETH/USDT
+                UseTicker: true
+              - UnderlyingName: ETC/USDT
+              - UnderlyingName: BCH/USDT
+              - UnderlyingName: TRX/USDT
+              - UnderlyingName: BAKE/USDT
+              - UnderlyingName: ONEINCH/USDT
+              - UnderlyingName: THETA/USDT
+              - UnderlyingName: MAGIC/USDT
+              - UnderlyingName: GMX/USDT
+              - UnderlyingName: MINA/USDT
+              - UnderlyingName: T/USDT
+              - UnderlyingName: FXS/USDT
+              - UnderlyingName: ASTR/USDT
+              - UnderlyingName: SUI/USDT
+                UseTicker: true
+              - UnderlyingName: EDU/USDT
+              - UnderlyingName: BLUR/USDT
+              - UnderlyingName: PEPE/USDT
+              - UnderlyingName: ENA/USDT
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 201
+        ExchangeName: BinanceFut
+
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: BTC/USDT
+                UseTicker: true
+              - UnderlyingName: PERP/USDT
+              - UnderlyingName: MAV/USDT
+              - UnderlyingName: OXT/USDT
+              - UnderlyingName: BNT/USDT
+              - UnderlyingName: SEI/USDT
+              - UnderlyingName: SHIB/USDT
+              - UnderlyingName: FLOKI/USDT
+              - UnderlyingName: ILV/USDT
+              - UnderlyingName: BONK/USDT
+              - UnderlyingName: TON/USDT
+              - UnderlyingName: PORTAL/USDT
+              - UnderlyingName: VTHO/USDT
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-203
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 202
+        ExchangeName: BinanceFut
+
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: XLM/USDT
+              - UnderlyingName: XMR/USDT
+              - UnderlyingName: GTC/USDT
+              - UnderlyingName: GALA/USDT
+              - UnderlyingName: GMT/USDT
+              - UnderlyingName: SPELL/USDT
+              - UnderlyingName: DEFI/USDT
+              - UnderlyingName: NEO/USDT
+              - UnderlyingName: VET/USDT
+              - UnderlyingName: QTUM/USDT
+              - UnderlyingName: EOS/USDT
+              - UnderlyingName: APE/USDT
+              - UnderlyingName: LINK/USDT
+              - UnderlyingName: NTRN/USDT
+              - UnderlyingName: ETHW/USDT
+              - UnderlyingName: MYRO/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-204
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 203
+        ExchangeName: BinanceFut
+
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: COMP/USDT
+              - UnderlyingName: SNX/USDT
+              - UnderlyingName: DOT/USDT
+              - UnderlyingName: AVAX/USDT
+              - UnderlyingName: BAND/USDT
+              - UnderlyingName: ICX/USDT
+              - UnderlyingName: RSR/USDT
+              - UnderlyingName: BAL/USDT
+              - UnderlyingName: KNC/USDT
+              - UnderlyingName: ZRX/USDT
+              - UnderlyingName: INJ/USDT
+              - UnderlyingName: SSV/USDT
+              - UnderlyingName: BNX/USDT
+              - UnderlyingName: UMA/USDT
+              - UnderlyingName: XVG/USDT
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-205
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 204
+        ExchangeName: BinanceFut
+
+
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: SOL/USDT
+              - UnderlyingName: BLZ/USDT
+              - UnderlyingName: DOGE/USDT
+              - UnderlyingName: FTM/USDT
+              - UnderlyingName: RLC/USDT
+              - UnderlyingName: ZEC/USDT
+              - UnderlyingName: IOTA/USDT
+              - UnderlyingName: BAT/USDT
+              - UnderlyingName: CRV/USDT
+              - UnderlyingName: ID/USDT
+              - UnderlyingName: JOE/USDT
+              - UnderlyingName: CYBER/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-206
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 205
+        ExchangeName: BinanceFut
+
+
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: LINK/USD
+              - UnderlyingName: LRC/USDT
+              - UnderlyingName: ARPA/USDT
+              - UnderlyingName: LPT/USDT
+              - UnderlyingName: BCH/USD
+              - UnderlyingName: FIL/USD
+              - UnderlyingName: CELR/USDT
+              - UnderlyingName: CTSI/USDT
+              - UnderlyingName: OGN/USDT
+              - UnderlyingName: TRB/USDT
+              - UnderlyingName: JTO/USDT
+              - UnderlyingName: BEAMX/USDT
+              - UnderlyingName: PIXEL/USDT
+              - UnderlyingName: STRK/USDT
+
+
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-207
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 206
+        ExchangeName: BinanceFut
+
+
+        Monitor:
+          DefaultConnectionCount: 1
+
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: AXS/USDT
+              - UnderlyingName: COTI/USDT
+              - UnderlyingName: RVN/USDT
+              - UnderlyingName: XRP/USD
+                UseTicker: true
+              - UnderlyingName: ADA/USDT
+                UseTicker: true
+              - UnderlyingName: BNB/USDT
+                UseTicker: true
+              - UnderlyingName: XRP/USDT
+                UseTicker: true
+              - UnderlyingName: ADA/USD
+                UseTicker: true
+              - UnderlyingName: BNB/USD
+                UseTicker: true
+              - UnderlyingName: ICP/USDT
+                UseTicker: true
+              - UnderlyingName: DUSK/USDT
+                UseTicker: true
+              - UnderlyingName: IMX/USDT
+                UseTicker: true
+              - UnderlyingName: ZEN/USDT
+              - UnderlyingName: ATOM/USDT
+              - UnderlyingName: ONT/USDT
+              - UnderlyingName: ALT/USDT
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-208
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 207
+        ExchangeName: BinanceFut
+
+
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: XEM/USDT
+              - UnderlyingName: ALICE/USDT
+              - UnderlyingName: CHR/USDT
+              - UnderlyingName: MANA/USDT
+              - UnderlyingName: HBAR/USDT
+              - UnderlyingName: DENT/USDT
+              - UnderlyingName: STMX/USDT
+              - UnderlyingName: LINA/USDT
+              - UnderlyingName: MTL/USDT
+              - UnderlyingName: CELO/USDT
+              - UnderlyingName: AUCTION/USDT
+              - UnderlyingName: BADGER/USDT
+              - UnderlyingName: KAS/USDT
+              - UnderlyingName: SUPER/USDT
+              - UnderlyingName: ONG/USDT
+              - UnderlyingName: USTC/USDT
+              - UnderlyingName: XEC/USDT
+              - UnderlyingName: NFP/USDT
+              - UnderlyingName: AXL/USDT
+              - UnderlyingName: IO/USDT
+              - UnderlyingName: TRUMP/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-209
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 208
+        ExchangeName: BinanceFut
+
+
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: ONE/USDT
+              - UnderlyingName: HOT/USDT
+              - UnderlyingName: ATOM/USD
+              - UnderlyingName: MANA/USD
+              - UnderlyingName: SFP/USDT
+              - UnderlyingName: EGLD/USDT
+              - UnderlyingName: ENJ/USDT
+              - UnderlyingName: FLM/USDT
+              - UnderlyingName: ZIL/USDT
+              - UnderlyingName: KAVA/USDT
+              - UnderlyingName: STORJ/USDT
+              - UnderlyingName: KEY/USDT
+              - UnderlyingName: NMR/USDT
+              - UnderlyingName: BICO/USDT
+              - UnderlyingName: ARK/USDT
+              - UnderlyingName: HIFI/USDT
+              - UnderlyingName: AMB/USDT
+              - UnderlyingName: TLM/USDT
+              - UnderlyingName: LEVER/USDT
+              - UnderlyingName: AERGO/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: "00:00:01"
+            PriceForChangeThreshold: 3.0e-5
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-210
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 209
+        ExchangeName: BinanceFut
+
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: ANKR/USDT
+              - UnderlyingName: BEL/USDT
+              - UnderlyingName: OP/USDT
+              - UnderlyingName: JASMY/USDT
+              - UnderlyingName: USDC/USDT
+              - UnderlyingName: CFX/USDT
+              - UnderlyingName: APT/USDT
+              - UnderlyingName: XVS/USDT
+              - UnderlyingName: TRU/USDT
+              - UnderlyingName: CAKE/USDT
+              - UnderlyingName: TWT/USDT
+              - UnderlyingName: ORDI/USDT
+              - UnderlyingName: STEEM/USDT
+              - UnderlyingName: LINK/USDC
+              - UnderlyingName: METIS/USDT
+              - UnderlyingName: POPCAT/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-211
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 210
+        ExchangeName: BinanceFut
+
+        Monitor:
+          DefaultConnectionCount: 1
+
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: APT/USD
+              - UnderlyingName: CHZ/USD
+              - UnderlyingName: ENS/USD
+              - UnderlyingName: OP/USD
+              - UnderlyingName: STG/USDT
+              - UnderlyingName: HIGH/USDT
+              - UnderlyingName: SOL/USD
+              - UnderlyingName: DYDX/USDT
+              - UnderlyingName: LDO/USDT
+              - UnderlyingName: NEAR/USDT
+              - UnderlyingName: ARB/USDT
+              - UnderlyingName: RUNE/USDT
+              - UnderlyingName: NKN/USDT
+              - UnderlyingName: MASK/USDT
+              - UnderlyingName: ENS/USDT
+              - UnderlyingName: NEAR/USD
+              - UnderlyingName: COMBO/USDT
+              - UnderlyingName: TIA/USDT
+              - UnderlyingName: PYTH/USDT
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-212
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 211
+        ExchangeName: BinanceFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: XAI/USDT
+              - UnderlyingName: SOL/USDC
+              - UnderlyingName: BTC/USDC
+              - UnderlyingName: ETH/USDC
+              - UnderlyingName: BNB/USDC
+              - UnderlyingName: XRP/USDC
+              - UnderlyingName: MANTA/USDT
+              - UnderlyingName: ONDO/USDT
+              - UnderlyingName: ZETA/USDT
+              - UnderlyingName: DYM/USDT
+              - UnderlyingName: OM/USDT
+              - UnderlyingName: SUI/USDC
+              - UnderlyingName: MAVIA/USDT
+              - UnderlyingName: GLM/USDT
+              - UnderlyingName: ORDI/USDC
+              - UnderlyingName: AEVO/USDT
+              - UnderlyingName: ETHFI/USDT
+              - UnderlyingName: MEW/USDT
+              - UnderlyingName: RENDER/USDT
+              - UnderlyingName: POL/USDT
+              - UnderlyingName: CATI/USDT
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-02:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false

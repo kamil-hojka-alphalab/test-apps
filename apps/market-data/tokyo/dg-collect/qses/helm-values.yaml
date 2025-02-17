@@ -1,0 +1,4371 @@
+QuoteServers:
+  - name: qs-binance-301
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 300
+        ExchangeName: Binance
+        Binance:
+          Variant: DeltaSimplified
+          DedupTradesEarly: true
+          DedupTickersEarly: true
+        Monitor:
+          DefaultConnectionCount: 1
+          Symbols:
+          - Name: AAVE/FDUSD
+          - Name: AAVE/TRY
+          - Name: AAVE/USDC
+          - Name: ACA/TRY
+          - Name: ACE/TRY
+          - Name: ACH/TRY
+          - Name: ACT/FDUSD
+          - Name: ACT/TRY
+          - Name: ACT/USDC
+          - Name: ACT/USDT
+          - Name: ACX/TRY
+          - Name: ACX/USDC
+          - Name: ACX/USDT
+          - Name: ADA/USDC
+          - Name: AEVO/FDUSD
+          - Name: AEVO/TRY
+          - Name: AI/FDUSD
+          - Name: AIXBT/USDC
+          - Name: AIXBT/USDT
+          - Name: ALGO/TRY
+          - Name: ALGO/USDC
+          - Name: ALICE/TRY
+          - Name: ALT/FDUSD
+          - Name: ALT/TRY
+          - Name: ALT/USDC
+          - Name: APE/FDUSD
+          - Name: APE/USDC
+          - Name: APT/JPY
+          - Name: APT/USDC
+          - Name: AR/FDUSD
+          - Name: AR/TRY
+          - Name: AR/USDC
+          - Name: ARB/FDUSD
+          - Name: ARB/USDC
+          - Name: ARK/TRY
+          - Name: ARKM/FDUSD
+          - Name: ARKM/TRY
+          - Name: ARKM/USDC
+          - Name: ATOM/FDUSD
+          - Name: ATOM/TRY
+          - Name: ATOM/USDC
+          - Name: AUCTION/FDUSD
+          - Name: AUD/USDT
+          - Name: AUDIO/TRY
+          - Name: AVAX/FDUSD
+          - Name: AVAX/USDC
+          - Name: AXS/TRY
+          - Name: BAKE/TRY
+          - Name: BANANA/FDUSD
+          - Name: BANANA/TRY
+          - Name: BANANA/USDT
+          - Name: BB/FDUSD
+          - Name: BB/TRY
+          - Name: BB/USDC
+          - Name: BCH/FDUSD
+          - Name: BCH/TRY
+          - Name: BCH/USDC
+          - Name: BEAMX/TRY
+          - Name: BEL/TRY
+          - Name: BLUR/TRY
+          - Name: BLUR/USDC
+          - Name: BNX/TRY
+          - Name: BOME/FDUSD
+          - Name: BOME/TRY
+          - Name: BOME/USDC
+          - Name: BONK/FDUSD
+          - Name: BONK/USDC
+          - Name: BSW/TRY
+          - Name: CAKE/TRY
+          - Name: CATI/FDUSD
+          - Name: CATI/TRY
+          - Name: CELO/TRY
+          - Name: CETUS/TRY
+          - Name: CETUS/USDC
+          - Name: CETUS/USDT
+          - Name: CFX/USDC
+          - Name: CGPT/USDC
+          - Name: CGPT/USDT
+          - Name: CHZ/FDUSD
+          - Name: CHZ/USDC
+          - Name: CITY/TRY
+          - Name: CKB/TRY
+          - Name: CKB/USDC
+          - Name: COMP/TRY
+          - Name: COOKIE/USDC
+          - Name: COOKIE/USDT
+          - Name: COS/TRY
+          - Name: COTI/TRY
+          - Name: COW/TRY
+          - Name: COW/USDC
+          - Name: COW/USDT
+          - Name: CRV/TRY
+          - Name: CRV/USDC
+          - Name: CYBER/FDUSD
+          - Name: CYBER/TRY
+          - Name: DENT/TRY
+          - Name: DEXE/USDT
+          - Name: DOGE/TUSD
+          - Name: DOGE/USDC
+          - Name: DOGS/FDUSD
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binance-302
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 301
+        ExchangeName: Binance
+        Binance:
+          Variant: DeltaSimplified
+          DedupTradesEarly: true
+          DedupTickersEarly: true
+        Monitor:
+          DefaultConnectionCount: 1
+          Symbols:
+          - Name: DOGS/TRY
+          - Name: DOGS/USDC
+          - Name: DOGS/USDT
+          - Name: DOT/FDUSD
+          - Name: DOT/USDC
+          - Name: DYDX/FDUSD
+          - Name: DYDX/TRY
+          - Name: DYDX/USDC
+          - Name: DYM/TRY
+          - Name: EDU/TRY
+          - Name: EGLD/FDUSD
+          - Name: EGLD/TRY
+          - Name: EIGEN/FDUSD
+          - Name: EIGEN/TRY
+          - Name: EIGEN/USDC
+          - Name: EIGEN/USDT
+          - Name: ENA/FDUSD
+          - Name: ENA/TRY
+          - Name: ENA/USDC
+          - Name: ENJ/TRY
+          - Name: ENS/FDUSD
+          - Name: ENS/TRY
+          - Name: ENS/USDC
+          - Name: EOS/FDUSD
+          - Name: EOS/USDC
+          - Name: ETC/FDUSD
+          - Name: ETC/TRY
+          - Name: ETHFI/FDUSD
+          - Name: ETHFI/TRY
+          - Name: ETHFI/USDC
+          - Name: FDUSD/USDC
+          - Name: FET/FDUSD
+          - Name: FET/USDC
+          - Name: FIDA/TRY
+          - Name: FIL/FDUSD
+          - Name: FIL/USDC
+          - Name: FLOKI/FDUSD
+          - Name: FLOKI/TRY
+          - Name: FLOKI/USDC
+          - Name: G/TRY
+          - Name: G/USDT
+          - Name: GALA/FDUSD
+          - Name: GALA/USDC
+          - Name: GAS/TRY
+          - Name: GBP/USDT
+          - Name: GRT/FDUSD
+          - Name: HBAR/FDUSD
+          - Name: HBAR/TRY
+          - Name: HBAR/USDC
+          - Name: HIGH/TRY
+          - Name: HIVE/FDUSD
+          - Name: HIVE/TRY
+          - Name: HIVE/USDC
+          - Name: ICP/FDUSD
+          - Name: ICP/TRY
+          - Name: ICP/USDC
+          - Name: ID/TRY
+          - Name: IDEX/FDUSD
+          - Name: IDEX/USDC
+          - Name: INJ/FDUSD
+          - Name: INJ/USDC
+          - Name: IO/FDUSD
+          - Name: IO/TRY
+          - Name: IO/USDC
+          - Name: IOTA/TRY
+          - Name: JPY/USDT
+          - Name: JTO/FDUSD
+          - Name: JTO/USDC
+          - Name: JUP/FDUSD
+          - Name: JUP/TRY
+          - Name: JUP/USDC
+          - Name: KAIA/USDC
+          - Name: KSM/TRY
+          - Name: LAZIO/TRY
+          - Name: LDO/FDUSD
+          - Name: LDO/TRY
+          - Name: LDO/USDC
+          - Name: LEVER/TRY
+          - Name: LINK/FDUSD
+          - Name: LINK/USDC
+          - Name: LPT/TRY
+          - Name: LTC/FDUSD
+          - Name: LTC/TRY
+          - Name: LTC/USDC
+          - Name: MAGIC/TRY
+          - Name: MANA/TRY
+          - Name: MANTA/FDUSD
+          - Name: MANTA/USDC
+          - Name: MASK/TRY
+          - Name: MBOX/TRY
+          - Name: ME/FDUSD
+          - Name: ME/TRY
+          - Name: ME/USDT
+          - Name: MEME/FDUSD
+          - Name: MEME/USDC
+          - Name: METIS/TRY
+          - Name: MKR/TRY
+          - Name: MOVE/FDUSD
+          - Name: MOVE/TRY
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binance-303
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 302
+        ExchangeName: Binance
+        Binance:
+          Variant: DeltaSimplified
+          DedupTradesEarly: true
+          DedupTickersEarly: true
+        Monitor:
+          DefaultConnectionCount: 1
+          Symbols:
+          - Name: MOVE/USDC
+          - Name: MOVE/USDT
+          - Name: MOVR/TRY
+          - Name: NEAR/FDUSD
+          - Name: NEAR/JPY
+          - Name: NEAR/TRY
+          - Name: NEAR/USDC
+          - Name: NEIRO/FDUSD
+          - Name: NEIRO/TRY
+          - Name: NEIRO/USDC
+          - Name: NEO/TRY
+          - Name: NEO/USDC
+          - Name: NFP/FDUSD
+          - Name: NOT/FDUSD
+          - Name: NOT/TRY
+          - Name: NOT/USDC
+          - Name: NTRN/TRY
+          - Name: OG/TRY
+          - Name: OGN/TRY
+          - Name: OM/TRY
+          - Name: OM/USDC
+          - Name: OMNI/FDUSD
+          - Name: OMNI/TRY
+          - Name: OMNI/USDC
+          - Name: ONE/TRY
+          - Name: ONT/TRY
+          - Name: ONT/USDC
+          - Name: OP/FDUSD
+          - Name: OP/TRY
+          - Name: OP/USDC
+          - Name: ORCA/TRY
+          - Name: ORCA/USDT
+          - Name: ORDI/FDUSD
+          - Name: ORDI/USDC
+          - Name: PAXG/TRY
+          - Name: PDA/USDT
+          - Name: PENDLE/FDUSD
+          - Name: PENDLE/TRY
+          - Name: PENDLE/USDC
+          - Name: PENGU/FDUSD
+          - Name: PENGU/TRY
+          - Name: PENGU/USDC
+          - Name: PENGU/USDT
+          - Name: PEOPLE/FDUSD
+          - Name: PEOPLE/TRY
+          - Name: PEOPLE/USDC
+          - Name: PEPE/FDUSD
+          - Name: PEPE/JPY
+          - Name: PEPE/USDC
+          - Name: PHA/TRY
+          - Name: PHA/USDC
+          - Name: PHB/TRY
+          - Name: PIXEL/TRY
+          - Name: PIXEL/USDC
+          - Name: PNUT/FDUSD
+          - Name: PNUT/TRY
+          - Name: PNUT/USDC
+          - Name: PNUT/USDT
+          - Name: POL/FDUSD
+          - Name: POL/TRY
+          - Name: POL/USDC
+          - Name: POLYX/TRY
+          - Name: PORTAL/FDUSD
+          - Name: PORTAL/TRY
+          - Name: PYTH/FDUSD
+          - Name: PYTH/TRY
+          - Name: PYTH/USDC
+          - Name: RAD/TRY
+          - Name: RARE/TRY
+          - Name: RARE/USDC
+          - Name: RAY/FDUSD
+          - Name: RAY/TRY
+          - Name: RAY/USDC
+          - Name: RDNT/TRY
+          - Name: RENDER/FDUSD
+          - Name: RENDER/TRY
+          - Name: RENDER/USDC
+          - Name: REZ/TRY
+          - Name: REZ/USDC
+          - Name: RONIN/FDUSD
+          - Name: RONIN/TRY
+          - Name: ROSE/TRY
+          - Name: RSR/FDUSD
+          - Name: RSR/TRY
+          - Name: RSR/USDC
+          - Name: RUNE/FDUSD
+          - Name: RUNE/USDC
+          - Name: RVN/TRY
+          - Name: SAGA/FDUSD
+          - Name: SAGA/TRY
+          - Name: SAGA/USDC
+          - Name: SAND/FDUSD
+          - Name: SAND/TRY
+          - Name: SAND/USDC
+          - Name: SCR/FDUSD
+          - Name: SCR/TRY
+          - Name: SCR/USDT
+          - Name: SEI/USDC
+          - Name: SHIB/FDUSD
+          - Name: SHIB/JPY
+          - Name: BERA/USDT
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binance-304
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 303
+        ExchangeName: Binance
+        Binance:
+          Variant: DeltaSimplified
+          DedupTradesEarly: true
+          DedupTickersEarly: true
+        Monitor:
+          DefaultConnectionCount: 1
+          Symbols:
+          - Name: SHIB/USDC
+          - Name: SKL/TRY
+          - Name: SLP/TRY
+          - Name: SNX/TRY
+          - Name: SOL/TUSD
+          - Name: SOL/USDC
+          - Name: SPELL/TRY
+          - Name: STEEM/USDC
+          - Name: STMX/TRY
+          - Name: STORJ/TRY
+          - Name: STRAX/TRY
+          - Name: STRK/FDUSD
+          - Name: STRK/TRY
+          - Name: STRK/USDC
+          - Name: STX/FDUSD
+          - Name: STX/USDC
+          - Name: SUI/FDUSD
+          - Name: SUI/JPY
+          - Name: SUI/USDC
+          - Name: SUN/TRY
+          - Name: SUPER/TRY
+          - Name: SUSHI/TRY
+          - Name: TAO/FDUSD
+          - Name: TAO/TRY
+          - Name: TAO/USDC
+          - Name: THE/FDUSD
+          - Name: THE/TRY
+          - Name: THE/USDT
+          - Name: THETA/FDUSD
+          - Name: THETA/TRY
+          - Name: TIA/FDUSD
+          - Name: TIA/USDC
+          - Name: TLM/TRY
+          - Name: TNSR/TRY
+          - Name: TNSR/USDC
+          - Name: TON/FDUSD
+          - Name: TON/TRY
+          - Name: TON/USDC
+          - Name: TRB/TRY
+          - Name: TRB/USDC
+          - Name: TROY/TRY
+          - Name: TROY/USDC
+          - Name: TRU/TRY
+          - Name: TRX/USDC
+          - Name: TRY/USDT
+          - Name: TURBO/FDUSD
+          - Name: TURBO/TRY
+          - Name: TURBO/USDC
+          - Name: TURBO/USDT
+          - Name: TWT/TRY
+          - Name: UNI/FDUSD
+          - Name: UNI/TRY
+          - Name: UNI/USDC
+          - Name: USDC/TRY
+          - Name: USTC/TRY
+          - Name: USUAL/FDUSD
+          - Name: USUAL/TRY
+          - Name: USUAL/USDC
+          - Name: USUAL/USDT
+          - Name: VANA/FDUSD
+          - Name: VANA/TRY
+          - Name: VANA/USDT
+          - Name: VANRY/TRY
+          - Name: VELODROME/USDT
+          - Name: VET/TRY
+          - Name: VIC/TRY
+          - Name: W/FDUSD
+          - Name: W/TRY
+          - Name: W/USDC
+          - Name: WIF/FDUSD
+          - Name: WIF/TRY
+          - Name: WIF/USDC
+          - Name: WLD/FDUSD
+          - Name: WLD/TRY
+          - Name: WLD/USDC
+          - Name: WNXM/USDT
+          - Name: XAI/FDUSD
+          - Name: XEC/TRY
+          - Name: XLM/FDUSD
+          - Name: XLM/JPY
+          - Name: XLM/USDC
+          - Name: XRP/TUSD
+          - Name: XRP/USDC
+          - Name: XTZ/USDC
+          - Name: XVG/TRY
+          - Name: XVS/TRY
+          - Name: YGG/TRY
+          - Name: YGG/USDC
+          - Name: ZIL/TRY
+          - Name: ZK/FDUSD
+          - Name: ZK/TRY
+          - Name: ZK/USDC
+          - Name: ZRO/FDUSD
+          - Name: ZRO/TRY
+          - Name: ZRO/USDC
+          - Name: IOTX/JPY
+          - Name: NEIRO/USDT
+          - Name: SEI/JPY
+          - Name: SOLV/USDT
+          - Name: TRUMP/USDT
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-301
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ShardId: 300
+        ExchangeName: BinanceFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: 1000BONK/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: 1000PEPE/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ACT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ACX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AERO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AI16Z/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AIXBT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ALPACA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ARB/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AVA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AVAX/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BAN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BANANA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BB/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BCH/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BOME/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BRETT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BSW/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CETUS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CGPT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CHESS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CHILLGUY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: COOKIE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: COS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: COW/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CRV/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DEGEN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DEGO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DEXE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DF/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DIA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DOGE/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DOGS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: EIGEN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ENA/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ETHFI/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FARTCOIN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FIL/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FIO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FLUX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GHST/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GOAT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GRASS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GRIFFAIN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HIPPO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HIVE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: KMNO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LOKA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LTC/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LUNA2/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MELANIA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VTHO/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-binancefut-302
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ShardId: 301
+        ExchangeName: BinanceFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: MBOX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ME/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MOODENG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MORPHO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MOVE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NEAR/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NEIRO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NEIROETH/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NEO/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NOT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NULS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: OMNI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ORCA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PENGU/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PHA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PNUT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PONKE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PROM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: QUICKSWAP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RARE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: REZ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RPL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SAGA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SANTOS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SCR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SCRT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SLERF/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SONIC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SPX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SYN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SYS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: THE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TIA/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TNSR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TROY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: USUAL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VANA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VANRY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VELODROME/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VIDT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VIRTUAL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VOXEL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WIF/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WLD/USDC
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ARC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SOLV/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SWARMS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TRUMP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VINE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BERA/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateio-301
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 300
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: wss://spotws-private.gateapi.io/ws/v4/
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+          - Name: 1EARTH/USDT
+          - Name: 1ON8/USDT
+          - Name: 3ULL/USDT
+          - Name: ABYS/USDT
+          - Name: ACENT/USDT
+          - Name: ACT/USDT
+          - Name: ACX/USDT
+          - Name: ADA/USDC
+          - Name: ADX/USDT
+          - Name: AE/USDT
+          - Name: AERGO/USDT
+          - Name: AERO/USDT
+          - Name: AEVO/USDT
+          - Name: AFC/USDT
+          - Name: AI16Z/USDT
+          - Name: AIEPK/USDT
+          - Name: AIT/USDT
+          - Name: AIXBT/USDT
+          - Name: AKI/USDT
+          - Name: AKITA/USDT
+          - Name: ALPHA/USDT
+          - Name: ALT/USDT
+          - Name: AME/USDT
+          - Name: AMPL/USDT
+          - Name: ANDR/USDT
+          - Name: ANDY/USDT
+          - Name: ANDYETH/USDT
+          - Name: APU/USDT
+          - Name: APX/USDT
+          - Name: AQT/USDT
+          - Name: ARC/USDT
+          - Name: ARRR/USDT
+          - Name: ARS/USDT
+          - Name: ASMATCH/USDT
+          - Name: ASR/USDT
+          - Name: ATH/USDT
+          - Name: ATM/USDT
+          - Name: ATR/USDT
+          - Name: ATS/USDT
+          - Name: AURA/USDT
+          - Name: AVA/USDT
+          - Name: AVAIL/USDT
+          - Name: AVALOX/USDT
+          - Name: AWT/USDT
+          - Name: AZY/USDT
+          - Name: BAD/USDT
+          - Name: BADGER/USDT
+          - Name: BAJU/USDT
+          - Name: BAN/USDT
+          - Name: BANANA/USDT
+          - Name: BAND/USDT
+          - Name: BB/USDT
+          - Name: BBL/USDT
+          - Name: BBT/USDT
+          - Name: BCCOIN/USDT
+          - Name: BD20/USDT
+          - Name: BEBE/USDT
+          - Name: BEER/USDT
+          - Name: BEFI/USDT
+          - Name: BENDOG/USDT
+          - Name: BENJI/USDT
+          - Name: BEPRO/USDT
+          - Name: BITCI/USDT
+          - Name: BLADE/USDT
+          - Name: BLAST/USDT
+          - Name: BLAZE/USDT
+          - Name: BLENDR/USDT
+          - Name: BLOCK/USDT
+          - Name: BLS/USDT
+          - Name: BLUE/USDT
+          - Name: BOBO/USDT
+          - Name: BORA/USDT
+          - Name: BORING/USDT
+          - Name: BOSON/USDT
+          - Name: BOX/USDT
+          - Name: BRAWL/USDT
+          - Name: BRCST/USDT
+          - Name: BRETT/USDT
+          - Name: BRI/USDT
+          - Name: BRWL/USDT
+          - Name: BST/USDT
+          - Name: BTC/USDC
+          - Name: BTF/USDT
+          - Name: BTRST/USDT
+          - Name: BUBBLE/USDT
+          - Name: BVM/USDT
+          - Name: BWLD/USDT
+          - Name: BXN/USDT
+          - Name: CAD/USDT
+          - Name: CAF/USDT
+          - Name: CANTO/USDT
+          - Name: CAPS/USDT
+          - Name: CATCH/USDT
+          - Name: CATCOIN/USDT
+          - Name: CATE/USDT
+          - Name: CATS/USDT
+          - Name: CAW/USDT
+          - Name: CBK/USDT
+          - Name: CCD/USDT
+          - Name: CEL/USDT
+          DefaultConnectionCount: 1
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateio-302
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 301
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: wss://spotws-private.gateapi.io/ws/v4/
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+          - Name: CGG/USDT
+          - Name: CGV/USDT
+          - Name: CHAMP/USDT
+          - Name: CHAT/USDT
+          - Name: CHILLGUY/USDT
+          - Name: CHKN/USDT
+          - Name: CLND/USDT
+          - Name: CLOUD/USDT
+          - Name: COBE/USDT
+          - Name: COMP/USDT
+          - Name: COOK/USDT
+          - Name: COOKIE/USDT
+          - Name: COPI/USDT
+          - Name: COQ/USDT
+          - Name: COS/USDT
+          - Name: COW/USDT
+          - Name: CRE/USDT
+          - Name: CREDI/USDT
+          - Name: CREO/USDT
+          - Name: CRF/USDT
+          - Name: CRH/USDT
+          - Name: CRTS/USDT
+          - Name: CTA/USDT
+          - Name: CTP/USDT
+          - Name: CTRC/USDT
+          - Name: CWAR/USDT
+          - Name: DAI/USDT
+          - Name: DASH/USDT
+          - Name: DBC/USDT
+          - Name: DECHAT/USDT
+          - Name: DEGEN/USDT
+          - Name: DEP/USDT
+          - Name: DEVVE/USDT
+          - Name: DFI/USDT
+          - Name: DFYN/USDT
+          - Name: DGB/USDT
+          - Name: DGI/USDT
+          - Name: DIO/USDT
+          - Name: DKA/USDT
+          - Name: DKS/USDT
+          - Name: DOG/USDT
+          - Name: DOGA/USDT
+          - Name: DOGS/USDT
+          - Name: DOPE/USDT
+          - Name: DORA/USDT
+          - Name: DOSE/USDT
+          - Name: DREP/USDT
+          - Name: DRIFT/USDT
+          - Name: DSLA/USDT
+          - Name: DSYNC/USDT
+          - Name: DUKO/USDT
+          - Name: DVI/USDT
+          - Name: DZOO/USDT
+          - Name: EGAME/USDT
+          - Name: EIGEN/USDT
+          - Name: EL/USDT
+          - Name: ELU/USDT
+          - Name: EMC/USDT
+          - Name: EMT/USDT
+          - Name: ENA/USDT
+          - Name: EQX/USDT
+          - Name: ESE/USDT
+          - Name: ETHFI/USDT
+          - Name: ETN/USDT
+          - Name: EVMOS/USDT
+          - Name: EXVG/USDT
+          - Name: F/USDT
+          - Name: FACTR/USDT
+          - Name: FAKEAI/USDT
+          - Name: FARTCOIN/USDT
+          - Name: FAST/USDT
+          - Name: FDT/USDT
+          - Name: FEVR/USDT
+          - Name: FOMO/USDT
+          - Name: FORA/USDT
+          - Name: FORT/USDT
+          - Name: FOXY/USDT
+          - Name: FRBK/USDT
+          - Name: FSN/USDT
+          - Name: FTRB/USDT
+          - Name: FURY/USDT
+          - Name: FUSE/USDT
+          - Name: G/USDT
+          - Name: GAME/USDT
+          - Name: GAME2/USDT
+          - Name: GAMES/USDT
+          - Name: GAS/USDT
+          - Name: GAT/USDT
+          - Name: GEAR/USDT
+          - Name: GEMAI/USDT
+          - Name: GHX/USDT
+          - Name: GINUX/USDT
+          - Name: GLM/USDT
+          - Name: GLS/USDT
+          - Name: GME/USDT
+          - Name: GMEE/USDT
+          - Name: GMPD/USDT
+          - Name: GMRX/USDT
+          - Name: GOAT/USDT
+          - Name: BERA/USDT
+          DefaultConnectionCount: 1
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateio-303
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 302
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: wss://spotws-private.gateapi.io/ws/v4/
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+          - Name: GOG/USDT
+          - Name: GOLD/USDT
+          - Name: GOMINING/USDT
+          - Name: GPT/USDT
+          - Name: GQ/USDT
+          - Name: GRASS/USDT
+          - Name: GRIFFAIN/USDT
+          - Name: GROW/USDT
+          - Name: GUI/USDT
+          - Name: GXE/USDT
+          - Name: HC/USDT
+          - Name: HEART/USDT
+          - Name: HGPT/USDT
+          - Name: HIP/USDT
+          - Name: HIPPO/USDT
+          - Name: HIVE/USDT
+          - Name: HLG/USDT
+          - Name: HMT/USDT
+          - Name: HOPPY/USDT
+          - Name: HORD/USDT
+          - Name: HOTCROSS/USDT
+          - Name: HRT/USDT
+          - Name: HTM/USDT
+          - Name: HTX/USDT
+          - Name: HYCO/USDT
+          - Name: HYPE/USDT
+          - Name: IAG/USDT
+          - Name: IDEX/USDT
+          - Name: INK/USDT
+          - Name: IO/USDT
+          - Name: IONX/USDT
+          - Name: IOST/USDT
+          - Name: IQ/USDT
+          - Name: IQ50/USDT
+          - Name: IQT/USDT
+          - Name: IRIS/USDT
+          - Name: ISLM/USDT
+          - Name: ITA/USDT
+          - Name: ITEM/USDT
+          - Name: IVPAY/USDT
+          - Name: IZI/USDT
+          - Name: JST/USDT
+          - Name: JULD/USDT
+          - Name: JUV/USDT
+          - Name: KAI/USDT
+          - Name: KAP/USDT
+          - Name: KARRAT/USDT
+          - Name: KBD/USDT
+          - Name: KIBA/USDT
+          - Name: KINE/USDT
+          - Name: KLV/USDT
+          - Name: KMA/USDT
+          - Name: KMNO/USDT
+          - Name: KMON/USDT
+          - Name: KNC/USDT
+          - Name: KNINE/USDT
+          - Name: KOKO/USDT
+          - Name: KONO/USDT
+          - Name: KUBE/USDT
+          - Name: KZEN/USDT
+          - Name: L3/USDT
+          - Name: LAMB/USDT
+          - Name: LAND/USDT
+          - Name: LANDWOLF/USDT
+          - Name: LAT/USDT
+          - Name: LBL/USDT
+          - Name: LEASH/USDT
+          - Name: LIFE/USDT
+          - Name: LIME/USDT
+          - Name: LKI/USDT
+          - Name: LL/USDT
+          - Name: LLT/USDT
+          - Name: LOE/USDT
+          - Name: LOFI/USDT
+          - Name: LOGT/USDT
+          - Name: LON/USDT
+          - Name: LOOP/USDT
+          - Name: LOVE/USDT
+          - Name: LSS/USDT
+          - Name: LTC/USDC
+          - Name: LUNA2/USDT
+          - Name: LUNC/USDT
+          - Name: LWA/USDT
+          - Name: LYM/USDT
+          - Name: LYNX/USDT
+          - Name: LYX/USDT
+          - Name: MAF/USDT
+          - Name: MAGA/USDT
+          - Name: MANEKI/USDT
+          - Name: MANTA/USDC
+          - Name: MARSH/USDT
+          - Name: MASA/USDT
+          - Name: MAX/USDT
+          - Name: MBL/USDT
+          - Name: MBX/USDT
+          - Name: MDAO/USDT
+          - Name: ME/USDT
+          - Name: MED/USDT
+          - Name: MELD/USDT
+          - Name: MEMETOON/USDT
+          DefaultConnectionCount: 1
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateio-304
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 303
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: wss://spotws-private.gateapi.io/ws/v4/
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+          - Name: MERL/USDT
+          - Name: METAL/USDT
+          - Name: METFI/USDT
+          - Name: METO/USDT
+          - Name: MEW/USDT
+          - Name: MFER/USDT
+          - Name: MICHI/USDT
+          - Name: MIX/USDT
+          - Name: MLK/USDT
+          - Name: MLP/USDT
+          - Name: MMT/USDT
+          - Name: MOBILE/USDT
+          - Name: MODE/USDT
+          - Name: MOG/USDT
+          - Name: MOJO/USDT
+          - Name: MON/USDT
+          - Name: MONI/USDT
+          - Name: MONKY/USDT
+          - Name: MOOV/USDT
+          - Name: MORPHO/USDT
+          - Name: MOTHER/USDT
+          - Name: MOVE/USDT
+          - Name: MPT/USDT
+          - Name: MSN/USDT
+          - Name: MSOL/USDT
+          - Name: MTL/USDT
+          - Name: MUC/USDT
+          - Name: MUNITY/USDT
+          - Name: MUSE/USDT
+          - Name: MV/USDT
+          - Name: MVL/USDT
+          - Name: MYRO/USDT
+          - Name: MYT/USDT
+          - Name: NAI/USDT
+          - Name: NBS/USDT
+          - Name: NEIROETH/USDT
+          - Name: NEVER/USDT
+          - Name: NEXO/USDT
+          - Name: NFE/USDT
+          - Name: NFT/USDT
+          - Name: NIBI/USDT
+          - Name: NOT/USDT
+          - Name: NPC/USDT
+          - Name: NS/USDT
+          - Name: NUB/USDT
+          - Name: NWC/USDT
+          - Name: NYAN/USDT
+          - Name: O4DX/USDT
+          - Name: OBI/USDT
+          - Name: OBT/USDT
+          - Name: OCTA/USDT
+          - Name: OFF/USDT
+          - Name: OGN/USDT
+          - Name: OLT/USDT
+          - Name: OMNI/USDT
+          - Name: OOE/USDT
+          - Name: OORT/USDT
+          - Name: OPAI/USDT
+          - Name: OPN1/USDT
+          - Name: ORB/USDT
+          - Name: ORBK/USDT
+          - Name: ORBR/USDT
+          - Name: ORDER/USDT
+          - Name: ORFY/USDT
+          - Name: OSHI/USDT
+          - Name: PACK/USDT
+          - Name: PAI/USDT
+          - Name: PANDO/USDT
+          - Name: PARAM/USDT
+          - Name: PATEX/USDT
+          - Name: PBUX/USDT
+          - Name: PBX/USDT
+          - Name: PCH/USDT
+          - Name: PDEX/USDT
+          - Name: PENG/USDT
+          - Name: PENGU/USDT
+          - Name: PEPECOIN/USDT
+          - Name: PEW/USDT
+          - Name: PIGCOIN/USDT
+          - Name: PIN/USDT
+          - Name: PIP/USDT
+          - Name: PIXEL/USDT
+          - Name: PIZZA/USDT
+          - Name: PNUT/USDT
+          - Name: POINT/USDT
+          - Name: POLK/USDT
+          - Name: PONKE/USDT
+          - Name: POPCAT/USDT
+          - Name: POR/USDT
+          - Name: PORTAL/USDT
+          - Name: POWER/USDT
+          - Name: PPT/USDT
+          - Name: PRCL/USDT
+          - Name: PRO/USDT
+          - Name: PROPC/USDT
+          - Name: PROPS/USDT
+          - Name: PRX/USDT
+          - Name: PSG/USDT
+          - Name: PSTAKE/USDT
+          - Name: MELANIA/USDT
+          DefaultConnectionCount: 1
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateio-305
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 304
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: wss://spotws-private.gateapi.io/ws/v4/
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+          - Name: PUMP/USDT
+          - Name: PUNDU/USDT
+          - Name: PUNKAI/USDT
+          - Name: PUSH/USDT
+          - Name: QKC/USDT
+          - Name: QORPO/USDT
+          - Name: RADAR/USDT
+          - Name: RANKER/USDT
+          - Name: RAZOR/USDT
+          - Name: RBC/USDT
+          - Name: REAP/USDT
+          - Name: RENDER/USDT
+          - Name: REP/USDT
+          - Name: REQ/USDT
+          - Name: REVU/USDT
+          - Name: REVV/USDT
+          - Name: REX/USDT
+          - Name: REZ/USDT
+          - Name: RGAME/USDT
+          - Name: RIDE/USDT
+          - Name: RINGAI/USDT
+          - Name: ROCK/USDT
+          - Name: ROCO/USDT
+          - Name: ROOST/USDT
+          - Name: ROUTE/USDT
+          - Name: RTF/USDT
+          - Name: RWA/USDT
+          - Name: SAFE/USDT
+          - Name: SAGA/USDT
+          - Name: SAI/USDT
+          - Name: SAMO/USDT
+          - Name: SCA/USDT
+          - Name: SCR/USDT
+          - Name: SD/USDT
+          - Name: SEAM/USDT
+          - Name: SECOND/USDT
+          - Name: SEND/USDT
+          - Name: SERO/USDT
+          - Name: SERSH/USDT
+          - Name: SFM/USDT
+          - Name: SFP/USDT
+          - Name: SHDW/USDT
+          - Name: SHIRO/USDT
+          - Name: SHPING/USDT
+          - Name: SIX/USDT
+          - Name: SKYA/USDT
+          - Name: SLERF/USDT
+          - Name: SLN/USDT
+          - Name: SMART/USDT
+          - Name: SMX/USDT
+          - Name: SNAP/USDT
+          - Name: SNS/USDT
+          - Name: SNT/USDT
+          - Name: SOIL/USDT
+          - Name: SOL/USDC
+          - Name: SONIC/USDT
+          - Name: SOON/USDT
+          - Name: SOPH/USDT
+          - Name: SOVRN/USDT
+          - Name: SPACE/USDT
+          - Name: SPEC/USDT
+          - Name: SPELLFIRE/USDT
+          - Name: SPOT/USDT
+          - Name: SPX/USDT
+          - Name: SQD/USDT
+          - Name: SRK/USDT
+          - Name: SS20/USDT
+          - Name: SSNC/USDT
+          - Name: STBU/USDT
+          - Name: STEEM/USDT
+          - Name: STETH/USDT
+          - Name: STMX/USDT
+          - Name: STORM/USDT
+          - Name: STREAM/USDT
+          - Name: STRK/USDT
+          - Name: STRM/USDT
+          - Name: STRUMP/USDT
+          - Name: SUI/USDC
+          - Name: SUIA/USDT
+          - Name: SUIAI/USDT
+          - Name: SUN/USDT
+          - Name: SWCH/USDT
+          - Name: SWRV/USDT
+          - Name: SYNC/USDT
+          - Name: TABOO/USDT
+          - Name: TAI/USDT
+          - Name: TAIKO/USDT
+          - Name: TALK/USDT
+          - Name: TET/USDT
+          - Name: THE/USDT
+          - Name: THG/USDT
+          - Name: THN/USDT
+          - Name: TIP/USDT
+          - Name: TNSR/USDT
+          - Name: TOMS/USDT
+          - Name: TRIO/USDT
+          - Name: TRR/USDT
+          - Name: TRUF/USDT
+          - Name: TRUMP/USDT
+          DefaultConnectionCount: 1
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateio-306
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 305
+        ExchangeName: GateIO
+        GateIO:
+          ExchangeConnection:
+            WebsocketApi:
+              Uri: wss://spotws-private.gateapi.io/ws/v4/
+          SnapshotMakerStrategy:
+            RestApi:
+              Uri: "https://apiv4-private.gateapi.io/api/v4/spot/order_book"
+        Monitor:
+          Symbols:
+          - Name: TRVL/USDT
+          - Name: TRY/USDT
+          - Name: TTC/USDT
+          - Name: TUSD/USDT
+          - Name: TX20/USDT
+          - Name: UBXS/USDT
+          - Name: UDS/USDT
+          - Name: UMA/USDT
+          - Name: UNA/USDT
+          - Name: USDE/USDT
+          - Name: USUAL/USDT
+          - Name: UXLINK/USDT
+          - Name: VADER/USDT
+          - Name: VANA/USDT
+          - Name: VANRY/USDT
+          - Name: VELA/USDT
+          - Name: VENOM/USDT
+          - Name: VIA/USDT
+          - Name: VIRTUAL/USDT
+          - Name: VIZ/USDT
+          - Name: VSC/USDT
+          - Name: VSX/USDT
+          - Name: W/USDT
+          - Name: WAGMIGAMES/USDT
+          - Name: WALLET/USDT
+          - Name: WALV/USDT
+          - Name: WAMPL/USDT
+          - Name: WBTC/USDT
+          - Name: WELL/USDT
+          - Name: WEST/USDT
+          - Name: WNXM/USDT
+          - Name: WOLF/USDT
+          - Name: WOOP/USDT
+          - Name: WRT/USDT
+          - Name: WRX/USDT
+          - Name: WSDM/USDT
+          - Name: WSIENNA/USDT
+          - Name: WUF/USDT
+          - Name: WX/USDT
+          - Name: X/USDT
+          - Name: XAUT/USDT
+          - Name: XCHNG/USDT
+          - Name: XELS/USDT
+          - Name: XFI/USDT
+          - Name: XION/USDT
+          - Name: XMR/USDT
+          - Name: XNO/USDT
+          - Name: XPET/USDT
+          - Name: XPRESS/USDT
+          - Name: XPRT/USDT
+          - Name: XRP/USDC
+          - Name: XSWAP/USDT
+          - Name: XVG/USDT
+          - Name: XYO/USDT
+          - Name: Y8U/USDT
+          - Name: YFDAI/USDT
+          - Name: YFI/USDT
+          - Name: YOOSHI/USDT
+          - Name: YOURAI/USDT
+          - Name: ZAM/USDT
+          - Name: ZBCN/USDT
+          - Name: ZCN/USDT
+          - Name: ZEC/USDT
+          - Name: ZEE/USDT
+          - Name: ZELIX/USDT
+          - Name: ZENT/USDT
+          - Name: ZEROLEND/USDT
+          - Name: ZEUS/USDT
+          - Name: ZEX/USDT
+          - Name: ZF/USDT
+          - Name: ZK/USDT
+          - Name: ZKJ/USDT
+          - Name: ZLW/USDT
+          - Name: ZRO/USDT
+          - Name: DUCK/USDT
+          - Name: FB/USDT
+          - Name: NEIRO/USDT
+          - Name: SOLV/USDT
+          - Name: SWARMS/USDT
+          - Name: VINE/USDT
+          DefaultConnectionCount: 1
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateiofut-301
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 300
+        ExchangeName: GateIOFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: 1CAT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: 1INCH/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AAVE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ACE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ACH/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ACT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ACX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ADX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AERGO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AERO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AEVO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AGI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AGLD/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AI16Z/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AIOZ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AIXBT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AKRO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ALEO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ALGO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ALICE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ALPACA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ALPHA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ALT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AMB/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AMP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ANKR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: API3/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: APT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: APU/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: APX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ARB/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ARK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ARKM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ARPA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ASTR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ATA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ATH/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ATOM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AUCTION/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AUDIO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AURORA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AVA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AVAIL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AVAX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AXS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BADGER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BAKE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BAN/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateiofut-302
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 301
+        ExchangeName: GateIOFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: BANANA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BAND/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BAT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BB/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BBL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BCH/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BEAMX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BEER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BEL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BENDOG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BIGTIME/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BLAST/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BLUE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BLUR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BLZ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BNT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BNX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BOME/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BOND/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BONE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BONK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BRETT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BSV/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BSW/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BTT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: C98/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CAKE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CARV/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CAT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CATI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CATS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CEL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CELO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CELR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CETUS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CFX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CGPT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CHESS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CHILLGUY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CHR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CHZ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CKB/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CLOUD/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: COMP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: COOKIE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CORE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: COS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: COTI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: COW/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CPOOL/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateiofut-303
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 302
+        ExchangeName: GateIOFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: CREAM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CRO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CRV/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CSPR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CTC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CTK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CTSI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CVC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CVX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CYBER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DAO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DBR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DEEP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DEGEN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DEGO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DEXE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DF/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DIA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DMAIL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DOG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DOGS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DOT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DRIFT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DUKO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DYDX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DYM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: EDU/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: EGLD/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: EIGEN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ELON/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ENA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ENJ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ENS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: EOS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ESE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ETC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ETHFI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ETHW/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: F/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FARTCOIN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FB/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FET/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FIDA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FIL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FIO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FITFI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FLM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FLOKI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FLOW/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FLR/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateiofut-304
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 303
+        ExchangeName: GateIOFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: FLUX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FOXY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FTN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FTT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: G/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GALA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GAS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GEAR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GFI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GLM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GLMR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GME/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GMT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GMX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GOAT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GPT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GRASS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GRIFFAIN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GROK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GRT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GTAI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HBAR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HIFI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HIGH/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HIPPO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HIVE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HNT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HOLD/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HOOK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HYPE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ICE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ICP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ICX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ID/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: IDEX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ILV/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: IMX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: INJ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: IO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: IOST/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: IOTA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: IOTX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: IRIS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: JASMY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: JOE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: JTO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: JUP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: KAIA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: KAS/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateiofut-305
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 304
+        ExchangeName: GateIOFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: KAVA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: KDA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: KEY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: KMNO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: KNC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: KSM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: L3/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LADYS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LAI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LAVA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LDO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LEVER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LINA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LINK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LIT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LMWR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LOKA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LOOKS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LOOM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LPT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LQTY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LRC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LSK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LTC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LUNA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LUNC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MAGA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MAGIC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MANA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MANEKI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MANTA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MASA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MASK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MAV/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MAVIA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MAX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MBL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MBOX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MDT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ME/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MEME/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MEMETOON/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MERL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: METIS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MEW/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MICHI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MINA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MKR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MNT/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateiofut-306
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 305
+        ExchangeName: GateIOFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: MODE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MOG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MONKY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MOODENG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MORPHO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MOTHER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MOVE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MOVR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MTL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MUBI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MYRIA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MYRO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NEAR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NEIRO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NEIROETH/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NEO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NFP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NKN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NMR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NOT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NPC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NTRN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: OAX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: OG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: OGN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: OM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: OMG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: OMNI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ONDO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ONE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ONG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ONT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: OP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ORBS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ORCA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ORDER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ORDI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: OXT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PEAQ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PENDLE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PENGU/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PEOPLE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PEPE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PEPE2/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PERP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PHA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PHB/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PIXEL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PNG/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateiofut-307
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 306
+        ExchangeName: GateIOFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: PNUT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: POL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: POLYX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PONKE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: POPCAT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PORTAL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: POWER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: POWR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PRCL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PRIME/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PROM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PRQ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PUFFER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PYTH/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: QNT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: QTUM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RACA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RAD/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RARE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RATS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RAY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RDNT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: REEF/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: REI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: REN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RENDER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: REQ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: REX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: REZ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RLC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RON/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ROOT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ROSE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RPL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RSR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RSS3/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RUNE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RVN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RWA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SAFE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SAGA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SAND/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SANTOS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SATS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SCA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SCR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SCRT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SD/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SEI/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateiofut-308
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 307
+        ExchangeName: GateIOFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: SEND/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SHIB/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SIDUS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SKL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SLERF/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SLP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SMILE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SNEK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SNX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SOLO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SOLS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SONIC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SOON/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SPA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SPEC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SPX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SSV/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: STEEM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: STG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: STMX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: STORJ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: STPT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: STREAM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: STRK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: STX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SUI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SUIAI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SUN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SUPER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SUSHI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SWEAT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SWFTC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SXP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SYN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: T/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TAI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TAIKO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TAO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: THE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: THETA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TIA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TLM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TNSR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TOKEN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TOMI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TON/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TRB/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TROY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TRU/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TRUMP/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateiofut-309
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 308
+        ExchangeName: GateIOFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: TRX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TURBO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TWT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: UMA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: UNFI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: UNI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: USDC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: USTC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: USUAL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: UXLINK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VANA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VANRY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VELO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VELODROME/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VET/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VEXT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VGX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VIRTUAL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VOXEL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VRA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: W/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WAVES/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WAXL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WAXP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WEMIX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WEN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WIF/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WING/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WLD/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WOJAK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WOLF/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: WOO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: X/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XAI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XCH/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XCN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XDC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XEC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XEM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XEN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XION/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XLM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XRD/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XTZ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XVS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: XYO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: YFI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: YGG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ZCX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ZETA/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-gateiofut-310
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-gateio:2025.1.21.94-914bf85
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 309
+        ExchangeName: GateIOFut
+        Monitor:
+          DefaultConnectionCount: 1
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: ZEUS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ZIL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ZK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ZRO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ZRX/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          SanityCheckFilter:
+            AllowEmptyL2Deltas: true
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-huobiglobal-301
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 300
+        ExchangeName: HuobiGlobal
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+          - Name: ACX/USDT
+          - Name: AI16Z/USDT
+          - Name: AIXBT/USDT
+          - Name: ALU/USDT
+          - Name: ANON/USDT
+          - Name: ANT/USDT
+          - Name: ARC/USDT
+          - Name: ASTO/USDT
+          - Name: ATH/USDT
+          - Name: AVA/USDT
+          - Name: AVAIL/USDT
+          - Name: BAN/USDT
+          - Name: BB/USDT
+          - Name: BEBE/USDT
+          - Name: BEER/USDT
+          - Name: BFC/USDT
+          - Name: BLUE/USDT
+          - Name: BLZ/USDT
+          - Name: BRETT/USDT
+          - Name: BTF/USDT
+          - Name: BTM/USDT
+          - Name: BUBBLE/USDT
+          - Name: CETUS/USDT
+          - Name: CFX/USDT
+          - Name: CHO/USDT
+          - Name: CLORE/USDT
+          - Name: COW/USDT
+          - Name: CSIX/USDT
+          - Name: DIS/USDT
+          - Name: DRIFT/USDT
+          - Name: DYM/USDT
+          - Name: EIGEN/USDT
+          - Name: EUR/USDT
+          - Name: EVER/USDT
+          - Name: F/USDT
+          - Name: FARTCOIN/USDT
+          - Name: FLUX/USDT
+          - Name: FURY/USDT
+          - Name: G/USDT
+          - Name: GME/USDT
+          - Name: GOAT/USDT
+          - Name: GOMINING/USDT
+          - Name: GRASS/USDT
+          - Name: GRIFFAIN/USDT
+          - Name: GUMMY/USDT
+          - Name: HIPPO/USDT
+          - Name: IO/USDT
+          - Name: KAIA/USDT
+          - Name: L3/USDT
+          - Name: LITH/USDT
+          - Name: LUCE/USDT
+          - Name: LWA/USDT
+          - Name: MAGA/USDT
+          - Name: MANEKI/USDT
+          - Name: MASA/USDT
+          - Name: ME/USDT
+          - Name: MERL/USDT
+          - Name: MEV/USDT
+          - Name: MEW/USDT
+          - Name: MICHI/USDT
+          - Name: MNDE/USDT
+          - Name: MODE/USDT
+          - Name: MON/USDT
+          - Name: MOTHER/USDT
+          - Name: MOVE/USDT
+          - Name: MSN/USDT
+          - Name: MULTI/USDT
+          - Name: MYTH/USDT
+          - Name: NEIROETH/USDT
+          - Name: NIM/USDT
+          - Name: NYAN/USDT
+          - Name: OMNI/USDT
+          - Name: OPEN/USDT
+          - Name: ORC/USDT
+          - Name: ORCA/USDT
+          - Name: ORDER/USDT
+          - Name: OX/USDT
+          - Name: PARAM/USDT
+          - Name: PBUX/USDT
+          - Name: PDA/USDT
+          - Name: PENGU/USDT
+          - Name: PEW/USDT
+          - Name: PIZZA/USDT
+          - Name: PNUT/USDT
+          - Name: POL/USDT
+          - Name: POPCAT/USDT
+          - Name: POWR/USDT
+          - Name: PRCL/USDT
+          - Name: PRQ/USDT
+          - Name: RAY/USDT
+          - Name: RENDER/USDT
+          - Name: RIF/USDT
+          - Name: RLY/USDT
+          - Name: RONIN/USDT
+          - Name: ROUTE/USDT
+          - Name: RTF/USDT
+          - Name: SAFE/USDT
+          - Name: SAGA/USDT
+          - Name: SBD/USDT
+          - Name: SCR/USDT
+          - Name: VINE/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 10
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.075
+            RequestCosts:
+              FundingRate: 1
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: false
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+          SnapshotCoordinator:
+            OrderBy: Counter
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 82800
+  - name: qs-huobiglobal-302
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-huobi:2025.1.14.73-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 301
+        ExchangeName: HuobiGlobal
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+          - Name: SOVRN/USDT
+          - Name: STETH/USDT
+          - Name: STRX/USDT
+          - Name: TAIKO/USDT
+          - Name: TNSR/USDT
+          - Name: TREMP/USDT
+          - Name: UXLINK/USDT
+          - Name: VELODROME/USDT
+          - Name: VIRTUAL/USDT
+          - Name: VSYS/USDT
+          - Name: WALLET/USDT
+          - Name: WOJAK/USDT
+          - Name: WSDM/USDT
+          - Name: XCUR/USDT
+          - Name: XNO/USDT
+          - Name: ZBCN/USDT
+          - Name: ZENT/USDT
+          - Name: ZERO/USDT
+          - Name: ZEROLEND/USDT
+          - Name: ZEUS/USDT
+          - Name: ZK/USDT
+          - Name: ZRO/USDT
+          - Name: AURORA/USDT
+          - Name: CAT/USDT
+          - Name: DGB/USDT
+          - Name: DODO/USDT
+          - Name: GODS/USDT
+          - Name: METIS/USDT
+          - Name: MTL/USDT
+          - Name: NEIRO/USDT
+          - Name: REZ/USDT
+          - Name: SOLV/USDT
+          - Name: STG/USDT
+          - Name: SWARMS/USDT
+          - Name: SYN/USDT
+          - Name: TRUMP/USDT
+          - Name: WAXP/USDT
+          - Name: XYO/USDT
+          - Name: BIGTIME/USDT
+          - Name: MELANIA/USDT
+          - Name: OBT/USDT
+          - Name: BERA/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 10
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.075
+            RequestCosts:
+              FundingRate: 1
+        HuobiGlobal:
+          Collocation: true
+          UseTickFeed: false
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Sequence
+          SnapshotCoordinator:
+            OrderBy: Counter
+          DepthBookMaintainer:
+            LevelsCap: 150
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 82800
+  - name: qs-kucoin-301
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.1.10.16-c375899
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 300
+        KuCoin:
+          ApiPassphrase: VoxOoWnTefUKRsC2J6dJ9wP2LT0MNf9j
+          ApiKey: 6672b0b7104f94000103430c
+          ApiSecret: 3868343c-bfff-4736-a79a-52deb7f3c879
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+          - Name: ABBC/USDT
+          - Name: ACX/USDT
+          - Name: ADX/USDT
+          - Name: AERGO/USDT
+          - Name: AERO/USDT
+          - Name: AEVO/USDT
+          - Name: AGLD/USDT
+          - Name: AI16Z/USDT
+          - Name: AIEPK/USDT
+          - Name: AITECH/USDT
+          - Name: AIXBT/USDT
+          - Name: ALGO/USDC
+          - Name: ALPINE/USDT
+          - Name: AMB/USDT
+          - Name: AMP/USDT
+          - Name: ATA/USDT
+          - Name: ATH/USDT
+          - Name: AVA/USDT
+          - Name: AVAIL/USDT
+          - Name: BABYDOGE/USDT
+          - Name: BAN/USDT
+          - Name: BANANA/USDT
+          - Name: BB/USDT
+          - Name: BBL/USDT
+          - Name: BEER/USDT
+          - Name: BEFI/USDT
+          - Name: BIDP/USDT
+          - Name: BLAST/USDT
+          - Name: BLOCK/USDT
+          - Name: BLUE/USDT
+          - Name: BOND/USDT
+          - Name: BRAWL/USDT
+          - Name: BRETT/USDT
+          - Name: BRWL/USDT
+          - Name: BULL/USDT
+          - Name: CAS/USDT
+          - Name: CAT/USDT
+          - Name: CATS/USDT
+          - Name: CHILLGUY/USDT
+          - Name: CLOUD/USDT
+          - Name: CLV/USDT
+          - Name: COMBO/USDT
+          - Name: COW/USDT
+          - Name: CTA/USDT
+          - Name: CVC/USDT
+          - Name: DECHAT/USDT
+          - Name: DEGEN/USDT
+          - Name: DOGS/USDT
+          - Name: DRIFT/USDT
+          - Name: EGO/USDT
+          - Name: EIGEN/USDT
+          - Name: ENA/USDT
+          - Name: EPX/USDT
+          - Name: ESE/USDT
+          - Name: ETH3L/USDT
+          - Name: ETHFI/USDT
+          - Name: EUL/USDT
+          - Name: EUR/USDT
+          - Name: EVER/USDT
+          - Name: F/USDT
+          - Name: FARTCOIN/USDT
+          - Name: FLOKI/USDT
+          - Name: FORT/USDT
+          - Name: FORWARD/USDT
+          - Name: FOXY/USDT
+          - Name: FRM/USDT
+          - Name: FTM/USDT
+          - Name: FUEL/USDT
+          - Name: FX/USDT
+          - Name: GARI/USDT
+          - Name: GLM/USDT
+          - Name: GMRX/USDT
+          - Name: GOAL/USDT
+          - Name: GOAT/USDT
+          - Name: GRASS/USDT
+          - Name: GRIFFAIN/USDT
+          - Name: HARD/USDT
+          - Name: HIFI/USDT
+          - Name: HIPPO/USDT
+          - Name: HLG/USDT
+          - Name: HMND/USDT
+          - Name: HOLD/USDT
+          - Name: HOLDCOIN/USDT
+          - Name: HYPE/USDT
+          - Name: ICE/USDT
+          - Name: IO/USDT
+          - Name: IOST/USDT
+          - Name: IZI/USDT
+          - Name: KAIA/USDT
+          - Name: KARRAT/USDT
+          - Name: KEY/USDT
+          - Name: KMD/USDT
+          - Name: KMNO/USDT
+          - Name: KNC/USDT
+          - Name: L3/USDT
+          - Name: LBP/USDT
+          - Name: LKI/USDT
+          - Name: LMR/USDT
+          - Name: LOOM/USDT
+          - Name: LSK/USDT
+          - Name: TRUMP/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.2
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 150
+          StaleMarketDataObserver:
+            StaleThreshold: 00:10:00
+            IdleThreshold: 00:10:00
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-kucoin-302
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.1.10.16-c375899
+    requests:
+      cpu: 1200m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ExchangeName: KuCoin
+        ShardId: 301
+        KuCoin:
+          ApiPassphrase: VoxOoWnTefUKRsC2J6dJ9wP2LT0MNf9j
+          ApiKey: 6672b0b7104f94000103430c
+          ApiSecret: 3868343c-bfff-4736-a79a-52deb7f3c879
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 30
+          Symbols:
+          - Name: LUCE/USDT
+          - Name: LUNC/USDT
+          - Name: LYX/USDT
+          - Name: MANEKI/USDT
+          - Name: MARSH/USDT
+          - Name: MASA/USDT
+          - Name: MAX/USDT
+          - Name: MBL/USDT
+          - Name: ME/USDT
+          - Name: MERL/USDT
+          - Name: MEW/USDT
+          - Name: MICHI/USDT
+          - Name: MNDE/USDT
+          - Name: MOG/USDT
+          - Name: MON/USDT
+          - Name: MONKY/USDT
+          - Name: MORPHO/USDT
+          - Name: MOVE/USDT
+          - Name: MTL/USDT
+          - Name: NAVI/USDT
+          - Name: NEAR/USDC
+          - Name: NETVR/USDT
+          - Name: NIBI/USDT
+          - Name: NOT/USDT
+          - Name: NPC/USDT
+          - Name: NS/USDT
+          - Name: NYM/USDT
+          - Name: OMNI/USDT
+          - Name: OPEN/USDT
+          - Name: ORBS/USDT
+          - Name: ORCA/USDT
+          - Name: ORDER/USDT
+          - Name: PBR/USDT
+          - Name: PBUX/USDT
+          - Name: PENGU/USDT
+          - Name: PIP/USDT
+          - Name: PIXEL/USDT
+          - Name: PNUT/USDT
+          - Name: POLS/USDT
+          - Name: PONKE/USDT
+          - Name: POPCAT/USDT
+          - Name: PORTAL/USDT
+          - Name: PRCL/USDT
+          - Name: PSTAKE/USDT
+          - Name: PUNDIX/USDT
+          - Name: QORPO/USDT
+          - Name: QTUM/USDT
+          - Name: RENDER/USDT
+          - Name: REZ/USDT
+          - Name: RIO/USDT
+          - Name: RWA/USDT
+          - Name: SAFE/USDT
+          - Name: SCA/USDT
+          - Name: SD/USDT
+          - Name: SEAM/USDT
+          - Name: SFP/USDT
+          - Name: SLN/USDT
+          - Name: SMILE/USDT
+          - Name: SON/USDT
+          - Name: SONIC/USDT
+          - Name: SPX/USDT
+          - Name: SQD/USDT
+          - Name: STRAX/USDT
+          - Name: STREAM/USDT
+          - Name: STRK/USDT
+          - Name: SUIA/USDT
+          - Name: SUKU/USDT
+          - Name: SUN/USDT
+          - Name: SXP/USDT
+          - Name: TAIKO/USDT
+          - Name: TNSR/USDT
+          - Name: TRUF/USDT
+          - Name: TRVL/USDT
+          - Name: TURBO/USDT
+          - Name: USDT/USDC
+          - Name: UTK/USDT
+          - Name: UXLINK/USDT
+          - Name: VANA/USDT
+          - Name: VANRY/USDT
+          - Name: VEMP/USDT
+          - Name: VINU/USDT
+          - Name: VIRTUAL/USDT
+          - Name: VSYS/USDT
+          - Name: W/USDT
+          - Name: WBTC/USDT
+          - Name: WRX/USDT
+          - Name: WSDM/USDT
+          - Name: X/USDT
+          - Name: XEC/USDT
+          - Name: XETA/USDT
+          - Name: XION/USDT
+          - Name: ZEUS/USDT
+          - Name: ZK/USDT
+          - Name: ZKJ/USDT
+          - Name: ZRO/USDT
+          - Name: ZRX/USDT
+          - Name: FB/USDT
+          - Name: G/USDT
+          - Name: NEIRO/USDT
+          - Name: SLERF/USDT
+          - Name: USDE/USDT
+          - Name: QKC/USDT
+        RateLimiter:
+          Http:
+            UsageLimit: 200
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.2
+            RequestCosts:
+              Snapshot: 10
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 150
+          StaleMarketDataObserver:
+            StaleThreshold: 00:10:00
+            IdleThreshold: 00:10:00
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-kucoinfut-301
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.9.17.76-6cc293d
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 300
+        ExchangeName: KuCoinFut
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 20
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: AERO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AGI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AI16Z/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AIXBT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ALT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: API3/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ATH/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AVA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AVAIL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: AXL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BADGER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BAL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BAN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BANANA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BAT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: BLAST/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CARV/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CATI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CATS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CGPT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CHILLGUY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: COOKIE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: COTI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: COW/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: CVX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DEEP/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DEGEN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DENT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DOG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DOGE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DOGS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: DRIFT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: EIGEN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FARTCOIN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FLOKI/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FLUX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FUEL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: FXS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: G/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GLMR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GOAT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GRASS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: GRIFFAIN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HIPPO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HIVE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HOT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: HYPE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ICX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ILV/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-kucoinfut-302
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.9.17.76-6cc293d
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-nrt
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-nrt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 301
+        ExchangeName: KuCoinFut
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 20
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+            - UnderlyingName: IO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: IOTA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: KAIA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LOOKS/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: LUNC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MAX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MBOX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ME/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MOODENG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MORPHO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: MOVE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NAKA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: NEIRO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PENGU/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PHA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PHB/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PNUT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: POL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PONKE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: POPCAT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PRCL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: PUFFER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RARE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RAY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RENDER/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: REZ/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RON/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: RVN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SCR/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SHIB/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SMILE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SONIC/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SPX/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: STEEM/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: STG/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: SUN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: T/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: TAIKO/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: THE/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: USUAL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: UXLINK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VANA/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VANRY/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VIDT/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: VIRTUAL/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ZEN/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ZK/USDT
+              NamePatterns:
+              - _Perpetual
+            - UnderlyingName: ZRO/USDT
+              NamePatterns:
+              - _Perpetual
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-collect:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false

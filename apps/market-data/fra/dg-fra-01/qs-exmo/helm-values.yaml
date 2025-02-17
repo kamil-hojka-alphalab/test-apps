@@ -1,0 +1,64 @@
+QuoteServers:
+  - name: qs-exmo-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-exmo:2025.1.14.69-100f6ef
+    requests:
+      cpu: 1000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: Exmo
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 15
+          Symbols:
+            - Name: ADA/USD
+            - Name: TRX/USD
+            - Name: XRP/ETH
+            - Name: ETC/BTC
+            - Name: ADA/USDT
+            - Name: BTC/USD
+            - Name: ETH/USD
+            - Name: XRP/USD
+            - Name: BTC/USDT
+            - Name: ETH/USDT
+            - Name: ETH/BTC
+            - Name: XRP/USDT
+            - Name: ETC/USD
+            - Name: NEO/USD
+            - Name: XRP/BTC
+            - Name: BCH/USD
+            - Name: ETH/UAH
+            - Name: ETH/LTC
+            - Name: BTC/UAH
+            - Name: BTC/EUR
+            - Name: ADA/BTC
+            - Name: ALGO/USDT
+            - Name: LTC/USD
+            - Name: ALGO/BTC
+            - Name: BTC/GBP
+            - Name: LTC/BTC
+            - Name: ETH/EUR
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-fra-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+              Extension: InstanceId

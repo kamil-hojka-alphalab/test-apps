@@ -31,11 +31,11 @@ spec:
           mountPath: /app/prod
         resources:
           limits:
-            memory: 12000Mi
-            cpu: 5000m
+            memory: 16000Mi
+            cpu: 6000m
           requests:
-            cpu: 5000m
-            memory: 12000Mi
+            cpu: 6000m
+            memory: 8000Mi
         ports:
           - name: health-port
             containerPort: 5001

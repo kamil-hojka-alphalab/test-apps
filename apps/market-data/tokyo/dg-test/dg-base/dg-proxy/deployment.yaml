@@ -47,7 +47,7 @@ spec:
       tolerations:
       - key: node/destiny
         operator: Equal
-        value: dg-test
+        value: dg-nrt
         effect: NoSchedule
       nodeSelector:
-        node/destiny: dg-test
+        node/destiny: dg-nrt

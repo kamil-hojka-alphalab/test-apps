@@ -7,7 +7,7 @@ data:
           - ">tcp://dg-proxy.dg-irl-01:11900"
     DataRecorder:
       PublishFileEventChannel:
-        ParallelConsumers: 2
+        ParallelConsumers: 3
       S3Options:
         Bucket: "qs-bin-v2-irl"
       Redis:

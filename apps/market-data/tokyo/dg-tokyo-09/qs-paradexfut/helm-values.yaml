@@ -1,0 +1,115 @@
+QuoteServers:
+  - name: qs-paradexfut-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-paradex:2025.1.21.92-914bf85
+    requests:
+      cpu: 1200m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: ParadexFut
+
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: BTC/USDC
+                NamePatterns:
+                - _Perpetual
+              - UnderlyingName: ETH/USDC
+                NamePatterns:
+                - _Perpetual
+              - UnderlyingName: STRK/USDC
+                NamePatterns:
+                - _Perpetual
+              - UnderlyingName: WIF/USDC
+                NamePatterns:
+                - _Perpetual
+              - UnderlyingName: AVAX/USDC
+                NamePatterns:
+                - _Perpetual
+              - UnderlyingName: FTM/USDC
+                NamePatterns:
+                - _Perpetual
+              - UnderlyingName: NEAR/USDC
+                NamePatterns:
+                - _Perpetual
+              - UnderlyingName: TIA/USDC
+                NamePatterns:
+                - _Perpetual
+              - UnderlyingName: DOGE/USDC
+                NamePatterns:
+                - _Perpetual
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Timestamp
+              Deduplicate: true
+              IncludeInHash: Timestamp
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-paradexfut-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-paradex:2025.1.21.92-914bf85
+    requests:
+      cpu: 1200m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 201
+        ExchangeName: ParadexFut
+
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: SOL/USDC
+                NamePatterns:
+                - _Perpetual
+        Pipeline:
+          AbArbitrator:
+            DepthBookProcessing:
+              OrderBy: Counter
+            TradesProcessing:
+              OrderBy: Timestamp
+              Deduplicate: true
+              IncludeInHash: Timestamp
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false

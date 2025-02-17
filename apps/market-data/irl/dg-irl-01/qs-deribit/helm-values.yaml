@@ -1,6 +1,6 @@
 QuoteServers:
   - name: qs-deribit-206
-    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2024.12.17.75-b3f7dd2
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.1.14.80-100f6ef
     requests:
       cpu: 1100m
       memory: 2000Mi
@@ -49,8 +49,58 @@ QuoteServers:
 
             V3BinaryFormat:
               DevelopmentMode: false
+
+  - name: qs-deribitmerged-206
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.2.11.86-1a0165a
+    requests:
+      cpu: 1100m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 205
+        ExchangeName: DeribitMerged
+        DeribitMerged:
+          ExchangeConnection:
+            ParsingOptions:
+              FastParsing : false # true for fast parsing, false will use fallback (JsonDispatcher) mechanism
+        RateLimiter:
+          Http:
+            UsageLimit: 40
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.50
+            RequestCosts:
+              Snapshot: 20
+        Monitor:
+          DerivedSymbols:
+            Type: All
+            Symbols:
+              - UnderlyingName: SOL/USDC
+                NamePatterns:
+                  - 'SOL/USDC_.*DeribitMerged'
+          DefaultConnectionCount: 1
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-irl-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+
   - name: qs-deribitoptions-201
-    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2024.12.17.75-b3f7dd2
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.1.21.81-7df981e
     requests:
       cpu: 2000m
       memory: 4000Mi
@@ -116,8 +166,73 @@ QuoteServers:
           DepthBookMaintainer:
             TickersNeedExchangeTime: true
             LevelsCap: 200
+
+  - name: qs-deribitmerged-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.2.11.86-1a0165a
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: false
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: DeribitMerged
+        DeribitMerged:
+          ExchangeConnection:
+            OrderBookUpdateChannel:
+              DebugVerbosity: 2
+            TradeChannel:
+              DebugVerbosity: 2
+            ParsingOptions:
+              FastParsing: false # true for fast parsing, false will use fallback (JsonDispatcher) mechanism
+            Sync:
+              Interval: 0 # ms 0 - disable
+          SnapshotMakerStrategy:
+            DebugVerbosity: 2
+
+        PeriodicSnapshotTrigger:
+          Enabled: true
+          MinPeriodSeconds: 30
+          MaxPeriodSeconds: 60
+        RateLimiter:
+          Http:
+            UsageLimit: 22
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.50
+            RequestCosts:
+              Snapshot: 20
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 100
+          DerivedSymbols:
+            Type: All
+            Symbols:
+              - UnderlyingName: XRP/USDC
+                NamePatterns:
+                  - 'XRP/USDC_.*DeribitMerged'
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-irl-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          DepthBookMaintainer:
+            TickersNeedExchangeTime: true
+            LevelsCap: 200
+
   - name: qs-deribitoptions-202
-    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2024.12.17.75-b3f7dd2
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.1.21.81-7df981e
     requests:
       cpu: 2000m
       memory: 4000Mi
@@ -175,13 +290,6 @@ QuoteServers:
               - UnderlyingName: ETH/USD
                 NamePatterns:
                   - 'ETH/USD_P.*DeribitOptions'
-          #Symbols:
-          #  - Name: MATIC/USDC_C_0.52_20240830@DeribitOptions
-          #  - Name: MATIC/USDC_C_0.54_20240830@DeribitOptions
-          #  - Name: MATIC/USDC_C_0.55_20240830@DeribitOptions
-          #  - Name: MATIC/USDC_P_0.52_20240830@DeribitOptions
-          #  - Name: MATIC/USDC_P_0.54_20240830@DeribitOptions
-          #  - Name: MATIC/USDC_P_0.55_20240830@DeribitOptions
 
 
         Pipeline:
@@ -193,8 +301,75 @@ QuoteServers:
           DepthBookMaintainer:
             TickersNeedExchangeTime: true
             LevelsCap: 200
+
+  - name: qs-deribitmerged-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.2.11.86-1a0165a
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: false
+      QuoteServer:
+        ShardId: 201
+        ExchangeName: DeribitMerged
+        DeribitMerged:
+          ExchangeConnection:
+            OrderBookUpdateChannel:
+              DebugVerbosity: 2
+            TradeChannel:
+              DebugVerbosity: 2
+            ParsingOptions:
+              FastParsing: false # true for fast parsing, false will use fallback (JsonDispatcher) mechanism
+            Sync:
+              Interval: 0 # ms 0 - disable
+          SnapshotMakerStrategy:
+            DebugVerbosity: 2
+
+        PeriodicSnapshotTrigger:
+          Enabled: true
+          MinPeriodSeconds: 30
+          MaxPeriodSeconds: 60
+
+        RateLimiter:
+          Http:
+            UsageLimit: 22
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.50
+            RequestCosts:
+              Snapshot: 20
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 100
+          DerivedSymbols:
+            Type: All
+            Symbols:
+              - UnderlyingName: BNB/USDC
+                NamePatterns:
+                  - 'BNB/USDC_.*DeribitMerged'
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-irl-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          DepthBookMaintainer:
+            TickersNeedExchangeTime: true
+            LevelsCap: 200
+
   - name: qs-deribitoptions-203
-    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2024.12.17.75-b3f7dd2
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.1.21.81-7df981e
     requests:
       cpu: 2000m
       memory: 4000Mi
@@ -267,8 +442,74 @@ QuoteServers:
           DepthBookMaintainer:
             TickersNeedExchangeTime: true
             LevelsCap: 200
+
+  - name: qs-deribitmerged-203
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.2.11.86-1a0165a
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: false
+      QuoteServer:
+        ShardId: 202
+        ExchangeName: DeribitMerged
+        DeribitMerged:
+          ExchangeConnection:
+            OrderBookUpdateChannel:
+              DebugVerbosity: 2
+            TradeChannel:
+              DebugVerbosity: 2
+            ParsingOptions:
+              FastParsing: false # true for fast parsing, false will use fallback (JsonDispatcher) mechanism
+            Sync:
+              Interval: 0 # ms 0 - disable
+          SnapshotMakerStrategy:
+            DebugVerbosity: 2
+
+        PeriodicSnapshotTrigger:
+          Enabled: true
+          MinPeriodSeconds: 30
+          MaxPeriodSeconds: 60
+
+        RateLimiter:
+          Http:
+            UsageLimit: 22
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.50
+            RequestCosts:
+              Snapshot: 20
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 100
+          DerivedSymbols:
+            Type: All
+            Symbols:
+              - UnderlyingName: ETH/USD
+                NamePatterns:
+                  - 'ETH/USD_.*DeribitMerged'
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-irl-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          DepthBookMaintainer:
+            TickersNeedExchangeTime: true
+            LevelsCap: 200
+
   - name: qs-deribitoptions-204
-    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2024.12.17.75-b3f7dd2
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.1.21.81-7df981e
     requests:
       cpu: 2000m
       memory: 4000Mi
@@ -344,8 +585,75 @@ QuoteServers:
           DepthBookMaintainer:
             TickersNeedExchangeTime: true
             LevelsCap: 200
+
+  - name: qs-deribitmerged-204
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.2.11.86-1a0165a
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: false
+      QuoteServer:
+        ShardId: 203
+        ExchangeName: DeribitMerged
+        DeribitMerged:
+          ExchangeConnection:
+            OrderBookUpdateChannel:
+              DebugVerbosity: 2
+            TradeChannel:
+              DebugVerbosity: 2
+            ParsingOptions:
+              FastParsing: false # true for fast parsing, false will use fallback (JsonDispatcher) mechanism
+            Sync:
+              Interval: 0 # ms 0 - disable
+          SnapshotMakerStrategy:
+            DebugVerbosity: 2
+
+        PeriodicSnapshotTrigger:
+          Enabled: true
+          MinPeriodSeconds: 30
+          MaxPeriodSeconds: 60
+
+        RateLimiter:
+          Http:
+            UsageLimit: 40
+            Interval: 00:00:01
+            MinAcquireGap: 0.00:00:00.50
+            RequestCosts:
+              Snapshot: 20
+        Monitor:
+          DefaultConnectionCount: 1
+          MaxSymbolsPerConnection: 100
+          DerivedSymbols:
+            Type: All
+            Symbols:
+              - UnderlyingName: BTC/USD
+                NamePatterns:
+                  - 'BTC/USD_.*DeribitMerged'
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-irl-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+          DepthBookMaintainer:
+            TickersNeedExchangeTime: true
+            LevelsCap: 200
+
   - name: qs-deribitspot-201
-    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2024.12.17.75-b3f7dd2
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-deribit:2025.1.14.80-100f6ef
     requests:
       cpu: 1200m
       memory: 2000Mi

@@ -1,0 +1,71 @@
+QuoteServers:
+  - name: qs-bitbank-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bitbank:2025.1.14.71-100f6ef
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: BitBank
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: BTC/JPY
+            - Name: ETH/JPY
+            - Name: QTUM/JPY
+            - Name: BAT/JPY
+            - Name: OMG/JPY
+            - Name: BOBA/JPY
+            - Name: XRP/JPY
+            - Name: LTC/JPY
+            - Name: MONA/JPY
+            - Name: XLM/JPY
+            - Name: XYM/JPY
+            - Name: BCH/JPY
+            - Name: DOT/JPY
+            - Name: DOGE/JPY
+            - Name: LINK/JPY
+            - Name: ENJ/JPY
+            - Name: ASTR/JPY
+            - Name: AVAX/JPY
+            - Name: AXS/JPY
+            - Name: SAND/JPY
+            - Name: FLR/JPY
+            - Name: APE/JPY
+            - Name: GALA/JPY
+            - Name: CHZ/JPY
+            - Name: MKR/JPY
+            - Name: OAS/JPY
+            - Name: GRT/JPY
+            - Name: BNB/JPY
+            - Name: ADA/JPY
+            - Name: OP/JPY
+            - Name: ARB/JPY
+            - Name: POL/JPY
+            - Name: MANA/JPY
+
+
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            V3BinaryFormat:
+              DevelopmentMode: false
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+      PerfCollector:
+        Enabled: false

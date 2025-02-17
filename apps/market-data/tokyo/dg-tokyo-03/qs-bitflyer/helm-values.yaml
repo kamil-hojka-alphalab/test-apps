@@ -1,0 +1,43 @@
+QuoteServers:
+  - name: qs-bitflyer-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-bitflyer:2025.1.21.72-914bf85
+    requests:
+      cpu: 1000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 3500Mi
+    nodeDestiny: dg-rt-az1
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az1
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      QuoteServer:
+        ExchangeName: bitFlyer
+        ShardId: 200
+
+        Monitor:
+          DefaultConnectionCount: 2
+          Symbols:
+            - Name: ETH/JPY
+            - Name: BTC/JPY
+            - Name: ETH/BTC
+            - Name: BCH/BTC
+            - Name: XRP/JPY
+            - Name: XLM/JPY
+            - Name: MONA/JPY
+
+        Pipeline:
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-03:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+              Extension: InstanceId
+      PerfCollector:
+        HistogramDumpInterval: 23:00:00

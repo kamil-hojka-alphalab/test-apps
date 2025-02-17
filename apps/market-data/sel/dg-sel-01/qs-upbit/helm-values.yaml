@@ -1,0 +1,332 @@
+QuoteServers:
+  - name: qs-upbit-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-upbit:2025.1.14.87-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: Upbit
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 12
+          Symbols:
+            - Name: BTC/KRW
+            - Name: AHT/KRW
+            - Name: FCT2/KRW
+            - Name: LSK/KRW
+            - Name: POWR/KRW
+            - Name: MASK/KRW
+            - Name: APT/KRW
+            - Name: EGLD/KRW
+            - Name: AXS/KRW
+            - Name: STX/KRW
+            - Name: DKA/KRW
+            - Name: TT/KRW
+            - Name: META/KRW
+            - Name: STRAX/KRW
+            - Name: ORBS/KRW
+            - Name: CELO/KRW
+            - Name: GMT/KRW
+            - Name: ARB/KRW
+            - Name: ETH/USDT
+            - Name: SEI/KRW
+            - Name: MNT/KRW
+            - Name: ENS/KRW
+            - Name: G/KRW
+            - Name: MEW/KRW
+            - Name: UNI/KRW
+            - Name: CKB/KRW
+            - Name: USDT/KRW
+            - Name: POL/KRW
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 15
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-upbit-202
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-upbit:2025.1.14.87-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 201
+        ExchangeName: Upbit
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 13
+          Symbols:
+            - Name: ETC/KRW
+            - Name: SBD/KRW
+            - Name: FLOW/KRW
+            - Name: DOT/KRW
+            - Name: GAS/KRW
+            - Name: GRS/KRW
+            - Name: IQ/KRW
+            - Name: AAVE/KRW
+            - Name: SUI/KRW
+            - Name: STORJ/KRW
+            - Name: BTG/KRW
+            - Name: XEM/KRW
+            - Name: ARDR/KRW
+            - Name: ARK/KRW
+            - Name: CRO/KRW
+            - Name: AERGO/KRW
+            - Name: CHZ/KRW
+            - Name: HIVE/KRW
+            - Name: CBK/KRW
+            - Name: SAND/KRW
+            - Name: ONG/KRW
+            - Name: ZETA/KRW
+            - Name: STG/KRW
+            - Name: TAIKO/KRW
+            - Name: AUCTION/KRW
+            - Name: BEAM/KRW
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 15
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-upbit-203
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-upbit:2025.1.14.87-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 202
+        ExchangeName: Upbit
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 12
+
+          Symbols:
+            - Name: ETH/KRW
+            - Name: EOS/KRW
+            - Name: BCH/KRW
+            - Name: ADA/KRW
+            - Name: MBL/KRW
+            - Name: PUNDIX/KRW
+            - Name: ALGO/KRW
+            - Name: NEAR/KRW
+            - Name: AVAX/KRW
+            - Name: T/KRW
+            - Name: CVC/KRW
+            - Name: MANA/KRW
+            - Name: ICX/KRW
+            - Name: KAVA/KRW
+            - Name: MVL/KRW
+            - Name: XEC/KRW
+            - Name: ONEINCH/KRW
+            - Name: SC/KRW
+            - Name: MOC/KRW
+            - Name: STPT/KRW
+            - Name: BLUR/KRW
+            - Name: IMX/KRW
+            - Name: HPO/KRW
+            - Name: ID/KRW
+            - Name: ZRO/KRW
+            - Name: JUP/KRW
+            - Name: BLAST/KRW
+            - Name: ONDO/KRW
+
+
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          DepthBookMaintainer:
+            LevelsCap: 15
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
+  - name: qs-upbit-204
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-upbit:2025.1.14.87-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 203
+        ExchangeName: Upbit
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 12
+
+          Symbols:
+            - Name: XRP/KRW
+            - Name: QTUM/KRW
+            - Name: ZIL/KRW
+            - Name: TRX/KRW
+            - Name: MLK/KRW
+            - Name: MED/KRW
+            - Name: DOGE/KRW
+            - Name: STMX/KRW
+            - Name: WAXP/KRW
+            - Name: BAT/KRW
+            - Name: STEEM/KRW
+            - Name: NEO/KRW
+            - Name: VET/KRW
+            - Name: WAVES/KRW
+            - Name: QKC/KRW
+            - Name: THETA/KRW
+            - Name: TFUEL/KRW
+            - Name: HBAR/KRW
+            - Name: ANKR/KRW
+            - Name: LOOM/KRW
+            - Name: LINK/KRW
+            - Name: AQT/KRW
+            - Name: ASTR/KRW
+            - Name: UXLINK/KRW
+            - Name: BIGTIME/KRW
+            - Name: CARV/KRW
+            - Name: SAFE/KRW
+            - Name: W/KRW
+            - Name: DRIFT/KRW
+            - Name: GAME2/KRW
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 15
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-upbit-205
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-upbit:2025.1.14.87-100f6ef
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 204
+        ExchangeName: Upbit
+
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 13
+          Symbols:
+            - Name: SXP/KRW
+            - Name: ONT/KRW
+            - Name: ELF/KRW
+            - Name: JST/KRW
+            - Name: SOL/KRW
+            - Name: HUNT/KRW
+            - Name: SHIB/KRW
+            - Name: HIFI/KRW
+            - Name: POLYX/KRW
+            - Name: TOKAMAK/KRW
+            - Name: IOTA/KRW
+            - Name: SNT/KRW
+            - Name: ZRX/KRW
+            - Name: KNC/KRW
+            - Name: BSV/KRW
+            - Name: XLM/KRW
+            - Name: BTT/KRW
+            - Name: IOST/KRW
+            - Name: MTL/KRW
+            - Name: ATOM/KRW
+            - Name: XTZ/KRW
+            - Name: BORA/KRW
+            - Name: GLM/KRW
+            - Name: GRT/KRW
+            - Name: MINA/KRW
+            - Name: CTC/KRW
+            - Name: PYTH/KRW
+            - Name: STRIKE/KRW
+            - Name: AKT/KRW
+            - Name: PENDLE/KRW
+            - Name: ATH/KRW
+
+        Pipeline:
+          DepthBookMaintainer:
+            LevelsCap: 15
+
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-sel-01:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false

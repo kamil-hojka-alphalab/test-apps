@@ -1,0 +1,47 @@
+QuoteServers:
+  - name: qs-hibachi-201
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-hibachi:2024.10.17.364-fd4de5d
+    requests:
+      cpu: 2000m
+      memory: 4000Mi
+    limits:
+      cpu: 2000m
+      memory: 4000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+
+      QuoteServer:
+        ShardId: 200
+        ExchangeName: Hibachi
+
+        Monitor:
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: ETH/USDT
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: BTC/USDT
+                NamePatterns:
+                  - '_Perpetual'
+              - UnderlyingName: SOL/USDT
+                NamePatterns:
+                  - '_Perpetual'
+
+
+        Pipeline:
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-06:11800"
+
+            V3BinaryFormat:
+              DevelopmentMode: false

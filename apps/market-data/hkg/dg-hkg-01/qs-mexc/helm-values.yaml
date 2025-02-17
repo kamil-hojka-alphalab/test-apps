@@ -1,0 +1,266 @@
+QuoteServers:
+  - name: qs-mexc-210
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    nodeDestiny: dg-rt
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 209
+        ExchangeName: Mexc
+        Monitor:
+          MaxSymbolsPerConnection: 10
+          Symbols:
+          - Name: ONEINCH/USDT
+          - Name: AAVE/USDT
+          - Name: ACH/USDT
+          - Name: ACT/USDT
+          - Name: ACX/USDT
+          - Name: ADA/USDT
+          - Name: AERO/USDT
+          - Name: AEVO/USDT
+          - Name: AI16Z/USDT
+          - Name: AKRO/USDT
+          - Name: ALGO/USDT
+          - Name: ALICE/USDT
+          - Name: ALPACA/USDT
+          - Name: ALPHA/USDT
+          - Name: ANKR/USDT
+          - Name: APE/USDT
+          - Name: API3/USDT
+          - Name: APT/USDT
+          - Name: APU/USDT
+          - Name: ARB/USDT
+          - Name: ARKM/USDT
+          - Name: ATH/USDT
+          - Name: ATOM/USDT
+          - Name: AUCTION/USDT
+          - Name: AVA/USDT
+          - Name: AVAIL/USDT
+          - Name: AVAX/USDT
+          - Name: BAKE/USDT
+          - Name: BAN/USDT
+          - Name: BANANA/USDT
+          - Name: BB/USDT
+          - Name: BCH/USDT
+          - Name: BEAMX/USDT
+          - Name: BEL/USDT
+          - Name: BIGTIME/USDT
+          - Name: BLAST/USDT
+          - Name: BLUE/USDT
+          - Name: BLUR/USDT
+          - Name: BLZ/USDT
+          - Name: BNB/USDT
+          - Name: AIXBT/USDT
+          - Name: DF/USDT
+          - Name: GRIFFAIN/USDT
+          - Name: NEIROETH/USDT
+          - Name: REX/USDT
+          - Name: USUAL/USDT
+          DefaultConnectionCount: 1
+          RateLimiter:
+            Http:
+              UsageLimit: 240
+              Interval: 00:01
+              MinAcquireGap: 0.00:00:01
+              RequestCosts:
+                Snapshot: 15
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-mexc-211
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    nodeDestiny: dg-rt
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 210
+        ExchangeName: Mexc
+        Monitor:
+          MaxSymbolsPerConnection: 10
+          Symbols:
+
+          - Name: BNT/USDT
+          - Name: BOME/USDT
+          - Name: BOND/USDT
+          - Name: BONE/USDT
+          - Name: BONK/USDT
+          - Name: BSV/USDT
+          - Name: BTT/USDT
+          - Name: C98/USDT
+          - Name: CAKE/USDT
+          - Name: CEL/USDT
+          - Name: CELO/USDT
+          - Name: CETUS/USDT
+          - Name: CFX/USDT
+          - Name: CHESS/USDT
+          - Name: CHILLGUY/USDT
+          - Name: CHR/USDT
+          - Name: CHZ/USDT
+          - Name: CKB/USDT
+          - Name: COMP/USDT
+          - Name: COOK/USDT
+          - Name: CORE/USDT
+          - Name: COW/USDT
+          - Name: CPOOL/USDT
+          - Name: CRO/USDT
+          - Name: CRV/USDT
+          - Name: CSPR/USDT
+          - Name: CYBER/USDT
+          - Name: DASH/USDT
+          - Name: DMAIL/USDT
+          - Name: DODO/USDT
+          - Name: DOGE/USDT
+          - Name: DOGS/USDT
+          - Name: DOT/USDT
+          - Name: DUKO/USDT
+          - Name: DYDX/USDT
+          - Name: DYM/USDT
+          - Name: EDU/USDT
+          - Name: EGLD/USDT
+          - Name: EIGEN/USDT
+          - Name: ELON/USDT
+          - Name: ENA/USDT
+          - Name: ZEN/USDT
+          - Name: WOLF/USDT
+          - Name: ARC/USDT
+          - Name: FXS/USDT
+          - Name: CGPT/USDT
+          - Name: ACE/USDT
+          DefaultConnectionCount: 1
+          RateLimiter:
+            Http:
+              UsageLimit: 240
+              Interval: 00:01
+              MinAcquireGap: 0.00:00:01
+              RequestCosts:
+                Snapshot: 15
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  - name: qs-mexc-212
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
+    requests:
+      cpu: 1200m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt
+        effect: NoSchedule
+    nodeDestiny: dg-rt
+
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      QuoteServer:
+        ShardId: 211
+        ExchangeName: Mexc
+        Monitor:
+          MaxSymbolsPerConnection: 10
+          Symbols:
+          - Name: ENJ/USDT
+          - Name: EOS/USDT
+          - Name: ETC/USDT
+          - Name: ETHFI/USDT
+          - Name: ETHW/USDT
+          - Name: F/USDT
+          - Name: FARTCOIN/USDT
+          - Name: FET/USDT
+          - Name: FIL/USDT
+          - Name: FLM/USDT
+          - Name: FLOKI/USDT
+          - Name: FLOW/USDT
+          - Name: FLR/USDT
+          - Name: FTT/USDT
+          - Name: G/USDT
+          - Name: GALA/USDT
+          - Name: GEAR/USDT
+          - Name: GLMR/USDT
+          - Name: GRASS/USDT
+          - Name: GRT/USDT
+          - Name: GTC/USDT
+          - Name: HFT/USDT
+          - Name: HIPPO/USDT
+          - Name: HIVE/USDT
+          - Name: HOLD/USDT
+          - Name: HOOK/USDT
+          - Name: HOT/USDT
+          - Name: ICP/USDT
+          - Name: ID/USDT
+          - Name: IDEX/USDT
+          - Name: ILV/USDT
+          - Name: IMX/USDT
+          - Name: INJ/USDT
+          - Name: IO/USDT
+          - Name: IOST/USDT
+          - Name: IOTA/USDT
+          - Name: IOTX/USDT
+          - Name: IRIS/USDT
+          - Name: JASMY/USDT
+          - Name: JOE/USDT
+          - Name: CELR/USDT
+          - Name: PEOPLE/USDT
+          - Name: REN/USDT
+          - Name: HIGH/USDT
+          - Name: RARE/USDT
+          - Name: GMX/USDT
+          DefaultConnectionCount: 1
+          RateLimiter:
+            Http:
+              UsageLimit: 240
+              Interval: 00:01
+              MinAcquireGap: 0.00:00:01
+              RequestCosts:
+                Snapshot: 15
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-hkg-01:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+  

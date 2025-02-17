@@ -12,11 +12,6 @@ data:
             Args:
               theme: "Serilog.Sinks.SystemConsole.Themes.AnsiConsoleTheme::Code, Serilog.Sinks.Console"
               outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Prefix}{Message:lj}{NewLine}{Exception}"
-        -   Name: File
-            Args:
-              path:  "./logs/qscs-.txt"
-              rollingInterval: Day
-              outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Prefix}{Message:lj} {Properties:j}{NewLine}{Exception}"
 
     QsClient:
       DevelopmentMode: false

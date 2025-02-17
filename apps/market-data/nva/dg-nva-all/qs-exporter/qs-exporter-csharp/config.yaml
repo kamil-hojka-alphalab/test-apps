@@ -8,7 +8,7 @@ data:
         Type: SplitBySymbolCount
         SymbolsCount: 200
         InitialWorkflowCount: 2
-    
+
       ZmqTransport:
         DefaultEndpointName: "default"
         Endpoint:
@@ -16,7 +16,7 @@ data:
             - ">tcp://dg-proxy.dg-nva-01:11900"
         LocalByteCacheSize: 65536
         ReceiveHighWatermark: 300000
-        
+
       Extension: InstanceId
       Subscription: NonSubSampled
       ExtensionDeserializationErrorHandling: None
@@ -28,6 +28,7 @@ data:
         default:
           - "GDAX"
           - "BinanceUS"
+          - "Coinbase"
 
     MetricConfigurationProvider:
       DefaultEnabled: true

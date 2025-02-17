@@ -59,6 +59,10 @@ spec:
         operator: "Equal"
         value: "prefect-etl"
         effect: "NoSchedule"
+      - key: node/destiny
+        operator: "Equal"
+        value: "sigma-apps"
+        effect: "NoSchedule"
 
       affinity:
         nodeAffinity:
@@ -78,6 +82,7 @@ spec:
                 - etl-spot
                 - etl-spot-memory
                 - prefect-etl
+                - sigma-apps
       serviceAccountName: sm-watcher-sa
       containers:
       - name: sm-watcher

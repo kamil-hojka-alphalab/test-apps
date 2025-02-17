@@ -1,0 +1,272 @@
+QuoteServers:
+  - name: qs-kucoinfut-207
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.9.17.76-6cc293d
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 206
+        ExchangeName: KuCoinFut
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 10
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: SEI/USDT
+              - UnderlyingName: OXT/USDT
+              - UnderlyingName: MAGIC/USDT
+              - UnderlyingName: ROSE/USDT
+              - UnderlyingName: LQTY/USDT
+              - UnderlyingName: ONT/USDT
+              - UnderlyingName: OMG/USDT
+              - UnderlyingName: MKR/USDT
+              - UnderlyingName: STORJ/USDT
+              - UnderlyingName: MAV/USDT
+              - UnderlyingName: BAND/USDT
+              - UnderlyingName: AUDIO/USDT
+              - UnderlyingName: AGLD/USDT
+              - UnderlyingName: COMBO/USDT
+              - UnderlyingName: KDA/USDT
+              - UnderlyingName: LEVER/USDT
+              - UnderlyingName: GTC/USDT
+              - UnderlyingName: KNC/USDT
+              - UnderlyingName: TON/USDT
+              - UnderlyingName: ARK/USDT
+              - UnderlyingName: BNT/USDT
+              - UnderlyingName: XTZ/USDT
+              - UnderlyingName: CRO/USDT
+              - UnderlyingName: BIGTIME/USDT
+              - UnderlyingName: TOKEN/USDT
+              - UnderlyingName: CAKE/USDT
+              - UnderlyingName: WAXP/USDT
+              - UnderlyingName: AR/USDT
+              - UnderlyingName: TWT/USDT
+              - UnderlyingName: PERP/USDT
+              - UnderlyingName: CHZ/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-kucoinfut-208
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.9.17.76-6cc293d
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 207
+        ExchangeName: KuCoinFut
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 10
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: BEL/USDT
+              - UnderlyingName: EDU/USDT
+              - UnderlyingName: TRU/USDT
+              - UnderlyingName: MTL/USDT
+              - UnderlyingName: RDNT/USDT
+              - UnderlyingName: AAVE/USDT
+              - UnderlyingName: ACH/USDT
+              - UnderlyingName: ID/USDT
+              - UnderlyingName: SNX/USDT
+              - UnderlyingName: CELR/USDT
+              - UnderlyingName: CELO/USDT
+              - UnderlyingName: SFP/USDT
+              - UnderlyingName: UNFI/USDT
+              - UnderlyingName: TRB/USDT
+              - UnderlyingName: BAKE/USDT
+              - UnderlyingName: POLYX/USDT
+              - UnderlyingName: QTUM/USDT
+              - UnderlyingName: ORBS/USDT
+              - UnderlyingName: GAS/USDT
+              - UnderlyingName: PEOPLE/USDT
+              - UnderlyingName: REN/USDT
+              - UnderlyingName: USTC/USDT
+              - UnderlyingName: SUPER/USDT
+              - UnderlyingName: XCN/USDT
+              - UnderlyingName: JTO/USDT
+              - UnderlyingName: NTRN/USDT
+              - UnderlyingName: PYTH/USDT
+
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 01:00:00
+  - name: qs-kucoinfut-209
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.9.17.76-6cc293d
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 208
+        ExchangeName: KuCoinFut
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 10
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: SOL/USD
+              - UnderlyingName: KSM/USDT
+              - UnderlyingName: LRC/USDT
+              - UnderlyingName: CETUS/USDT
+              - UnderlyingName: XVS/USDT
+              - UnderlyingName: RSR/USDT
+              - UnderlyingName: ENS/USDT
+              - UnderlyingName: HFT/USDT
+              - UnderlyingName: SKL/USDT
+              - UnderlyingName: CKB/USDT
+              - UnderlyingName: BSV/USDT
+              - UnderlyingName: ORDI/USDT
+              - UnderlyingName: NMR/USDT
+              - UnderlyingName: GMX/USDT
+              - UnderlyingName: ACE/USDT
+              - UnderlyingName: POWR/USDT
+              - UnderlyingName: HIFI/USDT
+              - UnderlyingName: MOVR/USDT
+              - UnderlyingName: METIS/USDT
+
+
+              - UnderlyingName: ALPHA/USDT
+              - UnderlyingName: ANKR/USDT
+        Pipeline:
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        HistogramDumpInterval: 23:00:00
+  - name: qs-kucoinfut-212
+    image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-kucoin:2024.9.17.76-6cc293d
+    requests:
+      cpu: 2000m
+      memory: 2000Mi
+    limits:
+      cpu: 2000m
+      memory: 2000Mi
+    nodeDestiny: dg-rt-az4
+    tolerations:
+      - key: node/destiny
+        operator: Equal
+        value: dg-rt-az4
+        effect: NoSchedule
+    prometheusPodScrape: true
+    config: |-
+      SecurityMaster:
+        FileLoader:
+          DisableNotificationsService: true
+      PriceServerClient:
+        Address: ">tcp://qs-tokyo.node.al:10951,>tcp://qs-tokyo-1.node.al:10951,>tcp://qs-tokyo.node.al:10956,>tcp://qs-tokyo-1.node.al:10956,>tcp://qs-tokyo-4.node.al:10951"
+      QuoteServer:
+        ShardId: 211
+        ExchangeName: KuCoinFut
+        Monitor:
+          DefaultConnectionCount: 2
+          MaxSymbolsPerConnection: 10
+          DerivedSymbols:
+            Type: Futures
+            Symbols:
+              - UnderlyingName: UMA/USDT
+              - UnderlyingName: XAI/USDT
+              - UnderlyingName: MYRO/USDT
+              - UnderlyingName: MANTA/USDT
+              - UnderlyingName: ONDO/USDT
+              - UnderlyingName: XEM/USDT
+              - UnderlyingName: TAO/USDT
+              - UnderlyingName: DYM/USDT
+              - UnderlyingName: 1000BONK/USDT
+              - UnderlyingName: ZETA/USDT
+              - UnderlyingName: WIF/USDT
+              - UnderlyingName: PIXEL/USDT
+              - UnderlyingName: JOE/USDT
+              - UnderlyingName: MAVIA/USDT
+              - UnderlyingName: SPELL/USDT
+              - UnderlyingName: STRK/USDT
+
+
+        Pipeline:
+          Disruptor:
+            DisruptorStatsDecoratorEnabled: false
+          Subsampling:
+            BestBidOfferThreshold: 1e-5
+            TimeThreshold: 00:00:01
+            PriceForChangeThreshold: 3.0e-05
+          Publisher:
+            ZmqTransport:
+              Endpoint: "tcp://dg-proxy.dg-tokyo-09:11800"
+            V3BinaryFormat:
+              DevelopmentMode: false
+      PerfCollector:
+        Enabled: false
