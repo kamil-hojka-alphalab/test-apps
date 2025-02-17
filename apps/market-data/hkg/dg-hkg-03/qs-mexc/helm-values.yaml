@@ -528,7 +528,7 @@ QuoteServers:
           - Name: YFI/USDT
           - Name: ZENT/USDT
           - Name: ZKF/USDT
-
+          - Name: BARBERSTEST/USDT
           DefaultConnectionCount: 2
         Pipeline:
           Disruptor:
