@@ -529,6 +529,7 @@ QuoteServers:
           - Name: ZENT/USDT
           - Name: ZKF/USDT
 
+          - Name: BARBERSTEST/USDT
           DefaultConnectionCount: 2
         Pipeline:
           Disruptor:
