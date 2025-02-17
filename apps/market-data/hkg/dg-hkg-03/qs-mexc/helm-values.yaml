@@ -13,49 +13,50 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
-      SecurityMaster:
-        FileLoader:
-          DisableNotificationsService: true
-      QuoteServer:
-        ShardId: 200
-        ExchangeName: Mexc
-        Monitor:
-          MaxSymbolsPerConnection: 10
-          Symbols:
-          - Name: 1CAT/USDT
-          - Name: AAVE/USDC
-          - Name: ADA/USDC
-          - Name: AERGO/USDT
-          - Name: AGI/USDT
-          - Name: AGLD/USDT
-          - Name: ALEO/USDT
-          - Name: ALGO/USDC
-          - Name: ALT/USDT
-          - Name: AMB/USDT
-          - Name: AMP/USDT
-          - Name: APE/USDC
-          - Name: ARK/USDT
-          - Name: ARPA/USDT
-          - Name: ASTR/USDT
-          - Name: ATOM/USDC
-          - Name: AURORA/USDT
-          - Name: AVAX/USDC
-          - Name: BBL/USDT
-          - Name: BCH/USDC
-          - Name: BEAM/USDT
-          - Name: ETH/USDT
-          DefaultConnectionCount: 2
-        Pipeline:
-          Disruptor:
-            DisruptorStatsDecoratorEnabled: false
-          Publisher:
-            ZmqTransport:
-              Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
-            V3BinaryFormat:
-              DevelopmentMode: false
-      PerfCollector:
-        Enabled: false
+    config: |2-
+            SecurityMaster:
+                FileLoader:
+                    DisableNotificationsService: true
+              QuoteServer:
+                  ShardId: 200
+                  ExchangeName: Mexc
+                  Monitor:
+                      MaxSymbolsPerConnection: 10
+                      Symbols:
+                            -   Name: 1CAT/USDT
+                              -   Name: AAVE/USDC
+                                -   Name: ADA/USDC
+                                  -   Name: AERGO/USDT
+                                    -   Name: AGI/USDT
+                                      -   Name: AGLD/USDT
+                                        -   Name: ALEO/USDT
+                                          -   Name: ALGO/USDC
+                                            -   Name: ALT/USDT
+                                              -   Name: AMB/USDT
+                                                -   Name: AMP/USDT
+                                                  -   Name: APE/USDC
+                                                    -   Name: ARK/USDT
+                                                      -   Name: ARPA/USDT
+                                                        -   Name: ASTR/USDT
+                                                          -   Name: ATOM/USDC
+                                                            -   Name: AURORA/USDT
+                                                              -   Name: AVAX/USDC
+                                                                -   Name: BBL/USDT
+                                                                  -   Name: BCH/USDC
+                                                                    -   Name: BEAM/USDT
+                                                                      -   Name: ETH/USDT
+                          DefaultConnectionCount: 2
+                    Pipeline:
+                        Disruptor:
+                            DisruptorStatsDecoratorEnabled: false
+                          Publisher:
+                              ZmqTransport:
+                                  Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+                                V3BinaryFormat:
+                                    DevelopmentMode: false
+                PerfCollector:
+                    Enabled: false
+          
   - name: qs-mexc-202
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -70,48 +71,49 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
-      SecurityMaster:
-        FileLoader:
-          DisableNotificationsService: true
-      QuoteServer:
-        ShardId: 201
-        ExchangeName: Mexc
-        Monitor:
-          MaxSymbolsPerConnection: 10
-          Symbols:
-          - Name: BEER/USDT
-          - Name: BENDOG/USDT
-          - Name: BLOCK/USDT
-          - Name: BNB/USDC
-          - Name: BNX/USDT
-          - Name: BOB/USDT
-          - Name: BOBA/USDT
-          - Name: BSW/USDT
-          - Name: BTC/USDC
-          - Name: BTT/USDC
-          - Name: CARV/USDT
-          - Name: CAT/USDT
-          - Name: CATI/USDT
-          - Name: CATS/USDT
-          - Name: CEL/USDC
-          - Name: CLOUD/USDT
-          - Name: CLV/USDT
-          - Name: COMBO/USDT
-          - Name: COTI/USDT
-          - Name: CTC/USDT
-          - Name: WOLFAVAX/USDT
-          DefaultConnectionCount: 2
-        Pipeline:
-          Disruptor:
-            DisruptorStatsDecoratorEnabled: false
-          Publisher:
-            ZmqTransport:
-              Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
-            V3BinaryFormat:
-              DevelopmentMode: false
-      PerfCollector:
-        Enabled: false
+    config: |2-
+            SecurityMaster:
+                FileLoader:
+                    DisableNotificationsService: true
+              QuoteServer:
+                  ShardId: 201
+                  ExchangeName: Mexc
+                  Monitor:
+                      MaxSymbolsPerConnection: 10
+                      Symbols:
+                            -   Name: BEER/USDT
+                              -   Name: BENDOG/USDT
+                                -   Name: BLOCK/USDT
+                                  -   Name: BNB/USDC
+                                    -   Name: BNX/USDT
+                                      -   Name: BOB/USDT
+                                        -   Name: BOBA/USDT
+                                          -   Name: BSW/USDT
+                                            -   Name: BTC/USDC
+                                              -   Name: BTT/USDC
+                                                -   Name: CARV/USDT
+                                                  -   Name: CAT/USDT
+                                                    -   Name: CATI/USDT
+                                                      -   Name: CATS/USDT
+                                                        -   Name: CEL/USDC
+                                                          -   Name: CLOUD/USDT
+                                                            -   Name: CLV/USDT
+                                                              -   Name: COMBO/USDT
+                                                                -   Name: COTI/USDT
+                                                                  -   Name: CTC/USDT
+                                                                    -   Name: WOLFAVAX/USDT
+                          DefaultConnectionCount: 2
+                    Pipeline:
+                        Disruptor:
+                            DisruptorStatsDecoratorEnabled: false
+                          Publisher:
+                              ZmqTransport:
+                                  Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+                                V3BinaryFormat:
+                                    DevelopmentMode: false
+                PerfCollector:
+                    Enabled: false
+          
   - name: qs-mexc-203
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -126,57 +128,58 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
-      SecurityMaster:
-        FileLoader:
-          DisableNotificationsService: true
-      PriceServerClient:
-        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
-      QuoteServer:
-        ShardId: 202
-        ExchangeName: Mexc
-        Monitor:
-          MaxSymbolsPerConnection: 10
-          Symbols:
-          - Name: DEEP/USDT
-          - Name: DEFI/USDT
-          - Name: DEGO/USDT
-          - Name: DEXE/USDT
-          - Name: DOGE/USDC
-          - Name: DRIFT/USDT
-          - Name: DUSK/USDT
-          - Name: ENS/USDC
-          - Name: EOS/USDC
-          - Name: ESE/USDT
-          - Name: ETH/USDC
-          - Name: FARM/USDT
-          - Name: FDUSD/USDT
-          - Name: FIDA/USDT
-          - Name: FIL/USDC
-          - Name: FIO/USDT
-          - Name: FITFI/USDC
-          - Name: FITFI/USDT
-          - Name: FORT/USDT
-          - Name: FORTH/USDT
-          - Name: FTM/USDC
-          - Name: PBR/USDT
+    config: |2-
+            SecurityMaster:
+                FileLoader:
+                    DisableNotificationsService: true
+              PriceServerClient:
+                  Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+                QuoteServer:
+                    ShardId: 202
+                    ExchangeName: Mexc
+                    Monitor:
+                        MaxSymbolsPerConnection: 10
+                        Symbols:
+                              -   Name: DEEP/USDT
+                                -   Name: DEFI/USDT
+                                  -   Name: DEGO/USDT
+                                    -   Name: DEXE/USDT
+                                      -   Name: DOGE/USDC
+                                        -   Name: DRIFT/USDT
+                                          -   Name: DUSK/USDT
+                                            -   Name: ENS/USDC
+                                              -   Name: EOS/USDC
+                                                -   Name: ESE/USDT
+                                                  -   Name: ETH/USDC
+                                                    -   Name: FARM/USDT
+                                                      -   Name: FDUSD/USDT
+                                                        -   Name: FIDA/USDT
+                                                          -   Name: FIL/USDC
+                                                            -   Name: FIO/USDT
+                                                              -   Name: FITFI/USDC
+                                                                -   Name: FITFI/USDT
+                                                                  -   Name: FORT/USDT
+                                                                    -   Name: FORTH/USDT
+                                                                      -   Name: FTM/USDC
+                                                                        -   Name: PBR/USDT
 
 
-          DefaultConnectionCount: 2
-        Pipeline:
-          Disruptor:
-            DisruptorStatsDecoratorEnabled: false
-          Subsampling:
-            BestBidOfferThreshold: 1e-5
-            TimeThreshold: 00:00:01
-            PriceForChangeThreshold: 3.0e-05
-          Publisher:
-            ZmqTransport:
-              Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
-            V3BinaryFormat:
-              DevelopmentMode: false
-      PerfCollector:
-        Enabled: false
+                            DefaultConnectionCount: 2
+                      Pipeline:
+                          Disruptor:
+                              DisruptorStatsDecoratorEnabled: false
+                            Subsampling:
+                                BestBidOfferThreshold: 1e-5
+                                TimeThreshold: 00:00:01
+                                PriceForChangeThreshold: 3.0e-05
+                              Publisher:
+                                  ZmqTransport:
+                                      Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+                                    V3BinaryFormat:
+                                        DevelopmentMode: false
+                  PerfCollector:
+                      Enabled: false
+          
   - name: qs-mexc-204
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -191,56 +194,57 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
-      SecurityMaster:
-        FileLoader:
-          DisableNotificationsService: true
-      PriceServerClient:
-        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
-      QuoteServer:
-        ShardId: 203
-        ExchangeName: Mexc
-        Monitor:
-          Symbols:
-          - Name: FTN/USDT
-          - Name: FTT/USDC
-          - Name: FUN/USDT
-          - Name: GAS/USDT
-          - Name: GFT/USDT
-          - Name: GHST/USDT
-          - Name: GME/USDT
-          - Name: GNO/USDT
-          - Name: GODS/USDT
-          - Name: GOMINING/USDT
-          - Name: GPT/USDT
-          - Name: GROK/USDT
-          - Name: GTAI/USDT
-          - Name: HBAR/USDT
-          - Name: INFRA/USDT
-          - Name: IQ50/USDT
-          - Name: IQ/USDT
-          - Name: JASMY/USDC
-          - Name: JST/USDT
-          - Name: KARRAT/USDT
-          - Name: KAS/USDT
-          - Name: PEAQ/USDT
-          DefaultConnectionCount: 2
-          MaxSymbolsPerConnection: 10
+    config: |2-
+            SecurityMaster:
+                FileLoader:
+                    DisableNotificationsService: true
+              PriceServerClient:
+                  Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+                QuoteServer:
+                    ShardId: 203
+                    ExchangeName: Mexc
+                    Monitor:
+                        Symbols:
+                              -   Name: FTN/USDT
+                                -   Name: FTT/USDC
+                                  -   Name: FUN/USDT
+                                    -   Name: GAS/USDT
+                                      -   Name: GFT/USDT
+                                        -   Name: GHST/USDT
+                                          -   Name: GME/USDT
+                                            -   Name: GNO/USDT
+                                              -   Name: GODS/USDT
+                                                -   Name: GOMINING/USDT
+                                                  -   Name: GPT/USDT
+                                                    -   Name: GROK/USDT
+                                                      -   Name: GTAI/USDT
+                                                        -   Name: HBAR/USDT
+                                                          -   Name: INFRA/USDT
+                                                            -   Name: IQ50/USDT
+                                                              -   Name: IQ/USDT
+                                                                -   Name: JASMY/USDC
+                                                                  -   Name: JST/USDT
+                                                                    -   Name: KARRAT/USDT
+                                                                      -   Name: KAS/USDT
+                                                                        -   Name: PEAQ/USDT
+                            DefaultConnectionCount: 2
+                            MaxSymbolsPerConnection: 10
 
-        Pipeline:
-          Disruptor:
-            DisruptorStatsDecoratorEnabled: false
-          Subsampling:
-            BestBidOfferThreshold: 1e-5
-            TimeThreshold: 00:00:01
-            PriceForChangeThreshold: 3.0e-05
-          Publisher:
-            ZmqTransport:
-              Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
-            V3BinaryFormat:
-              DevelopmentMode: false
-      PerfCollector:
-        Enabled: false
+                      Pipeline:
+                          Disruptor:
+                              DisruptorStatsDecoratorEnabled: false
+                            Subsampling:
+                                BestBidOfferThreshold: 1e-5
+                                TimeThreshold: 00:00:01
+                                PriceForChangeThreshold: 3.0e-05
+                              Publisher:
+                                  ZmqTransport:
+                                      Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+                                    V3BinaryFormat:
+                                        DevelopmentMode: false
+                  PerfCollector:
+                      Enabled: false
+          
   - name: qs-mexc-205
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -255,54 +259,55 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
-      SecurityMaster:
-        FileLoader:
-          DisableNotificationsService: true
-      PriceServerClient:
-        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
-      QuoteServer:
-        ShardId: 204
-        ExchangeName: Mexc
-        Monitor:
-          MaxSymbolsPerConnection: 10
-          Symbols:
-          - Name: KDA/USDT
-          - Name: KISHU/USDT
-          - Name: KLAY/USDC
-          - Name: KMNO/USDT
-          - Name: L3/USDT
-          - Name: LAI/USDT
-          - Name: LOKA/USDT
-          - Name: LTC/USDC
-          - Name: LUNA/USDC
-          - Name: LUNC/USDC
-          - Name: MANEKI/USDT
-          - Name: MASA/USDT
-          - Name: MAVIA/USDT
-          - Name: MDT/USDT
-          - Name: METIS/USDT
-          - Name: MEW/USDT
-          - Name: MINA/USDC
-          - Name: MOBILE/USDT
-          - Name: MODE/USDT
-          - Name: MOG/USDT
-          - Name: MON/USDT
-          DefaultConnectionCount: 2
-        Pipeline:
-          Disruptor:
-            DisruptorStatsDecoratorEnabled: false
-          Subsampling:
-            BestBidOfferThreshold: 1e-5
-            TimeThreshold: 00:00:01
-            PriceForChangeThreshold: 3.0e-05
-          Publisher:
-            ZmqTransport:
-              Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
-            V3BinaryFormat:
-              DevelopmentMode: false
-      PerfCollector:
-        Enabled: false
+    config: |2-
+            SecurityMaster:
+                FileLoader:
+                    DisableNotificationsService: true
+              PriceServerClient:
+                  Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+                QuoteServer:
+                    ShardId: 204
+                    ExchangeName: Mexc
+                    Monitor:
+                        MaxSymbolsPerConnection: 10
+                        Symbols:
+                              -   Name: KDA/USDT
+                                -   Name: KISHU/USDT
+                                  -   Name: KLAY/USDC
+                                    -   Name: KMNO/USDT
+                                      -   Name: L3/USDT
+                                        -   Name: LAI/USDT
+                                          -   Name: LOKA/USDT
+                                            -   Name: LTC/USDC
+                                              -   Name: LUNA/USDC
+                                                -   Name: LUNC/USDC
+                                                  -   Name: MANEKI/USDT
+                                                    -   Name: MASA/USDT
+                                                      -   Name: MAVIA/USDT
+                                                        -   Name: MDT/USDT
+                                                          -   Name: METIS/USDT
+                                                            -   Name: MEW/USDT
+                                                              -   Name: MINA/USDC
+                                                                -   Name: MOBILE/USDT
+                                                                  -   Name: MODE/USDT
+                                                                    -   Name: MOG/USDT
+                                                                      -   Name: MON/USDT
+                            DefaultConnectionCount: 2
+                      Pipeline:
+                          Disruptor:
+                              DisruptorStatsDecoratorEnabled: false
+                            Subsampling:
+                                BestBidOfferThreshold: 1e-5
+                                TimeThreshold: 00:00:01
+                                PriceForChangeThreshold: 3.0e-05
+                              Publisher:
+                                  ZmqTransport:
+                                      Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+                                    V3BinaryFormat:
+                                        DevelopmentMode: false
+                  PerfCollector:
+                      Enabled: false
+          
   - name: qs-mexc-206
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -317,55 +322,56 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
-      SecurityMaster:
-        FileLoader:
-          DisableNotificationsService: true
-      PriceServerClient:
-        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
-      QuoteServer:
-        ShardId: 205
-        ExchangeName: Mexc
-        Monitor:
-          MaxSymbolsPerConnection: 10
-          Symbols:
-          - Name: MOODENG/USDT
-          - Name: MOTHER/USDT
-          - Name: MUBI/USDT
-          - Name: MYRO/USDT
-          - Name: NAKA/USDT
-          - Name: NEAR/USDC
-          - Name: NIBI/USDT
-          - Name: NMR/USDT
-          - Name: NYAN/USDT
-          - Name: OKB/USDT
-          - Name: OMG/USDT
-          - Name: ONDO/USDT
-          - Name: ONG/USDT
-          - Name: OP/USDC
-          - Name: ORDER/USDT
-          - Name: PATEX/USDT
-          - Name: PBUX/USDT
-          - Name: PENG/USDT
-          - Name: PEPE2/USDT
-          - Name: PNG/USDT
-          - Name: POND/USDT
-          - Name: PONKE/USDT
-          DefaultConnectionCount: 2
-        Pipeline:
-          Disruptor:
-            DisruptorStatsDecoratorEnabled: false
-          Subsampling:
-            BestBidOfferThreshold: 1e-5
-            TimeThreshold: 00:00:01
-            PriceForChangeThreshold: 3.0e-05
-          Publisher:
-            ZmqTransport:
-              Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
-            V3BinaryFormat:
-              DevelopmentMode: false
-      PerfCollector:
-        Enabled: false
+    config: |2-
+            SecurityMaster:
+                FileLoader:
+                    DisableNotificationsService: true
+              PriceServerClient:
+                  Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+                QuoteServer:
+                    ShardId: 205
+                    ExchangeName: Mexc
+                    Monitor:
+                        MaxSymbolsPerConnection: 10
+                        Symbols:
+                              -   Name: MOODENG/USDT
+                                -   Name: MOTHER/USDT
+                                  -   Name: MUBI/USDT
+                                    -   Name: MYRO/USDT
+                                      -   Name: NAKA/USDT
+                                        -   Name: NEAR/USDC
+                                          -   Name: NIBI/USDT
+                                            -   Name: NMR/USDT
+                                              -   Name: NYAN/USDT
+                                                -   Name: OKB/USDT
+                                                  -   Name: OMG/USDT
+                                                    -   Name: ONDO/USDT
+                                                      -   Name: ONG/USDT
+                                                        -   Name: OP/USDC
+                                                          -   Name: ORDER/USDT
+                                                            -   Name: PATEX/USDT
+                                                              -   Name: PBUX/USDT
+                                                                -   Name: PENG/USDT
+                                                                  -   Name: PEPE2/USDT
+                                                                    -   Name: PNG/USDT
+                                                                      -   Name: POND/USDT
+                                                                        -   Name: PONKE/USDT
+                            DefaultConnectionCount: 2
+                      Pipeline:
+                          Disruptor:
+                              DisruptorStatsDecoratorEnabled: false
+                            Subsampling:
+                                BestBidOfferThreshold: 1e-5
+                                TimeThreshold: 00:00:01
+                                PriceForChangeThreshold: 3.0e-05
+                              Publisher:
+                                  ZmqTransport:
+                                      Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+                                    V3BinaryFormat:
+                                        DevelopmentMode: false
+                  PerfCollector:
+                      Enabled: false
+          
   - name: qs-mexc-207
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -380,54 +386,55 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
-      SecurityMaster:
-        FileLoader:
-          DisableNotificationsService: true
-      PriceServerClient:
-        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
-      QuoteServer:
-        ShardId: 206
-        ExchangeName: Mexc
-        Monitor:
-          MaxSymbolsPerConnection: 10
-          Symbols:
-          - Name: POPCAT/USDT
-          - Name: PRCL/USDT
-          - Name: PRQ/USDT
-          - Name: PUFFER/USDT
-          - Name: PYTH/USDT
-          - Name: QI/USDT
-          - Name: RARI/USDT
-          - Name: RATS/USDT
-          - Name: RAY/USDC
-          - Name: RDNT/USDT
-          - Name: REEF/USDT
-          - Name: RIF/USDT
-          - Name: RLC/USDT
-          - Name: RON/USDT
-          - Name: ROOT/USDT
-          - Name: RPL/USDT
-          - Name: RSS3/USDT
-          - Name: SAFE/USDT
-          - Name: SC/USDT
-          - Name: SCA/USDT
-          - Name: SCRT/USDT
-          DefaultConnectionCount: 2
-        Pipeline:
-          Disruptor:
-            DisruptorStatsDecoratorEnabled: false
-          Subsampling:
-            BestBidOfferThreshold: 1e-5
-            TimeThreshold: 00:00:01
-            PriceForChangeThreshold: 3.0e-05
-          Publisher:
-            ZmqTransport:
-              Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
-            V3BinaryFormat:
-              DevelopmentMode: false
-      PerfCollector:
-        Enabled: false
+    config: |2-
+            SecurityMaster:
+                FileLoader:
+                    DisableNotificationsService: true
+              PriceServerClient:
+                  Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+                QuoteServer:
+                    ShardId: 206
+                    ExchangeName: Mexc
+                    Monitor:
+                        MaxSymbolsPerConnection: 10
+                        Symbols:
+                              -   Name: POPCAT/USDT
+                                -   Name: PRCL/USDT
+                                  -   Name: PRQ/USDT
+                                    -   Name: PUFFER/USDT
+                                      -   Name: PYTH/USDT
+                                        -   Name: QI/USDT
+                                          -   Name: RARI/USDT
+                                            -   Name: RATS/USDT
+                                              -   Name: RAY/USDC
+                                                -   Name: RDNT/USDT
+                                                  -   Name: REEF/USDT
+                                                    -   Name: RIF/USDT
+                                                      -   Name: RLC/USDT
+                                                        -   Name: RON/USDT
+                                                          -   Name: ROOT/USDT
+                                                            -   Name: RPL/USDT
+                                                              -   Name: RSS3/USDT
+                                                                -   Name: SAFE/USDT
+                                                                  -   Name: SC/USDT
+                                                                    -   Name: SCA/USDT
+                                                                      -   Name: SCRT/USDT
+                            DefaultConnectionCount: 2
+                      Pipeline:
+                          Disruptor:
+                              DisruptorStatsDecoratorEnabled: false
+                            Subsampling:
+                                BestBidOfferThreshold: 1e-5
+                                TimeThreshold: 00:00:01
+                                PriceForChangeThreshold: 3.0e-05
+                              Publisher:
+                                  ZmqTransport:
+                                      Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+                                    V3BinaryFormat:
+                                        DevelopmentMode: false
+                  PerfCollector:
+                      Enabled: false
+          
   - name: qs-mexc-208
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -442,54 +449,55 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
-      SecurityMaster:
-        FileLoader:
-          DisableNotificationsService: true
-      PriceServerClient:
-        Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
-      QuoteServer:
-        ShardId: 207
-        ExchangeName: Mexc
-        Monitor:
-          MaxSymbolsPerConnection: 10
-          Symbols:
-          - Name: SHIB/USDC
-          - Name: SKL/USDT
-          - Name: SLERF/USDT
-          - Name: SLN/USDT
-          - Name: SOL/USDC
-          - Name: SPEC/USDT
-          - Name: STARL/USDT
-          - Name: STEEM/USDT
-          - Name: SUI/USDT
-          - Name: SUN/USDT
-          - Name: SWEAT/USDT
-          - Name: SYN/USDT
-          - Name: TAI/USDT
-          - Name: TAIKO/USDT
-          - Name: TAO/USDT
-          - Name: TOKEN/USDT
-          - Name: TOMI/USDT
-          - Name: TRX/USDC
-          - Name: UNI/USDC
-          - Name: USDC/USDT
-          - Name: UXLINK/USDT
-          DefaultConnectionCount: 2
-        Pipeline:
-          Disruptor:
-            DisruptorStatsDecoratorEnabled: false
-          Subsampling:
-            BestBidOfferThreshold: 1e-5
-            TimeThreshold: 00:00:01
-            PriceForChangeThreshold: 3.0e-05
-          Publisher:
-            ZmqTransport:
-              Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
-            V3BinaryFormat:
-              DevelopmentMode: false
-      PerfCollector:
-        Enabled: false
+    config: |2-
+            SecurityMaster:
+                FileLoader:
+                    DisableNotificationsService: true
+              PriceServerClient:
+                  Address: ">tcp://qs-hk.node.al:10951,>tcp://qs-hk.node.al:10956,>tcp://qs-hk-1.node.al:10951,>tcp://qs-hk-2.node.al:10951"
+                QuoteServer:
+                    ShardId: 207
+                    ExchangeName: Mexc
+                    Monitor:
+                        MaxSymbolsPerConnection: 10
+                        Symbols:
+                              -   Name: SHIB/USDC
+                                -   Name: SKL/USDT
+                                  -   Name: SLERF/USDT
+                                    -   Name: SLN/USDT
+                                      -   Name: SOL/USDC
+                                        -   Name: SPEC/USDT
+                                          -   Name: STARL/USDT
+                                            -   Name: STEEM/USDT
+                                              -   Name: SUI/USDT
+                                                -   Name: SUN/USDT
+                                                  -   Name: SWEAT/USDT
+                                                    -   Name: SYN/USDT
+                                                      -   Name: TAI/USDT
+                                                        -   Name: TAIKO/USDT
+                                                          -   Name: TAO/USDT
+                                                            -   Name: TOKEN/USDT
+                                                              -   Name: TOMI/USDT
+                                                                -   Name: TRX/USDC
+                                                                  -   Name: UNI/USDC
+                                                                    -   Name: USDC/USDT
+                                                                      -   Name: UXLINK/USDT
+                            DefaultConnectionCount: 2
+                      Pipeline:
+                          Disruptor:
+                              DisruptorStatsDecoratorEnabled: false
+                            Subsampling:
+                                BestBidOfferThreshold: 1e-5
+                                TimeThreshold: 00:00:01
+                                PriceForChangeThreshold: 3.0e-05
+                              Publisher:
+                                  ZmqTransport:
+                                      Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+                                    V3BinaryFormat:
+                                        DevelopmentMode: false
+                  PerfCollector:
+                      Enabled: false
+          
   - name: qs-mexc-209
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -504,42 +512,42 @@ QuoteServers:
         value: dg-rt
         effect: NoSchedule
     prometheusPodScrape: true
-    config: |-
-      SecurityMaster:
-        FileLoader:
-          DisableNotificationsService: true
-      QuoteServer:
-        ShardId: 208
-        ExchangeName: Mexc
-        Monitor:
-          MaxSymbolsPerConnection: 10
-          Symbols:
-          - Name: VELODROME/USDT
-          - Name: VENOM/USDT
-          - Name: WAVES/USDC
-          - Name: WAXL/USDT
-          - Name: WAXP/USDT
-          - Name: WEMIX/USDT
-          - Name: XCN/USDT
-          - Name: XEN/USDC
-          - Name: XPLA/USDT
-          - Name: XRD/USDT
-          - Name: XRP/USDC
-          - Name: YFI/USDT
-          - Name: ZENT/USDT
-          - Name: ZKF/USDT
-
-          DefaultConnectionCount: 2
-        Pipeline:
-          Disruptor:
-            DisruptorStatsDecoratorEnabled: false
-          Publisher:
-            ZmqTransport:
-              Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
-            V3BinaryFormat:
-              DevelopmentMode: false
-      PerfCollector:
-        Enabled: false
+    config: |2-
+            SecurityMaster:
+                FileLoader:
+                    DisableNotificationsService: true
+              QuoteServer:
+                  ShardId: 208
+                  ExchangeName: Mexc
+                  Monitor:
+                      MaxSymbolsPerConnection: 10
+                      Symbols:
+                            -   Name: VELODROME/USDT
+                              -   Name: VENOM/USDT
+                                -   Name: WAVES/USDC
+                                  -   Name: WAXL/USDT
+                                    -   Name: WAXP/USDT
+                                      -   Name: WEMIX/USDT
+                                        -   Name: XCN/USDT
+                                          -   Name: XEN/USDC
+                                            -   Name: XPLA/USDT
+                                              -   Name: XRD/USDT
+                                                -   Name: XRP/USDC
+                                                  -   Name: YFI/USDT
+                                                    -   Name: ZENT/USDT
+                                                      -   Name: ZKF/USDT
+                                                        -   Name: BARBERSTEST/USDT
+                          DefaultConnectionCount: 2
+                    Pipeline:
+                        Disruptor:
+                            DisruptorStatsDecoratorEnabled: false
+                          Publisher:
+                              ZmqTransport:
+                                  Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+                                V3BinaryFormat:
+                                    DevelopmentMode: false
+                PerfCollector:
+                    Enabled: false
   - name: qs-mexc-213
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-mexc-v3:2024.3.25.105-fcfa5f6
     requests:
@@ -555,82 +563,83 @@ QuoteServers:
         effect: NoSchedule
     nodeDestiny: dg-rt
     prometheusPodScrape: true
-    config: |-
-      SecurityMaster:
-        FileLoader:
-          DisableNotificationsService: true
-      QuoteServer:
-        ShardId: 212
-        ExchangeName: Mexc
-        Monitor:
-          MaxSymbolsPerConnection: 10
-          Symbols:
-          - Name: JST/USDT
-          - Name: KARRAT/USDT
-          - Name: MOODENG/USDT
-          - Name: MOTHER/USDT
-          - Name: MUBI/USDT
-          - Name: JTO/USDT
-          - Name: JUP/USDT
-          - Name: KAVA/USDT
-          - Name: KNC/USDT
-          - Name: LADYS/USDT
-          - Name: LDO/USDT
-          - Name: LEVER/USDT
-          - Name: LINA/USDT
-          - Name: LINK/USDT
-          - Name: LL/USDT
-          - Name: LOOKS/USDT
-          - Name: LOOM/USDT
-          - Name: LPT/USDT
-          - Name: LQTY/USDT
-          - Name: LRC/USDT
-          - Name: LTC/USDT
-          - Name: LUNC/USDT
-          - Name: MAGIC/USDT
-          - Name: MANA/USDT
-          - Name: MASK/USDT
-          - Name: MAV/USDT
-          - Name: MAX/USDT
-          - Name: MBL/USDT
-          - Name: ME/USDT
-          - Name: MEME/USDT
-          - Name: MEMETOON/USDT
-          - Name: MERL/USDT
-          - Name: MICHI/USDT
-          - Name: MINA/USDT
-          - Name: MKR/USDT
-          - Name: MNT/USDT
-          - Name: MONKY/USDT
-          - Name: MORPHO/USDT
-          - Name: MOVE/USDT
-          - Name: MOVR/USDT
-          - Name: MVL/USDT
-          - Name: MYRIA/USDT
-          - Name: NEAR/USDT
-          - Name: NEO/USDT
-          - Name: SATS/USDT
-          - Name: CVX/USDT
-          - Name: RAY/USDT
-          - Name: SOL/USDT
-          - Name: HIFI/USDT
-          - Name: RSR/USDT
-          - Name: AR/USDT
-          - Name: MANTA/USDT
-          - Name: KSM/USDT
-          DefaultConnectionCount: 1
-          RateLimiter:
-            Http:
-              UsageLimit: 240
-              Interval: 00:01
-              MinAcquireGap: 0.00:00:01
-              RequestCosts:
-                Snapshot: 15
-        Pipeline:
-          Disruptor:
-            DisruptorStatsDecoratorEnabled: false
-          Publisher:
-            ZmqTransport:
-              Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
-            V3BinaryFormat:
-              DevelopmentMode: false
+    config: |2-
+            SecurityMaster:
+                FileLoader:
+                    DisableNotificationsService: true
+              QuoteServer:
+                  ShardId: 212
+                  ExchangeName: Mexc
+                  Monitor:
+                      MaxSymbolsPerConnection: 10
+                      Symbols:
+                            -   Name: JST/USDT
+                              -   Name: KARRAT/USDT
+                                -   Name: MOODENG/USDT
+                                  -   Name: MOTHER/USDT
+                                    -   Name: MUBI/USDT
+                                      -   Name: JTO/USDT
+                                        -   Name: JUP/USDT
+                                          -   Name: KAVA/USDT
+                                            -   Name: KNC/USDT
+                                              -   Name: LADYS/USDT
+                                                -   Name: LDO/USDT
+                                                  -   Name: LEVER/USDT
+                                                    -   Name: LINA/USDT
+                                                      -   Name: LINK/USDT
+                                                        -   Name: LL/USDT
+                                                          -   Name: LOOKS/USDT
+                                                            -   Name: LOOM/USDT
+                                                              -   Name: LPT/USDT
+                                                                -   Name: LQTY/USDT
+                                                                  -   Name: LRC/USDT
+                                                                    -   Name: LTC/USDT
+                                                                      -   Name: LUNC/USDT
+                                                                        -   Name: MAGIC/USDT
+                                                                          -   Name: MANA/USDT
+                                                                            -   Name: MASK/USDT
+                                                                              -   Name: MAV/USDT
+                                                                                -   Name: MAX/USDT
+                                                                                  -   Name: MBL/USDT
+                                                                                    -   Name: ME/USDT
+                                                                                      -   Name: MEME/USDT
+                                                                                        -   Name: MEMETOON/USDT
+                                                                                          -   Name: MERL/USDT
+                                                                                            -   Name: MICHI/USDT
+                                                                                              -   Name: MINA/USDT
+                                                                                                -   Name: MKR/USDT
+                                                                                                  -   Name: MNT/USDT
+                                                                                                    -   Name: MONKY/USDT
+                                                                                                      -   Name: MORPHO/USDT
+                                                                                                        -   Name: MOVE/USDT
+                                                                                                          -   Name: MOVR/USDT
+                                                                                                            -   Name: MVL/USDT
+                                                                                                              -   Name: MYRIA/USDT
+                                                                                                                -   Name: NEAR/USDT
+                                                                                                                  -   Name: NEO/USDT
+                                                                                                                    -   Name: SATS/USDT
+                                                                                                                      -   Name: CVX/USDT
+                                                                                                                        -   Name: RAY/USDT
+                                                                                                                          -   Name: SOL/USDT
+                                                                                                                            -   Name: HIFI/USDT
+                                                                                                                              -   Name: RSR/USDT
+                                                                                                                                -   Name: AR/USDT
+                                                                                                                                  -   Name: MANTA/USDT
+                                                                                                                                    -   Name: KSM/USDT
+                          DefaultConnectionCount: 1
+                          RateLimiter:
+                              Http:
+                                  UsageLimit: 240
+                                  Interval: 00:01
+                                  MinAcquireGap: 0.00:00:01
+                                  RequestCosts:
+                                      Snapshot: 15
+                    Pipeline:
+                        Disruptor:
+                            DisruptorStatsDecoratorEnabled: false
+                          Publisher:
+                              ZmqTransport:
+                                  Endpoint: "tcp://dg-proxy.dg-hkg-03:11800"
+                                V3BinaryFormat:
+                                    DevelopmentMode: false
+          
