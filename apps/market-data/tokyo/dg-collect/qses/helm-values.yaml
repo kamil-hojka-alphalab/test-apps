@@ -134,6 +134,7 @@ QuoteServers:
               Endpoint: "tcp://dg-proxy.dg-collect:11800"
             V3BinaryFormat:
               DevelopmentMode: false
+      new_key: value
   - name: qs-binance-302
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
     requests:
@@ -262,12 +263,14 @@ QuoteServers:
           - Name: MKR/TRY
           - Name: MOVE/FDUSD
           - Name: MOVE/TRY
+          - Name: TEST/USDT
         Pipeline:
           Publisher:
             ZmqTransport:
               Endpoint: "tcp://dg-proxy.dg-collect:11800"
             V3BinaryFormat:
               DevelopmentMode: false
+      new_key: value
   - name: qs-binance-303
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
     requests:
@@ -404,6 +407,7 @@ QuoteServers:
               Endpoint: "tcp://dg-proxy.dg-collect:11800"
             V3BinaryFormat:
               DevelopmentMode: false
+      new_key: value
   - name: qs-binance-304
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
     requests:
@@ -539,6 +543,7 @@ QuoteServers:
               Endpoint: "tcp://dg-proxy.dg-collect:11800"
             V3BinaryFormat:
               DevelopmentMode: false
+      new_key: value
   - name: qs-binancefut-301
     image: 346086605621.dkr.ecr.ap-southeast-1.amazonaws.com/alc-qs-exchange-binance:2025.1.21.134-914bf85
     requests:
